@@ -1,0 +1,42 @@
+﻿# macOS System Files
+**/.DS_Store
+
+# CodeStyle
+**/.editorconfig
+
+# Rider
+**/.idea
+**/*.DotSettings.user
+
+# Visual Studio
+**/.vs
+
+# Visual Studio Code
+**/.vscode
+
+# Docker
+**/.dockerignore
+**/*compose.yaml
+**/*Dockerfile
+
+# Git
+**/.git
+**/.github
+**/.gitignore
+**/.gitattributes
+**/README.md
+!NothingServices.Abstractions/README.md
+
+# Build results
+**/bin
+**/obj
+
+# Environment
+**/appsettings*.json
+
+# Nuget
+**/Nuget.Config
+
+# Images
+**/.jpg
+**/.png

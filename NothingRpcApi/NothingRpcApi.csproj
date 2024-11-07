@@ -1,0 +1,74 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <Authors>Golovin Nikita</Authors>
+    <Copyright>Copyright (C) Golovin Nikita 2024</Copyright>
+    <Description>Приложение gRpc</Description>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <FileVersion>1.0.0.0</FileVersion>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <LangVersion>latest</LangVersion>
+    <NeutralLanguage>ru</NeutralLanguage>
+    <Nullable>enable</Nullable>
+    <OpenApiName>openapi</OpenApiName>
+    <OpenApiVersion>1.0</OpenApiVersion>
+    <RepositoryUrl>https://github.com/wrazgler/NothingServices</RepositoryUrl>
+    <TargetFramework>net8.0</TargetFramework>
+    <Title>NothingRpcApi</Title>
+    <Version>1.0.0.0</Version>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="13.0.1" />
+    <PackageReference Include="Grpc.AspNetCore" Version="2.66.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Grpc.Swagger" Version="0.8.10" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="8.0.10" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="8.0.10" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.10">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="NothingServices.Abstractions" Version="1.0.0.0" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.10" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.9.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Protos/google/api/annotations.proto"/>
+    <Content Include="Protos/google/api/http.proto" />
+    <Protobuf Include="Protos/UpdateNothingModelDto.proto" GrpcServices="Server" />
+    <Protobuf Include="Protos/CreateNothingModelDto.proto" GrpcServices="Server" />
+    <Protobuf Include="Protos/NothingModelDto.proto" GrpcServices="Server" />
+    <Protobuf Include="Protos/NothingModelIdDto.proto" GrpcServices="Server" />
+    <Protobuf Include="Protos/NothingRpcService.proto" GrpcServices="Server" />
+    <Protobuf Include="Protos/UpdateNothingModelDto.proto" GrpcServices="Server" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="..\.certificates\localhost.crt">
+      <Link>localhost.crt</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\.dockerignore">
+      <Link>.dockerignore</Link>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Dockerfile" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AssemblyAttribute Include="NothingServices.Abstractions.Attributes.OpenApiVersionAttribute">
+      <_Parameter1>$(OpenApiVersion)</_Parameter1>
+    </AssemblyAttribute>
+  </ItemGroup>
+
+  <Target Name="Generate OpenAPI" AfterTargets="Build" Condition="$(Configuration)=='Debug'">
+    <Exec Command="dotnet tool restore" />
+    <Exec Command="dotnet swagger tofile --output $(OpenApiName)_v$(OpenApiVersion).yaml --yaml $(OutputPath)$(AssemblyName).dll v$(OpenApiVersion)" WorkingDirectory="$(ProjectDir)" />
+  </Target>
+
+</Project>

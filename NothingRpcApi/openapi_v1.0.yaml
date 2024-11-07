@@ -1,0 +1,176 @@
+openapi: 3.0.1
+info:
+  title: NothingRpcApi
+  version: v1.0
+paths:
+  /NothingRpcApi:
+    get:
+      tags:
+        - NothingRpcService
+      summary: Получить список моделей
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NothingModelDto'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+    post:
+      tags:
+        - NothingRpcService
+      summary: Создать новую модель
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateNothingModelDto'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NothingModelDto'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+    put:
+      tags:
+        - NothingRpcService
+      summary: Обновить существующую модель
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateNothingModelDto'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NothingModelDto'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+  '/NothingRpcApi/{Id}':
+    get:
+      tags:
+        - NothingRpcService
+      summary: Получить модель с указанным идентификатором
+      parameters:
+        - name: Id
+          in: path
+          description: Идентификатор модели
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NothingModelDto'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+    delete:
+      tags:
+        - NothingRpcService
+      summary: Удалить модель с указанным идентификатором
+      parameters:
+        - name: Id
+          in: path
+          description: Идентификатор модели
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NothingModelDto'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+components:
+  schemas:
+    Any:
+      required:
+        - '@type'
+      type: object
+      properties:
+        '@type':
+          type: string
+      additionalProperties: { }
+    CreateNothingModelDto:
+      type: object
+      properties:
+        Name:
+          type: string
+          description: Имя модели
+      additionalProperties: false
+      description: Данные для создания моде
+    NothingModelDto:
+      type: object
+      properties:
+        Id:
+          type: integer
+          description: Идентификатор модели
+          format: int32
+        Name:
+          type: string
+          description: Имя модели
+      additionalProperties: false
+      description: Dto модели
+    Status:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/Any'
+      additionalProperties: false
+    UpdateNothingModelDto:
+      type: object
+      properties:
+        Id:
+          type: integer
+          description: Идентификатор модели
+          format: int32
+        Name:
+          type: string
+          description: Имя модели
+      additionalProperties: false
+      description: Данные для обновления модели
+tags:
+  - name: NothingRpcService
+    description: Сервис бизнес логики

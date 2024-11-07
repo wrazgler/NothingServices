@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package NothingRpcApi;
+
+option csharp_namespace = "NothingRpcApi.Dtos";
+
+// Данные для создания моде
+message CreateNothingModelDto
+{
+    // Имя модели
+    string Name = 1;
+}

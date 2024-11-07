@@ -1,0 +1,50 @@
+name: test_nothing_grpc_api
+services:
+ test_postgres_nothing_grpc_api_db:
+    image: postgres
+    container_name: test_postgres_nothing_grpc_api_db
+    environment:
+      POSTGRES_PORT: "5432"
+      POSTGRES_DB: "nothing_grpc_api_db"
+      POSTGRES_USER: "nothing_grpc_api"
+      POSTGRES_PASSWORD: "nothing_grpc_api"
+    networks:
+      - default
+    ports:
+      - "5459:5432"
+    restart: unless-stopped
+    volumes:
+      - test_postgres_nothing_grpc_api_db:/var/lib/test_postgres_nothing_grpc_api_db
+ test_nothing_grpc_api:
+    image: test_nothing_grpc_api
+    container_name: test_nothing_grpc_api
+    build:
+      args:
+        CERTIFICATE_PASSWORD: "localhost"
+        CONFIGURATION: "Release"
+      context: ../
+      dockerfile: NothingRpcApi/Dockerfile
+    depends_on:
+      - test_postgres_nothing_grpc_api_db
+    environment:
+      ASPNETCORE_HTTP_PORTS: "8359"
+      ASPNETCORE_HTTPS_PORTS: "8459"
+      PATH_BASE: "/nothing-grpc-api"
+      POSTGRES_HOST: "test_postgres_nothing_grpc_api_db"
+      POSTGRES_PORT: "5432"
+      POSTGRES_DB: "nothing_grpc_api_db"
+      POSTGRES_USER: "nothing_grpc_api"
+      POSTGRES_PASSWORD: "nothing_grpc_api"
+    links:
+      - test_postgres_nothing_grpc_api_db
+    networks:
+      - default
+    ports:
+      - "8359:8359"
+      - "8459:8459"
+    restart: unless-stopped
+networks:
+  default:
+    driver: bridge
+volumes:
+  test_postgres_nothing_grpc_api_db:

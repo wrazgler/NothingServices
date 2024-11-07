@@ -1,0 +1,94 @@
+name: nothing_services
+services:
+  nothing_services_postgres_nothing_grpc_api_db:
+    image: postgres
+    container_name: nothing_services_postgres_nothing_grpc_api_db
+    environment:
+      POSTGRES_PORT: "5432"
+      POSTGRES_DB: "nothing_grpc_api_db"
+      POSTGRES_USER: "nothing_grpc_api"
+      POSTGRES_PASSWORD: "nothing_grpc_api"
+    networks:
+      - default
+    ports:
+      - "5500:5432"
+    restart: unless-stopped
+    volumes:
+      - nothing_services_postgres_nothing_grpc_api_db:/var/lib/nothing_services_postgres_nothing_grpc_api_db
+  nothing_services_postgres_nothing_web_api_db:
+    image: postgres
+    container_name: nothing_services_postgres_nothing_web_api_db
+    environment:
+      POSTGRES_PORT: "5432"
+      POSTGRES_DB: "nothing_web_api_db"
+      POSTGRES_USER: "nothing_web_api"
+      POSTGRES_PASSWORD: "nothing_web_api"
+    networks:
+      - default
+    ports:
+      - "5600:5432"
+    restart: unless-stopped
+    volumes:
+      - nothing_services_postgres_nothing_web_api_db:/var/lib/nothing_services_postgres_nothing_web_api_db
+  nothing_services_nothing_grpc_api:
+    image: nothing_grpc_api
+    container_name: nothing_services_nothing_grpc_api
+    build:
+      args:
+        CERTIFICATE_PASSWORD: "localhost"
+        CONFIGURATION: "Release"
+      context: .
+      dockerfile: NothingRpcApi/Dockerfile
+    depends_on:
+      - nothing_services_postgres_nothing_grpc_api_db
+    environment:
+      ASPNETCORE_HTTP_PORTS: "8500"
+      ASPNETCORE_HTTPS_PORTS: "8600"
+      PATH_BASE: "/nothing-grpc-api"
+      POSTGRES_HOST: "nothing_services_postgres_nothing_grpc_api_db"
+      POSTGRES_PORT: "5432"
+      POSTGRES_DB: "nothing_grpc_api_db"
+      POSTGRES_USER: "nothing_grpc_api"
+      POSTGRES_PASSWORD: "nothing_grpc_api"
+    links:
+      - nothing_services_postgres_nothing_grpc_api_db
+    networks:
+      - default
+    ports:
+      - "8500:8500"
+      - "8600:8600"
+    restart: unless-stopped
+  nothing_services_nothing_web_api:
+    image: nothing_web_api
+    container_name: nothing_services_nothing_web_api
+    build:
+      args:
+        CERTIFICATE_PASSWORD: "localhost"
+        CONFIGURATION: "Release"
+      context: .
+      dockerfile: NothingWebApi/Dockerfile
+    depends_on:
+      - nothing_services_postgres_nothing_web_api_db
+    environment:
+      ASPNETCORE_HTTP_PORTS: "8700"
+      ASPNETCORE_HTTPS_PORTS: "8800"
+      PATH_BASE: "/nothing-web-api"
+      POSTGRES_HOST: "nothing_services_postgres_nothing_web_api_db"
+      POSTGRES_PORT: "5432"
+      POSTGRES_DB: "nothing_web_api_db"
+      POSTGRES_USER: "nothing_web_api"
+      POSTGRES_PASSWORD: "nothing_web_api"
+    links:
+      - nothing_services_postgres_nothing_web_api_db
+    networks:
+      - default
+    ports:
+      - "8700:8700"
+      - "8800:8800"
+    restart: unless-stopped
+networks:
+  default:
+    driver: bridge
+volumes:
+  nothing_services_postgres_nothing_grpc_api_db:
+  nothing_services_postgres_nothing_web_api_db:

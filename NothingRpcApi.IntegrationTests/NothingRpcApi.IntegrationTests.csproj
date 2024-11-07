@@ -1,0 +1,55 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Authors>Golovin Nikita</Authors>
+    <Copyright>Copyright (C) Golovin Nikita 2024</Copyright>
+    <Description>Интеграционные тесты приложения gRpc</Description>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <IsPackable>false</IsPackable>
+    <IsTestProject>true</IsTestProject>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <RepositoryUrl>https://github.com/wrazgler/NothingServices</RepositoryUrl>
+    <TargetFramework>net8.0</TargetFramework>
+    <Title>NothingRpcApi.IntegrationTests</Title>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="coverlet.collector" Version="6.0.2">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Google.Protobuf" Version="3.28.3" />
+    <PackageReference Include="Grpc.Net.Client" Version="2.66.0" />
+    <PackageReference Include="Grpc.Tools" Version="2.67.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.11.1" />
+    <PackageReference Include="Moq" Version="4.20.72" />
+    <PackageReference Include="Moq.EntityFrameworkCore" Version="8.0.1.2" />
+    <PackageReference Include="xunit" Version="2.9.2" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="3.0.0-pre.30">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Protobuf Include="Protos\CreateNothingModelDto.proto" GrpcServices="Client" />
+    <Protobuf Include="Protos\NothingModelDto.proto" GrpcServices="Client" />
+    <Protobuf Include="Protos\NothingModelIdDto.proto" GrpcServices="Client" />
+    <Protobuf Include="Protos\NothingRpcService.proto" GrpcServices="Client" />
+    <Protobuf Include="Protos\UpdateNothingModelDto.proto" GrpcServices="Client" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Using Include="Moq" />
+    <Using Include="Xunit" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\NothingRpcApi\NothingRpcApi.csproj" />
+  </ItemGroup>
+
+</Project>

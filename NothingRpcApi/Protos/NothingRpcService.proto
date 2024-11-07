@@ -1,0 +1,74 @@
+syntax = "proto3";
+
+package NothingRpcApi;
+
+import "google/protobuf/empty.proto";
+import "Protos/google/api/annotations.proto";
+import "Protos/CreateNothingModelDto.proto";
+import "Protos/NothingModelDto.proto";
+import "Protos/NothingModelIdDto.proto";
+import "Protos/UpdateNothingModelDto.proto";
+
+option csharp_namespace = "NothingRpcApi.Services";
+
+// Сервис бизнес логики
+service NothingRpcService
+{
+  // Получить список моделей
+  // <returns>Список моделей</returns>
+  rpc GetStream (google.protobuf.Empty) returns (stream NothingModelDto)
+  {
+    option (google.api.http) = 
+    {
+      get: "/NothingRpcApi"
+    };
+  }
+
+  // Получить модель с указанным идентификатором
+  // <param name="nothingModelIdDto">Идентификатор модели</param>
+  // <returns>Объект модели</returns>
+  rpc Get (NothingModelIdDto) returns (NothingModelDto)
+  {
+    option (google.api.http) = 
+    {
+      get: "/NothingRpcApi/{Id}"
+    };
+  }
+
+  // Создать новую модель
+  // <param name="createNothingModelDto">Данные для создания модели</param>
+  // <returns>Объект модели</returns>
+  // <exception cref="ArgumentNullException">Ошибка валидации входных данных</exception>
+  rpc Create (CreateNothingModelDto) returns (NothingModelDto)
+  {
+    option (google.api.http) = 
+    {
+      post: "/NothingRpcApi"
+      body: "*"
+    };
+  }
+
+  // Обновить существующую модель
+  // <param name="updateNothingModelDto">Данные для обновления модели</param>
+  // <returns>Объект модели</returns>
+  // <exception cref="ArgumentNullException">Ошибка валидации входных данных</exception>
+  rpc Update (UpdateNothingModelDto) returns (NothingModelDto)
+  {
+    option (google.api.http) = 
+    {
+      put: "/NothingRpcApi"
+      body: "*"
+    };
+  }
+
+  // Удалить модель с указанным идентификатором
+  // <param name="nothingModelIdDto">Идентификатор модели</param>
+  // <returns>Объект модели</returns>
+  rpc Delete (NothingModelIdDto) returns (NothingModelDto)
+  {
+    option (google.api.http) = 
+    {
+      delete: "/NothingRpcApi/{Id}"
+    };
+  }
+}

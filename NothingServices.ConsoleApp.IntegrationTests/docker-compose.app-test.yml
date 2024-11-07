@@ -1,0 +1,94 @@
+name: console_app_test
+services:
+  console_app_test_postgres_nothing_grpc_api_db:
+    image: postgres
+    container_name: console_app_test_postgres_nothing_grpc_api_db
+    environment:
+      POSTGRES_PORT: "5432"
+      POSTGRES_DB: "nothing_grpc_api_db"
+      POSTGRES_USER: "nothing_grpc_api"
+      POSTGRES_PASSWORD: "nothing_grpc_api"
+    networks:
+      - default
+    ports:
+      - "5559:5432"
+    restart: unless-stopped
+    volumes:
+      - console_app_test_postgres_nothing_grpc_api_db:/var/lib/console_app_test_postgres_nothing_grpc_api_db
+  console_app_test_postgres_nothing_web_api_db:
+    image: postgres
+    container_name: console_app_test_postgres_nothing_web_api_db
+    environment:
+      POSTGRES_PORT: "5432"
+      POSTGRES_DB: "nothing_web_api_db"
+      POSTGRES_USER: "nothing_web_api"
+      POSTGRES_PASSWORD: "nothing_web_api"
+    networks:
+      - default
+    ports:
+      - "5659:5432"
+    restart: unless-stopped
+    volumes:
+      - console_app_test_postgres_nothing_web_api_db:/var/lib/console_app_test_postgres_nothing_web_api_db
+  console_app_test_nothing_grpc_api:
+    image: console_app_test_nothing_grpc_api
+    container_name: console_app_test_nothing_grpc_api
+    build:
+      args:
+        CERTIFICATE_PASSWORD: "localhost"
+        CONFIGURATION: "Release"
+      context: ../
+      dockerfile: NothingRpcApi/Dockerfile
+    depends_on:
+      - console_app_test_postgres_nothing_grpc_api_db
+    environment:
+      ASPNETCORE_HTTP_PORTS: "8559"
+      ASPNETCORE_HTTPS_PORTS: "8659"
+      PATH_BASE: "/nothing-grpc-api"
+      POSTGRES_HOST: "console_app_test_postgres_nothing_grpc_api_db"
+      POSTGRES_PORT: "5432"
+      POSTGRES_DB: "nothing_grpc_api_db"
+      POSTGRES_USER: "nothing_grpc_api"
+      POSTGRES_PASSWORD: "nothing_grpc_api"
+    links:
+      - console_app_test_postgres_nothing_grpc_api_db
+    networks:
+      - default
+    ports:
+      - "8559:8559"
+      - "8659:8659"
+    restart: unless-stopped
+  console_app_test_nothing_web_api:
+    image: console_app_test_nothing_web_api
+    container_name: console_app_test_nothing_web_api
+    build:
+      args:
+        CERTIFICATE_PASSWORD: "localhost"
+        CONFIGURATION: "Release"
+      context: ../
+      dockerfile: NothingWebApi/Dockerfile
+    depends_on:
+      - console_app_test_postgres_nothing_web_api_db
+    environment:
+      ASPNETCORE_HTTP_PORTS: "8759"
+      ASPNETCORE_HTTPS_PORTS: "8859"
+      PATH_BASE: "/nothing-web-api"
+      POSTGRES_HOST: "console_app_test_postgres_nothing_web_api_db"
+      POSTGRES_PORT: "5432"
+      POSTGRES_DB: "nothing_web_api_db"
+      POSTGRES_USER: "nothing_web_api"
+      POSTGRES_PASSWORD: "nothing_web_api"
+    links:
+      - console_app_test_postgres_nothing_web_api_db
+    networks:
+      - default
+    ports:
+      - "8759:8759"
+      - "8859:8859"
+    restart: unless-stopped
+networks:
+  default:
+    driver: bridge
+volumes:
+  console_app_test_postgres_nothing_grpc_api_db:
+  console_app_test_postgres_nothing_web_api_db:
