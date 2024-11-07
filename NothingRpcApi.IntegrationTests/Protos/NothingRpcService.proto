@@ -27,7 +27,7 @@ service NothingRpcService
   // <returns>Объект модели</returns>
   // <exception cref="ArgumentNullException">Ошибка валидации входных данных</exception>
   rpc Create (CreateNothingModelDto) returns (NothingModelDto);
-  
+
   // Обновить существующую модель
   // <param name="updateNothingModelDto">Данные для обновления модели</param>
   // <returns>Объект модели</returns>
