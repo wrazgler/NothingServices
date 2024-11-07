@@ -14,12 +14,13 @@ public class EnumExtensionsTests
 
         //Act
         var result = enumValue.GetDescription();
-        
+
         //Assert
         var assert = "test";
         Assert.Equal(assert, result);
     }
-    [Fact]
+
+    [Fact]
     public void GetPgName_Equal()
     {
         //Arrange

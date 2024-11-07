@@ -115,7 +115,7 @@ public class NothingServiceTests
         var result = nothingModel.Name;
 
         //Assert
-    var assert = "Test";
+        var assert = "Test";
         Assert.Equal(assert, result);
     }
 

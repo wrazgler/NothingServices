@@ -4,7 +4,7 @@ package NothingRpcApi;
 
 option csharp_namespace = "NothingRpcApi.Dtos";
 
-// Данные для создания моде
+// Данные для создания модели
 message CreateNothingModelDto
 {
     // Имя модели

@@ -9,7 +9,7 @@ namespace NothingServices.ConsoleApp.UnitTests.ExtensionsTests;
 public class AppExtensionsTests
 {
     [Fact]
-    public void AddAppClients_Services_Count_Equal()
+    public void AddAppClients_Services_Equivalent()
     {
         //Arrange
         var dictionary = new Dictionary<string, string>(1)
@@ -62,7 +62,7 @@ public class AppExtensionsTests
     }
 
     [Fact]
-    public void AddAppServices_Services_Count_Equal()
+    public void AddAppServices_Services_Equivalent()
     {
         //Act
         var result = new ServiceCollection()

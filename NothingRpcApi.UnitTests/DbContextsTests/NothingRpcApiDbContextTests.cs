@@ -8,84 +8,84 @@ namespace NothingRpcApi.UnitTests.DbContextsTests;
 
 public class NothingRpcApiDbContextTests
 {
-	[Fact]
-	public async Task CreateAsync_Db_Empty()
-	{
-		//Arrange
-		var dbContext = await GetDbContext();
-		await dbContext.Database.EnsureCreatedAsync();
+    [Fact]
+    public async Task CreateAsync_Db_Empty()
+    {
+        //Arrange
+        var dbContext = await GetDbContext();
+        await dbContext.Database.EnsureCreatedAsync();
 
-		//Act
-		var result = await dbContext.NothingModels
-			.AsNoTracking()
-			.ToListAsync();
+        //Act
+        var result = await dbContext.NothingModels
+            .AsNoTracking()
+            .ToListAsync();
 
-		//Assert
-		Assert.Empty(result);
-	}
+        //Assert
+        Assert.Empty(result);
+    }
 
-	[Fact]
-	public async Task AddAsync_Db_Equivalent()
-	{
-		//Arrange
-		var dbContext = await GetDbContext();
-		await dbContext.Database.EnsureCreatedAsync();
-		dbContext.ChangeTracker.Clear();
-		var nothingModel = new NothingModel()
-		{
-			Name = "Test",
-		};
+    [Fact]
+    public async Task AddAsync_Db_Equivalent()
+    {
+        //Arrange
+        var dbContext = await GetDbContext();
+        await dbContext.Database.EnsureCreatedAsync();
+        dbContext.ChangeTracker.Clear();
+        var nothingModel = new NothingModel()
+        {
+            Name = "Test",
+        };
 
-		//Act
-		await dbContext.NothingModels.AddAsync(nothingModel);
-		await dbContext.SaveChangesAsync();
-		dbContext.ChangeTracker.Clear();
-		var result = await dbContext.NothingModels
-			.AsNoTracking()
-			.SingleAsync();
+        //Act
+        await dbContext.NothingModels.AddAsync(nothingModel);
+        await dbContext.SaveChangesAsync();
+        dbContext.ChangeTracker.Clear();
+        var result = await dbContext.NothingModels
+            .AsNoTracking()
+            .SingleAsync();
 
-		//Assert
-		var assert = new NothingModel()
-		{
-			Id = 1,
-			Name = "Test",
-		};
-		Assert.Equivalent(assert, result, true);
-	}
+        //Assert
+        var assert = new NothingModel()
+        {
+            Id = 1,
+            Name = "Test",
+        };
+        Assert.Equivalent(assert, result, true);
+    }
 
-	[Fact]
-	public async Task Remove_Db_Equivalent()
-	{
-		//Arrange
-		var dbContext = await GetDbContext();
-		await dbContext.Database.EnsureCreatedAsync();
-		var nothingModel = new NothingModel()
-		{
-			Name = "Test",
-		};
-		await dbContext.NothingModels.AddAsync(nothingModel);
-		await dbContext.SaveChangesAsync();
-		dbContext.ChangeTracker.Clear();
+    [Fact]
+    public async Task Remove_Db_Equivalent()
+    {
+        //Arrange
+        var dbContext = await GetDbContext();
+        await dbContext.Database.EnsureCreatedAsync();
+        var nothingModel = new NothingModel()
+        {
+            Name = "Test",
+        };
+        await dbContext.NothingModels.AddAsync(nothingModel);
+        await dbContext.SaveChangesAsync();
+        dbContext.ChangeTracker.Clear();
 
-		//Act
-		dbContext.NothingModels.Remove(nothingModel);
-		await dbContext.SaveChangesAsync();
-		dbContext.ChangeTracker.Clear();
-		var result = await dbContext.NothingModels
-			.AsNoTracking()
-			.ToListAsync();
+        //Act
+        dbContext.NothingModels.Remove(nothingModel);
+        await dbContext.SaveChangesAsync();
+        dbContext.ChangeTracker.Clear();
+        var result = await dbContext.NothingModels
+            .AsNoTracking()
+            .ToListAsync();
 
-		//Assert
-		Assert.Empty(result);
-	}
+        //Assert
+        Assert.Empty(result);
+    }
 
-	private static async Task<NothingRpcApiDbContext> GetDbContext()
-	{
-		var dbContext = new ServiceCollection()
-			.AddInMemoryDatabase(nameof(NothingRpcApiDbContextTests))
-			.BuildServiceProvider()
-			.GetRequiredService<NothingRpcApiDbContext>();
-		await dbContext.Database.EnsureDeletedAsync();
-		return dbContext;
-	}
+    private static async Task<NothingRpcApiDbContext> GetDbContext()
+    {
+        var dbContext = new ServiceCollection()
+            .AddInMemoryDatabase(nameof(NothingRpcApiDbContextTests))
+            .BuildServiceProvider()
+            .GetRequiredService<NothingRpcApiDbContext>();
+        await dbContext.Database.EnsureDeletedAsync();
+        return dbContext;
+    }
 }

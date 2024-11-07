@@ -127,7 +127,7 @@ public class NothingWebApiController(INothingService nothingService) : Controlle
     /// <summary>
     /// Удалить модель с указанным идентификатором
     /// </summary>
-    /// <param name="id">Идентификатор графа</param>
+    /// <param name="id">Идентификатор модели</param>
     /// <param name="cancellationToken">Токен отмены</param>
     /// <returns>Объект модели</returns>
     [HttpDelete("{id}")]

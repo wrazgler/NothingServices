@@ -13,85 +13,86 @@ namespace NothingRpcApi.Extensions;
 /// </summary>
 public static class DbContextExtensions
 {
-	/// <summary>
-	/// Добавить базу данных PostgreSQL в контейнер DI
-	/// </summary>
-	/// <param name="services">Контейнер DI</param>
-	/// <param name="context">Контекст приложения</param>
-	/// <returns>Контейнер DI</returns>
-	/// <exception cref="ConfigurationNullException{TConfig}">
-	/// Ошибка, возникшая при получении конфигурации.
-	/// </exception>
+    /// <summary>
+    /// Добавить базу данных PostgreSQL в коллекцию сервисов
+    /// </summary>
+    /// <param name="services">Коллекция сервисов</param>
+    /// <param name="context">Контекст приложения</param>
+    /// <returns>Коллекция сервисов с добавленной базой данных PostgreSQL</returns>
+    /// <exception cref="ConfigurationNullException{TConfig}">
+    /// Ошибка, возникшая при получении конфигурации.
+    /// </exception>
     internal static IServiceCollection AddPostgreSQL(
-		this IServiceCollection services,
-		HostBuilderContext context)
-	{
-		var config = context.Configuration.GetConfig<PostgresConfig>();
-		services.AddDbContextFactory<NothingRpcApiDbContext>((_, optionsBuilder) =>
-		{
-			optionsBuilder.ConfigureNpgsql(config.ConnectionString);
-			if (context.HostingEnvironment.IsDevelopment())
-			{
-				optionsBuilder.EnableSensitiveDataLogging();
-			}
-		});
-		return services;
-	}
+        this IServiceCollection services,
+        HostBuilderContext context)
+    {
+        var config = context.Configuration.GetConfig<PostgresConfig>();
+        services.AddDbContextFactory<NothingRpcApiDbContext>((_, optionsBuilder) =>
+        {
+            optionsBuilder.ConfigureNpgsql(config.ConnectionString);
+            if (context.HostingEnvironment.IsDevelopment())
+            {
+                optionsBuilder.EnableSensitiveDataLogging();
+            }
+        });
+        return services;
+    }
 
-	/// <summary>
-	/// Сконфигурировать базу данных PostgreSQL
-	/// </summary>
-	/// <param name="optionsBuilder">Конфигуратор базы данных</param>
-	/// <param name="connectionString">Строка подключения</param>
+    /// <summary>
+    /// Сконфигурировать базу данных PostgreSQL
+    /// </summary>
+    /// <param name="optionsBuilder">Конфигуратор базы данных</param>
+    /// <param name="connectionString">Строка подключения</param>
     internal static void ConfigureNpgsql(
-		this DbContextOptionsBuilder optionsBuilder,
-		string connectionString)
-	{
-		var dataSource = NothingRpcApiDbContext.CreateNpgsqlDataSource(connectionString);
-		optionsBuilder.UseNpgsql(dataSource, dbContextOptionsBuilder =>
-		{
-			var assemblyName = Assembly.GetExecutingAssembly().GetName().Name;
-			dbContextOptionsBuilder.MigrationsAssembly(assemblyName);
-			dbContextOptionsBuilder.MigrationsHistoryTable("__ef_migrations");
-		});
-	}
+        this DbContextOptionsBuilder optionsBuilder,
+        string connectionString)
+    {
+        var dataSource = NothingRpcApiDbContext.CreateNpgsqlDataSource(connectionString);
+        optionsBuilder.UseNpgsql(dataSource, dbContextOptionsBuilder =>
+        {
+            var assemblyName = Assembly.GetExecutingAssembly().GetName().Name;
+            dbContextOptionsBuilder.MigrationsAssembly(assemblyName);
+            dbContextOptionsBuilder.MigrationsHistoryTable("__ef_migrations");
+        });
+    }
 
-	/// <summary>
-	/// Добавить базу данных в оперативной памяти
-	/// </summary>
-	/// <param name="services">Контейнер DI</param>
-	/// <param name="context">Контекст приложения</param>
-	/// <returns>Контейнер DI</returns>
-	/// <exception cref="ConfigurationNullException{TConfig}">
-	/// Ошибка, возникшая при получении конфигурации.
-	/// </exception>
-	public static IServiceCollection AddInMemoryDatabase(
-		this IServiceCollection services,
-		HostBuilderContext context)
-	{
-		var config = context.Configuration.GetConfig<PostgresConfig>();
-		services.AddInMemoryDatabase(config.Database);
-		return services;
-	}
 
-	/// <summary>
-	/// Добавить базу данных в оперативной памяти
-	/// </summary>
-	/// <param name="services">Контейнер DI</param>
-	/// <param name="dbName">Имя базы данных</param>
-	/// <returns>Контейнер DI</returns>
-	public static IServiceCollection AddInMemoryDatabase(
-		this IServiceCollection services,
-		string dbName)
-	{
-		services.AddDbContext<NothingRpcApiDbContext>(builder =>
-		{
-			builder.UseInMemoryDatabase(dbName);
-			builder.ConfigureWarnings(warnings =>
-			{
-				warnings.Ignore(InMemoryEventId.TransactionIgnoredWarning);
-			});
-		});
-		return services;
-	}
+    /// <summary>
+    /// Добавить базу данных в оперативной памяти в коллекцию сервисов
+    /// </summary>
+    /// <param name="services">Коллекция сервисов</param>
+    /// <param name="context">Контекст приложения</param>
+    /// <returns>Коллекция сервисов с добавленной базой данных в оперативной памяти</returns>
+    /// <exception cref="ConfigurationNullException{TConfig}">
+    /// Ошибка, возникшая при получении конфигурации.
+    /// </exception>
+    public static IServiceCollection AddInMemoryDatabase(
+        this IServiceCollection services,
+        HostBuilderContext context)
+    {
+        var config = context.Configuration.GetConfig<PostgresConfig>();
+        services.AddInMemoryDatabase(config.Database);
+        return services;
+    }
+
+    /// <summary>
+    /// Добавить базу данных в оперативной памяти в коллекцию сервисов
+    /// </summary>
+    /// <param name="services">Коллекция сервисов</param>
+    /// <param name="dbName">Имя базы данных</param>
+    /// <returns>Коллекция сервисов с добавленной базой данных в оперативной памяти</returns>
+    public static IServiceCollection AddInMemoryDatabase(
+        this IServiceCollection services,
+        string dbName)
+    {
+        services.AddDbContext<NothingRpcApiDbContext>(builder =>
+        {
+            builder.UseInMemoryDatabase(dbName);
+            builder.ConfigureWarnings(warnings =>
+            {
+                warnings.Ignore(InMemoryEventId.TransactionIgnoredWarning);
+            });
+        });
+        return services;
+    }
 }

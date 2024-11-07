@@ -4,12 +4,12 @@ package NothingRpcApi;
 
 option csharp_namespace = "NothingRpcApi.IntegrationTests.Dtos";
 
-// Dto модели
+// Данные модели
 message NothingModelDto
 {
   // Идентификатор модели
-  int32 Id = 1;  
-  
+  int32 Id = 1;
+
   // Имя модели
   string Name = 2;
 }

@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 namespace NothingServices.ConsoleApp.Dtos;
 
 /// <summary>
-/// Dto модели
+/// Данные модели
 /// </summary>
 public class NothingModelWebDto
 {
