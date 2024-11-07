@@ -4,7 +4,7 @@ package NothingRpcApi;
 
 option csharp_namespace = "NothingServices.ConsoleApp.Dtos";
 
-// Dto идентификатора модели
+// Данные идентификатора модели
 message NothingModelIdDto
 {
   // Идентификатор модели

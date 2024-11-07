@@ -8,7 +8,7 @@ namespace NothingServices.ConsoleApp.Configs;
 public class NothingWebApiClientConfig
 {
     /// <summary>
-    /// Номер порта NothingWebApi
+    /// Адрес сервиса NothingWebApi
     /// </summary>
     [ConfigurationKeyName("NOTHING_WEB_API_URL")]
     public required string BaseUrl { get; init; }

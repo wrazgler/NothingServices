@@ -51,7 +51,7 @@ public abstract class NothingApiClientStrategy(IConsoleService consoleService)
     public abstract Task DeleteNothingModelAsync(CancellationToken cancellationToken = default);
 
     /// <summary>
-    /// Получить Идентификатор модели из консоли
+    /// Получить идентификатор модели из консоли
     /// </summary>
     /// <param name="cancellationToken">Токен отмены</param>
     /// <returns>Идентификатор модели</returns>
@@ -72,7 +72,7 @@ public abstract class NothingApiClientStrategy(IConsoleService consoleService)
     }
 
     /// <summary>
-    /// Получить Имя модели из консоли
+    /// Получить имя модели из консоли
     /// </summary>
     /// <param name="cancellationToken">Токен отмены</param>
     /// <returns>Имя модели</returns>
