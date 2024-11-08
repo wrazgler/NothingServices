@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package NothingRpcApi;
+
+option csharp_namespace = "NothingServices.WPFApp.Dtos";
+
+// Данные идентификатора модели
+message NothingModelIdDto
+{
+  // Идентификатор модели
+  int32 Id = 1;
+}

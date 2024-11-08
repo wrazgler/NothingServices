@@ -1,7 +1,6 @@
 using System.Diagnostics;
 using System.Net.Http.Json;
 using System.Security.Cryptography.X509Certificates;
-using NothingServices.Abstractions.Extensions;
 using NothingWebApi.Dtos;
 
 namespace NothingWebApi.IntegrationTests;
