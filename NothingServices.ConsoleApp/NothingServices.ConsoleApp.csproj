@@ -51,10 +51,4 @@
     <Protobuf Include="Protos\UpdateNothingModelDto.proto" GrpcServices="Client" />
   </ItemGroup>
 
-  <ItemGroup>
-    <None Update="Protos\UpdateNothingModelDto.proto">
-      <GrpcServices>Server</GrpcServices>
-    </None>
-  </ItemGroup>
-
 </Project>

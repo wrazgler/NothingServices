@@ -133,7 +133,7 @@ components:
           type: string
           description: Имя модели
       additionalProperties: false
-      description: Данные для создания моде
+      description: Данные для создания модели
     NothingModelDto:
       type: object
       properties:
@@ -145,7 +145,7 @@ components:
           type: string
           description: Имя модели
       additionalProperties: false
-      description: Dto модели
+      description: Данные модели
     Status:
       type: object
       properties:

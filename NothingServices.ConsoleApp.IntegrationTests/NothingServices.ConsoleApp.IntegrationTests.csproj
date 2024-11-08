@@ -32,7 +32,7 @@
     <Using Include="Moq" />
     <Using Include="Xunit" />
   </ItemGroup>
-  
+
   <ItemGroup>
     <Content Include="appsettings.AppTesting.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -41,15 +41,14 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-  
+
   <ItemGroup>
     <ProjectReference Include="..\NothingServices.ConsoleApp\NothingServices.ConsoleApp.csproj" />
   </ItemGroup>
-  
-  <ItemGroup>
-    <None Update="docker-compose.app-test.yml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
+
+  <Target Name="Create certificate" BeforeTargets="Build" Condition="$(Configuration)=='Debug'">
+    <Exec Command="dotnet dev-certs https -ep .certificates/localhost.crt -p localhost --trust"
+          WorkingDirectory="$(SolutionDir)" />
+  </Target>
 
 </Project>
