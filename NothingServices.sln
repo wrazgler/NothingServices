@@ -46,6 +46,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IntegrationTests", "Integra
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NothingServices.WPFApp", "NothingServices.WPFApp\NothingServices.WPFApp.csproj", "{1089505E-B240-46E7-8CB5-7EEDE355EBDA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NothingServices.WPFApp.UnitTests", "NothingServices.WPFApp.UnitTests\NothingServices.WPFApp.UnitTests.csproj", "{7C221D93-6BFA-499C-AF2C-535D43AEE747}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -100,6 +102,10 @@ Global
 		{1089505E-B240-46E7-8CB5-7EEDE355EBDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1089505E-B240-46E7-8CB5-7EEDE355EBDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1089505E-B240-46E7-8CB5-7EEDE355EBDA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7C221D93-6BFA-499C-AF2C-535D43AEE747}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C221D93-6BFA-499C-AF2C-535D43AEE747}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C221D93-6BFA-499C-AF2C-535D43AEE747}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C221D93-6BFA-499C-AF2C-535D43AEE747}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -117,6 +123,7 @@ Global
 		{8A22802F-3D35-4C9D-92FF-DD752CD98F93} = {4B5B43A6-D4A4-4282-A306-D06C828A2C50}
 		{927F3860-955C-4696-B7DF-1A6FDA266DB7} = {4B5B43A6-D4A4-4282-A306-D06C828A2C50}
 		{1089505E-B240-46E7-8CB5-7EEDE355EBDA} = {397A7181-1D7D-4B96-956D-A9E2008BB54C}
+		{7C221D93-6BFA-499C-AF2C-535D43AEE747} = {6C9C67D1-F810-406E-920D-5391E4FF7D9D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A6EA7D68-C0AF-4132-BDE4-8539C4849090}

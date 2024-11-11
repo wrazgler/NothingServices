@@ -53,4 +53,9 @@
     <Protobuf Include="Protos\UpdateNothingModelDto.proto" GrpcServices="Client" />
   </ItemGroup>
 
+  <Target Name="Create certificate" BeforeTargets="Build" Condition="$(Configuration)=='Debug'">
+    <Exec Command="dotnet dev-certs https -ep .certificates/localhost.crt -p localhost --trust"
+          WorkingDirectory="$(SolutionDir)" />
+  </Target>
+
 </Project>
