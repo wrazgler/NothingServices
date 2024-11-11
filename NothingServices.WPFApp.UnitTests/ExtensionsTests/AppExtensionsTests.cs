@@ -29,9 +29,8 @@ public class AppExtensionsTests
         //Assert
         var assert = new string[]
         {
-            "NothingServices.ConsoleApp.Clients.NothingRpcService+NothingRpcServiceClient",
-            "NothingServices.ConsoleApp.Clients.INothingWebApiClient",
-
+            "NothingServices.WPFApp.Clients.NothingRpcService+NothingRpcServiceClient",
+            "NothingServices.WPFApp.Clients.INothingWebApiClient",
         };
         Assert.Equivalent(assert, result, true);
     }
@@ -57,7 +56,7 @@ public class AppExtensionsTests
             .ToArray();
 
         //Assert
-        var assert = "Microsoft.Extensions.Options.IConfigureOptions`1[NothingServices.ConsoleApp.Configs.NothingWebApiClientConfig]";
+        var assert = "Microsoft.Extensions.Options.IConfigureOptions`1[NothingServices.WPFApp.Configs.NothingWebApiClientConfig]";
         Assert.Contains(assert, result);
     }
 
@@ -73,6 +72,26 @@ public class AppExtensionsTests
         //Assert
         var assert = new string[]
         {
+            "NothingServices.WPFApp.Services.IAppVersionProvider",
+            "NothingServices.WPFApp.Services.StartupService",
+        };
+        Assert.Equivalent(assert, result, true);
+    }
+
+    [Fact]
+    public void AddAppViews_Services_Equivalent()
+    {
+        //Act
+        var result = new ServiceCollection()
+            .AddAppViews()
+            .Select(x => x.ServiceType.ToString())
+            .ToArray();
+
+        //Assert
+        var assert = new string[]
+        {
+            "NothingServices.WPFApp.Views.MainWindow",
+            "NothingServices.WPFApp.ViewModels.MainWindowVM",
         };
         Assert.Equivalent(assert, result, true);
     }

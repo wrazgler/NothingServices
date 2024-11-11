@@ -8,6 +8,9 @@ using NothingServices.Abstractions.Exceptions;
 using NothingServices.Abstractions.Extensions;
 using NothingServices.WPFApp.Clients;
 using NothingServices.WPFApp.Configs;
+using NothingServices.WPFApp.Services;
+using NothingServices.WPFApp.ViewModels;
+using NothingServices.WPFApp.Views;
 
 namespace NothingServices.WPFApp.Extensions;
 
@@ -57,6 +60,20 @@ public static class AppExtensions
     /// <returns>Коллекция сервисов с добавленными сервисами приложения</returns>
     public static IServiceCollection AddAppServices(this IServiceCollection services)
     {
+        services.AddScoped<IAppVersionProvider, AppVersionProvider>();
+        services.AddScoped<StartupService>();
+        return services;
+    }
+
+    /// <summary>
+    /// Добавить представления приложения в коллекцию сервисов
+    /// </summary>
+    /// <param name="services">Коллекция сервисов</param>
+    /// <returns>Коллекция сервисов с добавленными представления приложения</returns>
+    public static IServiceCollection AddAppViews(this IServiceCollection services)
+    {
+        services.AddScoped<MainWindow>();
+        services.AddScoped<MainWindowVM>();
         return services;
     }
 
