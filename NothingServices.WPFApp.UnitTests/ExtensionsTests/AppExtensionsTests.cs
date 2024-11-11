@@ -1,10 +1,10 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using NothingServices.Abstractions.Exceptions;
-using NothingServices.ConsoleApp.Configs;
-using NothingServices.ConsoleApp.Extensions;
+using NothingServices.WPFApp.Configs;
+using NothingServices.WPFApp.Extensions;
 
-namespace NothingServices.ConsoleApp.UnitTests.ExtensionsTests;
+namespace NothingServices.WPFApp.UnitTests.ExtensionsTests;
 
 public class AppExtensionsTests
 {
@@ -31,6 +31,7 @@ public class AppExtensionsTests
         {
             "NothingServices.ConsoleApp.Clients.NothingRpcService+NothingRpcServiceClient",
             "NothingServices.ConsoleApp.Clients.INothingWebApiClient",
+
         };
         Assert.Equivalent(assert, result, true);
     }
@@ -72,10 +73,6 @@ public class AppExtensionsTests
         //Assert
         var assert = new string[]
         {
-            "NothingServices.ConsoleApp.Services.IConsoleService",
-            "NothingServices.ConsoleApp.Services.ILoopService",
-            "NothingServices.ConsoleApp.Strategies.NothingRpcApiClientStrategy",
-            "NothingServices.ConsoleApp.Strategies.NothingWebApiClientStrategy",
         };
         Assert.Equivalent(assert, result, true);
     }

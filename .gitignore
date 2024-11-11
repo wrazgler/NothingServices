@@ -20,7 +20,6 @@
 [Rr]elease/
 [Bb]in/
 [Oo]bj/
-localhost.crt
 
 # Nuget
 .nupkg
