@@ -10,6 +10,8 @@ using NothingServices.WPFApp.Clients;
 using NothingServices.WPFApp.Configs;
 using NothingServices.WPFApp.Services;
 using NothingServices.WPFApp.ViewModels;
+using NothingServices.WPFApp.ViewModels.Buttons;
+using NothingServices.WPFApp.ViewModels.MainWindowContent;
 using NothingServices.WPFApp.Views;
 
 namespace NothingServices.WPFApp.Extensions;
@@ -72,6 +74,9 @@ public static class AppExtensions
     /// <returns>Коллекция сервисов с добавленными представления приложения</returns>
     public static IServiceCollection AddAppViews(this IServiceCollection services)
     {
+        services.AddScoped<ApiSelectionVM>();
+        services.AddScoped<GRpcApiButtonVM>();
+        services.AddScoped<RestApiButtonVM>();
         services.AddScoped<MainWindow>();
         services.AddScoped<MainWindowVM>();
         return services;
