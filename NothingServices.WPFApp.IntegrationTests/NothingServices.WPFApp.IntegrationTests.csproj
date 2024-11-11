@@ -3,15 +3,15 @@
   <PropertyGroup>
     <Authors>Golovin Nikita</Authors>
     <Copyright>Copyright (C) Golovin Nikita 2024</Copyright>
-    <Description>Интеграционные тесты консольного клиента</Description>
+    <Description>Интеграционные тесты WPF клиента</Description>
     <ImplicitUsings>enable</ImplicitUsings>
     <IsPackable>false</IsPackable>
     <IsTestProject>true</IsTestProject>
     <LangVersion>latest</LangVersion>
     <Nullable>enable</Nullable>
     <RepositoryUrl>https://github.com/wrazgler/NothingServices</RepositoryUrl>
-    <TargetFramework>net8.0</TargetFramework>
-    <Title>NothingServices.ConsoleApp.IntegrationTests</Title>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Title>NothingServices.WPFApp.IntegrationTests</Title>
   </PropertyGroup>
 
   <ItemGroup>
@@ -34,16 +34,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="appsettings.AppTesting.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="appsettings.NothingWebApiClientTesting.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\NothingServices.ConsoleApp\NothingServices.ConsoleApp.csproj" />
+    <ProjectReference Include="..\NothingWebApi\NothingWebApi.csproj" />
   </ItemGroup>
 
   <Target Name="Create certificate" BeforeTargets="Build" Condition="$(Configuration)=='Debug'">
