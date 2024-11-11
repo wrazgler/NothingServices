@@ -1,11 +1,11 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
+using NothingServices.Abstractions.Configs;
 using NothingServices.Abstractions.Exceptions;
 using NothingServices.Abstractions.Extensions;
-using NothingServices.ConsoleApp.Configs;
 
-namespace NothingServices.ConsoleApp.UnitTests.ConfigsTests;
+namespace NothingServices.Abstractions.UnitTests.ConfigsTests;
 
 public class CertificateConfigTests
 {

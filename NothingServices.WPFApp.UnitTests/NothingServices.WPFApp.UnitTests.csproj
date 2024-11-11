@@ -4,6 +4,7 @@
     <Authors>Golovin Nikita</Authors>
     <Copyright>Copyright (C) Golovin Nikita 2024</Copyright>
     <Description>Unit тесты WPF клиента</Description>
+    <EnableWindowsTargeting>true</EnableWindowsTargeting>
     <ImplicitUsings>enable</ImplicitUsings>
     <IsPackable>false</IsPackable>
     <IsTestProject>true</IsTestProject>

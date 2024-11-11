@@ -4,13 +4,14 @@
     <Authors>Golovin Nikita</Authors>
     <Copyright>Copyright (C) Golovin Nikita 2024</Copyright>
     <Description>Интеграционные тесты приложения gRpc</Description>
+    <EnableWindowsTargeting>true</EnableWindowsTargeting>
     <ImplicitUsings>enable</ImplicitUsings>
     <IsPackable>false</IsPackable>
     <IsTestProject>true</IsTestProject>
     <LangVersion>latest</LangVersion>
     <Nullable>enable</Nullable>
     <RepositoryUrl>https://github.com/wrazgler/NothingServices</RepositoryUrl>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFramework>net8.0-windows</TargetFramework>
     <Title>NothingRpcApi.IntegrationTests</Title>
   </PropertyGroup>
 
