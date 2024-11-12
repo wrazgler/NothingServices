@@ -15,5 +15,9 @@
                             DataContext="{Binding Path=ApiSelectionVM}"
                             Visibility="{Binding Path=Visible, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
 
+    <views:NothingModelsListView x:Name="NothingModelsListView"
+                                 DataContext="{Binding Path=NothingModelsListVM}"
+                                 Visibility="{Binding Path=Visible, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
+
   </Grid>
 </Window>

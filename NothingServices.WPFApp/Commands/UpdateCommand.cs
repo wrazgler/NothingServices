@@ -1,5 +1,4 @@
 using NothingServices.WPFApp.Services;
-using NothingServices.WPFApp.Strategies;
 using NothingServices.WPFApp.ViewModels.Controls;
 
 namespace NothingServices.WPFApp.Commands;
@@ -7,13 +6,15 @@ namespace NothingServices.WPFApp.Commands;
 /// <summary>
 /// Команда обновить существующую модель
 /// </summary>
+/// <param name="mainWindowManager">Сервис управление отображением преставления на главном окне</param>
+/// <param name="notificator">Сервис отображения уведомлений в пользовательском интерфейсе</param>
 public class UpdateCommand(
-    INotificator notificator,
-    INothingApiClientStrategy strategy)
+    IMainWindowManager mainWindowManager,
+    INotificator notificator)
     : BaseCommand
 {
+    private readonly IMainWindowManager _mainWindowManager = mainWindowManager;
     private readonly INotificator _notificator = notificator;
-    private readonly INothingApiClientStrategy _strategy = strategy;
     private readonly CancellationTokenSource _cancellationTokenSource = new(10000);
 
     /// <summary>
@@ -42,9 +43,11 @@ public class UpdateCommand(
     {
         try
         {
-            if (parameter is not UpdateNothingModelVM updateNothingModelVM)
-                throw new ArgumentException(parameter?.GetType().Name);
-            var nothingModelVM = await _strategy.UpdateNothingModelAsync(
+            var updateNothingModelVM = parameter as UpdateNothingModelVM
+                ?? throw new ArgumentException(parameter?.GetType().Name);
+            var strategy = _mainWindowManager.Strategy
+                ?? throw new NullReferenceException(_mainWindowManager.Strategy?.GetType().Name);
+            var nothingModelVM = await strategy.UpdateNothingModelAsync(
                 updateNothingModelVM,
                 _cancellationTokenSource.Token);
         }

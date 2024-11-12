@@ -7,8 +7,10 @@ using NothingServices.Abstractions.Configs;
 using NothingServices.Abstractions.Exceptions;
 using NothingServices.Abstractions.Extensions;
 using NothingServices.WPFApp.Clients;
+using NothingServices.WPFApp.Commands;
 using NothingServices.WPFApp.Configs;
 using NothingServices.WPFApp.Services;
+using NothingServices.WPFApp.Strategies;
 using NothingServices.WPFApp.ViewModels;
 using NothingServices.WPFApp.ViewModels.Buttons;
 using NothingServices.WPFApp.Views;
@@ -62,7 +64,10 @@ public static class AppExtensions
     public static IServiceCollection AddAppServices(this IServiceCollection services)
     {
         services.AddScoped<IAppVersionProvider, AppVersionProvider>();
+        services.AddScoped<IMainWindowManager, MainWindowManager>();
         services.AddScoped<INotificator, Notificator>();
+        services.AddScoped<NothingRpcApiClientStrategy>();
+        services.AddScoped<NothingWebApiClientStrategy>();
         services.AddScoped<StartupService>();
         return services;
     }
@@ -78,9 +83,12 @@ public static class AppExtensions
 
         services.AddScoped<ApiSelectionVM>();
         services.AddScoped<MainWindowVM>();
+        services.AddScoped<NothingModelsListVM>();
 
         services.AddScoped<GRpcApiButtonVM>();
         services.AddScoped<RestApiButtonVM>();
+
+        services.AddScoped<OpenNothingModelsListCommand>();
 
         return services;
     }

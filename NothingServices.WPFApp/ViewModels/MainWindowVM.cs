@@ -8,9 +8,11 @@ namespace NothingServices.WPFApp.ViewModels;
 /// </summary>
 /// <param name="apiSelectionVM">Данные представления окна выбора внешнего сервиса</param>
 /// <param name="appVersionProvider">Провайдер версии приложения</param>
+/// <param name="nothingModelsListVM">Данные представления окна списка моделей</param>
 public class MainWindowVM(
     IAppVersionProvider appVersionProvider,
-    ApiSelectionVM apiSelectionVM)
+    ApiSelectionVM apiSelectionVM,
+    NothingModelsListVM nothingModelsListVM)
     : ObservableObject
 {
     private const string TitleFormat = "Клиент работы с NothingServices - v{0}";
@@ -24,4 +26,9 @@ public class MainWindowVM(
     /// Данные представления окна выбора внешнего сервиса
     /// </summary>
     public ApiSelectionVM ApiSelectionVM { get; } = apiSelectionVM;
+
+    /// <summary>
+    /// Данные представления окна списка моделей
+    /// </summary>
+    public NothingModelsListVM NothingModelsListVM { get; } = nothingModelsListVM;
 }

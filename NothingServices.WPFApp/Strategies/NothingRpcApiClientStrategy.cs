@@ -1,19 +1,27 @@
 using System.Collections.ObjectModel;
+using NothingServices.WPFApp.Clients;
 using NothingServices.WPFApp.ViewModels.Controls;
 
 namespace NothingServices.WPFApp.Strategies;
 
 /// <summary>
-/// Стратегия взаимодействия с клиентом NothingApi
+/// Стратегия взаимодействия с клиентом NothingRpcApi
 /// </summary>
-public interface INothingApiClientStrategy
+/// <param name="client">Клиент сервиса NothingRpcApi</param>
+public class NothingRpcApiClientStrategy(NothingRpcService.NothingRpcServiceClient client)
+    : INothingApiClientStrategy
 {
+    private readonly NothingRpcService.NothingRpcServiceClient _client = client;
+
     /// <summary>
     /// Вывести список моделей
     /// </summary>
     /// <param name="cancellationToken">Токен отмены</param>
     /// <returns>Коллекция данных представления модели</returns>
-    Task<ObservableCollection<NothingModelVM>> GetNothingModelsAsync(CancellationToken cancellationToken = default);
+    public async Task<ObservableCollection<NothingModelVM>> GetNothingModelsAsync(CancellationToken cancellationToken = default)
+    {
+        return null;
+    }
 
     /// <summary>
     /// Создать новую модель
@@ -21,9 +29,12 @@ public interface INothingApiClientStrategy
     /// <param name="createNothingModelVM">Данные представления создать модель</param>
     /// <param name="cancellationToken">Токен отмены</param>
     /// <returns>Данные представления модели</returns>
-    Task<NothingModelVM> CreateNothingModelAsync(
+    public async Task<NothingModelVM> CreateNothingModelAsync(
         CreateNothingModelVM createNothingModelVM,
-        CancellationToken cancellationToken = default);
+        CancellationToken cancellationToken = default)
+    {
+        return null;
+    }
 
     /// <summary>
     /// Обновить существующую модель
@@ -31,9 +42,12 @@ public interface INothingApiClientStrategy
     /// <param name="updateNothingModelVM">Данные представления обновить модель</param>
     /// <param name="cancellationToken">Токен отмены</param>
     /// <returns>Данные представления модели</returns>
-    Task<NothingModelVM> UpdateNothingModelAsync(
+    public async Task<NothingModelVM> UpdateNothingModelAsync(
         UpdateNothingModelVM updateNothingModelVM,
-        CancellationToken cancellationToken = default);
+        CancellationToken cancellationToken = default)
+    {
+        return null;
+    }
 
     /// <summary>
     /// Удалить модель
@@ -41,7 +55,10 @@ public interface INothingApiClientStrategy
     /// <param name="nothingModelVM">Данные представления модели</param>
     /// <param name="cancellationToken">Токен отмены</param>
     /// <returns>Данные представления модели</returns>
-    Task<NothingModelVM> DeleteNothingModelAsync(
+    public async Task<NothingModelVM> DeleteNothingModelAsync(
         NothingModelVM nothingModelVM,
-        CancellationToken cancellationToken = default);
+        CancellationToken cancellationToken = default)
+    {
+        return null;
+    }
 }

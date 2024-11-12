@@ -11,10 +11,11 @@ public class StartupServiceTests
     {
         //Arrange
         var mainWindowMock = new Mock<MainWindow>();
+        var mainWindowManagerMock = new Mock<IMainWindowManager>();
         var mainWindowVMMock = new Mock<MainWindowVM>();
         var mainWindow = mainWindowMock.Object;
         var mainWindowVM = mainWindowVMMock.Object;
-        var startupService = new StartupService(mainWindow, mainWindowVM);
+        var startupService = new StartupService(mainWindowManagerMock.Object, mainWindow, mainWindowVM);
 
         //Act
         startupService.Start();
@@ -23,6 +24,8 @@ public class StartupServiceTests
         //Assert
         var assert = mainWindowVM;
         Assert.Equal(assert, result);
+        mainWindowManagerMock.Verify(mainWindowManager
+            => mainWindowManager.Next(It.IsAny<IMainWindowContentVM>()), Times.Once);
         mainWindowMock.Verify(window => window.Show(), Times.Once);
     }
 }

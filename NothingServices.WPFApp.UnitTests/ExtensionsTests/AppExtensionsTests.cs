@@ -73,7 +73,10 @@ public class AppExtensionsTests
         var assert = new string[]
         {
             "NothingServices.WPFApp.Services.IAppVersionProvider",
+            "NothingServices.WPFApp.Services.IMainWindowManager",
             "NothingServices.WPFApp.Services.INotificator",
+            "NothingServices.WPFApp.Strategies.NothingRpcApiClientStrategy",
+            "NothingServices.WPFApp.Strategies.NothingWebApiClientStrategy",
             "NothingServices.WPFApp.Services.StartupService",
         };
         Assert.Equivalent(assert, result, true);
@@ -94,8 +97,10 @@ public class AppExtensionsTests
             "NothingServices.WPFApp.Views.MainWindow",
             "NothingServices.WPFApp.ViewModels.ApiSelectionVM",
             "NothingServices.WPFApp.ViewModels.MainWindowVM",
+            "NothingServices.WPFApp.ViewModels.NothingModelsListVM",
             "NothingServices.WPFApp.iewModels.Buttons.GRpcApiButtonVM",
             "NothingServices.WPFApp.iewModels.Buttons.RestApiButtonVM",
+            "NothingServices.WPFApp.iewModels.Commands.OpenNothingModelsListCommand",
         };
         Assert.Equivalent(assert, result, true);
     }

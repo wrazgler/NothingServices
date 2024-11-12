@@ -11,7 +11,7 @@ namespace NothingServices.WPFApp.ViewModels;
 public class ApiSelectionVM(
     GRpcApiButtonVM gRpcApiButtonVM,
     RestApiButtonVM restApiButtonVM)
-    : ObservableObject
+    : ObservableObject, IMainWindowContentVM
 {
     private bool _visible = true;
 

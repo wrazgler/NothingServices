@@ -7,11 +7,14 @@ namespace NothingServices.WPFApp.Services;
 /// Бизнес логика запуска приложения
 /// </summary>
 /// <param name="mainWindow">Представление главного окна приложения</param>
+/// <param name="mainWindowManager">Сервис управление отображением преставления на главном окне</param>
 /// <param name="mainWindowVM">Данные представления главного окна</param>
 public class StartupService(
+    IMainWindowManager mainWindowManager,
     MainWindow mainWindow,
     MainWindowVM mainWindowVM)
 {
+    private readonly IMainWindowManager _mainWindowManager = mainWindowManager;
     private readonly MainWindow _mainWindow = mainWindow;
     private readonly MainWindowVM _mainWindowVM = mainWindowVM;
 
@@ -20,6 +23,7 @@ public class StartupService(
     /// </summary>
     public void Start()
     {
+        _mainWindowManager.Next(_mainWindowVM.ApiSelectionVM);
         _mainWindow.DataContext = _mainWindowVM;
         _mainWindow.Show();
     }

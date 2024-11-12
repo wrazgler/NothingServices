@@ -1,6 +1,6 @@
 using System.Windows.Controls;
 
-namespace NothingServices.WPFApp.Views;
+namespace NothingServices.WPFApp.Views.Controls;
 
 /// <summary>
 /// Представление создать модель

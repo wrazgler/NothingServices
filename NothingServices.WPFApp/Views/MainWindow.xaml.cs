@@ -3,7 +3,7 @@ using System.Windows;
 namespace NothingServices.WPFApp.Views;
 
 /// <summary>
-/// Представление главным окна
+/// Представление главного окна
 /// </summary>
 public partial class MainWindow : Window
 {

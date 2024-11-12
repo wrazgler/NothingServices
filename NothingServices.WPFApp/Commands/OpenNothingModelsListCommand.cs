@@ -1,52 +1,46 @@
 using NothingServices.WPFApp.Services;
-using NothingServices.WPFApp.ViewModels.Controls;
+using NothingServices.WPFApp.Strategies;
+using NothingServices.WPFApp.ViewModels;
 
 namespace NothingServices.WPFApp.Commands;
 
 /// <summary>
-/// Команда удалить модель
+/// Команда открыть представление окна списка моделей
 /// </summary>
 /// <param name="mainWindowManager">Сервис управление отображением преставления на главном окне</param>
 /// <param name="notificator">Сервис отображения уведомлений в пользовательском интерфейсе</param>
-public class DeleteCommand(
+/// <param name="nothingModelsListVM">Данные представления окна списка моделей</param>
+public class OpenNothingModelsListCommand(
     IMainWindowManager mainWindowManager,
-    INotificator notificator)
-    : BaseCommand
+    INotificator notificator,
+    NothingModelsListVM nothingModelsListVM) : BaseCommand
 {
     private readonly IMainWindowManager _mainWindowManager = mainWindowManager;
     private readonly INotificator _notificator = notificator;
-    private readonly CancellationTokenSource _cancellationTokenSource = new(10000);
+    private readonly NothingModelsListVM _nothingModelsListVM = nothingModelsListVM;
 
     /// <summary>
-    /// Проверка возможности выполнить команду удалить модель
+    /// Проверка возможности выполнить команду открыть представление окна списка моделей
     /// </summary>
     /// <param name="parameter">Параметр команды</param>
     public override bool CanExecute(object? parameter)
     {
-        if (parameter is not NothingModelVM nothingModelVM)
-            return false;
-
-        if (nothingModelVM.Id == 0)
-            return false;
-
-        return true;
+        var valid = parameter is not INothingApiClientStrategy;
+        return valid;
     }
 
     /// <summary>
-    /// Удалить модель
+    /// Открыть представление окна списка моделей
     /// </summary>
     /// <param name="parameter">Параметр команды</param>
-    public override async void Execute(object? parameter)
+    public override void Execute(object? parameter)
     {
         try
         {
-            var nothingModelVM = parameter as NothingModelVM
+            var strategy = parameter as INothingApiClientStrategy
                 ?? throw new ArgumentException(parameter?.GetType().Name);
-            var strategy = _mainWindowManager.Strategy
-                ?? throw new NullReferenceException(_mainWindowManager.Strategy?.GetType().Name);
-            await strategy.DeleteNothingModelAsync(
-                nothingModelVM,
-                _cancellationTokenSource.Token);
+            _mainWindowManager.Strategy = strategy;
+            _mainWindowManager.Next(_nothingModelsListVM);
         }
         catch (Exception ex)
         {

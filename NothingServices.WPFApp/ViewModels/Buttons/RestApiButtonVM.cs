@@ -1,12 +1,19 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using System.Windows.Input;
+using NothingServices.WPFApp.Commands;
+using NothingServices.WPFApp.Strategies;
 
 namespace NothingServices.WPFApp.ViewModels.Buttons;
 
 /// <summary>
 /// Данные представления кнопки Rest Api
 /// </summary>
-public class RestApiButtonVM : ObservableObject, IButtonVM
+/// <param name="strategy">Стратегия взаимодействия с клиентом NothingWebApi</param>
+/// <param name="openNothingModelsListCommand">Команда открыть представление окна списка моделей</param>
+public class RestApiButtonVM(
+    NothingWebApiClientStrategy strategy,
+    OpenNothingModelsListCommand openNothingModelsListCommand)
+    : ObservableObject, IButtonVM
 {
     /// <summary>
     /// Текст кнопки Rest Api
@@ -21,5 +28,10 @@ public class RestApiButtonVM : ObservableObject, IButtonVM
     /// <summary>
     /// Команда кнопки Rest Api
     /// </summary>
-    public ICommand Command { get; }
+    public ICommand Command { get; } = openNothingModelsListCommand;
+
+    /// <summary>
+    /// Стратегия взаимодействия с клиентом NothingApi
+    /// </summary>
+    public INothingApiClientStrategy Strategy { get; } = strategy;
 }

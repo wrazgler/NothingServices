@@ -1,12 +1,19 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using System.Windows.Input;
+using NothingServices.WPFApp.Commands;
+using NothingServices.WPFApp.Strategies;
 
 namespace NothingServices.WPFApp.ViewModels.Buttons;
 
 /// <summary>
 /// Данные представления кнопки gRpc Api
 /// </summary>
-public class GRpcApiButtonVM : ObservableObject, IButtonVM
+/// <param name="strategy">Стратегия взаимодействия с клиентом NothingRpcApi</param>
+/// <param name="openNothingModelsListCommand">Команда открыть представление окна списка моделей</param>
+public class GRpcApiButtonVM(
+    NothingRpcApiClientStrategy strategy,
+    OpenNothingModelsListCommand openNothingModelsListCommand)
+    : ObservableObject, IButtonVM
 {
     /// <summary>
     /// Текст кнопки gRpc Api
@@ -21,5 +28,10 @@ public class GRpcApiButtonVM : ObservableObject, IButtonVM
     /// <summary>
     /// Команда кнопки gRpc Api
     /// </summary>
-    public ICommand Command { get; }
+    public ICommand Command { get; } = openNothingModelsListCommand;
+
+    /// <summary>
+    /// Стратегия взаимодействия с клиентом NothingApi
+    /// </summary>
+    public INothingApiClientStrategy Strategy { get; } = strategy;
 }
