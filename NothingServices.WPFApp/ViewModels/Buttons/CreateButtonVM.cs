@@ -1,12 +1,14 @@
 using System.Windows.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
+using NothingServices.WPFApp.Commands;
 
 namespace NothingServices.WPFApp.ViewModels.Buttons;
 
 /// <summary>
 /// Данные представления кнопки создать модель
 /// </summary>
-public class CreateButtonVM : ObservableObject, IButtonVM
+/// <param name="createCommand">Команда создать новую модель</param>
+public class CreateButtonVM(CreateCommand createCommand) : ObservableObject, IButtonVM
 {
     /// <summary>
     /// Текст кнопки создать модель
@@ -21,5 +23,5 @@ public class CreateButtonVM : ObservableObject, IButtonVM
     /// <summary>
     /// Команда кнопки создать модель
     /// </summary>
-    public ICommand Command { get; }
+    public ICommand Command { get; } = createCommand;
 }

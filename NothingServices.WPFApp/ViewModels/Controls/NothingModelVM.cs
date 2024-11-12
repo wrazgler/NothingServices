@@ -18,4 +18,13 @@ public class NothingModelVM : ObservableObject
     /// </summary>
     public required string Name { get; init; }
 
+    /// <summary>
+    /// Кнопка удалить модель
+    /// </summary>
+    public required DeleteButtonVM DeleteButtonVM { get; init; }
+
+    /// <summary>
+    /// Кнопка обновить модель
+    /// </summary>
+    public required UpdateButtonVM UpdateButtonVM { get; init; }
 }

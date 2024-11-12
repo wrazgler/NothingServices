@@ -12,7 +12,6 @@ namespace NothingServices.WPFApp.ViewModels;
 /// </summary>
 public class NothingModelsListVM : ObservableObject, IMainWindowContentVM
 {
-    private readonly object _locker = new();
     private readonly IMainWindowManager _mainWindowManager ;
     private readonly CancellationTokenSource _cancellationTokenSource = new(10000);
     private bool _visible = true;
@@ -53,7 +52,7 @@ public class NothingModelsListVM : ObservableObject, IMainWindowContentVM
     /// </summary>
     public ObservableCollection<NothingModelVM>? NothingModels
     {
-        get => _nothingModels ??= GetNothingModels();
+        get => _nothingModels;
         private set
         {
             if (_nothingModels == value)
@@ -69,27 +68,24 @@ public class NothingModelsListVM : ObservableObject, IMainWindowContentVM
     /// </summary>
     public BackButtonVM BackButtonVM { get; }
 
+    private void OnNext(MainWindowContentType nextType)
+    {
+        NothingModels = _mainWindowManager.Strategy != null
+            ? GetNothingModels()
+            : null;
+        Visible = nextType == MainWindowContentType.NothingModelsListVM;
+    }
+
     private ObservableCollection<NothingModelVM>? GetNothingModels()
     {
         if (_nothingModels != null)
             return _nothingModels;
 
-        if (_mainWindowManager.Strategy == null)
-            return null;
-
-        lock (_locker)
-        {
-            var strategy = _mainWindowManager.Strategy
-                ?? throw new NullReferenceException(nameof(_mainWindowManager.Strategy));
-            var task = strategy.GetNothingModelsAsync(_cancellationTokenSource.Token);
-            task.Wait();
-            var nothingModels = task.Result;
-            return nothingModels;
-        }
-    }
-
-    private void OnNext(MainWindowContentType nextType)
-    {
-        Visible = nextType == MainWindowContentType.NothingModelsListVM;
+        var strategy = _mainWindowManager.Strategy
+            ?? throw new NullReferenceException(nameof(_mainWindowManager.Strategy));
+        var task = Task.Run(() => strategy.GetNothingModelsAsync(_cancellationTokenSource.Token));
+        task.Wait();
+        var nothingModels = task.Result;
+        return nothingModels;
     }
 }

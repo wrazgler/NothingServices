@@ -1,12 +1,14 @@
 using System.Windows.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
+using NothingServices.WPFApp.Commands;
 
 namespace NothingServices.WPFApp.ViewModels.Buttons;
 
 /// <summary>
 /// Данные представления кнопки обновить модель
 /// </summary>
-public class UpdateButtonVM : ObservableObject, IButtonVM
+/// <param name="updateCommand">Команда обновить существующую модель</param>
+public class UpdateButtonVM(UpdateCommand updateCommand) : ObservableObject, IButtonVM
 {
     /// <summary>
     /// Текст кнопки обновить модель
@@ -21,5 +23,5 @@ public class UpdateButtonVM : ObservableObject, IButtonVM
     /// <summary>
     /// Команда кнопки обновить модель
     /// </summary>
-    public ICommand Command { get; }
+    public ICommand Command { get; } = updateCommand;
 }

@@ -1,5 +1,9 @@
 using System.Collections.ObjectModel;
+using AutoMapper;
 using NothingServices.WPFApp.Clients;
+using NothingServices.WPFApp.Dtos;
+using NothingServices.WPFApp.Extensions;
+using NothingServices.WPFApp.Factories;
 using NothingServices.WPFApp.ViewModels.Controls;
 
 namespace NothingServices.WPFApp.Strategies;
@@ -8,8 +12,16 @@ namespace NothingServices.WPFApp.Strategies;
 /// Стратегия взаимодействия с клиентом NothingWebApi
 /// </summary>
 /// <param name="client">Клиент сервиса NothingWebApi</param>
-public class NothingWebApiClientStrategy(INothingWebApiClient client) : INothingApiClientStrategy
+/// <param name="factory">Фабрика создания объекта данных представления модели</param>
+/// <param name="mapper"><see cref="Mapper"/></param>
+public class NothingWebApiClientStrategy(
+    IMapper mapper,
+    INothingModelVMFactory factory,
+    INothingWebApiClient client)
+    : INothingApiClientStrategy
 {
+    private readonly IMapper _mapper = mapper;
+    private readonly INothingModelVMFactory _factory = factory;
     private readonly INothingWebApiClient _client = client;
 
     /// <summary>
@@ -19,7 +31,11 @@ public class NothingWebApiClientStrategy(INothingWebApiClient client) : INothing
     /// <returns>Коллекция данных представления модели</returns>
     public async Task<ObservableCollection<NothingModelVM>> GetNothingModelsAsync(CancellationToken cancellationToken = default)
     {
-        return null;
+        var nothingModels = await _client.GetAsync(cancellationToken);
+        var nothingModelVMs = nothingModels
+            .Select(nothingModel => _factory.Create(nothingModel))
+            .ToObservableCollection();
+        return nothingModelVMs;
     }
 
     /// <summary>
@@ -32,7 +48,10 @@ public class NothingWebApiClientStrategy(INothingWebApiClient client) : INothing
         CreateNothingModelVM createNothingModelVM,
         CancellationToken cancellationToken = default)
     {
-        return null;
+        var createNothingModel = _mapper.Map<CreateNothingModelWebDto>(createNothingModelVM);
+        var nothingModel = await _client.CreateAsync(createNothingModel, cancellationToken);
+        var nothingModelVM = _factory.Create(nothingModel);
+        return nothingModelVM;
     }
 
     /// <summary>
@@ -45,7 +64,11 @@ public class NothingWebApiClientStrategy(INothingWebApiClient client) : INothing
         UpdateNothingModelVM updateNothingModelVM,
         CancellationToken cancellationToken = default)
     {
-        return null;
+        var updateNothingModel = _mapper.Map<UpdateNothingModelWebDto>(updateNothingModelVM);
+        var nothingModel = await _client
+            .UpdateAsync(updateNothingModel, cancellationToken);
+        var nothingModelVM = _factory.Create(nothingModel);
+        return nothingModelVM;
     }
 
     /// <summary>
@@ -58,6 +81,7 @@ public class NothingWebApiClientStrategy(INothingWebApiClient client) : INothing
         NothingModelVM nothingModelVM,
         CancellationToken cancellationToken = default)
     {
-        return null;
+        await _client.DeleteAsync(nothingModelVM.Id, cancellationToken);
+        return nothingModelVM;
     }
 }

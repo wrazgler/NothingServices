@@ -75,9 +75,10 @@ public class AppExtensionsTests
             "NothingServices.WPFApp.Services.IAppVersionProvider",
             "NothingServices.WPFApp.Services.IMainWindowManager",
             "NothingServices.WPFApp.Services.INotificator",
+            "NothingServices.WPFApp.Services.StartupService",
+            "NothingServices.WPFApp.Factories.INothingModelVMFactory",
             "NothingServices.WPFApp.Strategies.NothingRpcApiClientStrategy",
             "NothingServices.WPFApp.Strategies.NothingWebApiClientStrategy",
-            "NothingServices.WPFApp.Services.StartupService",
         };
         Assert.Equivalent(assert, result, true);
     }
@@ -98,10 +99,14 @@ public class AppExtensionsTests
             "NothingServices.WPFApp.ViewModels.ApiSelectionVM",
             "NothingServices.WPFApp.ViewModels.MainWindowVM",
             "NothingServices.WPFApp.ViewModels.NothingModelsListVM",
-            "NothingServices.WPFApp.iewModels.Buttons.GRpcApiButtonVM",
-            "NothingServices.WPFApp.iewModels.Buttons.RestApiButtonVM",
-            "NothingServices.WPFApp.iewModels.Commands.OpenApiSelectionVMCommand",
-            "NothingServices.WPFApp.iewModels.Commands.OpenNothingModelsListCommand",
+            "NothingServices.WPFApp.ViewModels.Buttons.BackButtonVM",
+            "NothingServices.WPFApp.ViewModels.Buttons.GRpcApiButtonVM",
+            "NothingServices.WPFApp.ViewModels.Buttons.RestApiButtonVM",
+            "NothingServices.WPFApp.Commands.CreateCommand",
+            "NothingServices.WPFApp.Commands.DeleteCommand",
+            "NothingServices.WPFApp.Commands.OpenApiSelectionVMCommand",
+            "NothingServices.WPFApp.Commands.OpenNothingModelsListCommand",
+            "NothingServices.WPFApp.Commands.UpdateCommand",
         };
         Assert.Equivalent(assert, result, true);
     }

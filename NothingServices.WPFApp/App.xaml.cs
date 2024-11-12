@@ -24,6 +24,7 @@ public partial class App : Application
         });
         hostBuilder.ConfigureServices((context, services) =>
         {
+            services.AddAppAutoMapper();
             services.AddAppConfigs(context.Configuration);
             services.AddAppHttpClient(context.Configuration);
             services.AddAppClients(context.Configuration);
