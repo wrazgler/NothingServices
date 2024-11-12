@@ -1,7 +1,7 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using NothingServices.WPFApp.ViewModels.Buttons;
 
-namespace NothingServices.WPFApp.ViewModels.MainWindowContent;
+namespace NothingServices.WPFApp.ViewModels;
 
 /// <summary>
 /// Данные представления окна выбора внешнего сервиса
@@ -11,7 +11,7 @@ namespace NothingServices.WPFApp.ViewModels.MainWindowContent;
 public class ApiSelectionVM(
     GRpcApiButtonVM gRpcApiButtonVM,
     RestApiButtonVM restApiButtonVM)
-    : ObservableObject, IMainWindowContentVM
+    : ObservableObject
 {
     private bool _visible = true;
 

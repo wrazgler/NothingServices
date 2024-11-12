@@ -8,7 +8,7 @@ namespace NothingServices.WPFApp.Views;
 public partial class ApiSelectionView : UserControl
 {
     /// <summary>
-    /// Конструктор инициализации окна выбора внешнего сервиса
+    /// Инициализация окна выбора внешнего сервиса
     /// </summary>
     public ApiSelectionView()
     {

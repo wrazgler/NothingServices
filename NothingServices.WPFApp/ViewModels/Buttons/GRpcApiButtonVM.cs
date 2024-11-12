@@ -16,7 +16,7 @@ public class GRpcApiButtonVM : ObservableObject, IButtonVM
     /// <summary>
     /// Текстовая подсказка кнопки gRpc Api
     /// </summary>
-    public string ToolTip { get; } = "gRpc Api";
+    public string ToolTip { get; } = "Получить список моделей из сервиса gRpc Api";
 
     /// <summary>
     /// Команда кнопки gRpc Api

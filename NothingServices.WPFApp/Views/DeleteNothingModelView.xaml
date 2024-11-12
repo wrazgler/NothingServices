@@ -1,0 +1,35 @@
+<UserControl x:Class="NothingServices.WPFApp.Views.DeleteNothingModelView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:controls="clr-namespace:NothingServices.WPFApp.ViewModels.Controls"
+             mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance Type=controls:DeleteNothingModelVM}">
+
+  <Border x:Name="DeleteNothingModelViewBorder">
+    <Grid x:Name="DeleteNothingModelViewGrid">
+      <Grid.RowDefinitions>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="Auto"/>
+      </Grid.RowDefinitions>
+
+      <Label Grid.Row="0"
+             x:Name="TitleLabel"
+             Content="{Binding Path=Title}"/>
+
+      <Grid Grid.Row="1">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="*" />
+          <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Button Grid.Column="0"
+                x:Name="DeleteButton"/>
+
+        <Button Grid.Column="1"
+                x:Name="CancelButton"/>
+      </Grid>
+    </Grid>
+  </Border>
+</UserControl>

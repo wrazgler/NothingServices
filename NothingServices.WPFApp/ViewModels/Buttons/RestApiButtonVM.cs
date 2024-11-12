@@ -16,7 +16,7 @@ public class RestApiButtonVM : ObservableObject, IButtonVM
     /// <summary>
     /// Текстовая подсказка кнопки Rest Api
     /// </summary>
-    public string ToolTip { get; } = "Rest Api";
+    public string ToolTip { get; } = "Получить список моделей из сервиса Rest Api";
 
     /// <summary>
     /// Команда кнопки Rest Api

@@ -8,7 +8,7 @@ namespace NothingServices.WPFApp.Views;
 public partial class MainWindow : Window
 {
     /// <summary>
-    /// Конструктор инициализации главного окна
+    /// Инициализация главного окна
     /// </summary>
     public MainWindow()
     {

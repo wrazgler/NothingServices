@@ -1,6 +1,5 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using NothingServices.WPFApp.Services;
-using NothingServices.WPFApp.ViewModels.MainWindowContent;
 
 namespace NothingServices.WPFApp.ViewModels;
 
@@ -15,15 +14,11 @@ public class MainWindowVM(
     : ObservableObject
 {
     private const string TitleFormat = "Клиент работы с NothingServices - v{0}";
-    private readonly string _title = string.Format(TitleFormat, appVersionProvider.GetVersion());
 
     /// <summary>
     /// Заголовок главного окна
     /// </summary>
-    public string Title
-    {
-        get => _title;
-    }
+    public string Title { get; } = string.Format(TitleFormat, appVersionProvider.GetVersion());
 
     /// <summary>
     /// Данные представления окна выбора внешнего сервиса
