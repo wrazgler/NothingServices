@@ -1,15 +1,14 @@
 using NothingServices.WPFApp.Models;
 using NothingServices.WPFApp.Services;
-using NothingServices.WPFApp.Strategies;
 
 namespace NothingServices.WPFApp.Commands;
 
 /// <summary>
-/// Команда открыть представление окна списка моделей
+/// Команда открыть представление окна выбора внешнего сервиса
 /// </summary>
 /// <param name="mainWindowManager">Сервис управление отображением преставления на главном окне</param>
 /// <param name="notificator">Сервис отображения уведомлений в пользовательском интерфейсе</param>
-public class OpenNothingModelsListCommand(
+public class OpenApiSelectionVMCommand(
     IMainWindowManager mainWindowManager,
     INotificator notificator)
     : BaseCommand
@@ -18,27 +17,24 @@ public class OpenNothingModelsListCommand(
     private readonly INotificator _notificator = notificator;
 
     /// <summary>
-    /// Проверка возможности выполнить команду открыть представление окна списка моделей
+    /// Проверка возможности выполнить команду открыть представление окна выбора внешнего сервиса
     /// </summary>
     /// <param name="parameter">Параметр команды</param>
     public override bool CanExecute(object? parameter)
     {
-        var valid = parameter is INothingApiClientStrategy;
-        return valid;
+        return true;
     }
 
     /// <summary>
-    /// Открыть представление окна списка моделей
+    /// Открыть представление окна выбора внешнего сервиса
     /// </summary>
     /// <param name="parameter">Параметр команды</param>
     public override void Execute(object? parameter)
     {
         try
         {
-            var strategy = parameter as INothingApiClientStrategy
-                ?? throw new ArgumentException(parameter?.GetType().Name);
-            _mainWindowManager.Strategy = strategy;
-            _mainWindowManager.Next(MainWindowContentType.NothingModelsListVM);
+            _mainWindowManager.Strategy = null;
+            _mainWindowManager.Next(MainWindowContentType.ApiSelectionVM);
         }
         catch (Exception ex)
         {

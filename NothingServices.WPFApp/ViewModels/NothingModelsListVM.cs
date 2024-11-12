@@ -1,6 +1,8 @@
 using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.ComponentModel;
+using NothingServices.WPFApp.Models;
 using NothingServices.WPFApp.Services;
+using NothingServices.WPFApp.ViewModels.Buttons;
 using NothingServices.WPFApp.ViewModels.Controls;
 
 namespace NothingServices.WPFApp.ViewModels;
@@ -8,15 +10,27 @@ namespace NothingServices.WPFApp.ViewModels;
 /// <summary>
 /// Данные представления окна списка моделей
 /// </summary>
-/// <param name="mainWindowManager">Сервис управление отображением преставления на главном окне</param>
-public class NothingModelsListVM(IMainWindowManager mainWindowManager):
-    ObservableObject, IMainWindowContentVM
+public class NothingModelsListVM : ObservableObject, IMainWindowContentVM
 {
     private readonly object _locker = new();
-    private readonly IMainWindowManager _mainWindowManager = mainWindowManager;
+    private readonly IMainWindowManager _mainWindowManager ;
     private readonly CancellationTokenSource _cancellationTokenSource = new(10000);
     private bool _visible = true;
     private ObservableCollection<NothingModelVM>? _nothingModels;
+
+    /// <summary>
+    /// Инициализатор данных представления окна списка моделей
+    /// </summary>
+    /// <param name="backButtonVM">Кнопка вернуться назад</param>
+    /// <param name="mainWindowManager">Сервис управление отображением преставления на главном окне</param>
+    public NothingModelsListVM(
+        IMainWindowManager mainWindowManager,
+        BackButtonVM backButtonVM)
+    {
+        _mainWindowManager = mainWindowManager;
+        _mainWindowManager.OnNext += OnNext;
+        BackButtonVM = backButtonVM;
+    }
 
     /// <summary>
     /// Нужно ли отображать контент на главном окне
@@ -37,7 +51,7 @@ public class NothingModelsListVM(IMainWindowManager mainWindowManager):
     /// <summary>
     /// Список моделей
     /// </summary>
-    public ObservableCollection<NothingModelVM> NothingModels
+    public ObservableCollection<NothingModelVM>? NothingModels
     {
         get => _nothingModels ??= GetNothingModels();
         private set
@@ -50,19 +64,32 @@ public class NothingModelsListVM(IMainWindowManager mainWindowManager):
         }
     }
 
-    private ObservableCollection<NothingModelVM> GetNothingModels()
+    /// <summary>
+    /// Кнопка вернуться назад
+    /// </summary>
+    public BackButtonVM BackButtonVM { get; }
+
+    private ObservableCollection<NothingModelVM>? GetNothingModels()
     {
         if (_nothingModels != null)
             return _nothingModels;
 
+        if (_mainWindowManager.Strategy == null)
+            return null;
+
         lock (_locker)
         {
-            var strategy =_mainWindowManager.Strategy
+            var strategy = _mainWindowManager.Strategy
                 ?? throw new NullReferenceException(nameof(_mainWindowManager.Strategy));
             var task = strategy.GetNothingModelsAsync(_cancellationTokenSource.Token);
             task.Wait();
             var nothingModels = task.Result;
             return nothingModels;
         }
+    }
+
+    private void OnNext(MainWindowContentType nextType)
+    {
+        Visible = nextType == MainWindowContentType.NothingModelsListVM;
     }
 }

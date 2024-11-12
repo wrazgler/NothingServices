@@ -100,6 +100,7 @@ public class AppExtensionsTests
             "NothingServices.WPFApp.ViewModels.NothingModelsListVM",
             "NothingServices.WPFApp.iewModels.Buttons.GRpcApiButtonVM",
             "NothingServices.WPFApp.iewModels.Buttons.RestApiButtonVM",
+            "NothingServices.WPFApp.iewModels.Commands.OpenApiSelectionVMCommand",
             "NothingServices.WPFApp.iewModels.Commands.OpenNothingModelsListCommand",
         };
         Assert.Equivalent(assert, result, true);

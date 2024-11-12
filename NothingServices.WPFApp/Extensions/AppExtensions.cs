@@ -85,9 +85,11 @@ public static class AppExtensions
         services.AddScoped<MainWindowVM>();
         services.AddScoped<NothingModelsListVM>();
 
+        services.AddScoped<BackButtonVM>();
         services.AddScoped<GRpcApiButtonVM>();
         services.AddScoped<RestApiButtonVM>();
 
+        services.AddScoped<OpenApiSelectionVMCommand>();
         services.AddScoped<OpenNothingModelsListCommand>();
 
         return services;

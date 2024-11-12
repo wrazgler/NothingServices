@@ -1,3 +1,4 @@
+using NothingServices.WPFApp.Models;
 using NothingServices.WPFApp.ViewModels;
 using NothingServices.WPFApp.Views;
 
@@ -23,7 +24,7 @@ public class StartupService(
     /// </summary>
     public void Start()
     {
-        _mainWindowManager.Next(_mainWindowVM.ApiSelectionVM);
+        _mainWindowManager.Next(MainWindowContentType.ApiSelectionVM);
         _mainWindow.DataContext = _mainWindowVM;
         _mainWindow.Show();
     }

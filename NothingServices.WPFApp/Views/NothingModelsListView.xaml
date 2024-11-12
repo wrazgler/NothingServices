@@ -23,7 +23,10 @@
       </Grid.ColumnDefinitions>
 
       <Button Grid.Column="0"
-              x:Name="BackButton"/>
+              x:Name="BackButton"
+              Command="{Binding Path=BackButtonVM.Command}"
+              Content="{Binding Path=BackButtonVM.Text}"
+              ToolTip="{Binding Path=BackButtonVM.ToolTip}"/>
 
       <Button Grid.Column="1"
               x:Name="CreateButton"/>

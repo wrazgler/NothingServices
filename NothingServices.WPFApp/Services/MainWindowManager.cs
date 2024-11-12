@@ -1,5 +1,5 @@
+using NothingServices.WPFApp.Models;
 using NothingServices.WPFApp.Strategies;
-using NothingServices.WPFApp.ViewModels;
 
 namespace NothingServices.WPFApp.Services;
 
@@ -9,24 +9,21 @@ namespace NothingServices.WPFApp.Services;
 public class MainWindowManager : IMainWindowManager
 {
     /// <summary>
-    /// Представление, отображаемое на главном окне
-    /// </summary>
-    public IMainWindowContentVM? Current { get; set; }
-
-    /// <summary>
     /// Стратегия взаимодействия с клиентом NothingApi
     /// </summary>
     public INothingApiClientStrategy? Strategy { get; set; }
 
     /// <summary>
+    /// Событие изменения представления, отображаемое на главном окне
+    /// </summary>
+    public event Action<MainWindowContentType>? OnNext;
+
+    /// <summary>
     /// Изменить представление, отображаемое на главном окне
     /// </summary>
-    /// <param name="next">Следующее представление, отображаемое на главном окне</param>
-    public void Next(IMainWindowContentVM next)
+    /// <param name="nextType">Тип представления, отображаемого на главном окне</param>
+    public void Next(MainWindowContentType nextType)
     {
-        if(Current != null)
-            Current.Visible = false;
-        next.Visible = true;
-        Current = next;
+        OnNext?.Invoke(nextType);
     }
 }
