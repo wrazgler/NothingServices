@@ -62,6 +62,7 @@ public static class AppExtensions
     public static IServiceCollection AddAppServices(this IServiceCollection services)
     {
         services.AddScoped<IAppVersionProvider, AppVersionProvider>();
+        services.AddScoped<INotificator, Notificator>();
         services.AddScoped<StartupService>();
         return services;
     }
@@ -73,11 +74,14 @@ public static class AppExtensions
     /// <returns>Коллекция сервисов с добавленными представления приложения</returns>
     public static IServiceCollection AddAppViews(this IServiceCollection services)
     {
+        services.AddScoped<MainWindow>();
+
         services.AddScoped<ApiSelectionVM>();
+        services.AddScoped<MainWindowVM>();
+
         services.AddScoped<GRpcApiButtonVM>();
         services.AddScoped<RestApiButtonVM>();
-        services.AddScoped<MainWindow>();
-        services.AddScoped<MainWindowVM>();
+
         return services;
     }
 

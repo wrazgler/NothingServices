@@ -1,3 +1,4 @@
+using NothingServices.WPFApp.Services;
 using NothingServices.WPFApp.Strategies;
 using NothingServices.WPFApp.ViewModels.Controls;
 
@@ -6,9 +7,12 @@ namespace NothingServices.WPFApp.Commands;
 /// <summary>
 /// Команда обновить существующую модель
 /// </summary>
-public class UpdateCommand(INothingApiClientStrategy strategy)
+public class UpdateCommand(
+    INotificator notificator,
+    INothingApiClientStrategy strategy)
     : BaseCommand
 {
+    private readonly INotificator _notificator = notificator;
     private readonly INothingApiClientStrategy _strategy = strategy;
     private readonly CancellationTokenSource _cancellationTokenSource = new(10000);
 
@@ -46,7 +50,7 @@ public class UpdateCommand(INothingApiClientStrategy strategy)
         }
         catch (Exception ex)
         {
-            return;
+            _notificator.Notificate(ex.Message);
         }
     }
 }

@@ -73,6 +73,7 @@ public class AppExtensionsTests
         var assert = new string[]
         {
             "NothingServices.WPFApp.Services.IAppVersionProvider",
+            "NothingServices.WPFApp.Services.INotificator",
             "NothingServices.WPFApp.Services.StartupService",
         };
         Assert.Equivalent(assert, result, true);
@@ -91,7 +92,10 @@ public class AppExtensionsTests
         var assert = new string[]
         {
             "NothingServices.WPFApp.Views.MainWindow",
+            "NothingServices.WPFApp.ViewModels.ApiSelectionVM",
             "NothingServices.WPFApp.ViewModels.MainWindowVM",
+            "NothingServices.WPFApp.iewModels.Buttons.GRpcApiButtonVM",
+            "NothingServices.WPFApp.iewModels.Buttons.RestApiButtonVM",
         };
         Assert.Equivalent(assert, result, true);
     }
