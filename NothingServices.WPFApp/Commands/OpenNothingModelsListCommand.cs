@@ -42,6 +42,8 @@ public class OpenNothingModelsListCommand(
         }
         catch (Exception ex)
         {
+            _mainWindowManager.Strategy = null;
+            _mainWindowManager.Next(MainWindowContentType.ApiSelectionVM);
             _notificator.Notificate(ex.Message);
         }
     }

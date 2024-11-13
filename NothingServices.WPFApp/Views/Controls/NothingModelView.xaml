@@ -10,8 +10,16 @@
   <Border x:Name="NothingModelViewBorder">
     <Border.ContextMenu>
       <ContextMenu x:Name="NothingModelViewContextMenu">
-        <MenuItem x:Name="UpdateMenuItem"/>
-        <MenuItem x:Name="DeleteMenuItem"/>
+        <MenuItem x:Name="UpdateMenuItem"
+                  Command="{Binding Path=UpdateButtonVM.Command}"
+                  CommandParameter="{Binding}"
+                  Header="{Binding Path=UpdateButtonVM.Text}"
+                  ToolTip="{Binding Path=UpdateButtonVM.ToolTip}"/>
+        <MenuItem x:Name="DeleteMenuItem"
+                  Command="{Binding Path=DeleteButtonVM.Command}"
+                  CommandParameter="{Binding}"
+                  Header="{Binding Path=DeleteButtonVM.Text}"
+                  ToolTip="{Binding Path=DeleteButtonVM.ToolTip}"/>
       </ContextMenu>
     </Border.ContextMenu>
 
@@ -32,10 +40,18 @@
              Content="{Binding Path=Name}"/>
 
       <Button Grid.Column="2"
-              x:Name="UpdateButton"/>
+              x:Name="UpdateButton"
+              Command="{Binding Path=UpdateButtonVM.Command}"
+              CommandParameter="{Binding}"
+              Content="{Binding Path=UpdateButtonVM.Text}"
+              ToolTip="{Binding Path=UpdateButtonVM.ToolTip}"/>
 
       <Button Grid.Column="3"
-              x:Name="DeleteButton"/>
+              x:Name="DeleteButton"
+              Command="{Binding Path=DeleteButtonVM.Command}"
+              CommandParameter="{Binding}"
+              Content="{Binding Path=DeleteButtonVM.Text}"
+              ToolTip="{Binding Path=DeleteButtonVM.ToolTip}"/>
     </Grid>
   </Border>
 </UserControl>

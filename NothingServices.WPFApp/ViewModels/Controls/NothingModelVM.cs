@@ -21,10 +21,10 @@ public class NothingModelVM : ObservableObject
     /// <summary>
     /// Кнопка удалить модель
     /// </summary>
-    public required DeleteButtonVM DeleteButtonVM { get; init; }
+    public required IButtonVM DeleteButtonVM { get; init; }
 
     /// <summary>
     /// Кнопка обновить модель
     /// </summary>
-    public required UpdateButtonVM UpdateButtonVM { get; init; }
+    public required IButtonVM UpdateButtonVM { get; init; }
 }

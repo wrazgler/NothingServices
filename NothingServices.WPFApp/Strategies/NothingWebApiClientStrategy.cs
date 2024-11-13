@@ -33,7 +33,7 @@ public class NothingWebApiClientStrategy(
     {
         var nothingModels = await _client.GetAsync(cancellationToken);
         var nothingModelVMs = nothingModels
-            .Select(nothingModel => _factory.Create(nothingModel))
+            .Select(_factory.Create)
             .ToObservableCollection();
         return nothingModelVMs;
     }

@@ -27,7 +27,7 @@ public class AppExtensionsTests
             .ToArray();
 
         //Assert
-        var assert = new string[]
+        var assert = new[]
         {
             "NothingServices.WPFApp.Clients.NothingRpcService+NothingRpcServiceClient",
             "NothingServices.WPFApp.Clients.INothingWebApiClient",
@@ -70,7 +70,7 @@ public class AppExtensionsTests
             .ToArray();
 
         //Assert
-        var assert = new string[]
+        var assert = new[]
         {
             "NothingServices.WPFApp.Services.IAppVersionProvider",
             "NothingServices.WPFApp.Services.IMainWindowManager",
@@ -93,15 +93,18 @@ public class AppExtensionsTests
             .ToArray();
 
         //Assert
-        var assert = new string[]
+        var assert = new[]
         {
             "NothingServices.WPFApp.Views.MainWindow",
             "NothingServices.WPFApp.ViewModels.ApiSelectionVM",
             "NothingServices.WPFApp.ViewModels.MainWindowVM",
             "NothingServices.WPFApp.ViewModels.NothingModelsListVM",
             "NothingServices.WPFApp.ViewModels.Buttons.BackButtonVM",
+            "NothingServices.WPFApp.ViewModels.Buttons.CreateButtonVM",
+            "NothingServices.WPFApp.ViewModels.Buttons.DeleteButtonVM",
             "NothingServices.WPFApp.ViewModels.Buttons.GRpcApiButtonVM",
             "NothingServices.WPFApp.ViewModels.Buttons.RestApiButtonVM",
+            "NothingServices.WPFApp.ViewModels.Buttons.UpdateButtonVM",
             "NothingServices.WPFApp.Commands.CreateCommand",
             "NothingServices.WPFApp.Commands.DeleteCommand",
             "NothingServices.WPFApp.Commands.OpenApiSelectionVMCommand",

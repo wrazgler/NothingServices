@@ -90,8 +90,11 @@ public static class AppExtensions
         services.AddScoped<NothingModelsListVM>();
 
         services.AddScoped<BackButtonVM>();
+        services.AddScoped<CreateButtonVM>();
+        services.AddScoped<DeleteButtonVM>();
         services.AddScoped<GRpcApiButtonVM>();
         services.AddScoped<RestApiButtonVM>();
+        services.AddScoped<UpdateButtonVM>();
 
         services.AddScoped<CreateCommand>();
         services.AddScoped<DeleteCommand>();

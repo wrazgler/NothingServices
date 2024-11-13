@@ -13,7 +13,7 @@ namespace NothingServices.WPFApp.ViewModels;
 public class NothingModelsListVM : ObservableObject, IMainWindowContentVM
 {
     private readonly IMainWindowManager _mainWindowManager ;
-    private readonly CancellationTokenSource _cancellationTokenSource = new(10000);
+    private readonly CancellationTokenSource _cancellationTokenSource = new(100000);
     private bool _visible = true;
     private ObservableCollection<NothingModelVM>? _nothingModels;
 
@@ -78,9 +78,6 @@ public class NothingModelsListVM : ObservableObject, IMainWindowContentVM
 
     private ObservableCollection<NothingModelVM>? GetNothingModels()
     {
-        if (_nothingModels != null)
-            return _nothingModels;
-
         var strategy = _mainWindowManager.Strategy
             ?? throw new NullReferenceException(nameof(_mainWindowManager.Strategy));
         var task = Task.Run(() => strategy.GetNothingModelsAsync(_cancellationTokenSource.Token));
