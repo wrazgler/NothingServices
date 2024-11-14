@@ -11,12 +11,7 @@
         Height="400" Width="600"
         Title="{Binding Path=Title}">
 
-  <Grid x:Name="MainWindowGrid" ZIndex="0">
-    <dialogs:Dialog x:Name="Dialog"
-                    DataContext="{Binding Path=DialogVM}"
-                    Content="{Binding Path=DialogContent, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
-                    Visibility="{Binding Path=Open, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
-
+  <Grid x:Name="MainWindowGrid">
     <views:ApiSelectionView x:Name="ApiSelectionView"
                             DataContext="{Binding Path=ApiSelectionVM}"
                             Visibility="{Binding Path=Active, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
@@ -25,5 +20,9 @@
                                  DataContext="{Binding Path=NothingModelsListVM}"
                                  Visibility="{Binding Path=Active, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
 
+    <dialogs:Dialog x:Name="Dialog"
+                    Style="{StaticResource StandardDialog}"
+                    DialogContent="{Binding Path=DialogVM.DialogContent, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                    Open="{Binding Path=DialogVM.Open, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
   </Grid>
 </Window>

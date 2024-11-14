@@ -9,7 +9,7 @@
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance Type=viewModels:NothingModelsListVM}">
 
-  <Grid x:Name="NothingModelsListViewGrid" ZIndex="1">
+  <Grid x:Name="NothingModelsListViewGrid">
     <Grid.RowDefinitions>
       <RowDefinition Height="Auto"/>
       <RowDefinition Height="*"/>

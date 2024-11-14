@@ -23,10 +23,10 @@ public class DeleteCommand(
     /// <param name="parameter">Параметр команды</param>
     public override bool CanExecute(object? parameter)
     {
-        if (parameter is not NothingModelVM nothingModelVM)
+        if (parameter is not DeleteNothingModelVM deleteNothingModelVM)
             return false;
 
-        if (nothingModelVM.Id == 0)
+        if (deleteNothingModelVM.Id == 0)
             return false;
 
         return true;

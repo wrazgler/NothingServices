@@ -15,6 +15,7 @@ using NothingServices.WPFApp.Strategies;
 using NothingServices.WPFApp.ViewModels;
 using NothingServices.WPFApp.ViewModels.Buttons;
 using NothingServices.WPFApp.Views;
+using NothingServices.WPFApp.Views.Controls;
 
 namespace NothingServices.WPFApp.Extensions;
 
@@ -87,7 +88,10 @@ public static class AppExtensions
     /// <returns>Коллекция сервисов с добавленными представления приложения</returns>
     public static IServiceCollection AddAppViews(this IServiceCollection services)
     {
+        services.AddScoped<CreateNothingModelView>();
+        services.AddScoped<DeleteNothingModelView>();
         services.AddScoped<MainWindow>();
+        services.AddScoped<UpdateNothingModelView>();
 
         services.AddScoped<ApiSelectionVM>();
         services.AddScoped<DialogVM>();

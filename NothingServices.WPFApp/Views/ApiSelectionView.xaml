@@ -7,7 +7,7 @@
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance Type=viewModels:ApiSelectionVM}">
 
-  <Grid x:Name="ApiSelectionViewGrid" ZIndex="1">
+  <Grid x:Name="ApiSelectionViewGrid">
     <Grid.ColumnDefinitions>
       <ColumnDefinition Width="*" />
       <ColumnDefinition Width="*" />
