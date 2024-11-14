@@ -33,7 +33,7 @@ public class ApiSelectionVM : ObservableObject, IMainWindowContentVM
     /// <summary>
     /// Нужно ли отображать контент на главном окне
     /// </summary>
-    public bool Visible
+    public bool Active
     {
         get => _visible;
         set
@@ -58,6 +58,6 @@ public class ApiSelectionVM : ObservableObject, IMainWindowContentVM
 
     private void OnNext(MainWindowContentType nextType)
     {
-        Visible = nextType == MainWindowContentType.ApiSelectionVM;
+        Active = nextType == MainWindowContentType.ApiSelectionVM;
     }
 }

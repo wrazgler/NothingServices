@@ -1,11 +1,17 @@
 using CommunityToolkit.Mvvm.ComponentModel;
+using NothingServices.WPFApp.ViewModels.Buttons;
 
 namespace NothingServices.WPFApp.ViewModels.Controls;
 
 /// <summary>
-/// Данные представления создать модель
+/// Данные представления окна создать модель
 /// </summary>
-public class CreateNothingModelVM : ObservableObject
+/// <param name="cancelButtonVM">Кнопка отменить создание</param>
+/// <param name="createButtonVM">Кнопка создать модель</param>
+public class CreateNothingModelVM(
+    IButtonVM cancelButtonVM,
+    IButtonVM createButtonVM)
+    : ObservableObject, IDialogContentVM
 {
     private string _name = string.Empty;
 
@@ -29,4 +35,14 @@ public class CreateNothingModelVM : ObservableObject
     /// Заголовок окна создать модель
     /// </summary>
     public string Title { get; } = "Введите имя новой модели";
+
+    /// <summary>
+    /// Кнопка отменить создание
+    /// </summary>
+    public IButtonVM CancelButtonVM { get; } = cancelButtonVM;
+
+    /// <summary>
+    /// Кнопка создать модель
+    /// </summary>
+    public IButtonVM CreateButtonVM { get; } = createButtonVM;
 }

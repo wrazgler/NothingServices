@@ -5,7 +5,7 @@ namespace NothingServices.WPFApp.Views.Controls;
 /// <summary>
 /// Представление обновить модель
 /// </summary>
-public partial class UpdateNothingModelView : UserControl
+public partial class UpdateNothingModelView : UserControl, IDialogContentView
 {
     /// <summary>
     /// Инициализация представления обновить модель

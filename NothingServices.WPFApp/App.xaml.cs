@@ -1,9 +1,9 @@
+using System.Windows;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using NothingServices.WPFApp.Extensions;
 using NothingServices.WPFApp.Services;
-using System.Windows;
 
 namespace NothingServices.WPFApp;
 

@@ -12,11 +12,13 @@ public interface INothingModelVMFactory
     /// Создать объект данных представления модели
     /// </summary>
     /// <param name="nothingModelDto">Данные модели</param>
+    /// <returns>Объект данных представления модели</returns>
     NothingModelVM Create(NothingModelDto nothingModelDto);
 
     /// <summary>
     /// Создать объект данных представления модели
     /// </summary>
     /// <param name="nothingModelWebDto">Данные модели</param>
+    /// <returns>Объект данных представления модели</returns>
     NothingModelVM Create(NothingModelWebDto nothingModelWebDto);
 }

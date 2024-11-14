@@ -31,10 +31,17 @@
         </Grid.ColumnDefinitions>
 
         <Button Grid.Column="0"
-                x:Name="SaveButton"/>
+                x:Name="SaveButton"
+                Command="{Binding Path=CreateButtonVM.Command}"
+                CommandParameter="{Binding}"
+                Content="{Binding Path=CreateButtonVM.Text}"
+                ToolTip="{Binding Path=CreateButtonVM.ToolTip}"/>
 
         <Button Grid.Column="1"
-                x:Name="CancelButton"/>
+                x:Name="CancelButton"
+                Command="{Binding Path=CancelButtonVM.Command}"
+                Content="{Binding Path=CancelButtonVM.Text}"
+                ToolTip="{Binding Path=CancelButtonVM.ToolTip}"/>
       </Grid>
     </Grid>
   </Border>

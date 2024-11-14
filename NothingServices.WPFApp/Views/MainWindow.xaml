@@ -4,20 +4,26 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:views="clr-namespace:NothingServices.WPFApp.Views"
+        xmlns:dialogs="clr-namespace:NothingServices.WPFApp.Dialogs"
         xmlns:viewModels="clr-namespace:NothingServices.WPFApp.ViewModels"
         d:DataContext="{d:DesignInstance Type=viewModels:MainWindowVM}"
         mc:Ignorable="d"
         Height="400" Width="600"
         Title="{Binding Path=Title}">
 
-  <Grid x:Name="MainWindowGrid">
+  <Grid x:Name="MainWindowGrid" ZIndex="0">
+    <dialogs:Dialog x:Name="Dialog"
+                    DataContext="{Binding Path=DialogVM}"
+                    Content="{Binding Path=DialogContent, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                    Visibility="{Binding Path=Open, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
+
     <views:ApiSelectionView x:Name="ApiSelectionView"
                             DataContext="{Binding Path=ApiSelectionVM}"
-                            Visibility="{Binding Path=Visible, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
+                            Visibility="{Binding Path=Active, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
 
     <views:NothingModelsListView x:Name="NothingModelsListView"
                                  DataContext="{Binding Path=NothingModelsListVM}"
-                                 Visibility="{Binding Path=Visible, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                 Visibility="{Binding Path=Active, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
 
   </Grid>
 </Window>

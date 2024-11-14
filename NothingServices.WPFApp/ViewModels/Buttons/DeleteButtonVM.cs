@@ -1,14 +1,13 @@
 using System.Windows.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
-using NothingServices.WPFApp.Commands;
 
 namespace NothingServices.WPFApp.ViewModels.Buttons;
 
 /// <summary>
 /// Данные представления кнопки удалить модель
 /// </summary>
-/// <param name="deleteCommand">Команда удалить модель</param>
-public class DeleteButtonVM(DeleteCommand deleteCommand) : ObservableObject, IButtonVM
+/// <param name="command">Команда, исполняемая кнопкой</param>
+public class DeleteButtonVM(ICommand command) : ObservableObject, IButtonVM
 {
     /// <summary>
     /// Текст кнопки удалить модель
@@ -23,5 +22,5 @@ public class DeleteButtonVM(DeleteCommand deleteCommand) : ObservableObject, IBu
     /// <summary>
     /// Команда кнопки удалить модель
     /// </summary>
-    public ICommand Command { get; } = deleteCommand;
+    public ICommand Command { get; } = command;
 }

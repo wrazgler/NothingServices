@@ -65,11 +65,15 @@ public static class AppExtensions
     public static IServiceCollection AddAppServices(this IServiceCollection services)
     {
         services.AddScoped<IAppVersionProvider, AppVersionProvider>();
+        services.AddScoped<IDialogService, DialogService>();
         services.AddScoped<IMainWindowManager, MainWindowManager>();
         services.AddScoped<INotificator, Notificator>();
         services.AddScoped<StartupService>();
 
+        services.AddScoped<ICreateNothingModelVMFactory, CreateNothingModelVMFactory>();
+        services.AddScoped<IDeleteNothingModelVMFactory, DeleteNothingModelVMFactory>();
         services.AddScoped<INothingModelVMFactory, NothingModelVMFactory>();
+        services.AddScoped<IUpdateNothingModelVMFactory, UpdateNothingModelVMFactory>();
 
         services.AddScoped<NothingRpcApiClientStrategy>();
         services.AddScoped<NothingWebApiClientStrategy>();
@@ -86,20 +90,21 @@ public static class AppExtensions
         services.AddScoped<MainWindow>();
 
         services.AddScoped<ApiSelectionVM>();
+        services.AddScoped<DialogVM>();
         services.AddScoped<MainWindowVM>();
         services.AddScoped<NothingModelsListVM>();
 
         services.AddScoped<BackButtonVM>();
-        services.AddScoped<CreateButtonVM>();
-        services.AddScoped<DeleteButtonVM>();
         services.AddScoped<GRpcApiButtonVM>();
         services.AddScoped<RestApiButtonVM>();
-        services.AddScoped<UpdateButtonVM>();
 
         services.AddScoped<CreateCommand>();
         services.AddScoped<DeleteCommand>();
-        services.AddScoped<OpenApiSelectionVMCommand>();
+        services.AddScoped<OpenApiSelectionCommand>();
+        services.AddScoped<OpenCreateNothingModelCommand>();
+        services.AddScoped<OpenDeleteNothingModelCommand>();
         services.AddScoped<OpenNothingModelsListCommand>();
+        services.AddScoped<OpenUpdateNothingModelCommand>();
         services.AddScoped<UpdateCommand>();
 
         return services;

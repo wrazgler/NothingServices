@@ -8,7 +8,7 @@ namespace NothingServices.WPFApp.Commands;
 /// </summary>
 /// <param name="mainWindowManager">Сервис управление отображением преставления на главном окне</param>
 /// <param name="notificator">Сервис отображения уведомлений в пользовательском интерфейсе</param>
-public class OpenApiSelectionVMCommand(
+public class OpenApiSelectionCommand(
     IMainWindowManager mainWindowManager,
     INotificator notificator)
     : BaseCommand

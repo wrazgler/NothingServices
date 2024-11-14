@@ -1,12 +1,19 @@
 using CommunityToolkit.Mvvm.ComponentModel;
+using NothingServices.WPFApp.ViewModels.Buttons;
 
 namespace NothingServices.WPFApp.ViewModels.Controls;
 
 /// <summary>
-/// Данные представления удалить модель
+/// Данные представления окна удалить модель
 /// </summary>
+/// <param name="cancelButtonVM">Кнопка отменить удаление</param>
+/// <param name="deleteButtonVM">Кнопка удалить модель</param>
 /// <param name="nothingModelVM">Данные представления модели</param>
-public class DeleteNothingModelVM(NothingModelVM nothingModelVM) : ObservableObject
+public class DeleteNothingModelVM(
+    IButtonVM cancelButtonVM,
+    IButtonVM deleteButtonVM,
+    INothingModelVM nothingModelVM)
+    : ObservableObject, IDialogContentVM
 {
     private const string TitleFormat = "Удалить модели: {0}";
 
@@ -16,12 +23,17 @@ public class DeleteNothingModelVM(NothingModelVM nothingModelVM) : ObservableObj
     public int Id { get; } = nothingModelVM.Id;
 
     /// <summary>
-    /// Имя модели
-    /// </summary>
-    public string Name { get; } = nothingModelVM.Name;
-
-    /// <summary>
     /// Заголовок окна удалить модель
     /// </summary>
     public string Title { get; } = string.Format(TitleFormat, nothingModelVM.Name);
+
+    /// <summary>
+    /// Кнопка отменить удаление
+    /// </summary>
+    public IButtonVM CancelButtonVM { get; } = cancelButtonVM;
+
+    /// <summary>
+    /// Кнопка удалить модель
+    /// </summary>
+    public IButtonVM DeleteButtonVM { get; } = deleteButtonVM;
 }

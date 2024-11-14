@@ -7,8 +7,8 @@ namespace NothingServices.WPFApp.ViewModels.Buttons;
 /// <summary>
 /// Данные представления кнопки вернуться назад
 /// </summary>
-/// <param name="openApiSelectionVMCommand">Команда открыть представление окна списка моделей</param>
-public class BackButtonVM(OpenApiSelectionVMCommand openApiSelectionVMCommand)
+/// <param name="openApiSelectionCommand">Команда открыть представление окна списка моделей</param>
+public class BackButtonVM(OpenApiSelectionCommand openApiSelectionCommand)
     : ObservableObject, IButtonVM
 {
     /// <summary>
@@ -24,5 +24,5 @@ public class BackButtonVM(OpenApiSelectionVMCommand openApiSelectionVMCommand)
     /// <summary>
     /// Команда кнопки вернуться назад
     /// </summary>
-    public ICommand Command { get; } = openApiSelectionVMCommand;
+    public ICommand Command { get; } = openApiSelectionCommand;
 }

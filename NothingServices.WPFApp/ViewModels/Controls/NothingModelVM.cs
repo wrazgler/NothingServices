@@ -6,7 +6,7 @@ namespace NothingServices.WPFApp.ViewModels.Controls;
 /// <summary>
 /// Данные представления модели
 /// </summary>
-public class NothingModelVM : ObservableObject
+public class NothingModelVM : ObservableObject, INothingModelVM
 {
     /// <summary>
     /// Идентификатор модели

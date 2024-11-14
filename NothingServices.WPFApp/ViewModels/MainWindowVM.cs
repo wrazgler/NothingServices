@@ -8,10 +8,12 @@ namespace NothingServices.WPFApp.ViewModels;
 /// </summary>
 /// <param name="apiSelectionVM">Данные представления окна выбора внешнего сервиса</param>
 /// <param name="appVersionProvider">Провайдер версии приложения</param>
+/// <param name="dialogVM">Данные представления диалогового окна</param>
 /// <param name="nothingModelsListVM">Данные представления окна списка моделей</param>
 public class MainWindowVM(
     IAppVersionProvider appVersionProvider,
     ApiSelectionVM apiSelectionVM,
+    DialogVM dialogVM,
     NothingModelsListVM nothingModelsListVM)
     : ObservableObject
 {
@@ -26,6 +28,11 @@ public class MainWindowVM(
     /// Данные представления окна выбора внешнего сервиса
     /// </summary>
     public ApiSelectionVM ApiSelectionVM { get; } = apiSelectionVM;
+
+    /// <summary>
+    /// Данные представления диалогового окна
+    /// </summary>
+    public DialogVM DialogVM { get; } = dialogVM;
 
     /// <summary>
     /// Данные представления окна списка моделей

@@ -9,7 +9,7 @@
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance Type=viewModels:NothingModelsListVM}">
 
-  <Grid x:Name="NothingModelsListViewGrid">
+  <Grid x:Name="NothingModelsListViewGrid" ZIndex="1">
     <Grid.RowDefinitions>
       <RowDefinition Height="Auto"/>
       <RowDefinition Height="*"/>
@@ -29,7 +29,10 @@
               ToolTip="{Binding Path=BackButtonVM.ToolTip}"/>
 
       <Button Grid.Column="1"
-              x:Name="CreateButton"/>
+              x:Name="CreateButton"
+              Command="{Binding Path=CreateButtonVM.Command}"
+              Content="{Binding Path=CreateButtonVM.Text}"
+              ToolTip="{Binding Path=CreateButtonVM.ToolTip}"/>
     </Grid>
 
     <ListBox Grid.Row="1"

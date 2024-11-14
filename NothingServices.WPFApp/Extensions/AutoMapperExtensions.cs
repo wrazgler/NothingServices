@@ -22,6 +22,7 @@ public static class AutoMapperExtensions
             configuration.AllowNullCollections = true;
             configuration.CreateMap<CreateNothingModelVM, CreateNothingModelDto>();
             configuration.CreateMap<CreateNothingModelVM, CreateNothingModelWebDto>();
+            configuration.CreateMap<DeleteNothingModelVM, NothingModelIdDto>();
             configuration.CreateMap<NothingModelVM, NothingModelIdDto>();
             configuration.CreateMap<UpdateNothingModelVM, UpdateNothingModelDto>();
             configuration.CreateMap<UpdateNothingModelVM, UpdateNothingModelWebDto>();

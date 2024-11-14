@@ -1,5 +1,5 @@
-using CommunityToolkit.Mvvm.ComponentModel;
 using System.Windows.Input;
+using CommunityToolkit.Mvvm.ComponentModel;
 using NothingServices.WPFApp.Commands;
 using NothingServices.WPFApp.Strategies;
 

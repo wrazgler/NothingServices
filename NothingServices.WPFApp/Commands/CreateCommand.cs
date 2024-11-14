@@ -15,7 +15,7 @@ public class CreateCommand(
 {
     private readonly IMainWindowManager _mainWindowManager = mainWindowManager;
     private readonly INotificator _notificator = notificator;
-    private readonly CancellationTokenSource _cancellationTokenSource = new(10000);
+    private readonly CancellationTokenSource _cancellationTokenSource = new(100000);
 
     /// <summary>
     /// Проверка возможности выполнить команду создать новую модель
@@ -44,7 +44,7 @@ public class CreateCommand(
                  ?? throw new ArgumentException(parameter?.GetType().Name);
             var strategy = _mainWindowManager.Strategy
                 ?? throw new NullReferenceException(_mainWindowManager.Strategy?.GetType().Name);
-            var nothingModelVM = await strategy.CreateNothingModelAsync(
+             await strategy.CreateNothingModelAsync(
                 createNothingModelVM,
                 _cancellationTokenSource.Token);
         }

@@ -1,3 +1,4 @@
+using System.Collections.ObjectModel;
 using Microsoft.Extensions.DependencyInjection;
 using NothingServices.WPFApp.Clients;
 using NothingServices.WPFApp.Dtos;
@@ -29,8 +30,13 @@ public class NothingWebApiClientStrategyTests
         var result = await nothingWebApiClientStrategy.GetNothingModelsAsync();
 
         //Assert
-        Assert.Equal(nothingModels.Single().Id, result.Single().Id);
-        Assert.Equal(nothingModels.Single().Name, result.Single().Name);
+        var assert = new ObservableCollection<INothingModelVM>()
+        {
+            Mock.Of<INothingModelVM>(nothingModel
+                => nothingModel.Id == nothingModels.Single().Id &&
+                   nothingModel.Name == nothingModels.Single().Name),
+        };
+        Assert.Equivalent(assert, result, true);
     }
 
     [Fact]
@@ -75,15 +81,19 @@ public class NothingWebApiClientStrategyTests
         var nothingWebApiClientStrategy = GetNothingWebApiClientStrategy(
             nothingModelVMFactoryMock.Object,
             clientMock.Object);
-        var createNothingModelVM = Mock.Of<CreateNothingModelVM>(createNothingModelVM
-            => createNothingModelVM.Name == name);
+        var createNothingModelVM = new CreateNothingModelVM(Mock.Of<IButtonVM>(), Mock.Of<IButtonVM>())
+        {
+            Name = name
+        };
 
         //Act
-        var result = await nothingWebApiClientStrategy.CreateNothingModelAsync(createNothingModelVM);
+        await nothingWebApiClientStrategy.CreateNothingModelAsync(createNothingModelVM);
 
         //Assert
-        Assert.Equal(1, result.Id);
-        Assert.Equal(name, result.Name);
+        clientMock.Verify(client => client.CreateAsync(
+                It.IsAny<CreateNothingModelWebDto>(),
+                It.IsAny<CancellationToken>()),
+            Times.Once);
     }
 
     [Fact]
@@ -99,8 +109,10 @@ public class NothingWebApiClientStrategyTests
         var nothingWebApiClientStrategy = GetNothingWebApiClientStrategy(
             Mock.Of<INothingModelVMFactory>(),
             clientMock.Object);
-        var createNothingModelVM = Mock.Of<CreateNothingModelVM>(createNothingModelVM
-            => createNothingModelVM.Name == "Name");
+        var createNothingModelVM = new CreateNothingModelVM(Mock.Of<IButtonVM>(), Mock.Of<IButtonVM>())
+        {
+            Name = "Name"
+        };
 
         //Act
         var result = new Func<Task>(() => nothingWebApiClientStrategy.CreateNothingModelAsync(createNothingModelVM));
@@ -134,16 +146,23 @@ public class NothingWebApiClientStrategyTests
         var nothingWebApiClientStrategy = GetNothingWebApiClientStrategy(
             nothingModelVMFactoryMock.Object,
             clientMock.Object);
-        var updateNothingModelVM = Mock.Of<UpdateNothingModelVM>(updateNothingModelVM
-            => updateNothingModelVM.Id == id &&
-               updateNothingModelVM.Name == name);
+        var nothingModelVM = Mock.Of<INothingModelVM>(nothingModelVM => nothingModelVM.Id == id);
+        var updateNothingModelVM = new UpdateNothingModelVM(
+            Mock.Of<IButtonVM>(),
+            Mock.Of<IButtonVM>(),
+            nothingModelVM)
+        {
+            Name = name,
+        };
 
         //Act
-        var result = await nothingWebApiClientStrategy.UpdateNothingModelAsync(updateNothingModelVM);
+        await nothingWebApiClientStrategy.UpdateNothingModelAsync(updateNothingModelVM);
 
         //Assert
-        Assert.Equal(id, result.Id);
-        Assert.Equal(name, result.Name);
+        clientMock.Verify(client => client.UpdateAsync(
+                It.IsAny<UpdateNothingModelWebDto>(),
+                It.IsAny<CancellationToken>()),
+            Times.Once);
     }
 
     [Fact]
@@ -159,9 +178,14 @@ public class NothingWebApiClientStrategyTests
         var nothingWebApiClientStrategy = GetNothingWebApiClientStrategy(
             Mock.Of<INothingModelVMFactory>(),
             clientMock.Object);
-        var updateNothingModelVM = Mock.Of<UpdateNothingModelVM>(updateNothingModelVM
-            => updateNothingModelVM.Id == 1 &&
-               updateNothingModelVM.Name == "New Name");
+        var nothingModelVM = Mock.Of<NothingModelVM>(nothingModelVM => nothingModelVM.Id == 1);
+        var updateNothingModelVM = new UpdateNothingModelVM(
+            Mock.Of<IButtonVM>(),
+            Mock.Of<IButtonVM>(),
+            nothingModelVM)
+        {
+            Name = "New Name",
+        };
 
         //Act
         var result = new Func<Task>(() => nothingWebApiClientStrategy.UpdateNothingModelAsync(updateNothingModelVM));
@@ -183,15 +207,19 @@ public class NothingWebApiClientStrategyTests
         var nothingWebApiClientStrategy = GetNothingWebApiClientStrategy(
             nothingModelVMFactoryMock.Object,
             clientMock.Object);
-        var nothingModelVM = Mock.Of<NothingModelVM>(nothingModelVM
-            => nothingModelVM.Id == nothingModels.Single().Id);
+        var nothingModelVM = Mock.Of<NothingModelVM>(nothingModelVM => nothingModelVM.Id == nothingModels.Single().Id);
+        var deleteNothingModelVM = new DeleteNothingModelVM(
+            Mock.Of<IButtonVM>(),
+            Mock.Of<IButtonVM>(),
+            nothingModelVM);
 
         //Act
-        var result = await nothingWebApiClientStrategy.DeleteNothingModelAsync(nothingModelVM);
+        await nothingWebApiClientStrategy.DeleteNothingModelAsync(deleteNothingModelVM);
 
         //Assert
-        Assert.Equal(nothingModels.Single().Id, result.Id);
-        Assert.Equal(nothingModels.Single().Name, result.Name);
+        clientMock.Verify(
+            client => client.DeleteAsync(It.IsAny<int>(), It.IsAny<CancellationToken>()),
+            Times.Once);
     }
 
     [Fact]
@@ -206,9 +234,13 @@ public class NothingWebApiClientStrategyTests
             Mock.Of<INothingModelVMFactory>(),
             clientMock.Object);
         var nothingModelVM = Mock.Of<NothingModelVM>(nothingModelVM => nothingModelVM.Id == 1);
+        var deleteNothingModelVM = new DeleteNothingModelVM(
+            Mock.Of<IButtonVM>(),
+            Mock.Of<IButtonVM>(),
+            nothingModelVM);
 
         //Act
-        var result = new Func<Task>(() => nothingWebApiClientStrategy.DeleteNothingModelAsync(nothingModelVM));
+        var result = new Func<Task>(() => nothingWebApiClientStrategy.DeleteNothingModelAsync(deleteNothingModelVM));
 
         //Assert
         await Assert.ThrowsAsync<Exception>(result);

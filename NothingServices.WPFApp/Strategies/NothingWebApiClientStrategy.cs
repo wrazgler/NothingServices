@@ -43,15 +43,12 @@ public class NothingWebApiClientStrategy(
     /// </summary>
     /// <param name="createNothingModelVM">Данные представления создать модель</param>
     /// <param name="cancellationToken">Токен отмены</param>
-    /// <returns>Данные представления модели</returns>
-    public async Task<NothingModelVM> CreateNothingModelAsync(
+    public Task CreateNothingModelAsync(
         CreateNothingModelVM createNothingModelVM,
         CancellationToken cancellationToken = default)
     {
         var createNothingModel = _mapper.Map<CreateNothingModelWebDto>(createNothingModelVM);
-        var nothingModel = await _client.CreateAsync(createNothingModel, cancellationToken);
-        var nothingModelVM = _factory.Create(nothingModel);
-        return nothingModelVM;
+        return _client.CreateAsync(createNothingModel, cancellationToken);
     }
 
     /// <summary>
@@ -59,29 +56,23 @@ public class NothingWebApiClientStrategy(
     /// </summary>
     /// <param name="updateNothingModelVM">Данные представления обновить модель</param>
     /// <param name="cancellationToken">Токен отмены</param>
-    /// <returns>Данные представления модели</returns>
-    public async Task<NothingModelVM> UpdateNothingModelAsync(
+    public Task UpdateNothingModelAsync(
         UpdateNothingModelVM updateNothingModelVM,
         CancellationToken cancellationToken = default)
     {
         var updateNothingModel = _mapper.Map<UpdateNothingModelWebDto>(updateNothingModelVM);
-        var nothingModel = await _client
-            .UpdateAsync(updateNothingModel, cancellationToken);
-        var nothingModelVM = _factory.Create(nothingModel);
-        return nothingModelVM;
+        return _client.UpdateAsync(updateNothingModel, cancellationToken);
     }
 
     /// <summary>
     /// Удалить модель
     /// </summary>
-    /// <param name="nothingModelVM">Данные представления модели</param>
+    /// <param name="deleteNothingModelVM">Данные представления удалить модель</param>
     /// <param name="cancellationToken">Токен отмены</param>
-    /// <returns>Данные представления модели</returns>
-    public async Task<NothingModelVM> DeleteNothingModelAsync(
-        NothingModelVM nothingModelVM,
+    public Task DeleteNothingModelAsync(
+        DeleteNothingModelVM deleteNothingModelVM,
         CancellationToken cancellationToken = default)
     {
-        await _client.DeleteAsync(nothingModelVM.Id, cancellationToken);
-        return nothingModelVM;
+        return _client.DeleteAsync(deleteNothingModelVM.Id, cancellationToken);
     }
 }
