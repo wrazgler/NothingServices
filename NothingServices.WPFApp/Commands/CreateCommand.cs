@@ -6,13 +6,16 @@ namespace NothingServices.WPFApp.Commands;
 /// <summary>
 /// Команда создать новую модель
 /// </summary>
+/// <param name="dialogService">Сервис работы диалогового окна</param>
 /// <param name="mainWindowManager">Сервис управление отображением преставления на главном окне</param>
 /// <param name="notificator">Сервис отображения уведомлений в пользовательском интерфейсе</param>
 public class CreateCommand(
+    IDialogService dialogService,
     IMainWindowManager mainWindowManager,
     INotificator notificator)
     : BaseCommand
 {
+    private readonly IDialogService _dialogService = dialogService;
     private readonly IMainWindowManager _mainWindowManager = mainWindowManager;
     private readonly INotificator _notificator = notificator;
     private readonly CancellationTokenSource _cancellationTokenSource = new(100000);
@@ -47,6 +50,7 @@ public class CreateCommand(
              await strategy.CreateNothingModelAsync(
                 createNothingModelVM,
                 _cancellationTokenSource.Token);
+             _dialogService.CloseDialog();
         }
         catch (Exception ex)
         {

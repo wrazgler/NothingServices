@@ -10,16 +10,16 @@ namespace NothingServices.WPFApp.Factories;
 /// <param name="deleteCommand">
 /// Команда создать удалить модель
 /// </param>
-/// <param name="openNothingModelsListCommand">
-/// Команда открыть представление окна списка моделей
+/// <param name="closeDialogCommand">
+/// Команда закрыть представление диалогового окна
 /// </param>
 public class DeleteNothingModelVMFactory(
-    DeleteCommand deleteCommand,
-    OpenNothingModelsListCommand openNothingModelsListCommand)
+    CloseDialogCommand closeDialogCommand,
+    DeleteCommand deleteCommand)
     : IDeleteNothingModelVMFactory
 {
+    private readonly CloseDialogCommand _closeDialogCommand = closeDialogCommand;
     private readonly DeleteCommand _deleteCommand = deleteCommand;
-    private readonly OpenNothingModelsListCommand _openNothingModelsListCommand = openNothingModelsListCommand;
 
     /// <summary>
     /// Создать объект данных представления окна удалить модель
@@ -28,7 +28,7 @@ public class DeleteNothingModelVMFactory(
     /// <returns>Объект данных представления окна удалить модель</returns>
     public DeleteNothingModelVM Create(INothingModelVM nothingModelVM)
     {
-        var cancelButtonVM = new CancelButtonVM(_openNothingModelsListCommand);
+        var cancelButtonVM = new CancelButtonVM(_closeDialogCommand);
         var deleteButtonVM = new DeleteButtonVM(_deleteCommand);
         var deleteNothingModelVM = new DeleteNothingModelVM(cancelButtonVM, deleteButtonVM, nothingModelVM);
         return deleteNothingModelVM;

@@ -102,6 +102,7 @@ public static class AppExtensions
         services.AddScoped<GRpcApiButtonVM>();
         services.AddScoped<RestApiButtonVM>();
 
+        services.AddScoped<CloseDialogCommand>();
         services.AddScoped<CreateCommand>();
         services.AddScoped<DeleteCommand>();
         services.AddScoped<OpenApiSelectionCommand>();

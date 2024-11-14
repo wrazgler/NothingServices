@@ -39,7 +39,7 @@ public class Dialog : ContentControl
     /// Регистрация свойства контента диалогового окна
     /// </summary>
     public static readonly DependencyProperty DialogContentProperty = DependencyProperty.Register(
-        nameof(Content),
+        nameof(DialogContent),
         typeof(IDialogContentView),
         typeof(Dialog),
         new PropertyMetadata(default(IDialogContentVM)));

@@ -10,16 +10,16 @@ namespace NothingServices.WPFApp.Factories;
 /// <param name="createCommand">
 /// Команда создать новую модель
 /// </param>
-/// <param name="openNothingModelsListCommand">
-/// Команда открыть представление окна списка моделей
+/// <param name="closeDialogCommand">
+/// Команда закрыть представление диалогового окна
 /// </param>
 public class CreateNothingModelVMFactory(
-    CreateCommand createCommand,
-    OpenNothingModelsListCommand openNothingModelsListCommand)
+    CloseDialogCommand closeDialogCommand,
+    CreateCommand createCommand)
     : ICreateNothingModelVMFactory
 {
+    private readonly CloseDialogCommand _closeDialogCommand = closeDialogCommand;
     private readonly CreateCommand _createCommand = createCommand;
-    private readonly OpenNothingModelsListCommand _openNothingModelsListCommand = openNothingModelsListCommand;
 
     /// <summary>
     /// Создать объект данных представления окна создать модель
@@ -27,7 +27,7 @@ public class CreateNothingModelVMFactory(
     /// <returns>Объект данных представления окна создать модель</returns>
     public CreateNothingModelVM Create()
     {
-        var cancelButtonVM = new CancelButtonVM(_openNothingModelsListCommand);
+        var cancelButtonVM = new CancelButtonVM(_closeDialogCommand);
         var createButtonVM = new CreateButtonVM(_createCommand);
         var createNothingModelVM = new CreateNothingModelVM(cancelButtonVM, createButtonVM);
         return createNothingModelVM;

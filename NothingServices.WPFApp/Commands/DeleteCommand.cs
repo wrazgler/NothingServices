@@ -6,13 +6,16 @@ namespace NothingServices.WPFApp.Commands;
 /// <summary>
 /// Команда удалить модель
 /// </summary>
+/// <param name="dialogService">Сервис работы диалогового окна</param>
 /// <param name="mainWindowManager">Сервис управление отображением преставления на главном окне</param>
 /// <param name="notificator">Сервис отображения уведомлений в пользовательском интерфейсе</param>
 public class DeleteCommand(
+    IDialogService dialogService,
     IMainWindowManager mainWindowManager,
     INotificator notificator)
     : BaseCommand
 {
+    private readonly IDialogService _dialogService = dialogService;
     private readonly IMainWindowManager _mainWindowManager = mainWindowManager;
     private readonly INotificator _notificator = notificator;
     private readonly CancellationTokenSource _cancellationTokenSource = new(100000);
@@ -47,6 +50,7 @@ public class DeleteCommand(
             await strategy.DeleteNothingModelAsync(
                 deleteNothingModelVM,
                 _cancellationTokenSource.Token);
+            _dialogService.CloseDialog();
         }
         catch (Exception ex)
         {

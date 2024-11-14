@@ -2,8 +2,8 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:dialogs="clr-namespace:NothingServices.WPFApp.Dialogs">
 
-  <ControlTemplate x:Key="DialogTemplate" TargetType="dialogs:Dialog">
-    <Grid x:Name="DialogRoot" Focusable="False">
+  <ControlTemplate x:Key="DialogTemplate" TargetType="{x:Type dialogs:Dialog}">
+    <Grid x:Name="DialogRoot">
       <VisualStateManager.VisualStateGroups>
         <VisualStateGroup x:Name="States">
           <VisualState x:Name="Open">
@@ -12,22 +12,22 @@
                                              Storyboard.TargetProperty="Visibility"
                                              Duration="0">
                 <DiscreteObjectKeyFrame Value="{x:Static Visibility.Visible}"
-                                        KeyTime="0" />
+                                        KeyTime="0"/>
               </ObjectAnimationUsingKeyFrames>
               <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_DialogContent"
                                              Storyboard.TargetProperty="Visibility"
                                              Duration="0">
                 <DiscreteObjectKeyFrame Value="{x:Static Visibility.Visible}"
-                                        KeyTime="0" />
+                                        KeyTime="0"/>
               </ObjectAnimationUsingKeyFrames>
               <DoubleAnimation Storyboard.TargetName="PART_ContentCoverGrid"
                                Storyboard.TargetProperty="Opacity"
                                Duration="0"
-                               To="0.56" />
+                               To="0.56"/>
               <DoubleAnimation Storyboard.TargetName="PART_DialogContent"
                                Storyboard.TargetProperty="Opacity"
                                Duration="0"
-                               To="1" />
+                               To="1"/>
             </Storyboard>
           </VisualState>
           <VisualState x:Name="Closed">
@@ -36,29 +36,29 @@
                                              Storyboard.TargetProperty="Visibility"
                                              Duration="0">
                 <DiscreteObjectKeyFrame Value="{x:Static Visibility.Hidden}"
-                                        KeyTime="0" />
+                                        KeyTime="0"/>
               </ObjectAnimationUsingKeyFrames>
               <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_DialogContent"
                                              Storyboard.TargetProperty="Visibility"
                                              Duration="0">
                 <DiscreteObjectKeyFrame Value="{x:Static Visibility.Collapsed}"
-                                        KeyTime="0" />
+                                        KeyTime="0"/>
               </ObjectAnimationUsingKeyFrames>
               <DoubleAnimation Storyboard.TargetName="PART_ContentCoverGrid"
                                Storyboard.TargetProperty="Opacity"
                                Duration="0"
-                               To="0" />
+                               To="0"/>
               <DoubleAnimation Storyboard.TargetName="PART_DialogContent"
                                Storyboard.TargetProperty="Opacity"
                                Duration="0"
-                               To="0" />
+                               To="0"/>
             </Storyboard>
           </VisualState>
         </VisualStateGroup>
       </VisualStateManager.VisualStateGroups>
       <ContentPresenter x:Name="ContentPresenter"
                         Opacity="1"
-                        Content="{TemplateBinding Content}" />
+                        Content="{TemplateBinding Content}"/>
 
       <Grid x:Name="PART_ContentCoverGrid"
             Background="{TemplateBinding Background}"

@@ -10,16 +10,16 @@ namespace NothingServices.WPFApp.Factories;
 /// <param name="updateCommand">
 /// Команда создать обновить модель
 /// </param>
-/// <param name="openNothingModelsListCommand">
-/// Команда открыть представление окна списка моделей
+/// <param name="closeDialogCommand">
+/// Команда закрыть представление диалогового окна
 /// </param>
 public class UpdateNothingModelVMFactory(
-    UpdateCommand updateCommand,
-    OpenNothingModelsListCommand openNothingModelsListCommand)
+    CloseDialogCommand closeDialogCommand,
+    UpdateCommand updateCommand)
     : IUpdateNothingModelVMFactory
 {
+    private readonly CloseDialogCommand _closeDialogCommand = closeDialogCommand;
     private readonly UpdateCommand _updateCommand = updateCommand;
-    private readonly OpenNothingModelsListCommand _openNothingModelsListCommand = openNothingModelsListCommand;
 
     /// <summary>
     /// Создать объект данных представления окна обновить модель
@@ -28,7 +28,7 @@ public class UpdateNothingModelVMFactory(
     /// <returns>Объект данных представления окна обновить модель</returns>
     public UpdateNothingModelVM Create(INothingModelVM nothingModelVM)
     {
-        var cancelButtonVM = new CancelButtonVM(_openNothingModelsListCommand);
+        var cancelButtonVM = new CancelButtonVM(_closeDialogCommand);
         var updateButtonVM = new UpdateButtonVM(_updateCommand);
         var updateNothingModelVM = new UpdateNothingModelVM(cancelButtonVM, updateButtonVM, nothingModelVM);
         return updateNothingModelVM;
