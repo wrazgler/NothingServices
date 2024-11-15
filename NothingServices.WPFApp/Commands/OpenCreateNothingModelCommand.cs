@@ -1,6 +1,5 @@
 using NothingServices.WPFApp.Factories;
 using NothingServices.WPFApp.Services;
-using NothingServices.WPFApp.ViewModels.Controls;
 using NothingServices.WPFApp.Views.Controls;
 
 namespace NothingServices.WPFApp.Commands;
@@ -22,7 +21,7 @@ public class OpenCreateNothingModelCommand(
     private readonly IDialogService _dialogService = dialogService;
     private readonly INotificator _notificator = notificator;
     private readonly CreateNothingModelView _createNothingModelView = createNothingModelView;
-    private readonly CreateNothingModelVM _createNothingModelVM = createNothingModelVMFactory.Create();
+    private readonly ICreateNothingModelVMFactory _createNothingModelVMFactory = createNothingModelVMFactory;
 
     /// <summary>
     /// Проверка возможности выполнить команду открыть представление окна создания новой модели
@@ -41,7 +40,8 @@ public class OpenCreateNothingModelCommand(
     {
         try
         {
-            _dialogService.OpenDialog(_createNothingModelVM, _createNothingModelView);
+            var createNothingModelVM = _createNothingModelVMFactory.Create();
+            _dialogService.OpenDialog(createNothingModelVM, _createNothingModelView);
         }
         catch (Exception ex)
         {

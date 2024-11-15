@@ -5,8 +5,11 @@
   <Application.Resources>
     <ResourceDictionary>
       <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/Resources/ButtonStyles.xaml"/>
+        <ResourceDictionary Source="/Resources/Colors.xaml"/>
         <ResourceDictionary Source="/Resources/Converters.xaml"/>
         <ResourceDictionary Source="/Resources/DialogStyles.xaml"/>
+        <ResourceDictionary Source="/Resources/MenuStyles.xaml"/>
       </ResourceDictionary.MergedDictionaries>
     </ResourceDictionary>
   </Application.Resources>

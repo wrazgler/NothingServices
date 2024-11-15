@@ -1,0 +1,151 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:assistants="clr-namespace:NothingServices.WPFApp.Assistants"
+                    xmlns:fontAwesome="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp">
+
+  <ResourceDictionary.MergedDictionaries>
+    <ResourceDictionary Source="pack://application:,,,/NothingServices.WPFApp;v1.0.0.0;component/Resources/Colors.xaml"/>
+  </ResourceDictionary.MergedDictionaries>
+
+  <ControlTemplate x:Key="ButtonTemplate" TargetType="{x:Type Button}">
+    <Border x:Name="ButtonBorder"
+        Background="{TemplateBinding Background}"
+        BorderBrush="{TemplateBinding BorderBrush}"
+        BorderThickness="{TemplateBinding BorderThickness}"
+        CornerRadius="{Binding Path=(assistants:ElementAssistant.CornerRadius), RelativeSource={RelativeSource TemplatedParent}}"
+        Padding="{TemplateBinding Padding}">
+      <Grid x:Name="ButtonGrid">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="Auto" />
+          <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <fontAwesome:IconBlock x:Name="ButtonIcon"
+                               Grid.Column="0"
+                               FontFamily="{TemplateBinding FontFamily}"
+                               FontSize="{TemplateBinding FontSize}"
+                               FontWeight="{TemplateBinding FontWeight}"
+                               Foreground="{TemplateBinding Foreground}"
+                               HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                               Icon="{Binding Path=(fontAwesome:IconImage.Icon), RelativeSource={RelativeSource TemplatedParent}}"
+                               SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                               VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+        <ContentPresenter x:Name="ButtonContentPresenter"
+                          Grid.Column="1"
+                          Content="{TemplateBinding Content}"
+                          ContentStringFormat="{TemplateBinding ContentStringFormat}"
+                          ContentTemplate="{TemplateBinding ContentTemplate}"
+                          Focusable="{TemplateBinding Focusable}"
+                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                          TextBlock.FontFamily="{TemplateBinding FontFamily}"
+                          TextBlock.FontSize="{TemplateBinding FontSize}"
+                          TextBlock.FontWeight="{TemplateBinding FontWeight}"
+                          TextBlock.Foreground="{TemplateBinding Foreground}"
+                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+      </Grid>
+    </Border>
+
+    <ControlTemplate.Triggers>
+      <MultiDataTrigger>
+        <MultiDataTrigger.Conditions>
+          <Condition Binding="{Binding ElementName=ButtonIcon, Path=Icon, Converter={StaticResource IconCharHasValueConverter}}"
+                     Value="True" />
+          <Condition Binding="{Binding ElementName=ButtonContentPresenter, Path=Content, Converter={StaticResource StringHasValueConverter}}"
+                     Value="True" />
+        </MultiDataTrigger.Conditions>
+        <MultiDataTrigger.Setters>
+          <Setter TargetName="ButtonIcon"
+                  Property="Margin"
+                  Value="0,0,25,0" />
+        </MultiDataTrigger.Setters>
+      </MultiDataTrigger>
+      <Trigger Property="IsMouseOver" Value="True">
+        <Setter TargetName="ButtonBorder"
+                Property="Background"
+                Value="{Binding Path=(assistants:ElementAssistant.MouseOverBackground), RelativeSource={RelativeSource TemplatedParent}}"/>
+        <Setter TargetName="ButtonBorder"
+                Property="BorderBrush"
+                Value="{Binding Path=(assistants:ElementAssistant.MouseOverBorderBrush), RelativeSource={RelativeSource TemplatedParent}}"/>
+        <Setter TargetName="ButtonContentPresenter"
+                Property="TextBlock.Foreground"
+                Value="{Binding Path=(assistants:ElementAssistant.MouseOverForeground), RelativeSource={RelativeSource TemplatedParent}}"/>
+      </Trigger>
+      <Trigger Property="IsEnabled" Value="False">
+        <Setter Property="BorderBrush" Value="{StaticResource DisableBorderBrush}"/>
+        <Setter Property="Foreground" Value="{StaticResource DisableForeground}"/>
+      </Trigger>
+    </ControlTemplate.Triggers>
+  </ControlTemplate>
+
+  <Style x:Key="StandardButton" TargetType="{x:Type Button}">
+    <Setter Property="assistants:ElementAssistant.MouseOverBackground"
+            Value="{StaticResource DefaultMouseOverBackground}" />
+    <Setter Property="assistants:ElementAssistant.MouseOverBorderBrush"
+            Value="{StaticResource DefaultMouseOverBorderBrush}" />
+    <Setter Property="assistants:ElementAssistant.MouseOverForeground"
+            Value="{StaticResource DefaultMouseOverForeground}" />
+    <Setter Property="assistants:ElementAssistant.CornerRadius" Value="10" />
+    <Setter Property="Background" Value="{StaticResource DefaultButtonBackground}"/>
+    <Setter Property="BorderBrush" Value="{StaticResource DefaultButtonBorderBrush}" />
+    <Setter Property="BorderThickness" Value="1" />
+    <Setter Property="Cursor" Value="Hand" />
+    <Setter Property="Focusable" Value="False" />
+    <Setter Property="FontSize" Value="15"/>
+    <Setter Property="FontWeight" Value="Medium"/>
+    <Setter Property="Foreground" Value="{StaticResource DefaultButtonForeground}" />
+    <Setter Property="Height" Value="40"/>
+    <Setter Property="HorizontalAlignment" Value="Stretch" />
+    <Setter Property="HorizontalContentAlignment" Value="Center" />
+    <Setter Property="Padding" Value="10,5,10,5" />
+    <Setter Property="SnapsToDevicePixels" Value="True"/>
+    <Setter Property="VerticalAlignment" Value="Stretch"/>
+    <Setter Property="VerticalContentAlignment" Value="Center" />
+    <Setter Property="Template" Value="{StaticResource ButtonTemplate}"/>
+  </Style>
+
+  <Style x:Key="GreenButton"
+         BasedOn="{StaticResource StandardButton}"
+         TargetType="{x:Type Button}">
+    <Setter Property="assistants:ElementAssistant.MouseOverBackground"
+            Value="{StaticResource GreenMouseOverBackground}"/>
+    <Setter Property="assistants:ElementAssistant.MouseOverBorderBrush"
+            Value="{StaticResource GreenMouseOverBorderBrush}"/>
+    <Setter Property="assistants:ElementAssistant.MouseOverForeground"
+            Value="{StaticResource GreenMouseOverForeground}"/>
+  </Style>
+
+  <Style x:Key="RedButton"
+         BasedOn="{StaticResource StandardButton}"
+         TargetType="{x:Type Button}">
+    <Setter Property="assistants:ElementAssistant.MouseOverBackground"
+            Value="{StaticResource RedMouseOverBackground}"/>
+    <Setter Property="assistants:ElementAssistant.MouseOverBorderBrush"
+            Value="{StaticResource RedMouseOverBorderBrush}"/>
+    <Setter Property="assistants:ElementAssistant.MouseOverForeground"
+            Value="{StaticResource RedMouseOverForeground}"/>
+  </Style>
+
+  <Style x:Key="CreateButton"
+         BasedOn="{StaticResource GreenButton}"
+         TargetType="{x:Type Button}">
+    <Setter Property="fontAwesome:IconImage.Icon" Value="Plus"/>
+  </Style>
+
+  <Style x:Key="DeleteButton"
+         BasedOn="{StaticResource RedButton}"
+         TargetType="{x:Type Button}">
+    <Setter Property="fontAwesome:IconImage.Icon" Value="TrashAlt"/>
+  </Style>
+
+  <Style x:Key="EditButton"
+         BasedOn="{StaticResource StandardButton}"
+         TargetType="{x:Type Button}">
+    <Setter Property="fontAwesome:IconImage.Icon" Value="Edit"/>
+  </Style>
+
+  <Style x:Key="SaveButton"
+         BasedOn="{StaticResource GreenButton}"
+         TargetType="{x:Type Button}">
+    <Setter Property="fontAwesome:IconImage.Icon" Value="Save"/>
+  </Style>
+</ResourceDictionary>

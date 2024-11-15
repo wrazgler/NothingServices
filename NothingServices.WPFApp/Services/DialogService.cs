@@ -1,7 +1,7 @@
 using System.Windows.Controls;
 using NothingServices.WPFApp.ViewModels;
 using NothingServices.WPFApp.ViewModels.Controls;
-using NothingServices.WPFApp.Views.Controls;
+using NothingServices.WPFApp.Views;
 
 namespace NothingServices.WPFApp.Services;
 
@@ -31,7 +31,7 @@ public class DialogService(DialogVM dialogVM) : IDialogService
         where TView : Control, IDialogContentView
     {
         dialogContentView.DataContext = dialogContentVM;
-        _dialogVM.DialogContent = dialogContentView;
+        _dialogVM.Content = dialogContentView;
         _dialogVM.Open = true;
     }
 }

@@ -1,3 +1,4 @@
+using NothingServices.WPFApp.Models;
 using NothingServices.WPFApp.Services;
 using NothingServices.WPFApp.ViewModels.Controls;
 
@@ -50,6 +51,7 @@ public class CreateCommand(
              await strategy.CreateNothingModelAsync(
                 createNothingModelVM,
                 _cancellationTokenSource.Token);
+             _mainWindowManager.Next(MainWindowContentType.NothingModelsListVM);
              _dialogService.CloseDialog();
         }
         catch (Exception ex)

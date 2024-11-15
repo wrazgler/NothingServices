@@ -1,6 +1,6 @@
 using System.Windows.Controls;
 using NothingServices.WPFApp.ViewModels.Controls;
-using NothingServices.WPFApp.Views.Controls;
+using NothingServices.WPFApp.Views;
 
 namespace NothingServices.WPFApp.Services;
 

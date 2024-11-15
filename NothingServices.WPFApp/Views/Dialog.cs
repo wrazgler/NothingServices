@@ -1,10 +1,8 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using NothingServices.WPFApp.ViewModels.Controls;
-using NothingServices.WPFApp.Views.Controls;
 
-namespace NothingServices.WPFApp.Dialogs;
+namespace NothingServices.WPFApp.Views;
 
 /// <summary>
 /// Представление диалогового окна
@@ -41,15 +39,14 @@ public class Dialog : ContentControl
     public static readonly DependencyProperty DialogContentProperty = DependencyProperty.Register(
         nameof(DialogContent),
         typeof(IDialogContentView),
-        typeof(Dialog),
-        new PropertyMetadata(default(IDialogContentVM)));
+        typeof(Dialog));
 
     /// <summary>
     /// Контент диалогового окна
     /// </summary>
-    public IDialogContentVM? DialogContent
+    public IDialogContentView? DialogContent
     {
-        get => (IDialogContentVM)GetValue(DialogContentProperty);
+        get => (IDialogContentView)GetValue(DialogContentProperty);
         set => SetValue(DialogContentProperty, value);
     }
 

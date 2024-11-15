@@ -1,15 +1,16 @@
-<UserControl x:Class="NothingServices.WPFApp.Views.Controls.DeleteNothingModelView"
+<UserControl x:Class="NothingServices.WPFApp.Views.Controls.UpdateNothingModelView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:controls="clr-namespace:NothingServices.WPFApp.ViewModels.Controls"
              mc:Ignorable="d"
-             d:DataContext="{d:DesignInstance Type=controls:DeleteNothingModelVM}">
+             d:DataContext="{d:DesignInstance Type=controls:UpdateNothingModelVM}">
 
-  <Border x:Name="DeleteNothingModelViewBorder">
-    <Grid x:Name="DeleteNothingModelViewGrid">
+  <Border x:Name="UpdateNothingModelViewBorder">
+    <Grid x:Name="UpdateNothingModelViewGrid">
       <Grid.RowDefinitions>
+        <RowDefinition Height="Auto"/>
         <RowDefinition Height="Auto"/>
         <RowDefinition Height="Auto"/>
       </Grid.RowDefinitions>
@@ -18,21 +19,28 @@
              x:Name="TitleLabel"
              Content="{Binding Path=Title}"/>
 
-      <Grid Grid.Row="1">
+      <TextBox Grid.Row="1"
+               x:Name="NameLabel"
+               Text="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+      <Grid Grid.Row="2"
+            x:Name="ButtonGrid">
         <Grid.ColumnDefinitions>
           <ColumnDefinition Width="*" />
           <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
         <Button Grid.Column="0"
-                x:Name="DeleteButton"
-                Command="{Binding Path=DeleteButtonVM.Command}"
+                x:Name="SaveButton"
+                Style="{StaticResource SaveButton}"
+                Command="{Binding Path=UpdateButtonVM.Command}"
                 CommandParameter="{Binding}"
-                Content="{Binding Path=DeleteButtonVM.Text}"
-                ToolTip="{Binding Path=DeleteButtonVM.ToolTip}"/>
+                Content="{Binding Path=UpdateButtonVM.Text}"
+                ToolTip="{Binding Path=UpdateButtonVM.ToolTip}"/>
 
         <Button Grid.Column="1"
                 x:Name="CancelButton"
+                Style="{StaticResource StandardButton}"
                 Command="{Binding Path=CancelButtonVM.Command}"
                 Content="{Binding Path=CancelButtonVM.Text}"
                 ToolTip="{Binding Path=CancelButtonVM.ToolTip}"/>

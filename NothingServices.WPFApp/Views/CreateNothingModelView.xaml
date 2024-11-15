@@ -1,14 +1,14 @@
-<UserControl x:Class="NothingServices.WPFApp.Views.Controls.UpdateNothingModelView"
+<UserControl x:Class="NothingServices.WPFApp.Views.Controls.CreateNothingModelView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:controls="clr-namespace:NothingServices.WPFApp.ViewModels.Controls"
              mc:Ignorable="d"
-             d:DataContext="{d:DesignInstance Type=controls:UpdateNothingModelVM}">
+             d:DataContext="{d:DesignInstance Type=controls:CreateNothingModelVM}">
 
-  <Border x:Name="UpdateNothingModelViewBorder">
-    <Grid x:Name="UpdateNothingModelViewGrid">
+  <Border x:Name="CreateNothingModelViewBorder">
+    <Grid x:Name="CreateNothingModelViewGrid">
       <Grid.RowDefinitions>
         <RowDefinition Height="Auto"/>
         <RowDefinition Height="Auto"/>
@@ -31,10 +31,19 @@
         </Grid.ColumnDefinitions>
 
         <Button Grid.Column="0"
-                x:Name="SaveButton"/>
+                x:Name="SaveButton"
+                Style="{StaticResource SaveButton}"
+                Command="{Binding Path=CreateButtonVM.Command}"
+                CommandParameter="{Binding}"
+                Content="{Binding Path=CreateButtonVM.Text}"
+                ToolTip="{Binding Path=CreateButtonVM.ToolTip}"/>
 
         <Button Grid.Column="1"
-                x:Name="CancelButton"/>
+                x:Name="CancelButton"
+                Style="{StaticResource StandardButton}"
+                Command="{Binding Path=CancelButtonVM.Command}"
+                Content="{Binding Path=CancelButtonVM.Text}"
+                ToolTip="{Binding Path=CancelButtonVM.ToolTip}"/>
       </Grid>
     </Grid>
   </Border>

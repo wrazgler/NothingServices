@@ -1,8 +1,8 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:dialogs="clr-namespace:NothingServices.WPFApp.Dialogs">
+                    xmlns:views="clr-namespace:NothingServices.WPFApp.Views">
 
-  <ControlTemplate x:Key="DialogTemplate" TargetType="{x:Type dialogs:Dialog}">
+  <ControlTemplate x:Key="DialogTemplate" TargetType="{x:Type views:Dialog}">
     <Grid x:Name="DialogRoot">
       <VisualStateManager.VisualStateGroups>
         <VisualStateGroup x:Name="States">
@@ -57,24 +57,26 @@
         </VisualStateGroup>
       </VisualStateManager.VisualStateGroups>
       <ContentPresenter x:Name="ContentPresenter"
-                        Opacity="1"
-                        Content="{TemplateBinding Content}"/>
+                        Content="{TemplateBinding Content}"
+                        Opacity="1"/>
 
       <Grid x:Name="PART_ContentCoverGrid"
             Background="{TemplateBinding Background}"
             HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
             VerticalAlignment="{TemplateBinding VerticalAlignment}"/>
 
       <ContentPresenter x:Name="PART_DialogContent"
-                        Margin="{TemplateBinding Padding}"
+                        Focusable="{TemplateBinding Focusable}"
                         HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                        RenderTransformOrigin="0.5,0.5"
+                        Margin="{TemplateBinding Padding}"
+                        SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
                         VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                         Content="{TemplateBinding DialogContent}"/>
     </Grid>
   </ControlTemplate>
 
-  <Style x:Key="StandardDialog" TargetType="{x:Type dialogs:Dialog}">
+  <Style x:Key="StandardDialog" TargetType="{x:Type views:Dialog}">
     <Setter Property="Background" Value="Black"/>
     <Setter Property="CloseOnClickAway" Value="True"/>
     <Setter Property="HorizontalContentAlignment" Value="Center" />

@@ -1,4 +1,4 @@
-namespace NothingServices.WPFApp.Views.Controls;
+namespace NothingServices.WPFApp.Views;
 
 /// <summary>
 /// Представление, отображаемое в диалоговом окне

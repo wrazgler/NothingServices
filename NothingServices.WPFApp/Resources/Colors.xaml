@@ -1,0 +1,28 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+  <SolidColorBrush x:Key="DefaultButtonBackground" Color="White"/>
+  <SolidColorBrush x:Key="DefaultButtonBorderBrush" Color="#3374BA"/>
+  <SolidColorBrush x:Key="DefaultButtonForeground" Color="#3374BA"/>
+
+  <SolidColorBrush x:Key="DefaultElementBackground" Color="White"/>
+  <SolidColorBrush x:Key="DefaultElementBorderBrush" Color="LightGray"/>
+  <SolidColorBrush x:Key="DefaultElementForeground" Color="#3374BA"/>
+
+  <SolidColorBrush x:Key="DefaultMouseOverBackground" Color="#3374BA"/>
+  <SolidColorBrush x:Key="DefaultMouseOverBorderBrush" Color="White"/>
+  <SolidColorBrush x:Key="DefaultMouseOverForeground" Color="White"/>
+
+  <SolidColorBrush x:Key="DefaultTextForeground" Color="Black"/>
+
+  <SolidColorBrush x:Key="DisableBorderBrush" Color="LightGray"/>
+  <SolidColorBrush x:Key="DisableForeground" Color="LightGray"/>
+
+  <SolidColorBrush x:Key="GreenMouseOverBackground" Color="SeaGreen"/>
+  <SolidColorBrush x:Key="GreenMouseOverBorderBrush" Color="SeaGreen"/>
+  <SolidColorBrush x:Key="GreenMouseOverForeground" Color="White"/>
+
+  <SolidColorBrush x:Key="RedMouseOverBackground" Color="IndianRed"/>
+  <SolidColorBrush x:Key="RedMouseOverBorderBrush" Color="IndianRed"/>
+  <SolidColorBrush x:Key="RedMouseOverForeground" Color="White"/>
+</ResourceDictionary>

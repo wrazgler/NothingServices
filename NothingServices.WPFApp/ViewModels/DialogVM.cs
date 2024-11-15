@@ -1,5 +1,5 @@
 using CommunityToolkit.Mvvm.ComponentModel;
-using NothingServices.WPFApp.Views.Controls;
+using NothingServices.WPFApp.Views;
 
 namespace NothingServices.WPFApp.ViewModels;
 
@@ -9,7 +9,7 @@ namespace NothingServices.WPFApp.ViewModels;
 public class DialogVM : ObservableObject
 {
     private bool _open = false;
-    private IDialogContentView? _dialogContentView;
+    private IDialogContentView? _content;
 
     /// <summary>
     /// Нужно ли отображать контент диалогового окна
@@ -30,15 +30,15 @@ public class DialogVM : ObservableObject
     /// <summary>
     /// Представление, отображаемое в диалоговом окне
     /// </summary>
-    public IDialogContentView? DialogContent
+    public IDialogContentView? Content
     {
-        get => _dialogContentView;
+        get => _content;
         set
         {
-            if (_dialogContentView == value)
+            if (_content == value)
                 return;
 
-            _dialogContentView = value;
+            _content = value;
             OnPropertyChanged();
         }
     }

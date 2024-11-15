@@ -4,7 +4,6 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:views="clr-namespace:NothingServices.WPFApp.Views"
-        xmlns:dialogs="clr-namespace:NothingServices.WPFApp.Dialogs"
         xmlns:viewModels="clr-namespace:NothingServices.WPFApp.ViewModels"
         d:DataContext="{d:DesignInstance Type=viewModels:MainWindowVM}"
         mc:Ignorable="d"
@@ -20,9 +19,9 @@
                                  DataContext="{Binding Path=NothingModelsListVM}"
                                  Visibility="{Binding Path=Active, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
 
-    <dialogs:Dialog x:Name="Dialog"
-                    Style="{StaticResource StandardDialog}"
-                    DialogContent="{Binding Path=DialogVM.DialogContent, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
-                    Open="{Binding Path=DialogVM.Open, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+    <views:Dialog x:Name="Dialog"
+                  Style="{StaticResource StandardDialog}"
+                  DialogContent="{Binding Path=DialogVM.Content, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                  Open="{Binding Path=DialogVM.Open, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
   </Grid>
 </Window>

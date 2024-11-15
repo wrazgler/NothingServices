@@ -41,6 +41,7 @@
 
       <Button Grid.Column="2"
               x:Name="UpdateButton"
+              Style="{StaticResource EditButton}"
               Command="{Binding Path=UpdateButtonVM.Command}"
               CommandParameter="{Binding}"
               Content="{Binding Path=UpdateButtonVM.Text}"
@@ -48,6 +49,7 @@
 
       <Button Grid.Column="3"
               x:Name="DeleteButton"
+              Style="{StaticResource DeleteButton}"
               Command="{Binding Path=DeleteButtonVM.Command}"
               CommandParameter="{Binding}"
               Content="{Binding Path=DeleteButtonVM.Text}"

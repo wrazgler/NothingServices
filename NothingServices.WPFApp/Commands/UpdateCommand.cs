@@ -1,3 +1,4 @@
+using NothingServices.WPFApp.Models;
 using NothingServices.WPFApp.Services;
 using NothingServices.WPFApp.ViewModels.Controls;
 
@@ -53,6 +54,7 @@ public class UpdateCommand(
             await strategy.UpdateNothingModelAsync(
                 updateNothingModelVM,
                 _cancellationTokenSource.Token);
+            _mainWindowManager.Next(MainWindowContentType.NothingModelsListVM);
             _dialogService.CloseDialog();
         }
         catch (Exception ex)
