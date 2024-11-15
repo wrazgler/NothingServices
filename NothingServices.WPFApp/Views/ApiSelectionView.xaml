@@ -15,6 +15,7 @@
 
     <Button x:Name="GRpcApiButton"
             Grid.Column="0"
+            Style="{StaticResource ApiSelectionButton}"
             Command="{Binding Path=GRpcApiButtonVM.Command}"
             CommandParameter="{Binding Path=GRpcApiButtonVM.Strategy}"
             Content="{Binding Path=GRpcApiButtonVM.Text}"
@@ -22,6 +23,7 @@
 
     <Button x:Name="RestApiButton"
             Grid.Column="1"
+            Style="{StaticResource ApiSelectionButton}"
             Command="{Binding Path=RestApiButtonVM.Command}"
             CommandParameter="{Binding Path=RestApiButtonVM.Strategy}"
             Content="{Binding Path=RestApiButtonVM.Text}"

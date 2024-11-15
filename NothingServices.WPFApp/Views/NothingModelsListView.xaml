@@ -24,12 +24,14 @@
 
       <Button Grid.Column="0"
               x:Name="BackButton"
+              Style="{StaticResource NothingModelsListBackButton}"
               Command="{Binding Path=BackButtonVM.Command}"
               Content="{Binding Path=BackButtonVM.Text}"
               ToolTip="{Binding Path=BackButtonVM.ToolTip}"/>
 
       <Button Grid.Column="1"
               x:Name="CreateButton"
+              Style="{StaticResource NothingModelsListCreateButton}"
               Command="{Binding Path=CreateButtonVM.Command}"
               Content="{Binding Path=CreateButtonVM.Text}"
               ToolTip="{Binding Path=CreateButtonVM.ToolTip}"/>
@@ -37,6 +39,7 @@
 
     <ListBox Grid.Row="1"
              x:Name="NothingModelsListBox"
+             Style="{StaticResource NothingModelsListListBox}"
              ItemsSource="{Binding Path=NothingModels, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}">
       <ListBox.ItemTemplate>
         <DataTemplate DataType="controls:NothingModelVM">

@@ -8,58 +8,111 @@
   </ResourceDictionary.MergedDictionaries>
 
   <ControlTemplate x:Key="MenuItemTemplate" TargetType="{x:Type MenuItem}">
-    <Border x:Name="MenuItemBorder"
-                    Background="{TemplateBinding Background}"
-                    BorderBrush="{TemplateBinding BorderBrush}"
-                    BorderThickness="{TemplateBinding BorderThickness}"
-                    ClipToBounds="{TemplateBinding ClipToBounds}"
-                    CornerRadius="{Binding Path=(assistants:ElementAssistant.CornerRadius), RelativeSource={RelativeSource TemplatedParent}}"
-                    HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
-                    SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-                    VerticalAlignment="{TemplateBinding VerticalAlignment}">
-
-      <StackPanel x:Name="MenuItemStackPanel"
-                  Orientation="Horizontal"
-                  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                  Margin="{TemplateBinding Padding}"
+  <Border x:Name="MenuItemBorder"
+                  Background="{TemplateBinding Background}"
+                  BorderBrush="{TemplateBinding BorderBrush}"
+                  BorderThickness="{TemplateBinding BorderThickness}"
+                  ClipToBounds="{TemplateBinding ClipToBounds}"
+                  CornerRadius="{Binding Path=(assistants:ElementAssistant.CornerRadius), RelativeSource={RelativeSource TemplatedParent}}"
+                  HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                  Padding="{TemplateBinding Padding}"
                   SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
-        <fontAwesome:IconBlock x:Name="MenuItemIcon"
-                               Icon="{Binding Path=(fontAwesome:IconBlock.Icon), RelativeSource={RelativeSource TemplatedParent}}"
-                               HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                               Padding="0,0,10,0"
-                               SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-                               VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-        <TextBlock x:Name="MenuItemTextBlock"
-                   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                   SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-                   Text="{TemplateBinding Header}"
-                   VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-      </StackPanel>
-    </Border>
+                  VerticalAlignment="{TemplateBinding VerticalAlignment}">
 
-    <ControlTemplate.Triggers>
-      <Trigger Property="IsMouseOver" Value="True">
-        <Setter Property="Background" Value="{StaticResource DefaultMouseOverBackground}"/>
-        <Setter Property="Foreground" Value="{StaticResource DefaultMouseOverForeground}"/>
-      </Trigger>
-      <Trigger Property="IsEnabled" Value="False">
-        <Setter Property="Foreground" Value="{StaticResource DisableForeground}" />
-      </Trigger>
-    </ControlTemplate.Triggers>
-  </ControlTemplate>
+    <StackPanel x:Name="MenuItemStackPanel"
+                Orientation="Horizontal"
+                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+      <fontAwesome:IconBlock x:Name="MenuItemIcon"
+                             FontFamily="{TemplateBinding FontFamily}"
+                             FontSize="{TemplateBinding FontSize}"
+                             FontWeight="{TemplateBinding FontWeight}"
+                             Foreground="{TemplateBinding Foreground}"
+                             HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                             Icon="{Binding Path=(fontAwesome:IconImage.Icon), RelativeSource={RelativeSource TemplatedParent}}"
+                             SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                             VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+      <TextBlock x:Name="MenuItemTextBlock"
+                 Focusable="{TemplateBinding Focusable}"
+                 FontFamily="{TemplateBinding FontFamily}"
+                 FontSize="{TemplateBinding FontSize}"
+                 FontWeight="{TemplateBinding FontWeight}"
+                 Foreground="{TemplateBinding Foreground}"
+                 HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                 SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                 Text="{TemplateBinding Header}"
+                 VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+    </StackPanel>
+  </Border>
+
+  <ControlTemplate.Triggers>
+    <MultiDataTrigger>
+      <MultiDataTrigger.Conditions>
+        <Condition Binding="{Binding ElementName=MenuItemIcon, Path=Icon, Converter={StaticResource IconCharHasValueConverter}}"
+                   Value="True" />
+        <Condition Binding="{Binding ElementName=MenuItemTextBlock, Path=Text, Converter={StaticResource StringHasValueConverter}}"
+                   Value="True" />
+      </MultiDataTrigger.Conditions>
+      <MultiDataTrigger.Setters>
+        <Setter TargetName="MenuItemIcon"
+                Property="Margin"
+                Value="0,0,5,0" />
+      </MultiDataTrigger.Setters>
+    </MultiDataTrigger>
+    <Trigger Property="IsMouseOver" Value="True">
+      <Setter TargetName="MenuItemBorder"
+              Property="Background"
+              Value="{Binding Path=(assistants:ElementAssistant.MouseOverBackground), RelativeSource={RelativeSource TemplatedParent}}"/>
+      <Setter TargetName="MenuItemIcon"
+              Property="Foreground"
+              Value="{Binding Path=(assistants:ElementAssistant.MouseOverForeground), RelativeSource={RelativeSource TemplatedParent}}"/>
+      <Setter TargetName="MenuItemTextBlock"
+              Property="Foreground"
+              Value="{Binding Path=(assistants:ElementAssistant.MouseOverForeground), RelativeSource={RelativeSource TemplatedParent}}"/>
+    </Trigger>
+    <Trigger Property="IsEnabled" Value="False">
+      <Setter Property="Foreground" Value="{StaticResource DisableForeground}" />
+    </Trigger>
+  </ControlTemplate.Triggers>
+</ControlTemplate>
 
   <Style x:Key="StandardMenuItem" TargetType="{x:Type MenuItem}">
+    <Setter Property="assistants:ElementAssistant.MouseOverBackground"
+            Value="{StaticResource DefaultMouseOverBackground}" />
+    <Setter Property="assistants:ElementAssistant.MouseOverForeground"
+            Value="{StaticResource DefaultMouseOverForeground}" />
     <Setter Property="assistants:ElementAssistant.CornerRadius" Value="8" />
     <Setter Property="Background" Value="{StaticResource DefaultElementBackground}" />
     <Setter Property="FontSize" Value="15" />
     <Setter Property="Foreground" Value="{StaticResource DefaultTextForeground}" />
     <Setter Property="HorizontalContentAlignment" Value="Left" />
     <Setter Property="OverridesDefaultStyle" Value="True" />
-    <Setter Property="Padding" Value="12,7,12,7" />
+    <Setter Property="Padding" Value="10,5,10,5" />
     <Setter Property="SnapsToDevicePixels" Value="True" />
     <Setter Property="Template" Value="{StaticResource MenuItemTemplate}"/>
     <Setter Property="VerticalContentAlignment" Value="Center" />
+  </Style>
+
+  <Style x:Key="RedMenuItem"
+         TargetType="{x:Type MenuItem}"
+         BasedOn="{StaticResource StandardMenuItem}">
+    <Setter Property="assistants:ElementAssistant.MouseOverBackground"
+            Value="{StaticResource RedMouseOverBackground}"/>
+    <Setter Property="assistants:ElementAssistant.MouseOverForeground"
+            Value="{StaticResource RedMouseOverForeground}"/>
+  </Style>
+
+  <Style x:Key="EditMenuItem"
+         TargetType="{x:Type MenuItem}"
+         BasedOn="{StaticResource StandardMenuItem}">
+    <Setter Property="fontAwesome:IconImage.Icon" Value="Edit"/>
+  </Style>
+
+  <Style x:Key="DeleteMenuItem"
+         TargetType="{x:Type MenuItem}"
+         BasedOn="{StaticResource RedMenuItem}">
+    <Setter Property="fontAwesome:IconImage.Icon" Value="Save"/>
   </Style>
 
   <ControlTemplate x:Key="ContextMenuTemplate" TargetType="{x:Type ContextMenu}">
@@ -82,7 +135,6 @@
     <Setter Property="BorderBrush" Value="{StaticResource DefaultElementBorderBrush}"/>
     <Setter Property="BorderThickness" Value="1" />
     <Setter Property="Foreground" Value="{StaticResource DefaultTextForeground}"/>
-    <Setter Property="Grid.IsSharedSizeScope" Value="True" />
     <Setter Property="ItemContainerStyle" Value="{StaticResource StandardMenuItem}"/>
     <Setter Property="HasDropShadow" Value="True" />
     <Setter Property="OverridesDefaultStyle" Value="True" />

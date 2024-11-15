@@ -9,11 +9,20 @@
   <SolidColorBrush x:Key="DefaultElementBorderBrush" Color="LightGray"/>
   <SolidColorBrush x:Key="DefaultElementForeground" Color="#3374BA"/>
 
+  <SolidColorBrush x:Key="DefaultDialogBackground" Color="Black"/>
+
   <SolidColorBrush x:Key="DefaultMouseOverBackground" Color="#3374BA"/>
-  <SolidColorBrush x:Key="DefaultMouseOverBorderBrush" Color="White"/>
+  <SolidColorBrush x:Key="DefaultMouseOverBorderBrush" Color="#3374BA"/>
   <SolidColorBrush x:Key="DefaultMouseOverForeground" Color="White"/>
 
+
+  <SolidColorBrush x:Key="DefaultSelectedBackground" Color="#3374BA"/>
+  <SolidColorBrush x:Key="DefaultSelectedBorderBrush" Color="White"/>
+  <SolidColorBrush x:Key="DefaultSelectedForeground" Color="White"/>
+
   <SolidColorBrush x:Key="DefaultTextForeground" Color="Black"/>
+
+  <SolidColorBrush x:Key="DefaultThumbBackground" Color="#3374BA"/>
 
   <SolidColorBrush x:Key="DisableBorderBrush" Color="LightGray"/>
   <SolidColorBrush x:Key="DisableForeground" Color="LightGray"/>

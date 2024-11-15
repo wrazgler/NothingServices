@@ -25,7 +25,7 @@ public class StringHasValueConverter : IValueConverter
     {
         if (value is not string stringValue)
             throw new ArgumentException(value?.GetType().Name);
-        var hasValue = string.IsNullOrEmpty(stringValue);
+        var hasValue = !string.IsNullOrEmpty(stringValue);
         return hasValue;
     }
 

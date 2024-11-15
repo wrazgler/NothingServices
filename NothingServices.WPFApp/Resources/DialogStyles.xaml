@@ -2,6 +2,10 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:views="clr-namespace:NothingServices.WPFApp.Views">
 
+  <ResourceDictionary.MergedDictionaries>
+    <ResourceDictionary Source="pack://application:,,,/NothingServices.WPFApp;v1.0.0.0;component/Resources/Colors.xaml"/>
+  </ResourceDictionary.MergedDictionaries>
+
   <ControlTemplate x:Key="DialogTemplate" TargetType="{x:Type views:Dialog}">
     <Grid x:Name="DialogRoot">
       <VisualStateManager.VisualStateGroups>
@@ -77,7 +81,7 @@
   </ControlTemplate>
 
   <Style x:Key="StandardDialog" TargetType="{x:Type views:Dialog}">
-    <Setter Property="Background" Value="Black"/>
+    <Setter Property="Background" Value="{StaticResource DefaultDialogBackground}"/>
     <Setter Property="CloseOnClickAway" Value="True"/>
     <Setter Property="HorizontalContentAlignment" Value="Center" />
     <Setter Property="HorizontalAlignment" Value="Stretch"/>

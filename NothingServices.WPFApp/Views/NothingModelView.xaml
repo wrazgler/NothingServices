@@ -9,13 +9,16 @@
 
   <Border x:Name="NothingModelViewBorder">
     <Border.ContextMenu>
-      <ContextMenu x:Name="NothingModelViewContextMenu">
+      <ContextMenu x:Name="NothingModelViewContextMenu"
+                   Style="{StaticResource StandardContextMenu}">
         <MenuItem x:Name="UpdateMenuItem"
+                  Style="{StaticResource EditMenuItem}"
                   Command="{Binding Path=UpdateButtonVM.Command}"
                   CommandParameter="{Binding}"
                   Header="{Binding Path=UpdateButtonVM.Text}"
                   ToolTip="{Binding Path=UpdateButtonVM.ToolTip}"/>
         <MenuItem x:Name="DeleteMenuItem"
+                  Style="{StaticResource DeleteMenuItem}"
                   Command="{Binding Path=DeleteButtonVM.Command}"
                   CommandParameter="{Binding}"
                   Header="{Binding Path=DeleteButtonVM.Text}"
@@ -41,7 +44,7 @@
 
       <Button Grid.Column="2"
               x:Name="UpdateButton"
-              Style="{StaticResource EditButton}"
+              Style="{StaticResource NothingModelEditButton}"
               Command="{Binding Path=UpdateButtonVM.Command}"
               CommandParameter="{Binding}"
               Content="{Binding Path=UpdateButtonVM.Text}"
@@ -49,7 +52,7 @@
 
       <Button Grid.Column="3"
               x:Name="DeleteButton"
-              Style="{StaticResource DeleteButton}"
+              Style="{StaticResource NothingModelDeleteButton}"
               Command="{Binding Path=DeleteButtonVM.Command}"
               CommandParameter="{Binding}"
               Content="{Binding Path=DeleteButtonVM.Text}"

@@ -12,7 +12,7 @@ public class DeleteButtonVM(ICommand command) : ObservableObject, IButtonVM
     /// <summary>
     /// Текст кнопки удалить модель
     /// </summary>
-    public string Text { get; } = "Удалить модель";
+    public string Text { get; } = "Удалить";
 
     /// <summary>
     /// Текстовая подсказка кнопки удалить модель

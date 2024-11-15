@@ -5,11 +5,16 @@
   <Application.Resources>
     <ResourceDictionary>
       <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/Resources/ApiSelectionViewStyles.xaml"/>
         <ResourceDictionary Source="/Resources/ButtonStyles.xaml"/>
         <ResourceDictionary Source="/Resources/Colors.xaml"/>
         <ResourceDictionary Source="/Resources/Converters.xaml"/>
         <ResourceDictionary Source="/Resources/DialogStyles.xaml"/>
+        <ResourceDictionary Source="/Resources/ListBoxStyles.xaml"/>
         <ResourceDictionary Source="/Resources/MenuStyles.xaml"/>
+        <ResourceDictionary Source="/Resources/NothingModelViewStyles.xaml"/>
+        <ResourceDictionary Source="/Resources/NothingModelsListViewStyles.xaml"/>
+        <ResourceDictionary Source="/Resources/ScrollViewerStyles.xaml"/>
       </ResourceDictionary.MergedDictionaries>
     </ResourceDictionary>
   </Application.Resources>

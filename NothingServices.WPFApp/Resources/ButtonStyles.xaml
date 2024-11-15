@@ -5,22 +5,26 @@
 
   <ResourceDictionary.MergedDictionaries>
     <ResourceDictionary Source="pack://application:,,,/NothingServices.WPFApp;v1.0.0.0;component/Resources/Colors.xaml"/>
+    <ResourceDictionary Source="pack://application:,,,/NothingServices.WPFApp;v1.0.0.0;component/Resources/Converters.xaml"/>
   </ResourceDictionary.MergedDictionaries>
 
   <ControlTemplate x:Key="ButtonTemplate" TargetType="{x:Type Button}">
     <Border x:Name="ButtonBorder"
-        Background="{TemplateBinding Background}"
-        BorderBrush="{TemplateBinding BorderBrush}"
-        BorderThickness="{TemplateBinding BorderThickness}"
-        CornerRadius="{Binding Path=(assistants:ElementAssistant.CornerRadius), RelativeSource={RelativeSource TemplatedParent}}"
-        Padding="{TemplateBinding Padding}">
-      <Grid x:Name="ButtonGrid">
-        <Grid.ColumnDefinitions>
-          <ColumnDefinition Width="Auto" />
-          <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
+            Background="{TemplateBinding Background}"
+            BorderBrush="{TemplateBinding BorderBrush}"
+            BorderThickness="{TemplateBinding BorderThickness}"
+            ClipToBounds="{TemplateBinding ClipToBounds}"
+            CornerRadius="{Binding Path=(assistants:ElementAssistant.CornerRadius), RelativeSource={RelativeSource TemplatedParent}}"
+            HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+            Padding="{TemplateBinding Padding}"
+            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+            VerticalAlignment="{TemplateBinding VerticalAlignment}">
+      <StackPanel x:Name="ButtonStackPanel"
+                  Orientation="Horizontal"
+                  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
         <fontAwesome:IconBlock x:Name="ButtonIcon"
-                               Grid.Column="0"
                                FontFamily="{TemplateBinding FontFamily}"
                                FontSize="{TemplateBinding FontSize}"
                                FontWeight="{TemplateBinding FontWeight}"
@@ -30,7 +34,6 @@
                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
         <ContentPresenter x:Name="ButtonContentPresenter"
-                          Grid.Column="1"
                           Content="{TemplateBinding Content}"
                           ContentStringFormat="{TemplateBinding ContentStringFormat}"
                           ContentTemplate="{TemplateBinding ContentTemplate}"
@@ -42,7 +45,7 @@
                           TextBlock.FontWeight="{TemplateBinding FontWeight}"
                           TextBlock.Foreground="{TemplateBinding Foreground}"
                           VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-      </Grid>
+      </StackPanel>
     </Border>
 
     <ControlTemplate.Triggers>
@@ -56,7 +59,7 @@
         <MultiDataTrigger.Setters>
           <Setter TargetName="ButtonIcon"
                   Property="Margin"
-                  Value="0,0,25,0" />
+                  Value="0,0,5,0" />
         </MultiDataTrigger.Setters>
       </MultiDataTrigger>
       <Trigger Property="IsMouseOver" Value="True">
@@ -66,6 +69,9 @@
         <Setter TargetName="ButtonBorder"
                 Property="BorderBrush"
                 Value="{Binding Path=(assistants:ElementAssistant.MouseOverBorderBrush), RelativeSource={RelativeSource TemplatedParent}}"/>
+        <Setter TargetName="ButtonIcon"
+                Property="Foreground"
+                Value="{Binding Path=(assistants:ElementAssistant.MouseOverForeground), RelativeSource={RelativeSource TemplatedParent}}"/>
         <Setter TargetName="ButtonContentPresenter"
                 Property="TextBlock.Foreground"
                 Value="{Binding Path=(assistants:ElementAssistant.MouseOverForeground), RelativeSource={RelativeSource TemplatedParent}}"/>
@@ -92,8 +98,8 @@
     <Setter Property="Focusable" Value="False" />
     <Setter Property="FontSize" Value="15"/>
     <Setter Property="FontWeight" Value="Medium"/>
-    <Setter Property="Foreground" Value="{StaticResource DefaultButtonForeground}" />
-    <Setter Property="Height" Value="40"/>
+    <Setter Property="Foreground" Value="{StaticResource DefaultTextForeground}" />
+    <Setter Property="Height" Value="Auto" />
     <Setter Property="HorizontalAlignment" Value="Stretch" />
     <Setter Property="HorizontalContentAlignment" Value="Center" />
     <Setter Property="Padding" Value="10,5,10,5" />
@@ -101,6 +107,7 @@
     <Setter Property="VerticalAlignment" Value="Stretch"/>
     <Setter Property="VerticalContentAlignment" Value="Center" />
     <Setter Property="Template" Value="{StaticResource ButtonTemplate}"/>
+    <Setter Property="Width" Value="Auto" />
   </Style>
 
   <Style x:Key="GreenButton"
@@ -147,5 +154,19 @@
          BasedOn="{StaticResource GreenButton}"
          TargetType="{x:Type Button}">
     <Setter Property="fontAwesome:IconImage.Icon" Value="Save"/>
+  </Style>
+
+  <ControlTemplate x:Key="RepeatButtonTemplate" TargetType="{x:Type RepeatButton}">
+    <Rectangle Width="{TemplateBinding Width}"
+               Height="{TemplateBinding Height}"
+               Fill="{TemplateBinding Background}"/>
+  </ControlTemplate>
+
+  <Style x:Key="StandardRepeatButton" TargetType="{x:Type RepeatButton}">
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="Focusable" Value="false" />
+    <Setter Property="IsTabStop" Value="false" />
+    <Setter Property="OverridesDefaultStyle" Value="true" />
+    <Setter Property="Template" Value="{StaticResource RepeatButtonTemplate}"/>
   </Style>
 </ResourceDictionary>
