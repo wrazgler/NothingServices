@@ -23,10 +23,16 @@ public class StringHasValueConverter : IValueConverter
     /// <exception cref="ArgumentException">Тип элемента не соответствует конвертеру</exception>
     public object Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
+        if (value == null)
+            return false;
+
         if (value is not string stringValue)
             throw new ArgumentException(value?.GetType().Name);
-        var hasValue = !string.IsNullOrEmpty(stringValue);
-        return hasValue;
+
+        if (string.IsNullOrEmpty(stringValue))
+            return false;
+
+        return true;
     }
 
     /// <summary>

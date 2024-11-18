@@ -180,6 +180,30 @@ public static class ElementAssistant
         => element.SetValue(SelectedForegroundProperty, value);
 
     /// <summary>
+    /// Регистрация свойства текста в элементе
+    /// </summary>
+    public static readonly DependencyProperty TextProperty = DependencyProperty.RegisterAttached(
+        "Text",
+        typeof(string),
+        typeof(ElementAssistant));
+
+    /// <summary>
+    /// Получение текста в элементе
+    /// </summary>
+    /// <param name="element">Элемент интерфейса</param>
+    /// <returns>Текст в элементе</returns>
+    public static string GetText(DependencyObject element)
+        => (string)element.GetValue(TextProperty);
+
+    /// <summary>
+    /// Установка текста в элементе
+    /// </summary>
+    /// <param name="element">Элемент интерфейса</param>
+    /// <param name="value">Текст в элементе</param>
+    public static void SetText(DependencyObject element, string value)
+        => element.SetValue(TextProperty, value);
+
+    /// <summary>
     /// Регистрация свойства стиля расположения текста элемента
     /// </summary>
     public static readonly DependencyProperty TextAlignmentProperty = DependencyProperty.RegisterAttached(

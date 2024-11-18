@@ -5,16 +5,24 @@
   <Application.Resources>
     <ResourceDictionary>
       <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="/Resources/ApiSelectionViewStyles.xaml"/>
-        <ResourceDictionary Source="/Resources/ButtonStyles.xaml"/>
-        <ResourceDictionary Source="/Resources/Colors.xaml"/>
-        <ResourceDictionary Source="/Resources/Converters.xaml"/>
-        <ResourceDictionary Source="/Resources/DialogStyles.xaml"/>
-        <ResourceDictionary Source="/Resources/ListBoxStyles.xaml"/>
-        <ResourceDictionary Source="/Resources/MenuStyles.xaml"/>
-        <ResourceDictionary Source="/Resources/NothingModelViewStyles.xaml"/>
-        <ResourceDictionary Source="/Resources/NothingModelsListViewStyles.xaml"/>
-        <ResourceDictionary Source="/Resources/ScrollViewerStyles.xaml"/>
+        <ResourceDictionary Source="/Styles/ApiSelectionViewStyles.xaml"/>
+        <ResourceDictionary Source="/Styles/BorderStyles.xaml"/>
+        <ResourceDictionary Source="/Styles/ButtonStyles.xaml"/>
+        <ResourceDictionary Source="/Styles/Colors.xaml"/>
+        <ResourceDictionary Source="/Styles/Converters.xaml"/>
+        <ResourceDictionary Source="/Styles/CreateNothingModelViewStyles.xaml"/>
+        <ResourceDictionary Source="/Styles/DeleteNothingModelViewStyles.xaml"/>
+        <ResourceDictionary Source="/Styles/DialogStyles.xaml"/>
+        <ResourceDictionary Source="/Styles/LabelStyles.xaml"/>
+        <ResourceDictionary Source="/Styles/ListBoxStyles.xaml"/>
+        <ResourceDictionary Source="/Styles/MenuStyles.xaml"/>
+        <ResourceDictionary Source="/Styles/NothingModelViewStyles.xaml"/>
+        <ResourceDictionary Source="/Styles/NothingModelsListViewStyles.xaml"/>
+        <ResourceDictionary Source="/Styles/ScrollBarStyles.xaml"/>
+        <ResourceDictionary Source="/Styles/ScrollViewerStyles.xaml"/>
+        <ResourceDictionary Source="/Styles/TextBoxStyles.xaml"/>
+        <ResourceDictionary Source="/Styles/ThumbStyles.xaml"/>
+        <ResourceDictionary Source="/Styles/UpdateNothingModelViewStyles.xaml"/>
       </ResourceDictionary.MergedDictionaries>
     </ResourceDictionary>
   </Application.Resources>

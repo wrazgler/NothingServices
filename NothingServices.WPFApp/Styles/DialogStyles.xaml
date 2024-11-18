@@ -3,7 +3,7 @@
                     xmlns:views="clr-namespace:NothingServices.WPFApp.Views">
 
   <ResourceDictionary.MergedDictionaries>
-    <ResourceDictionary Source="pack://application:,,,/NothingServices.WPFApp;v1.0.0.0;component/Resources/Colors.xaml"/>
+    <ResourceDictionary Source="pack://application:,,,/NothingServices.WPFApp;v1.0.0.0;component/Styles/Colors.xaml"/>
   </ResourceDictionary.MergedDictionaries>
 
   <ControlTemplate x:Key="DialogTemplate" TargetType="{x:Type views:Dialog}">

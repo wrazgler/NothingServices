@@ -8,12 +8,13 @@ namespace NothingServices.WPFApp.ViewModels.Buttons;
 /// Данные представления кнопки создать модель
 /// </summary>
 /// <param name="command">Команда, исполняемая кнопкой</param>
-public class CreateButtonVM(ICommand command) : ObservableObject, IButtonVM
+public class CreateButtonVM(ICommand command)
+    : ObservableObject, IButtonVM
 {
     /// <summary>
     /// Текст кнопки создать модель
     /// </summary>
-    public string Text { get; } = "Создать модель";
+    public string Text { get; } = "Создать";
 
     /// <summary>
     /// Текстовая подсказка кнопки создать модель

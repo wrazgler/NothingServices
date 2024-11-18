@@ -7,7 +7,8 @@
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance Type=controls:UpdateNothingModelVM}">
 
-  <Border x:Name="UpdateNothingModelViewBorder">
+  <Border x:Name="UpdateNothingModelViewBorder"
+          Style="{StaticResource UpdateNothingModelViewBorder}">
     <Grid x:Name="UpdateNothingModelViewGrid">
       <Grid.RowDefinitions>
         <RowDefinition Height="Auto"/>
@@ -17,10 +18,12 @@
 
       <Label Grid.Row="0"
              x:Name="TitleLabel"
+             Style="{StaticResource UpdateNothingModelViewTitleLabel}"
              Content="{Binding Path=Title}"/>
 
       <TextBox Grid.Row="1"
                x:Name="NameLabel"
+               Style="{StaticResource UpdateNothingModelViewNameTextBox}"
                Text="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
       <Grid Grid.Row="2"
@@ -32,7 +35,7 @@
 
         <Button Grid.Column="0"
                 x:Name="SaveButton"
-                Style="{StaticResource SaveButton}"
+                Style="{StaticResource UpdateNothingModelViewSaveButton}"
                 Command="{Binding Path=UpdateButtonVM.Command}"
                 CommandParameter="{Binding}"
                 Content="{Binding Path=UpdateButtonVM.Text}"
@@ -40,7 +43,7 @@
 
         <Button Grid.Column="1"
                 x:Name="CancelButton"
-                Style="{StaticResource StandardButton}"
+                Style="{StaticResource UpdateNothingModelViewCancelButton}"
                 Command="{Binding Path=CancelButtonVM.Command}"
                 Content="{Binding Path=CancelButtonVM.Text}"
                 ToolTip="{Binding Path=CancelButtonVM.ToolTip}"/>

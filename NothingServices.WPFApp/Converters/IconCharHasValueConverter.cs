@@ -24,10 +24,16 @@ public class IconCharHasValueConverter : IValueConverter
     /// <exception cref="ArgumentException">Тип элемента не соответствует конвертеру</exception>
     public object Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
+        if (value == null)
+            return false;
+
         if (value is not IconChar iconChar)
             throw new ArgumentException(value?.GetType().Name);
-        var hasValue = iconChar != IconChar.None;
-        return hasValue;
+
+        if (iconChar == IconChar.None)
+            return false;
+
+        return true;
     }
 
     /// <summary>

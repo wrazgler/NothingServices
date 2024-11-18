@@ -21,6 +21,7 @@
   <SolidColorBrush x:Key="DefaultSelectedForeground" Color="White"/>
 
   <SolidColorBrush x:Key="DefaultTextForeground" Color="Black"/>
+  <SolidColorBrush x:Key="DefaultTextSelectionBrush" Color="#3374BA" />
 
   <SolidColorBrush x:Key="DefaultThumbBackground" Color="#3374BA"/>
 

@@ -7,7 +7,8 @@
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance Type=controls:NothingModelVM}">
 
-  <Border x:Name="NothingModelViewBorder">
+  <Border x:Name="NothingModelViewBorder"
+          Style="{StaticResource NothingModelViewBorder}">
     <Border.ContextMenu>
       <ContextMenu x:Name="NothingModelViewContextMenu"
                    Style="{StaticResource StandardContextMenu}">
@@ -36,10 +37,12 @@
 
       <Label Grid.Column="0"
              x:Name="IdLabel"
+             Style="{StaticResource NothingModelViewIdLabel}"
              Content="{Binding Path=Id}"/>
 
       <Label Grid.Column="1"
              x:Name="NameLabel"
+             Style="{StaticResource NothingModelViewNameLabel}"
              Content="{Binding Path=Name}"/>
 
       <Button Grid.Column="2"

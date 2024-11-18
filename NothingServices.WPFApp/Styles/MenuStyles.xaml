@@ -4,7 +4,7 @@
                     xmlns:fontAwesome="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp">
 
   <ResourceDictionary.MergedDictionaries>
-    <ResourceDictionary Source="pack://application:,,,/NothingServices.WPFApp;v1.0.0.0;component/Resources/Colors.xaml"/>
+    <ResourceDictionary Source="pack://application:,,,/NothingServices.WPFApp;v1.0.0.0;component/Styles/Colors.xaml"/>
   </ResourceDictionary.MergedDictionaries>
 
   <ControlTemplate x:Key="MenuItemTemplate" TargetType="{x:Type MenuItem}">
@@ -14,6 +14,7 @@
                   BorderThickness="{TemplateBinding BorderThickness}"
                   ClipToBounds="{TemplateBinding ClipToBounds}"
                   CornerRadius="{Binding Path=(assistants:ElementAssistant.CornerRadius), RelativeSource={RelativeSource TemplatedParent}}"
+                  Height="{TemplateBinding Height}"
                   HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
                   Padding="{TemplateBinding Padding}"
                   SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
@@ -21,6 +22,7 @@
 
     <StackPanel x:Name="MenuItemStackPanel"
                 Orientation="Horizontal"
+                Height="{TemplateBinding Height}"
                 HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                 SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
                 VerticalAlignment="{TemplateBinding VerticalContentAlignment}">

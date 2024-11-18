@@ -7,7 +7,8 @@
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance Type=controls:CreateNothingModelVM}">
 
-  <Border x:Name="CreateNothingModelViewBorder">
+  <Border x:Name="CreateNothingModelViewBorder"
+          Style="{StaticResource CreateNothingModelViewBorder}">
     <Grid x:Name="CreateNothingModelViewGrid">
       <Grid.RowDefinitions>
         <RowDefinition Height="Auto"/>
@@ -17,10 +18,12 @@
 
       <Label Grid.Row="0"
              x:Name="TitleLabel"
+             Style="{StaticResource CreateNothingModelViewTitleLabel}"
              Content="{Binding Path=Title}"/>
 
       <TextBox Grid.Row="1"
-               x:Name="NameLabel"
+               x:Name="NameTextBox"
+               Style="{StaticResource CreateNothingModelViewNameTextBox}"
                Text="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
       <Grid Grid.Row="2"
@@ -32,7 +35,7 @@
 
         <Button Grid.Column="0"
                 x:Name="SaveButton"
-                Style="{StaticResource SaveButton}"
+                Style="{StaticResource CreateNothingModelViewSaveButton}"
                 Command="{Binding Path=CreateButtonVM.Command}"
                 CommandParameter="{Binding}"
                 Content="{Binding Path=CreateButtonVM.Text}"
@@ -40,7 +43,7 @@
 
         <Button Grid.Column="1"
                 x:Name="CancelButton"
-                Style="{StaticResource StandardButton}"
+                Style="{StaticResource CreateNothingModelViewCancelButton}"
                 Command="{Binding Path=CancelButtonVM.Command}"
                 Content="{Binding Path=CancelButtonVM.Text}"
                 ToolTip="{Binding Path=CancelButtonVM.ToolTip}"/>

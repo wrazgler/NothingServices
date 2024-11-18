@@ -7,7 +7,8 @@
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance Type=controls:DeleteNothingModelVM}">
 
-  <Border x:Name="DeleteNothingModelViewBorder">
+  <Border x:Name="DeleteNothingModelViewBorder"
+          Style="{StaticResource DeleteNothingModelViewBorder}">
     <Grid x:Name="DeleteNothingModelViewGrid">
       <Grid.RowDefinitions>
         <RowDefinition Height="Auto"/>
@@ -16,6 +17,7 @@
 
       <Label Grid.Row="0"
              x:Name="TitleLabel"
+             Style="{StaticResource DeleteNothingModelViewTitleLabel}"
              Content="{Binding Path=Title}"/>
 
       <Grid Grid.Row="1">
@@ -26,7 +28,7 @@
 
         <Button Grid.Column="0"
                 x:Name="DeleteButton"
-                Style="{StaticResource DeleteButton}"
+                Style="{StaticResource DeleteNothingModelViewDeleteButton}"
                 Command="{Binding Path=DeleteButtonVM.Command}"
                 CommandParameter="{Binding}"
                 Content="{Binding Path=DeleteButtonVM.Text}"
@@ -34,7 +36,7 @@
 
         <Button Grid.Column="1"
                 x:Name="CancelButton"
-                Style="{StaticResource StandardButton}"
+                Style="{StaticResource DeleteNothingModelViewCancelButton}"
                 Command="{Binding Path=CancelButtonVM.Command}"
                 Content="{Binding Path=CancelButtonVM.Text}"
                 ToolTip="{Binding Path=CancelButtonVM.ToolTip}"/>

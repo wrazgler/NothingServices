@@ -2,8 +2,23 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
   <ResourceDictionary.MergedDictionaries>
-    <ResourceDictionary Source="pack://application:,,,/NothingServices.WPFApp;v1.0.0.0;component/Resources/ButtonStyles.xaml"/>
+    <ResourceDictionary Source="pack://application:,,,/NothingServices.WPFApp;v1.0.0.0;component/Styles/ButtonStyles.xaml"/>
   </ResourceDictionary.MergedDictionaries>
+
+  <Style x:Key="NothingModelViewBorder"
+         BasedOn="{StaticResource StandardBorder}"
+         TargetType="{x:Type Border}">
+  </Style>
+
+  <Style x:Key="NothingModelViewIdLabel"
+         BasedOn="{StaticResource StandardLabel}"
+         TargetType="{x:Type Label}">
+  </Style>
+
+  <Style x:Key="NothingModelViewNameLabel"
+         BasedOn="{StaticResource StandardLabel}"
+         TargetType="{x:Type Label}">
+  </Style>
 
   <Style x:Key="NothingModelEditButton"
          BasedOn="{StaticResource EditButton}"
