@@ -7,11 +7,12 @@
     <ResourceDictionary Source="pack://application:,,,/NothingServices.WPFApp;v1.0.0.0;component/Styles/ScrollViewerStyles.xaml"/>
   </ResourceDictionary.MergedDictionaries>
 
-  <ControlTemplate x:Key="StandardTextBoxTemplate" TargetType="{x:Type TextBoxBase}">
+  <ControlTemplate x:Key="StandardTextBoxTemplate" TargetType="{x:Type TextBox}">
     <Border x:Name="TextBoxBorder"
             Background="{TemplateBinding Background}"
             BorderBrush="{TemplateBinding BorderBrush}"
             BorderThickness="{TemplateBinding BorderThickness}"
+            ClipToBounds="{TemplateBinding ClipToBounds}"
             CornerRadius="{Binding Path=(assistants:ElementAssistant.CornerRadius), RelativeSource={RelativeSource TemplatedParent}}"
             Height="{TemplateBinding Height}"
             HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
@@ -22,11 +23,11 @@
         <TextBlock x:Name="TextBoxTextBlock"
                    ClipToBounds="{TemplateBinding ClipToBounds}"
                    Foreground="{TemplateBinding Foreground}"
-                   HorizontalAlignment="Stretch"
+                   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                    Margin="{TemplateBinding Padding}"
+                   SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
                    Text="{Binding Path=(assistants:ElementAssistant.Text), RelativeSource={RelativeSource TemplatedParent}}"
-                   TextAlignment="{TemplateBinding HorizontalContentAlignment}"
-                   VerticalAlignment="Stretch"
+                   VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                    Visibility="Collapsed"/>
 
         <ScrollViewer x:Name="PART_ContentHost"
@@ -34,8 +35,8 @@
       </Grid>
     </Border>
     <ControlTemplate.Triggers>
-      <DataTrigger Value=""
-                   Binding="{Binding Path=Text, RelativeSource={RelativeSource Mode=Self}}">
+      <DataTrigger Binding="{Binding Path=Text, RelativeSource={RelativeSource Mode=Self}}"
+                   Value="">
         <Setter TargetName="TextBoxTextBlock"
                 Property="Visibility"
                 Value="Visible"/>
@@ -57,6 +58,7 @@
     <Setter Property="Padding" Value="10,2,10,2" />
     <Setter Property="SelectionBrush" Value="{StaticResource DefaultTextSelectionBrush}" />
     <Setter Property="SelectionOpacity" Value="0.5" />
+    <Setter Property="SnapsToDevicePixels" Value="True"/>
     <Setter Property="Template" Value="{StaticResource StandardTextBoxTemplate}"/>
     <Setter Property="VerticalAlignment" Value="Stretch"/>
     <Setter Property="VerticalContentAlignment" Value="Center" />

@@ -6,11 +6,9 @@
 
   <SolidColorBrush x:Key="DefaultButtonBackground" Color="White"/>
   <SolidColorBrush x:Key="DefaultButtonBorderBrush" Color="#3374BA"/>
-  <SolidColorBrush x:Key="DefaultButtonForeground" Color="#3374BA"/>
 
   <SolidColorBrush x:Key="DefaultElementBackground" Color="White"/>
   <SolidColorBrush x:Key="DefaultElementBorderBrush" Color="LightGray"/>
-  <SolidColorBrush x:Key="DefaultElementForeground" Color="#3374BA"/>
 
   <SolidColorBrush x:Key="DefaultDialogBackground" Color="Black"/>
 

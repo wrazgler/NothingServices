@@ -22,6 +22,7 @@
   <Style x:Key="ScrollBarThumb" TargetType="{x:Type Thumb}">
     <Setter Property="assistants:ElementAssistant.CornerRadius" Value="4"/>
     <Setter Property="Background" Value="{StaticResource DefaultThumbBackground}"/>
+    <Setter Property="ClipToBounds" Value="True"/>
     <Setter Property="Cursor" Value="Hand"/>
     <Setter Property="OverridesDefaultStyle" Value="True"/>
     <Setter Property="SnapsToDevicePixels" Value="True"/>

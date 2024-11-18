@@ -36,6 +36,11 @@ public class NothingModelsListVM : ObservableObject, IMainWindowContentVM
     }
 
     /// <summary>
+    /// Текст при отсутствии моделей
+    /// </summary>
+    public string EmptyText { get; } = "Список элементов пуст";
+
+    /// <summary>
     /// Нужно ли отображать контент на главном окне
     /// </summary>
     public bool Active

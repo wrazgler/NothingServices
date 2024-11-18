@@ -15,9 +15,11 @@
             ClipToBounds="{TemplateBinding ClipToBounds}"
             CornerRadius="{Binding Path=(assistants:ElementAssistant.CornerRadius), RelativeSource={RelativeSource TemplatedParent}}"
             SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
-      <TextBlock Foreground="{TemplateBinding Foreground}"
+      <TextBlock x:Name="EmptyListBoxTextBlock"
+                 ClipToBounds="{TemplateBinding ClipToBounds}"
+                 Foreground="{TemplateBinding Foreground}"
                  Margin="{TemplateBinding Padding}"
-                 Text="Список элементов пуст"
+                 Text="{Binding Path=(assistants:ElementAssistant.Text), RelativeSource={RelativeSource TemplatedParent}}"
                  TextAlignment="{Binding Path=(assistants:ElementAssistant.TextAlignment), RelativeSource={RelativeSource TemplatedParent}}"
                  TextWrapping="{Binding Path=(assistants:ElementAssistant.TextWrapping), RelativeSource={RelativeSource TemplatedParent}}"/>
     </Border>
@@ -53,9 +55,10 @@
     <Setter Property="ClipToBounds" Value="True"/>
     <Setter Property="HorizontalAlignment" Value="Stretch"/>
     <Setter Property="HorizontalContentAlignment" Value="Left"/>
+    <Setter Property="Padding" Value="0,0,0,5"/>
     <Setter Property="SnapsToDevicePixels" Value="True"/>
     <Setter Property="Template" Value="{StaticResource ListBoxTemplate}"/>
-    <Setter Property="VerticalAlignment" Value="Top"/>
+    <Setter Property="VerticalAlignment" Value="Stretch"/>
     <Setter Property="VerticalContentAlignment" Value="Stretch"/>
     <Style.Triggers>
       <Trigger Property="HasItems" Value="False">
@@ -63,7 +66,7 @@
         <Setter Property="assistants:ElementAssistant.TextWrapping" Value="Wrap"/>
         <Setter Property="BorderBrush" Value="{StaticResource DisableBorderBrush}" />
         <Setter Property="Foreground" Value="{StaticResource DisableForeground}" />
-        <Setter Property="Padding" Value="20"/>
+        <Setter Property="Padding" Value="20,20,20,20"/>
         <Setter Property="Template" Value="{StaticResource EmptyListBoxTemplate}" />
       </Trigger>
       <Trigger Property="IsEnabled" Value="False">
@@ -72,5 +75,4 @@
       </Trigger>
     </Style.Triggers>
   </Style>
-
 </ResourceDictionary>

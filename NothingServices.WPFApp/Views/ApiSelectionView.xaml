@@ -28,6 +28,5 @@
             CommandParameter="{Binding Path=RestApiButtonVM.Strategy}"
             Content="{Binding Path=RestApiButtonVM.Text}"
             ToolTip="{Binding Path=RestApiButtonVM.ToolTip}"/>
-
   </Grid>
 </UserControl>

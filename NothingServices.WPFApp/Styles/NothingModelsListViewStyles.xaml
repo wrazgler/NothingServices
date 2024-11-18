@@ -11,7 +11,7 @@
   <Style x:Key="NothingModelsListBackButton"
          BasedOn="{StaticResource StandardButton}"
          TargetType="{x:Type Button}">
-    <Setter Property="Height" Value="30" />
+    <Setter Property="Height" Value="40" />
     <Setter Property="HorizontalAlignment" Value="Left" />
     <Setter Property="Margin" Value="10,10,10,10" />
   </Style>
@@ -19,7 +19,7 @@
   <Style x:Key="NothingModelsListCreateButton"
          BasedOn="{StaticResource CreateButton}"
          TargetType="{x:Type Button}">
-    <Setter Property="Height" Value="30" />
+    <Setter Property="Height" Value="40" />
     <Setter Property="HorizontalAlignment" Value="Right" />
     <Setter Property="Margin" Value="10,10,10,10" />
   </Style>
@@ -36,6 +36,7 @@
     <Setter Property="assistants:ElementAssistant.MouseOverForeground"
             Value="{StaticResource DefaultMouseOverForeground}" />
     <Setter Property="BorderThickness" Value="0"/>
+    <Setter Property="ClipToBounds" Value="True"/>
     <Setter Property="Margin" Value="1,0,1,0"/>
     <Setter Property="Template" Value="{StaticResource NothingModelsListBoxItemTemplate}"/>
   </Style>
@@ -44,6 +45,6 @@
          BasedOn="{StaticResource StandardListBox}"
          TargetType="{x:Type ListBox}">
     <Setter Property="ItemContainerStyle" Value="{StaticResource NothingModelsListListBoxItem}"/>
-    <Setter Property="Margin" Value="10,0,10,10" />
+    <Setter Property="Margin" Value="10,10,10,0" />
   </Style>
 </ResourceDictionary>

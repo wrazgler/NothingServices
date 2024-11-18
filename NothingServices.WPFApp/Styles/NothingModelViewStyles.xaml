@@ -3,8 +3,19 @@
                     xmlns:assistants="clr-namespace:NothingServices.WPFApp.Assistants">
 
   <ResourceDictionary.MergedDictionaries>
+    <ResourceDictionary Source="pack://application:,,,/NothingServices.WPFApp;v1.0.0.0;component/Styles/BorderStyles.xaml"/>
     <ResourceDictionary Source="pack://application:,,,/NothingServices.WPFApp;v1.0.0.0;component/Styles/ButtonStyles.xaml"/>
+    <ResourceDictionary Source="pack://application:,,,/NothingServices.WPFApp;v1.0.0.0;component/Styles/LabelStyles.xaml"/>
   </ResourceDictionary.MergedDictionaries>
+
+  <LinearGradientBrush x:Key="MouseOverLinearGradientBrush"
+                       StartPoint="0,0"
+                       EndPoint="1,1">
+    <GradientStop Color="{Binding Path=(assistants:ElementAssistant.MouseOverColor), RelativeSource={RelativeSource AncestorType={x:Type ListBoxItem}}}"
+                  Offset="0.0" />
+    <GradientStop Color="{Binding Path=(assistants:ElementAssistant.Color), RelativeSource={RelativeSource AncestorType={x:Type ListBoxItem}}}"
+                  Offset="1.0" />
+  </LinearGradientBrush>
 
   <Style x:Key="NothingModelViewBorder"
          BasedOn="{StaticResource StandardBorder}"
@@ -13,24 +24,18 @@
             Value="{Binding Path=BorderThickness, RelativeSource={RelativeSource AncestorType={x:Type ListBoxItem}}}"/>
     <Style.Triggers>
       <Trigger Property="IsMouseOver" Value="True">
-        <Setter Property="Background">
-          <Setter.Value>
-            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-              <GradientStop Color="{Binding Path=(assistants:ElementAssistant.MouseOverColor), RelativeSource={RelativeSource AncestorType={x:Type ListBoxItem}}}"
-                            Offset="0.0" />
-              <GradientStop Color="{Binding Path=(assistants:ElementAssistant.Color), RelativeSource={RelativeSource AncestorType={x:Type ListBoxItem}}}"
-                            Offset="1.0" />
-            </LinearGradientBrush>
-          </Setter.Value>
-        </Setter>
+        <Setter Property="Background" Value="{StaticResource MouseOverLinearGradientBrush}"/>
       </Trigger>
+      <DataTrigger Binding="{Binding Path=IsOpen, ElementName=NothingModelViewContextMenu}"
+                   Value="True">
+        <Setter Property="Background" Value="{StaticResource MouseOverLinearGradientBrush}"/>
+      </DataTrigger>
     </Style.Triggers>
   </Style>
 
-  <Style x:Key="NothingModelViewIdLabel"
+  <Style x:Key="NothingModelViewLabel"
          BasedOn="{StaticResource StandardLabel}"
          TargetType="{x:Type Label}">
-    <Setter Property="Margin" Value="10,5,0,5" />
     <Setter Property="HorizontalAlignment" Value="Left" />
     <Style.Triggers>
       <DataTrigger Binding="{Binding Path=IsMouseOver, RelativeSource={RelativeSource AncestorType={x:Type Border}}}"
@@ -38,21 +43,24 @@
         <Setter Property="Foreground"
                 Value="{Binding Path=(assistants:ElementAssistant.MouseOverForeground), RelativeSource={RelativeSource AncestorType={x:Type ListBoxItem}}}"/>
       </DataTrigger>
-    </Style.Triggers>
-  </Style>
-
-  <Style x:Key="NothingModelViewNameLabel"
-         BasedOn="{StaticResource StandardLabel}"
-         TargetType="{x:Type Label}">
-    <Setter Property="Margin" Value="0,5,0,5" />
-    <Setter Property="HorizontalAlignment" Value="Left"/>
-    <Style.Triggers>
-      <DataTrigger Binding="{Binding Path=IsMouseOver, RelativeSource={RelativeSource AncestorType={x:Type Border}}}"
+      <DataTrigger Binding="{Binding Path=IsOpen, ElementName=NothingModelViewContextMenu}"
                    Value="True">
         <Setter Property="Foreground"
                 Value="{Binding Path=(assistants:ElementAssistant.MouseOverForeground), RelativeSource={RelativeSource AncestorType={x:Type ListBoxItem}}}"/>
       </DataTrigger>
     </Style.Triggers>
+  </Style>
+
+  <Style x:Key="NothingModelViewIdLabel"
+         BasedOn="{StaticResource NothingModelViewLabel}"
+         TargetType="{x:Type Label}">
+    <Setter Property="Margin" Value="10,5,0,5" />
+  </Style>
+
+  <Style x:Key="NothingModelViewNameLabel"
+         BasedOn="{StaticResource NothingModelViewLabel}"
+         TargetType="{x:Type Label}">
+    <Setter Property="Margin" Value="0,5,0,5" />
   </Style>
 
   <Style x:Key="NothingModelEditButton"

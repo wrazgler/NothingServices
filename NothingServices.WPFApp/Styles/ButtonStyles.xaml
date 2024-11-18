@@ -21,12 +21,14 @@
             SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
             VerticalAlignment="{TemplateBinding VerticalAlignment}">
       <StackPanel x:Name="ButtonStackPanel"
-                  Orientation="Horizontal"
+                  ClipToBounds="{TemplateBinding ClipToBounds}"
                   Height="{TemplateBinding Height}"
                   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                  Orientation="Horizontal"
                   SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
                   VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
         <fontAwesome:IconBlock x:Name="ButtonIcon"
+                               ClipToBounds="{TemplateBinding ClipToBounds}"
                                FontFamily="{TemplateBinding FontFamily}"
                                FontSize="{TemplateBinding FontSize}"
                                FontWeight="{TemplateBinding FontWeight}"
@@ -39,7 +41,7 @@
                           Content="{TemplateBinding Content}"
                           ContentStringFormat="{TemplateBinding ContentStringFormat}"
                           ContentTemplate="{TemplateBinding ContentTemplate}"
-                          Focusable="{TemplateBinding Focusable}"
+                          ClipToBounds="{TemplateBinding ClipToBounds}"
                           HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                           SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
                           TextBlock.FontFamily="{TemplateBinding FontFamily}"
@@ -86,18 +88,18 @@
   </ControlTemplate>
 
   <Style x:Key="StandardButton" TargetType="{x:Type Button}">
+    <Setter Property="assistants:ElementAssistant.CornerRadius" Value="10" />
     <Setter Property="assistants:ElementAssistant.MouseOverBackground"
             Value="{StaticResource DefaultMouseOverBackground}" />
     <Setter Property="assistants:ElementAssistant.MouseOverBorderBrush"
             Value="{StaticResource DefaultMouseOverBorderBrush}" />
     <Setter Property="assistants:ElementAssistant.MouseOverForeground"
             Value="{StaticResource DefaultMouseOverForeground}" />
-    <Setter Property="assistants:ElementAssistant.CornerRadius" Value="10" />
     <Setter Property="Background" Value="{StaticResource DefaultButtonBackground}"/>
     <Setter Property="BorderBrush" Value="{StaticResource DefaultButtonBorderBrush}" />
     <Setter Property="BorderThickness" Value="1" />
+    <Setter Property="ClipToBounds" Value="True" />
     <Setter Property="Cursor" Value="Hand" />
-    <Setter Property="Focusable" Value="False" />
     <Setter Property="FontSize" Value="15"/>
     <Setter Property="FontWeight" Value="Medium"/>
     <Setter Property="Foreground" Value="{StaticResource DefaultTextForeground}" />
@@ -167,7 +169,6 @@
 
   <Style x:Key="StandardRepeatButton" TargetType="{x:Type RepeatButton}">
     <Setter Property="Background" Value="Transparent" />
-    <Setter Property="Focusable" Value="false" />
     <Setter Property="IsTabStop" Value="false" />
     <Setter Property="OverridesDefaultStyle" Value="true" />
     <Setter Property="Template" Value="{StaticResource RepeatButtonTemplate}"/>

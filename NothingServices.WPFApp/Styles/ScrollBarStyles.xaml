@@ -7,9 +7,9 @@
   </ResourceDictionary.MergedDictionaries>
 
   <Style x:Key="StandardScrollBar" TargetType="{x:Type ScrollBar}">
-    <Setter Property="ClipToBounds"
-            Value="{Binding Path= ClipToBounds, RelativeSource={RelativeSource TemplatedParent}}"/>
+    <Setter Property="ClipToBounds" Value="True"/>
     <Setter Property="Minimum" Value="0"/>
+    <Setter Property="SnapsToDevicePixels" Value="True"/>
   </Style>
 
   <ControlTemplate x:Key="HorizontalScrollBarTemplate" TargetType="{x:Type ScrollBar}">

@@ -3,19 +3,24 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:controls="clr-namespace:NothingServices.WPFApp.ViewModels.Controls"
+             xmlns:assistants="clr-namespace:NothingServices.WPFApp.Assistants"
              xmlns:viewModels="clr-namespace:NothingServices.WPFApp.ViewModels"
-             xmlns:views="clr-namespace:NothingServices.WPFApp.Views"
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance Type=viewModels:NothingModelsListVM}">
 
   <Grid x:Name="NothingModelsListViewGrid">
     <Grid.RowDefinitions>
-      <RowDefinition Height="Auto"/>
       <RowDefinition Height="*"/>
+      <RowDefinition Height="Auto"/>
     </Grid.RowDefinitions>
 
-    <Grid Grid.Row="0"
+    <ListBox Grid.Row="0"
+             x:Name="NothingModelsListBox"
+             Style="{StaticResource NothingModelsListListBox}"
+             assistants:ElementAssistant.Text="{Binding Path=EmptyText}"
+             ItemsSource="{Binding Path=NothingModels, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+    <Grid Grid.Row="1"
           x:Name="ButtonGrid">
       <Grid.ColumnDefinitions>
         <ColumnDefinition Width="*" />
@@ -36,16 +41,5 @@
               Content="{Binding Path=CreateButtonVM.Text}"
               ToolTip="{Binding Path=CreateButtonVM.ToolTip}"/>
     </Grid>
-
-    <ListBox Grid.Row="1"
-             x:Name="NothingModelsListBox"
-             Style="{StaticResource NothingModelsListListBox}"
-             ItemsSource="{Binding Path=NothingModels, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}">
-      <ListBox.ItemTemplate>
-        <DataTemplate DataType="controls:NothingModelVM">
-          <views:NothingModelView DataContext="{Binding}" />
-        </DataTemplate>
-      </ListBox.ItemTemplate>
-    </ListBox>
   </Grid>
 </UserControl>

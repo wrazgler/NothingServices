@@ -61,17 +61,19 @@
         </VisualStateGroup>
       </VisualStateManager.VisualStateGroups>
       <ContentPresenter x:Name="ContentPresenter"
+                        ClipToBounds="{TemplateBinding ClipToBounds}"
                         Content="{TemplateBinding Content}"
                         Opacity="1"/>
 
       <Grid x:Name="PART_ContentCoverGrid"
             Background="{TemplateBinding Background}"
+            ClipToBounds="{TemplateBinding ClipToBounds}"
             HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
             SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
             VerticalAlignment="{TemplateBinding VerticalAlignment}"/>
 
       <ContentPresenter x:Name="PART_DialogContent"
-                        Focusable="{TemplateBinding Focusable}"
+                        ClipToBounds="{TemplateBinding ClipToBounds}"
                         HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                         Margin="{TemplateBinding Padding}"
                         SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
@@ -82,9 +84,11 @@
 
   <Style x:Key="StandardDialog" TargetType="{x:Type views:Dialog}">
     <Setter Property="Background" Value="{StaticResource DefaultDialogBackground}"/>
+    <Setter Property="ClipToBounds" Value="True"/>
     <Setter Property="CloseOnClickAway" Value="True"/>
     <Setter Property="HorizontalContentAlignment" Value="Center" />
     <Setter Property="HorizontalAlignment" Value="Stretch"/>
+    <Setter Property="SnapsToDevicePixels" Value="True"/>
     <Setter Property="Template" Value="{StaticResource DialogTemplate}"/>
     <Setter Property="VerticalAlignment" Value="Stretch"/>
     <Setter Property="VerticalContentAlignment" Value="Center" />
