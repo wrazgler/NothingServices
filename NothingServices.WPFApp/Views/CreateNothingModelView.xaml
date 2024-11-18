@@ -1,8 +1,9 @@
-<UserControl x:Class="NothingServices.WPFApp.Views.Controls.CreateNothingModelView"
+<UserControl x:Class="NothingServices.WPFApp.Views.CreateNothingModelView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:assistants="clr-namespace:NothingServices.WPFApp.Assistants"
              xmlns:controls="clr-namespace:NothingServices.WPFApp.ViewModels.Controls"
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance Type=controls:CreateNothingModelVM}">
@@ -24,6 +25,7 @@
       <TextBox Grid.Row="1"
                x:Name="NameTextBox"
                Style="{StaticResource CreateNothingModelViewNameTextBox}"
+               assistants:ElementAssistant.Text="{Binding Path=Text}"
                Text="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
       <Grid Grid.Row="2"

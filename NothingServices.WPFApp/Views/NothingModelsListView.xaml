@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:controls="clr-namespace:NothingServices.WPFApp.ViewModels.Controls"
              xmlns:viewModels="clr-namespace:NothingServices.WPFApp.ViewModels"
-             xmlns:views="clr-namespace:NothingServices.WPFApp.Views.Controls"
+             xmlns:views="clr-namespace:NothingServices.WPFApp.Views"
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance Type=viewModels:NothingModelsListVM}">
 

@@ -33,7 +33,7 @@ public class UpdateCommand(
         if (updateNothingModelVM.Id == 0)
             return false;
 
-        if (string.IsNullOrEmpty(updateNothingModelVM.Name))
+        if (string.IsNullOrEmpty(updateNothingModelVM.Name.Trim()))
             return false;
 
         return true;

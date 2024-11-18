@@ -11,6 +11,54 @@ namespace NothingServices.WPFApp.Assistants;
 public static class ElementAssistant
 {
     /// <summary>
+    /// Регистрация свойства цвета
+    /// </summary>
+    public static readonly DependencyProperty ColorProperty = DependencyProperty.RegisterAttached(
+        "Color",
+        typeof(Color),
+        typeof(ElementAssistant));
+
+    /// <summary>
+    /// Получение цвета
+    /// </summary>
+    /// <param name="element">Элемент интерфейса</param>
+    /// <returns>Цвет</returns>
+    public static Color GetColor(DependencyObject element)
+        => (Color)element.GetValue(CornerRadiusProperty);
+
+    /// <summary>
+    /// Установка цвета
+    /// </summary>
+    /// <param name="element">Элемент интерфейса</param>
+    /// <param name="value">Цвет</param>
+    public static void SetColor(DependencyObject element, Color value)
+        => element.SetValue(CornerRadiusProperty, value);
+
+    /// <summary>
+    /// Регистрация свойства цвета при наведении мыши
+    /// </summary>
+    public static readonly DependencyProperty MouseOverColorProperty = DependencyProperty.RegisterAttached(
+        "MouseOverColor",
+        typeof(Color),
+        typeof(ElementAssistant));
+
+    /// <summary>
+    /// Получение цвета при наведении мыши
+    /// </summary>
+    /// <param name="element">Элемент интерфейса</param>
+    /// <returns>Цвет при наведении мыши</returns>
+    public static Color GetMouseOverColor(DependencyObject element)
+        => (Color)element.GetValue(CornerRadiusProperty);
+
+    /// <summary>
+    /// Установка цвета при наведении мыши
+    /// </summary>
+    /// <param name="element">Элемент интерфейса</param>
+    /// <param name="value">Цвет при наведении мыши</param>
+    public static void SetMouseOverColor(DependencyObject element, Color value)
+        => element.SetValue(CornerRadiusProperty, value);
+
+    /// <summary>
     /// Регистрация свойства радиус углов
     /// </summary>
     public static readonly DependencyProperty CornerRadiusProperty = DependencyProperty.RegisterAttached(

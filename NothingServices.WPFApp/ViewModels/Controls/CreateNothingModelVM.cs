@@ -32,6 +32,11 @@ public class CreateNothingModelVM(
     }
 
     /// <summary>
+    /// Подсказка в тестовом блоке
+    /// </summary>
+    public string Text { get; } = "Введите имя";
+
+    /// <summary>
     /// Заголовок окна создать модель
     /// </summary>
     public string Title { get; } = "Введите имя новой модели";

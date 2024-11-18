@@ -13,17 +13,21 @@
 
   <Style x:Key="DeleteNothingModelViewTitleLabel"
          BasedOn="{StaticResource TitleLabel}"
-         TargetType="{x:Type Label}"/>
+         TargetType="{x:Type Label}">
+    <Setter Property="Margin" Value="10,5,10,0" />
+  </Style>
 
   <Style x:Key="DeleteNothingModelViewDeleteButton"
          BasedOn="{StaticResource DeleteButton}"
          TargetType="{x:Type Button}">
+    <Setter Property="Height" Value="40" />
     <Setter Property="Margin" Value="10,10,10,10" />
   </Style>
 
   <Style x:Key="DeleteNothingModelViewCancelButton"
          BasedOn="{StaticResource StandardButton}"
          TargetType="{x:Type Button}">
+    <Setter Property="Height" Value="40" />
     <Setter Property="Margin" Value="10,10,10,10" />
   </Style>
 </ResourceDictionary>

@@ -14,23 +14,28 @@
 
   <Style x:Key="CreateNothingModelViewTitleLabel"
          BasedOn="{StaticResource TitleLabel}"
-         TargetType="{x:Type Label}"/>
+         TargetType="{x:Type Label}">
+    <Setter Property="Margin" Value="10,5,10,5" />
+  </Style>
 
   <Style x:Key="CreateNothingModelViewNameTextBox"
          BasedOn="{StaticResource StandardTextBox}"
          TargetType="{x:Type TextBox}">
+    <Setter Property="Height" Value="40" />
     <Setter Property="Margin" Value="10,0,10,0" />
   </Style>
 
   <Style x:Key="CreateNothingModelViewSaveButton"
          BasedOn="{StaticResource SaveButton}"
          TargetType="{x:Type Button}">
+    <Setter Property="Height" Value="40" />
     <Setter Property="Margin" Value="10,10,10,10" />
   </Style>
 
   <Style x:Key="CreateNothingModelViewCancelButton"
          BasedOn="{StaticResource StandardButton}"
          TargetType="{x:Type Button}">
+    <Setter Property="Height" Value="40" />
     <Setter Property="Margin" Value="10,10,10,10" />
   </Style>
 </ResourceDictionary>

@@ -1,5 +1,6 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:assistants="clr-namespace:NothingServices.WPFApp.Assistants">
 
   <ResourceDictionary.MergedDictionaries>
     <ResourceDictionary Source="pack://application:,,,/NothingServices.WPFApp;v1.0.0.0;component/Styles/ButtonStyles.xaml"/>
@@ -8,16 +9,50 @@
   <Style x:Key="NothingModelViewBorder"
          BasedOn="{StaticResource StandardBorder}"
          TargetType="{x:Type Border}">
+    <Setter Property="BorderThickness"
+            Value="{Binding Path=BorderThickness, RelativeSource={RelativeSource AncestorType={x:Type ListBoxItem}}}"/>
+    <Style.Triggers>
+      <Trigger Property="IsMouseOver" Value="True">
+        <Setter Property="Background">
+          <Setter.Value>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+              <GradientStop Color="{Binding Path=(assistants:ElementAssistant.MouseOverColor), RelativeSource={RelativeSource AncestorType={x:Type ListBoxItem}}}"
+                            Offset="0.0" />
+              <GradientStop Color="{Binding Path=(assistants:ElementAssistant.Color), RelativeSource={RelativeSource AncestorType={x:Type ListBoxItem}}}"
+                            Offset="1.0" />
+            </LinearGradientBrush>
+          </Setter.Value>
+        </Setter>
+      </Trigger>
+    </Style.Triggers>
   </Style>
 
   <Style x:Key="NothingModelViewIdLabel"
          BasedOn="{StaticResource StandardLabel}"
          TargetType="{x:Type Label}">
+    <Setter Property="Margin" Value="10,5,0,5" />
+    <Setter Property="HorizontalAlignment" Value="Left" />
+    <Style.Triggers>
+      <DataTrigger Binding="{Binding Path=IsMouseOver, RelativeSource={RelativeSource AncestorType={x:Type Border}}}"
+                   Value="True">
+        <Setter Property="Foreground"
+                Value="{Binding Path=(assistants:ElementAssistant.MouseOverForeground), RelativeSource={RelativeSource AncestorType={x:Type ListBoxItem}}}"/>
+      </DataTrigger>
+    </Style.Triggers>
   </Style>
 
   <Style x:Key="NothingModelViewNameLabel"
          BasedOn="{StaticResource StandardLabel}"
          TargetType="{x:Type Label}">
+    <Setter Property="Margin" Value="0,5,0,5" />
+    <Setter Property="HorizontalAlignment" Value="Left"/>
+    <Style.Triggers>
+      <DataTrigger Binding="{Binding Path=IsMouseOver, RelativeSource={RelativeSource AncestorType={x:Type Border}}}"
+                   Value="True">
+        <Setter Property="Foreground"
+                Value="{Binding Path=(assistants:ElementAssistant.MouseOverForeground), RelativeSource={RelativeSource AncestorType={x:Type ListBoxItem}}}"/>
+      </DataTrigger>
+    </Style.Triggers>
   </Style>
 
   <Style x:Key="NothingModelEditButton"
@@ -25,7 +60,7 @@
          TargetType="{x:Type Button}">
     <Setter Property="Height" Value="30" />
     <Setter Property="HorizontalAlignment" Value="Right" />
-    <Setter Property="Margin" Value="5,2,0,2" />
+    <Setter Property="Margin" Value="0,5,0,5" />
   </Style>
 
   <Style x:Key="NothingModelDeleteButton"
@@ -33,6 +68,6 @@
          TargetType="{x:Type Button}">
     <Setter Property="Height" Value="30" />
     <Setter Property="HorizontalAlignment" Value="Right" />
-    <Setter Property="Margin" Value="5,2,5,2" />
+    <Setter Property="Margin" Value="10,5,15,5" />
   </Style>
 </ResourceDictionary>

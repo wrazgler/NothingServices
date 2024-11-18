@@ -30,7 +30,7 @@ public class CreateCommand(
         if (parameter is not CreateNothingModelVM createNothingModelVM)
             return false;
 
-        if (string.IsNullOrEmpty(createNothingModelVM.Name))
+        if (string.IsNullOrEmpty(createNothingModelVM.Name.Trim()))
             return false;
 
         return true;

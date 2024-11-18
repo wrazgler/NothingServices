@@ -15,7 +15,6 @@ using NothingServices.WPFApp.Strategies;
 using NothingServices.WPFApp.ViewModels;
 using NothingServices.WPFApp.ViewModels.Buttons;
 using NothingServices.WPFApp.Views;
-using NothingServices.WPFApp.Views.Controls;
 
 namespace NothingServices.WPFApp.Extensions;
 

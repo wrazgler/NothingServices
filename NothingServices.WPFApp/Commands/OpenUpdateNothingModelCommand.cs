@@ -1,7 +1,7 @@
 using NothingServices.WPFApp.Factories;
 using NothingServices.WPFApp.Services;
 using NothingServices.WPFApp.ViewModels.Controls;
-using NothingServices.WPFApp.Views.Controls;
+using NothingServices.WPFApp.Views;
 
 namespace NothingServices.WPFApp.Commands;
 

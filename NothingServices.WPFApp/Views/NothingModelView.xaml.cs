@@ -1,6 +1,6 @@
 using System.Windows.Controls;
 
-namespace NothingServices.WPFApp.Views.Controls;
+namespace NothingServices.WPFApp.Views;
 
 /// <summary>
 /// Представление модели

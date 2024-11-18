@@ -35,7 +35,7 @@
     </Border>
     <ControlTemplate.Triggers>
       <DataTrigger Value=""
-                   Binding="{Binding Path=Text, RelativeSource={RelativeSource TemplatedParent}}">
+                   Binding="{Binding Path=Text, RelativeSource={RelativeSource Mode=Self}}">
         <Setter TargetName="TextBoxTextBlock"
                 Property="Visibility"
                 Value="Visible"/>

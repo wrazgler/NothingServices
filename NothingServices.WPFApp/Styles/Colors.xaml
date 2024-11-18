@@ -1,6 +1,9 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
+  <Color x:Key="DefaultMouseOverColor">#3374BA</Color>
+  <Color x:Key="DefaultColor">Transparent</Color>
+
   <SolidColorBrush x:Key="DefaultButtonBackground" Color="White"/>
   <SolidColorBrush x:Key="DefaultButtonBorderBrush" Color="#3374BA"/>
   <SolidColorBrush x:Key="DefaultButtonForeground" Color="#3374BA"/>
@@ -14,11 +17,6 @@
   <SolidColorBrush x:Key="DefaultMouseOverBackground" Color="#3374BA"/>
   <SolidColorBrush x:Key="DefaultMouseOverBorderBrush" Color="#3374BA"/>
   <SolidColorBrush x:Key="DefaultMouseOverForeground" Color="White"/>
-
-
-  <SolidColorBrush x:Key="DefaultSelectedBackground" Color="#3374BA"/>
-  <SolidColorBrush x:Key="DefaultSelectedBorderBrush" Color="White"/>
-  <SolidColorBrush x:Key="DefaultSelectedForeground" Color="White"/>
 
   <SolidColorBrush x:Key="DefaultTextForeground" Color="Black"/>
   <SolidColorBrush x:Key="DefaultTextSelectionBrush" Color="#3374BA" />
