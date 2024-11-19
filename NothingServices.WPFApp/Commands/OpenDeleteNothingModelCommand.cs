@@ -11,18 +11,18 @@ namespace NothingServices.WPFApp.Commands;
 /// <param name="deleteNothingModelView">Представление удалить модель</param>
 /// <param name="deleteNothingModelVMFactory">Фабрика создания объекта данных представления окна удалить модель</param>
 /// <param name="dialogService">Сервис работы диалогового окна</param>
-/// <param name="notificator">Сервис отображения уведомлений в пользовательском интерфейсе</param>
+/// <param name="notificationService">Сервис отображения уведомлений в пользовательском интерфейсе</param>
 public class OpenDeleteNothingModelCommand(
     IDeleteNothingModelVMFactory deleteNothingModelVMFactory,
     IDialogService dialogService,
-    INotificator notificator,
+    INotificationService notificationService,
     DeleteNothingModelView deleteNothingModelView)
     : BaseCommand
 {
     private readonly DeleteNothingModelView _deleteNothingModelView = deleteNothingModelView;
     private readonly IDeleteNothingModelVMFactory _deleteNothingModelVMFactory = deleteNothingModelVMFactory;
     private readonly IDialogService _dialogService = dialogService;
-    private readonly INotificator _notificator = notificator;
+    private readonly INotificationService _notificationService = notificationService;
 
     /// <summary>
     /// Проверка возможности выполнить команду открыть представление окна удалить существующую модель
@@ -52,7 +52,7 @@ public class OpenDeleteNothingModelCommand(
         }
         catch (Exception ex)
         {
-            _notificator.Notificate(ex.Message);
+            _notificationService.Notify(ex.Message);
         }
     }
 }

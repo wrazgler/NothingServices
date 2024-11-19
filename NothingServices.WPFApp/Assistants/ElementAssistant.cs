@@ -1,6 +1,4 @@
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Interop;
 using System.Windows.Media;
 
 namespace NothingServices.WPFApp.Assistants;
@@ -24,7 +22,7 @@ public static class ElementAssistant
     /// <param name="element">Элемент интерфейса</param>
     /// <returns>Цвет</returns>
     public static Color GetColor(DependencyObject element)
-        => (Color)element.GetValue(CornerRadiusProperty);
+        => (Color)element.GetValue(ColorProperty);
 
     /// <summary>
     /// Установка цвета
@@ -32,7 +30,7 @@ public static class ElementAssistant
     /// <param name="element">Элемент интерфейса</param>
     /// <param name="value">Цвет</param>
     public static void SetColor(DependencyObject element, Color value)
-        => element.SetValue(CornerRadiusProperty, value);
+        => element.SetValue(ColorProperty, value);
 
     /// <summary>
     /// Регистрация свойства цвета при наведении мыши
@@ -48,7 +46,7 @@ public static class ElementAssistant
     /// <param name="element">Элемент интерфейса</param>
     /// <returns>Цвет при наведении мыши</returns>
     public static Color GetMouseOverColor(DependencyObject element)
-        => (Color)element.GetValue(CornerRadiusProperty);
+        => (Color)element.GetValue(MouseOverColorProperty);
 
     /// <summary>
     /// Установка цвета при наведении мыши
@@ -56,7 +54,7 @@ public static class ElementAssistant
     /// <param name="element">Элемент интерфейса</param>
     /// <param name="value">Цвет при наведении мыши</param>
     public static void SetMouseOverColor(DependencyObject element, Color value)
-        => element.SetValue(CornerRadiusProperty, value);
+        => element.SetValue(MouseOverColorProperty, value);
 
     /// <summary>
     /// Регистрация свойства радиус углов

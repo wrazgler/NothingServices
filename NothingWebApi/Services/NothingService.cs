@@ -28,6 +28,7 @@ public class NothingService(
     {
         return _dbContext.NothingModels.AsNoTracking()
             .Select(model => _mapper.Map<NothingModelDto>(model))
+            .OrderBy(model => model.Id)
             .ToArrayAsync(cancellationToken);
     }
 

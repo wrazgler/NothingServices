@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:controls="clr-namespace:NothingServices.WPFApp.Controls"
         xmlns:views="clr-namespace:NothingServices.WPFApp.Views"
         xmlns:viewModels="clr-namespace:NothingServices.WPFApp.ViewModels"
         d:DataContext="{d:DesignInstance Type=viewModels:MainWindowVM}"
@@ -20,9 +21,13 @@
                                  DataContext="{Binding Path=NothingModelsListVM}"
                                  Visibility="{Binding Path=Active, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
 
-    <views:Dialog x:Name="Dialog"
-                  Style="{StaticResource StandardDialog}"
-                  DialogContent="{Binding Path=DialogVM.Content, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
-                  Open="{Binding Path=DialogVM.Open, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+    <controls:Dialog x:Name="Dialog"
+                     Style="{StaticResource StandardDialog}"
+                     DialogContent="{Binding Path=DialogVM.Content, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                     Open="{Binding Path=DialogVM.Open, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+    <controls:Notificator x:Name="Notificator"
+                          Style="{StaticResource StandardNotificator}"
+                          MessageQueue="{Binding Path=NotificationService, UpdateSourceTrigger=PropertyChanged}"/>
   </Grid>
 </Window>

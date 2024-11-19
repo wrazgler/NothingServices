@@ -9,16 +9,16 @@ namespace NothingServices.WPFApp.Commands;
 /// </summary>
 /// <param name="dialogService">Сервис работы диалогового окна</param>
 /// <param name="mainWindowManager">Сервис управление отображением преставления на главном окне</param>
-/// <param name="notificator">Сервис отображения уведомлений в пользовательском интерфейсе</param>
+/// <param name="notificationService">Сервис отображения уведомлений в пользовательском интерфейсе</param>
 public class DeleteCommand(
     IDialogService dialogService,
     IMainWindowManager mainWindowManager,
-    INotificator notificator)
+    INotificationService notificationService)
     : BaseCommand
 {
     private readonly IDialogService _dialogService = dialogService;
     private readonly IMainWindowManager _mainWindowManager = mainWindowManager;
-    private readonly INotificator _notificator = notificator;
+    private readonly INotificationService _notificationService = notificationService;
     private readonly CancellationTokenSource _cancellationTokenSource = new(100000);
 
     /// <summary>
@@ -56,7 +56,7 @@ public class DeleteCommand(
         }
         catch (Exception ex)
         {
-            _notificator.Notificate(ex.Message);
+            _notificationService.Notify(ex.Message);
         }
     }
 }

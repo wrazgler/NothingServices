@@ -2,14 +2,19 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
-namespace NothingServices.WPFApp.Views;
+namespace NothingServices.WPFApp.Controls;
 
 /// <summary>
-/// Представление диалогового окна
+/// Элемент диалогового окна
 /// </summary>
+[TemplatePart(Name = DialogContentName, Type = typeof(ContentControl))]
+[TemplatePart(Name = ContentCoverGridName, Type = typeof(Grid))]
+[TemplateVisualState(GroupName = "PopupStates", Name = OpenStateName)]
+[TemplateVisualState(GroupName = "PopupStates", Name = ClosedStateName)]
 public class Dialog : ContentControl
 {
     private const string ContentCoverGridName = "PART_ContentCoverGrid";
+    private const string DialogContentName = "PART_DialogContent";
     private const string OpenStateName = "Open";
     private const string ClosedStateName = "Closed";
 
@@ -38,15 +43,15 @@ public class Dialog : ContentControl
     /// </summary>
     public static readonly DependencyProperty DialogContentProperty = DependencyProperty.Register(
         nameof(DialogContent),
-        typeof(IDialogContentView),
+        typeof(IDialogControl),
         typeof(Dialog));
 
     /// <summary>
     /// Контент диалогового окна
     /// </summary>
-    public IDialogContentView? DialogContent
+    public IDialogControl? DialogContent
     {
-        get => (IDialogContentView)GetValue(DialogContentProperty);
+        get => (IDialogControl)GetValue(DialogContentProperty);
         set => SetValue(DialogContentProperty, value);
     }
 
@@ -84,7 +89,7 @@ public class Dialog : ContentControl
         base.OnApplyTemplate();
     }
 
-    private void CloseOnMouseLeftButtonUp(object sender, MouseButtonEventArgs mouseButtonEventArgs)
+    private void CloseOnMouseLeftButtonUp(object sender, MouseButtonEventArgs eventArgs)
     {
         if (CloseOnClickAway && DialogContent != null)
             SetCurrentValue(OpenProperty, false);
@@ -92,7 +97,7 @@ public class Dialog : ContentControl
 
     private static void OpenPropertyChangedCallback(
         DependencyObject dependencyObject,
-        DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs)
+        DependencyPropertyChangedEventArgs eventArgs)
     {
         var dialogHost = (Dialog)dependencyObject;
         VisualStateManager.GoToState(dialogHost, dialogHost.GetStateName(), true);

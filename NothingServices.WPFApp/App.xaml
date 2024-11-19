@@ -18,6 +18,7 @@
         <ResourceDictionary Source="/Styles/MenuStyles.xaml"/>
         <ResourceDictionary Source="/Styles/NothingModelViewStyles.xaml"/>
         <ResourceDictionary Source="/Styles/NothingModelsListViewStyles.xaml"/>
+        <ResourceDictionary Source="/Styles/NotificatorStyles.xaml"/>
         <ResourceDictionary Source="/Styles/ScrollBarStyles.xaml"/>
         <ResourceDictionary Source="/Styles/ScrollViewerStyles.xaml"/>
         <ResourceDictionary Source="/Styles/TextBoxStyles.xaml"/>

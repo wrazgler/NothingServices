@@ -1,8 +1,8 @@
-namespace NothingServices.WPFApp.Views;
+namespace NothingServices.WPFApp.Controls;
 
 /// <summary>
 /// Представление, отображаемое в диалоговом окне
 /// </summary>
-public interface IDialogContentView
+public interface IDialogControl
 {
 }

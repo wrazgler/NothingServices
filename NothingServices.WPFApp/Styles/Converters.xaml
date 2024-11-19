@@ -4,5 +4,6 @@
 
   <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
   <converters:IconCharHasValueConverter x:Key="IconCharHasValueConverter"/>
+  <converters:NotificatorHeightConverter x:Key="NotificatorHeightConverter"/>
   <converters:StringHasValueConverter x:Key="StringHasValueConverter"/>
 </ResourceDictionary>

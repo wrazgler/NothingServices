@@ -8,14 +8,14 @@ namespace NothingServices.WPFApp.Commands;
 /// Команда открыть представление окна списка моделей
 /// </summary>
 /// <param name="mainWindowManager">Сервис управление отображением преставления на главном окне</param>
-/// <param name="notificator">Сервис отображения уведомлений в пользовательском интерфейсе</param>
+/// <param name="notificationService">Сервис отображения уведомлений в пользовательском интерфейсе</param>
 public class OpenNothingModelsListCommand(
     IMainWindowManager mainWindowManager,
-    INotificator notificator)
+    INotificationService notificationService)
     : BaseCommand
 {
     private readonly IMainWindowManager _mainWindowManager = mainWindowManager;
-    private readonly INotificator _notificator = notificator;
+    private readonly INotificationService _notificationService = notificationService;
 
     /// <summary>
     /// Проверка возможности выполнить команду открыть представление окна списка моделей
@@ -44,7 +44,7 @@ public class OpenNothingModelsListCommand(
         {
             _mainWindowManager.Strategy = null;
             _mainWindowManager.Next(MainWindowContentType.ApiSelectionVM);
-            _notificator.Notificate(ex.Message);
+            _notificationService.Notify(ex.Message);
         }
     }
 }

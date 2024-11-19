@@ -17,7 +17,7 @@ public class StringHasValueConverter : IValueConverter
     /// <param name="parameter">Параметр конвертации</param>
     /// <param name="culture">Информация о специфике культуре</param>
     /// <returns>
-    /// Возвращает <see langword="false"/>, если строка является пустой и
+    /// Возвращает <see langword="false"/>, если строка является пустой, и
     /// <see langword="true"/>, когда строка имеет значение
     /// </returns>
     /// <exception cref="ArgumentException">Тип элемента не соответствует конвертеру</exception>
@@ -38,7 +38,7 @@ public class StringHasValueConverter : IValueConverter
     /// <summary>
     /// Обратное преобразование недопустимо
     /// </summary>
-    /// <param name="value"></param>
+    /// <param name="value">Объект конвертации</param>
     /// <param name="targetType">Тип целевого объекта</param>
     /// <param name="parameter">Параметр конвертации</param>
     /// <param name="culture">Информация о специфике культуре</param>

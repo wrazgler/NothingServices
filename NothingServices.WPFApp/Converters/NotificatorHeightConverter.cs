@@ -1,50 +1,45 @@
 using System.Globalization;
 using System.Windows.Data;
-using FontAwesome.Sharp;
 
 namespace NothingServices.WPFApp.Converters;
 
 /// <summary>
-/// Конвертер проверки содержимого изображения для элемента
+/// Конвертер высоты окна уведомлений
 /// </summary>
-[ValueConversion(typeof(IconChar), typeof(bool))]
-public class IconCharHasValueConverter : IValueConverter
+public class NotificatorHeightConverter : IMultiValueConverter
 {
     /// <summary>
-    /// Проверяет задано ли изображение для элемента
+    /// Перемножает входящие значения для получения высоты элемента
     /// </summary>
-    /// <param name="value"></param>
+    /// <param name="value">Коллекция из двух значений для перемножения</param>
     /// <param name="targetType">Тип целевого объекта</param>
     /// <param name="parameter">Параметр конвертации</param>
     /// <param name="culture">Информация о специфике культуре</param>
     /// <returns>
-    /// Возвращает <see langword="false"/>, если изображение не задано и
-    /// <see langword="true"/>, когда изображение задано
+    /// Возвращает высоту окна уведомлений
     /// </returns>
     /// <exception cref="ArgumentException">Тип элемента не соответствует конвертеру</exception>
-    public object Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
+    public object? Convert(object?[]? value, Type? targetType, object? parameter, CultureInfo? culture)
     {
-        if (value == null)
-            return false;
+        if (value is null || value.Length < 2 || value[0] is null || value[1] is null)
+            return Binding.DoNothing;
 
-        if (value is not IconChar iconChar)
-            throw new ArgumentException(value?.GetType().Name);
+        if (!double.TryParse(value[0]!.ToString(), out var value1)
+            || !double.TryParse(value[1]!.ToString(), out var value2))
+            return 0;
 
-        if (iconChar == IconChar.None)
-            return false;
-
-        return true;
+        return value1 * value2;
     }
 
     /// <summary>
     /// Обратное преобразование недопустимо
     /// </summary>
     /// <param name="value">Объект конвертации</param>
-    /// <param name="targetType">Тип целевого объекта</param>
+    /// <param name="targetTypes">Типы целевых объектов</param>
     /// <param name="parameter">Параметр конвертации</param>
     /// <param name="culture">Информация о специфике культуре</param>
     /// <exception cref="NotImplementedException">Обратное преобразование недопустимо</exception>
-    public object ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
+    public object?[]? ConvertBack(object? value, Type[]? targetTypes, object? parameter, CultureInfo? culture)
     {
         throw new NotImplementedException("Обратное преобразование недопустимо");
     }

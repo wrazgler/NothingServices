@@ -6,14 +6,14 @@ namespace NothingServices.WPFApp.Commands;
 /// Команда закрыть представление диалогового окна
 /// </summary>
 /// <param name="dialogService">Сервис работы диалогового окна</param>
-/// <param name="notificator">Сервис отображения уведомлений в пользовательском интерфейсе</param>
+/// <param name="notificationService">Сервис отображения уведомлений в пользовательском интерфейсе</param>
 public class CloseDialogCommand(
     IDialogService dialogService,
-    INotificator notificator)
+    INotificationService notificationService)
     : BaseCommand
 {
     private readonly IDialogService _dialogService = dialogService;
-    private readonly INotificator _notificator = notificator;
+    private readonly INotificationService _notificationService = notificationService;
 
     /// <summary>
     /// Проверка возможности выполнить команду закрыть представление диалогового окна
@@ -36,7 +36,7 @@ public class CloseDialogCommand(
         }
         catch (Exception ex)
         {
-            _notificator.Notificate(ex.Message);
+            _notificationService.Notify(ex.Message);
         }
     }
 }

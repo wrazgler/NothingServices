@@ -17,13 +17,13 @@ namespace NothingRpcApi.Services;
 public class NothingService(
     NothingRpcApiDbContext dbContext,
     ILogger<NothingService> logger,
-    IMapper mapper) 
+    IMapper mapper)
     : NothingRpcService.NothingRpcServiceBase, INothingService
 {
     private readonly NothingRpcApiDbContext _dbContext = dbContext;
     private readonly ILogger<NothingService> _logger = logger;
     private readonly IMapper _mapper = mapper;
-    
+
     /// <summary>
     /// Получить список моделей
     /// </summary>
@@ -40,6 +40,7 @@ public class NothingService(
         {
             var nothingModels = await _dbContext.NothingModels.AsNoTracking()
                 .Select(model => _mapper.Map<NothingModelDto>(model))
+                .OrderBy(model => model.Id)
                 .ToArrayAsync(context.CancellationToken);
             foreach (var nothingModel in nothingModels)
             {
@@ -52,7 +53,7 @@ public class NothingService(
             throw;
         }
     }
-    
+
     /// <summary>
     /// Получить модель с указанным идентификатором
     /// </summary>
@@ -60,7 +61,7 @@ public class NothingService(
     /// <param name="context">Контекст запроса</param>
     /// <returns>Объект модели</returns>
     public override Task<NothingModelDto> Get(
-        NothingModelIdDto nothingModelIdDto, 
+        NothingModelIdDto nothingModelIdDto,
         ServerCallContext context)
     {
         try
@@ -87,7 +88,7 @@ public class NothingService(
     /// Ошибка валидации входных данных
     /// </exception>
     public override async Task<NothingModelDto> Create(
-        CreateNothingModelDto createNothingModelDto, 
+        CreateNothingModelDto createNothingModelDto,
         ServerCallContext context)
     {
         try
@@ -143,7 +144,7 @@ public class NothingService(
     /// <param name="context">Контекст запроса</param>
     /// <returns>Объект модели</returns>
     public override async Task<NothingModelDto> Delete(
-        NothingModelIdDto nothingModelIdDto, 
+        NothingModelIdDto nothingModelIdDto,
         ServerCallContext context)
     {
         try

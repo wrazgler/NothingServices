@@ -67,7 +67,7 @@ public static class AppExtensions
         services.AddScoped<IAppVersionProvider, AppVersionProvider>();
         services.AddScoped<IDialogService, DialogService>();
         services.AddScoped<IMainWindowManager, MainWindowManager>();
-        services.AddScoped<INotificator, Notificator>();
+        services.AddScoped<INotificationService, NotificationService>();
         services.AddScoped<StartupService>();
 
         services.AddScoped<ICreateNothingModelVMFactory, CreateNothingModelVMFactory>();

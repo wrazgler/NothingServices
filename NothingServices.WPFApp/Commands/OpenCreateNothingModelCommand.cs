@@ -10,16 +10,16 @@ namespace NothingServices.WPFApp.Commands;
 /// <param name="createNothingModelView">Представление создать модель</param>
 /// <param name="createNothingModelVMFactory">Фабрика создания объекта данных представления окна создать модель</param>
 /// <param name="dialogService">Сервис работы диалогового окна</param>
-/// <param name="notificator">Сервис отображения уведомлений в пользовательском интерфейсе</param>
+/// <param name="notificationService">Сервис отображения уведомлений в пользовательском интерфейсе</param>
 public class OpenCreateNothingModelCommand(
     ICreateNothingModelVMFactory createNothingModelVMFactory,
     IDialogService dialogService,
-    INotificator notificator,
+    INotificationService notificationService,
     CreateNothingModelView createNothingModelView)
     : BaseCommand
 {
     private readonly IDialogService _dialogService = dialogService;
-    private readonly INotificator _notificator = notificator;
+    private readonly INotificationService _notificationService = notificationService;
     private readonly CreateNothingModelView _createNothingModelView = createNothingModelView;
     private readonly ICreateNothingModelVMFactory _createNothingModelVMFactory = createNothingModelVMFactory;
 
@@ -45,7 +45,7 @@ public class OpenCreateNothingModelCommand(
         }
         catch (Exception ex)
         {
-            _notificator.Notificate(ex.Message);
+            _notificationService.Notify(ex.Message);
         }
     }
 }

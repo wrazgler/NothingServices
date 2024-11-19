@@ -11,16 +11,16 @@ namespace NothingServices.WPFApp.Commands;
 /// <param name="updateNothingModelView">Представление обновить модель</param>
 /// <param name="updateNothingModelVMFactory">Фабрика создания объекта данных представления окна обновить модель</param>
 /// <param name="dialogService">Сервис работы диалогового окна</param>
-/// <param name="notificator">Сервис отображения уведомлений в пользовательском интерфейсе</param>
+/// <param name="notificationService">Сервис отображения уведомлений в пользовательском интерфейсе</param>
 public class OpenUpdateNothingModelCommand(
     IUpdateNothingModelVMFactory updateNothingModelVMFactory,
     IDialogService dialogService,
-    INotificator notificator,
+    INotificationService notificationService,
     UpdateNothingModelView updateNothingModelView)
     : BaseCommand
 {
     private readonly IDialogService _dialogService = dialogService;
-    private readonly INotificator _notificator = notificator;
+    private readonly INotificationService _notificationService = notificationService;
     private readonly IUpdateNothingModelVMFactory _updateNothingModelVMFactory = updateNothingModelVMFactory;
     private readonly UpdateNothingModelView _updateNothingModelView = updateNothingModelView;
 
@@ -51,7 +51,7 @@ public class OpenUpdateNothingModelCommand(
         }
         catch (Exception ex)
         {
-            _notificator.Notificate(ex.Message);
+            _notificationService.Notify(ex.Message);
         }
     }
 }

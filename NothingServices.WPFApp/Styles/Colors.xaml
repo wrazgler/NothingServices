@@ -9,6 +9,7 @@
 
   <SolidColorBrush x:Key="DefaultElementBackground" Color="White"/>
   <SolidColorBrush x:Key="DefaultElementBorderBrush" Color="LightGray"/>
+  <SolidColorBrush x:Key="DefaultElementForeground" Color="LightGray"/>
 
   <SolidColorBrush x:Key="DefaultDialogBackground" Color="Black"/>
 
