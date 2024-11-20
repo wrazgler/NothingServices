@@ -98,6 +98,15 @@
     <Setter Property="VerticalContentAlignment" Value="Center" />
   </Style>
 
+  <Style x:Key="GreenMenuItem"
+         TargetType="{x:Type MenuItem}"
+         BasedOn="{StaticResource StandardMenuItem}">
+    <Setter Property="assistants:ElementAssistant.MouseOverBackground"
+            Value="{StaticResource GreenMouseOverBackground}"/>
+    <Setter Property="assistants:ElementAssistant.MouseOverForeground"
+            Value="{StaticResource GreenMouseOverForeground}"/>
+  </Style>
+
   <Style x:Key="RedMenuItem"
          TargetType="{x:Type MenuItem}"
          BasedOn="{StaticResource StandardMenuItem}">
@@ -105,6 +114,12 @@
             Value="{StaticResource RedMouseOverBackground}"/>
     <Setter Property="assistants:ElementAssistant.MouseOverForeground"
             Value="{StaticResource RedMouseOverForeground}"/>
+  </Style>
+
+  <Style x:Key="CreateMenuItem"
+         TargetType="{x:Type MenuItem}"
+         BasedOn="{StaticResource GreenMenuItem}">
+    <Setter Property="fontAwesome:IconImage.Icon" Value="Plus"/>
   </Style>
 
   <Style x:Key="EditMenuItem"

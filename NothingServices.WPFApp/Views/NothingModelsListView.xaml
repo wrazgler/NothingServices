@@ -18,7 +18,19 @@
              x:Name="NothingModelsListBox"
              Style="{StaticResource NothingModelsListListBox}"
              assistants:ElementAssistant.Text="{Binding Path=EmptyText}"
-             ItemsSource="{Binding Path=NothingModels, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
+             ItemsSource="{Binding Path=NothingModels, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}">
+      <ListBox.ContextMenu>
+        <ContextMenu x:Name="NothingModelViewContextMenu"
+                     Style="{StaticResource StandardContextMenu}">
+          <MenuItem x:Name="CreatMenuItem"
+                    Style="{StaticResource CreateMenuItem}"
+                    Command="{Binding Path=CreateButtonVM.Command}"
+                    CommandParameter="{Binding}"
+                    Header="{Binding Path=CreateButtonVM.Text}"
+                    ToolTip="{Binding Path=CreateButtonVM.ToolTip}"/>
+        </ContextMenu>
+      </ListBox.ContextMenu>
+    </ListBox>
 
     <Grid Grid.Row="1"
           x:Name="ButtonGrid">
