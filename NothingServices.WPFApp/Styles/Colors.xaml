@@ -17,6 +17,9 @@
   <SolidColorBrush x:Key="DefaultMouseOverBorderBrush" Color="#3374BA"/>
   <SolidColorBrush x:Key="DefaultMouseOverForeground" Color="White"/>
 
+  <SolidColorBrush x:Key="DefaultNotificatorBackground" Color="#3374BA"/>
+  <SolidColorBrush x:Key="DefaultNotificatorForeground" Color="White"/>
+
   <SolidColorBrush x:Key="DefaultTextForeground" Color="Black"/>
   <SolidColorBrush x:Key="DefaultTextSelectionBrush" Color="#3374BA" />
 

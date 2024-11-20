@@ -26,16 +26,6 @@ public class Notificator : Control
     public EventWaitHandle? EventWaitHandle { get; set; }
 
     /// <summary>
-    /// Длительность анимации появления
-    /// </summary>
-    public TimeSpan ActivateStoryboardDuration { get; set; }
-
-    /// <summary>
-    /// Длительность анимации исчезновения
-    /// </summary>
-    public TimeSpan DeactivateStoryboardDuration { get; set; }
-
-    /// <summary>
     /// Регистрация свойства текст уведомления
     /// </summary>
     public static readonly DependencyProperty MessageProperty = DependencyProperty.Register(
@@ -112,23 +102,12 @@ public class Notificator : Control
         typeof(RoutedPropertyChangedEventHandler<bool>),
         typeof(Notificator));
 
-    private event RoutedPropertyChangedEventHandler<bool> ActivateEventHandler
-    {
-        add => AddHandler(ActivateEvent, value);
-        remove => RemoveHandler(ActivateEvent, value);
-    }
 
     private static readonly RoutedEvent DeactivateEvent = EventManager.RegisterRoutedEvent(
         nameof(DeactivateEvent),
         RoutingStrategy.Bubble,
         typeof(RoutedEventArgs),
         typeof(Notificator));
-
-    private event RoutedPropertyChangedEventHandler<ContentControl> DeactivateEventHandler
-    {
-        add => AddHandler(DeactivateEvent, value);
-        remove => RemoveHandler(DeactivateEvent, value);
-    }
 
     private static void ActivePropertyChangedCallback(
         DependencyObject dependencyObject,
@@ -152,7 +131,6 @@ public class Notificator : Control
         var dispatcherTimer = new DispatcherTimer
         {
             Tag = new Tuple<Notificator, ContentControl>(notificator, notificator.Message),
-            Interval = notificator.DeactivateStoryboardDuration
         };
         dispatcherTimer.Tick += DeactivateStoryboardDispatcherTimerOnTick;
         dispatcherTimer.Start();
@@ -175,22 +153,9 @@ public class Notificator : Control
     /// </summary>
     public override void OnApplyTemplate()
     {
-        ActivateStoryboardDuration = GetStoryboardResourceDuration(ActivateStoryboardName);
-        DeactivateStoryboardDuration = GetStoryboardResourceDuration(DeactivateStoryboardName);
         MouseEnter += OnMouseEnter;
         MouseLeave += OnMouseLeave;
         base.OnApplyTemplate();
-    }
-
-    private TimeSpan GetStoryboardResourceDuration(string resourceName)
-    {
-        var storyboard = Template.Resources.Contains(resourceName)
-            ? Template.Resources[resourceName] as Storyboard
-            : null;
-        var durationTimeSpan =  storyboard is { Duration.HasTimeSpan: true }
-            ? storyboard.Duration.TimeSpan
-            : TimeSpan.Zero;
-        return durationTimeSpan;
     }
 
     private void OnMouseEnter(object sender, MouseEventArgs mouseEventArgs)

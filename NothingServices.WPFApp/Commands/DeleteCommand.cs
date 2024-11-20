@@ -19,7 +19,7 @@ public class DeleteCommand(
     private readonly IDialogService _dialogService = dialogService;
     private readonly IMainWindowManager _mainWindowManager = mainWindowManager;
     private readonly INotificationService _notificationService = notificationService;
-    private readonly CancellationTokenSource _cancellationTokenSource = new(100000);
+    private readonly CancellationTokenSource _cancellationTokenSource = new();
 
     /// <summary>
     /// Проверка возможности выполнить команду удалить модель
@@ -48,11 +48,12 @@ public class DeleteCommand(
                 ?? throw new ArgumentException(parameter?.GetType().Name);
             var strategy = _mainWindowManager.Strategy
                 ?? throw new NullReferenceException(_mainWindowManager.Strategy?.GetType().Name);
-            await strategy.DeleteNothingModelAsync(
+            var nothingModelVM = await strategy.DeleteNothingModelAsync(
                 deleteNothingModelVM,
                 _cancellationTokenSource.Token);
             _mainWindowManager.Next(MainWindowContentType.NothingModelsListVM);
             _dialogService.CloseDialog();
+            _notificationService.Notify($"Удалено \"{nothingModelVM.Name}\"");
         }
         catch (Exception ex)
         {

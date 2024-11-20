@@ -72,11 +72,20 @@
                           HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                           Margin="{TemplateBinding Padding}"
                           SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-                          TextBlock.FontFamily="{TemplateBinding FontFamily}"
-                          TextBlock.FontSize="{TemplateBinding FontSize}"
-                          TextBlock.FontWeight="{TemplateBinding FontWeight}"
-                          TextBlock.Foreground="{TemplateBinding Foreground}"
-                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+          <ContentPresenter.Resources>
+            <DataTemplate DataType="{x:Type system:String}">
+              <TextBlock FontFamily="{Binding Path=FontFamily, RelativeSource={RelativeSource AncestorType={x:Type controls:Notificator}}}"
+                         FontSize="{Binding Path=FontSize, RelativeSource={RelativeSource AncestorType={x:Type controls:Notificator}}}"
+                         FontWeight="{Binding Path=FontWeight, RelativeSource={RelativeSource AncestorType={x:Type controls:Notificator}}}"
+                         Foreground="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType={x:Type controls:Notificator}}}"
+                         Text="{Binding}"
+                         TextAlignment="{Binding Path=(assistants:ElementAssistant.TextAlignment), RelativeSource={RelativeSource AncestorType={x:Type controls:Notificator}}}"
+                         TextWrapping="{Binding Path=(assistants:ElementAssistant.TextWrapping), RelativeSource={RelativeSource AncestorType={x:Type controls:Notificator}}}"
+                         ToolTip="{Binding }"/>
+            </DataTemplate>
+          </ContentPresenter.Resources>
+        </ContentPresenter>
       </Border>
     </StackPanel>
     <ControlTemplate.Triggers>
@@ -98,13 +107,13 @@
     <Setter Property="assistants:ElementAssistant.CornerRadius" Value="20"/>
     <Setter Property="assistants:ElementAssistant.TextAlignment" Value="Center"/>
     <Setter Property="assistants:ElementAssistant.TextWrapping" Value="Wrap"/>
-    <Setter Property="Background" Value="{StaticResource DefaultElementBackground}"/>
+    <Setter Property="Background" Value="{StaticResource DefaultNotificatorBackground}"/>
     <Setter Property="FontSize" Value="15"/>
-    <Setter Property="Foreground" Value="{StaticResource DefaultElementForeground}"/>
+    <Setter Property="Foreground" Value="{StaticResource DefaultNotificatorForeground}"/>
     <Setter Property="Height" Value="Auto"/>
     <Setter Property="HorizontalAlignment" Value="Center"/>
     <Setter Property="HorizontalContentAlignment" Value="Center"/>
-    <Setter Property="Margin" Value="0,10,0,0"/>
+    <Setter Property="Margin" Value="10,10,10,0"/>
     <Setter Property="Padding" Value="20,10,20,10"/>
     <Setter Property="Panel.ZIndex" Value="5"/>
     <Setter Property="SnapsToDevicePixels" Value="True"/>

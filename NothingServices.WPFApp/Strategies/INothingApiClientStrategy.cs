@@ -20,7 +20,7 @@ public interface INothingApiClientStrategy
     /// </summary>
     /// <param name="createNothingModelVM">Данные представления создать модель</param>
     /// <param name="cancellationToken">Токен отмены</param>
-    Task CreateNothingModelAsync(
+    Task<NothingModelVM> CreateNothingModelAsync(
         CreateNothingModelVM createNothingModelVM,
         CancellationToken cancellationToken = default);
 
@@ -29,7 +29,7 @@ public interface INothingApiClientStrategy
     /// </summary>
     /// <param name="updateNothingModelVM">Данные представления обновить модель</param>
     /// <param name="cancellationToken">Токен отмены</param>
-    Task UpdateNothingModelAsync(
+    Task<NothingModelVM> UpdateNothingModelAsync(
         UpdateNothingModelVM updateNothingModelVM,
         CancellationToken cancellationToken = default);
 
@@ -38,7 +38,7 @@ public interface INothingApiClientStrategy
     /// </summary>
     /// <param name="deleteNothingModelVM">Данные представления удалить модель</param>
     /// <param name="cancellationToken">Токен отмены</param>
-    Task DeleteNothingModelAsync(
+    Task<NothingModelVM> DeleteNothingModelAsync(
         DeleteNothingModelVM deleteNothingModelVM,
         CancellationToken cancellationToken = default);
 }

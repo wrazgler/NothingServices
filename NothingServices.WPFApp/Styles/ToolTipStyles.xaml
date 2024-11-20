@@ -1,0 +1,50 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:assistants="clr-namespace:NothingServices.WPFApp.Assistants">
+
+  <ResourceDictionary.MergedDictionaries>
+    <ResourceDictionary Source="pack://application:,,,/NothingServices.WPFApp;v1.0.0.0;component/Styles/Colors.xaml"/>
+  </ResourceDictionary.MergedDictionaries>
+
+  <ControlTemplate x:Key="ToolTipTemplate" TargetType="ToolTip">
+    <Border x:Name="ToolTipBorder"
+            Background="{TemplateBinding Background}"
+            BorderBrush="{TemplateBinding BorderBrush}"
+            BorderThickness="{TemplateBinding BorderThickness}"
+            ClipToBounds="{TemplateBinding ClipToBounds}"
+            CornerRadius="{Binding Path=(assistants:ElementAssistant.CornerRadius), RelativeSource={RelativeSource TemplatedParent}}"
+            Height="{TemplateBinding Height}"
+            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+            Width="{TemplateBinding Width}">
+      <TextBlock x:Name="ToolTipContentTextBlock"
+                 ClipToBounds="{TemplateBinding ClipToBounds}"
+                 FontFamily="{TemplateBinding FontFamily}"
+                 FontSize="{TemplateBinding FontSize}"
+                 FontWeight="{TemplateBinding FontWeight}"
+                 Foreground="{TemplateBinding Foreground}"
+                 Margin="{TemplateBinding Padding}"
+                 SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                 Text="{TemplateBinding Content}"
+                 TextAlignment="{Binding Path=(assistants:ElementAssistant.TextAlignment), RelativeSource={RelativeSource TemplatedParent}}"
+                 VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+    </Border>
+  </ControlTemplate>
+
+  <Style x:Key="{x:Type ToolTip}" TargetType="ToolTip">
+    <Setter Property="assistants:ElementAssistant.CornerRadius" Value="8" />
+    <Setter Property="assistants:ElementAssistant.TextAlignment" Value="Left" />
+    <Setter Property="Background" Value="{StaticResource DefaultElementBackground}"/>
+    <Setter Property="BorderBrush" Value="{StaticResource DefaultElementBorderBrush}"/>
+    <Setter Property="BorderThickness" Value="1"/>
+    <Setter Property="FontSize" Value="14"/>
+    <Setter Property="FontWeight" Value="Normal"/>
+    <Setter Property="Foreground" Value="{StaticResource DefaultTextForeground}"/>
+    <Setter Property="HasDropShadow" Value="True"/>
+    <Setter Property="HorizontalContentAlignment" Value="Left"/>
+    <Setter Property="Padding" Value="10"/>
+    <Setter Property="OverridesDefaultStyle" Value="True"/>
+    <Setter Property="SnapsToDevicePixels" Value="True"/>
+    <Setter Property="Template" Value="{StaticResource ToolTipTemplate}"/>
+    <Setter Property="VerticalContentAlignment" Value="Center"/>
+  </Style>
+</ResourceDictionary>

@@ -47,12 +47,14 @@ public class NothingRpcApiClientStrategy(
     /// </summary>
     /// <param name="createNothingModelVM">Данные представления создать модель</param>
     /// <param name="cancellationToken">Токен отмены</param>
-    public async Task CreateNothingModelAsync(
+    public async Task<NothingModelVM> CreateNothingModelAsync(
         CreateNothingModelVM createNothingModelVM,
         CancellationToken cancellationToken = default)
     {
         var createNothingModel = _mapper.Map<CreateNothingModelDto>(createNothingModelVM);
-        await _client.CreateAsync(createNothingModel, cancellationToken: cancellationToken);
+        var nothingModel = await _client.CreateAsync(createNothingModel, cancellationToken: cancellationToken);
+        var nothingModelVM = _factory.Create(nothingModel);
+        return nothingModelVM;
     }
 
     /// <summary>
@@ -60,12 +62,14 @@ public class NothingRpcApiClientStrategy(
     /// </summary>
     /// <param name="updateNothingModelVM">Данные представления обновить модель</param>
     /// <param name="cancellationToken">Токен отмены</param>
-    public async Task UpdateNothingModelAsync(
+    public async Task<NothingModelVM> UpdateNothingModelAsync(
         UpdateNothingModelVM updateNothingModelVM,
         CancellationToken cancellationToken = default)
     {
         var updateNothingModel = _mapper.Map<UpdateNothingModelDto>(updateNothingModelVM);
-        await _client.UpdateAsync(updateNothingModel, cancellationToken: cancellationToken);
+        var nothingModel = await _client.UpdateAsync(updateNothingModel, cancellationToken: cancellationToken);
+        var nothingModelVM = _factory.Create(nothingModel);
+        return nothingModelVM;
     }
 
     /// <summary>
@@ -73,11 +77,13 @@ public class NothingRpcApiClientStrategy(
     /// </summary>
     /// <param name="deleteNothingModelVM">Данные представления удалить модель</param>
     /// <param name="cancellationToken">Токен отмены</param>
-    public async Task DeleteNothingModelAsync(
+    public async Task<NothingModelVM> DeleteNothingModelAsync(
         DeleteNothingModelVM deleteNothingModelVM,
         CancellationToken cancellationToken = default)
     {
         var request = _mapper.Map<NothingModelIdDto>(deleteNothingModelVM);
-        await _client.DeleteAsync(request, cancellationToken: cancellationToken);
+        var nothingModel = await _client.DeleteAsync(request, cancellationToken: cancellationToken);
+        var nothingModelVM = _factory.Create(nothingModel);
+        return nothingModelVM;
     }
 }

@@ -23,6 +23,7 @@
         <ResourceDictionary Source="/Styles/ScrollViewerStyles.xaml"/>
         <ResourceDictionary Source="/Styles/TextBoxStyles.xaml"/>
         <ResourceDictionary Source="/Styles/ThumbStyles.xaml"/>
+        <ResourceDictionary Source="/Styles/ToolTipStyles.xaml"/>
         <ResourceDictionary Source="/Styles/UpdateNothingModelViewStyles.xaml"/>
       </ResourceDictionary.MergedDictionaries>
     </ResourceDictionary>

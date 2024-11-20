@@ -100,40 +100,37 @@ public class NotificationService(Dispatcher? dispatcher = null, TimeSpan? durati
         notificator.EventWaitHandle = new ManualResetEvent(!notificator.IsMouseOver);
         notificator.Message = content;
         notificator.Active = true;
-        var durationPassedWaitHandle = new ManualResetEvent(false);
-        var minimumDuration = _duration.Add(notificator.ActivateStoryboardDuration);
-        StartDuration(minimumDuration, durationPassedWaitHandle);
+        var durationEventWaitHandle = new ManualResetEvent(false);
+        StartDuration(_duration, durationEventWaitHandle);
         await Task.Run(() =>
         {
             WaitHandle.WaitAll(
             [
                 notificator.EventWaitHandle,
-                durationPassedWaitHandle
+                durationEventWaitHandle
             ]);
         });
         notificator.EventWaitHandle.Set();
-        durationPassedWaitHandle.Set();
+        durationEventWaitHandle.Set();
         notificator.Active = false;
-        await Task.Delay(notificator.DeactivateStoryboardDuration);
         notificator.Message = null;
-        notificator.EventWaitHandle.Dispose();
-        durationPassedWaitHandle.Dispose();
+        durationEventWaitHandle.Dispose();
     }
 
-    private static void StartDuration(TimeSpan minimumDuration, EventWaitHandle durationPassedWaitHandle)
+    private static void StartDuration(TimeSpan duration, EventWaitHandle eventWaitHandle)
     {
-        var completionTime = DateTime.Now.Add(minimumDuration);
+        var completionTime = DateTime.Now.Add(duration);
         Task.Run(() =>
         {
             while (true)
             {
                 if (DateTime.Now >= completionTime)
                 {
-                    durationPassedWaitHandle.Set();
+                    eventWaitHandle.Set();
                     break;
                 }
 
-                if (durationPassedWaitHandle.WaitOne(TimeSpan.Zero))
+                if (eventWaitHandle.WaitOne(TimeSpan.Zero))
                     break;
             }
         });

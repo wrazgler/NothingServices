@@ -19,7 +19,7 @@ public class CreateCommand(
     private readonly IDialogService _dialogService = dialogService;
     private readonly IMainWindowManager _mainWindowManager = mainWindowManager;
     private readonly INotificationService _notificationService = notificationService;
-    private readonly CancellationTokenSource _cancellationTokenSource = new(100000);
+    private readonly CancellationTokenSource _cancellationTokenSource = new();
 
     /// <summary>
     /// Проверка возможности выполнить команду создать новую модель
@@ -48,11 +48,12 @@ public class CreateCommand(
                  ?? throw new ArgumentException(parameter?.GetType().Name);
             var strategy = _mainWindowManager.Strategy
                 ?? throw new NullReferenceException(_mainWindowManager.Strategy?.GetType().Name);
-             await strategy.CreateNothingModelAsync(
+            var nothingModelVM = await strategy.CreateNothingModelAsync(
                 createNothingModelVM,
                 _cancellationTokenSource.Token);
              _mainWindowManager.Next(MainWindowContentType.NothingModelsListVM);
              _dialogService.CloseDialog();
+             _notificationService.Notify($"Создано \"{nothingModelVM.Name}\"");
         }
         catch (Exception ex)
         {

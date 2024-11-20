@@ -19,7 +19,7 @@ public class UpdateCommand(
     private readonly IDialogService _dialogService = dialogService;
     private readonly IMainWindowManager _mainWindowManager = mainWindowManager;
     private readonly INotificationService _notificationService = notificationService;
-    private readonly CancellationTokenSource _cancellationTokenSource = new(100000);
+    private readonly CancellationTokenSource _cancellationTokenSource = new();
 
     /// <summary>
     /// Проверка возможности выполнить команду обновить существующую модель
@@ -51,11 +51,12 @@ public class UpdateCommand(
                 ?? throw new ArgumentException(parameter?.GetType().Name);
             var strategy = _mainWindowManager.Strategy
                 ?? throw new NullReferenceException(_mainWindowManager.Strategy?.GetType().Name);
-            await strategy.UpdateNothingModelAsync(
+            var nothingModelVM = await strategy.UpdateNothingModelAsync(
                 updateNothingModelVM,
                 _cancellationTokenSource.Token);
             _mainWindowManager.Next(MainWindowContentType.NothingModelsListVM);
             _dialogService.CloseDialog();
+            _notificationService.Notify($"Обновлено \"{nothingModelVM.Name}\"");
         }
         catch (Exception ex)
         {
