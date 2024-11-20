@@ -10,16 +10,19 @@ namespace NothingServices.WPFApp.Commands;
 /// <param name="dialogService">Сервис работы диалогового окна</param>
 /// <param name="mainWindowManager">Сервис управление отображением преставления на главном окне</param>
 /// <param name="notificationService">Сервис отображения уведомлений в пользовательском интерфейсе</param>
+/// <param name="cancellationTokenSource">Объект управления токена отмены</param>
 public class CreateCommand(
     IDialogService dialogService,
     IMainWindowManager mainWindowManager,
-    INotificationService notificationService)
+    INotificationService notificationService,
+    CancellationTokenSource? cancellationTokenSource = null)
     : BaseCommand
 {
     private readonly IDialogService _dialogService = dialogService;
     private readonly IMainWindowManager _mainWindowManager = mainWindowManager;
     private readonly INotificationService _notificationService = notificationService;
-    private readonly CancellationTokenSource _cancellationTokenSource = new();
+    private readonly CancellationTokenSource _cancellationTokenSource = cancellationTokenSource
+                                                                        ?? new CancellationTokenSource();
 
     /// <summary>
     /// Проверка возможности выполнить команду создать новую модель

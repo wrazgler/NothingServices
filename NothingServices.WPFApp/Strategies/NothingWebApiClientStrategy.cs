@@ -29,12 +29,12 @@ public class NothingWebApiClientStrategy(
     /// </summary>
     /// <param name="cancellationToken">Токен отмены</param>
     /// <returns>Коллекция данных представления модели</returns>
-    public async Task<ObservableCollection<NothingModelVM>> GetNothingModelsAsync(CancellationToken cancellationToken = default)
+    public async Task<ObservableCollection<INothingModelVM>> GetNothingModelsAsync(CancellationToken cancellationToken = default)
     {
         var nothingModels = await _client.GetAsync(cancellationToken);
         var nothingModelVMs = nothingModels
             .Select(_factory.Create)
-            .ToObservableCollection();
+            .ToObservableCollection<INothingModelVM>();
         return nothingModelVMs;
     }
 
@@ -43,7 +43,7 @@ public class NothingWebApiClientStrategy(
     /// </summary>
     /// <param name="createNothingModelVM">Данные представления создать модель</param>
     /// <param name="cancellationToken">Токен отмены</param>
-    public async Task<NothingModelVM> CreateNothingModelAsync(
+    public async Task<INothingModelVM> CreateNothingModelAsync(
         CreateNothingModelVM createNothingModelVM,
         CancellationToken cancellationToken = default)
     {
@@ -58,7 +58,7 @@ public class NothingWebApiClientStrategy(
     /// </summary>
     /// <param name="updateNothingModelVM">Данные представления обновить модель</param>
     /// <param name="cancellationToken">Токен отмены</param>
-    public async Task<NothingModelVM> UpdateNothingModelAsync(
+    public async Task<INothingModelVM> UpdateNothingModelAsync(
         UpdateNothingModelVM updateNothingModelVM,
         CancellationToken cancellationToken = default)
     {
@@ -73,7 +73,7 @@ public class NothingWebApiClientStrategy(
     /// </summary>
     /// <param name="deleteNothingModelVM">Данные представления удалить модель</param>
     /// <param name="cancellationToken">Токен отмены</param>
-    public async Task<NothingModelVM> DeleteNothingModelAsync(
+    public async Task<INothingModelVM> DeleteNothingModelAsync(
         DeleteNothingModelVM deleteNothingModelVM,
         CancellationToken cancellationToken = default)
     {

@@ -1,3 +1,5 @@
+using NothingServices.WPFApp.ViewModels.Buttons;
+
 namespace NothingServices.WPFApp.ViewModels.Controls;
 
 /// <summary>
@@ -14,4 +16,14 @@ public interface INothingModelVM
     /// Имя модели
     /// </summary>
     public string Name { get; }
+
+    /// <summary>
+    /// Кнопка удалить модель
+    /// </summary>
+    public IButtonVM DeleteButtonVM { get; }
+
+    /// <summary>
+    /// Кнопка обновить модель
+    /// </summary>
+    public IButtonVM UpdateButtonVM { get; }
 }

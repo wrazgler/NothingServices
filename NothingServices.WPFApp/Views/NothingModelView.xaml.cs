@@ -1,11 +1,9 @@
-using System.Windows.Controls;
-
 namespace NothingServices.WPFApp.Views;
 
 /// <summary>
 /// Представление модели
 /// </summary>
-public partial class NothingModelView : UserControl
+public partial class NothingModelView
 {
     /// <summary>
     /// Инициализация представления модели

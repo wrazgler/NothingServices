@@ -10,7 +10,7 @@ namespace NothingServices.WPFApp;
 /// <summary>
 /// Главный класс работы приложения
 /// </summary>
-public partial class App : Application
+public partial class App
 {
     /// <summary>
     /// Инициализация приложения, вызывается событием <see cref="Application.Startup"/>

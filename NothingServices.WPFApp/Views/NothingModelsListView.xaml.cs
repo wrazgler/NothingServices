@@ -1,11 +1,9 @@
-using System.Windows.Controls;
-
 namespace NothingServices.WPFApp.Views;
 
 /// <summary>
 /// Представление окна списка моделей
 /// </summary>
-public partial class NothingModelsListView : UserControl
+public partial class NothingModelsListView
 {
     /// <summary>
     /// Инициализация окна списка моделей

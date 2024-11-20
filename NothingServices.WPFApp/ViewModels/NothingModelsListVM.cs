@@ -14,9 +14,9 @@ namespace NothingServices.WPFApp.ViewModels;
 public class NothingModelsListVM : ObservableObject, IMainWindowContentVM
 {
     private readonly IMainWindowManager _mainWindowManager ;
-    private readonly CancellationTokenSource _cancellationTokenSource = new(100000);
+    private readonly CancellationTokenSource _cancellationTokenSource;
     private bool _visible = true;
-    private ObservableCollection<NothingModelVM>? _nothingModels;
+    private ObservableCollection<INothingModelVM>? _nothingModels;
 
     /// <summary>
     /// Инициализатор данных представления окна списка моделей
@@ -24,11 +24,14 @@ public class NothingModelsListVM : ObservableObject, IMainWindowContentVM
     /// <param name="backButtonVM">Кнопка вернуться назад</param>
     /// <param name="openCreateNothingModelCommand">Команда открыть представление окна создания новой модели</param>
     /// <param name="mainWindowManager">Сервис управление отображением преставления на главном окне</param>
+    /// <param name="cancellationTokenSource">Объект управления токена отмены</param>
     public NothingModelsListVM(
         IMainWindowManager mainWindowManager,
         BackButtonVM backButtonVM,
-        OpenCreateNothingModelCommand openCreateNothingModelCommand)
+        OpenCreateNothingModelCommand openCreateNothingModelCommand,
+        CancellationTokenSource? cancellationTokenSource = null)
     {
+        _cancellationTokenSource = cancellationTokenSource ?? new CancellationTokenSource();
         _mainWindowManager = mainWindowManager;
         _mainWindowManager.OnNext += OnNext;
         BackButtonVM = backButtonVM;
@@ -59,7 +62,7 @@ public class NothingModelsListVM : ObservableObject, IMainWindowContentVM
     /// <summary>
     /// Список моделей
     /// </summary>
-    public ObservableCollection<NothingModelVM>? NothingModels
+    public ObservableCollection<INothingModelVM>? NothingModels
     {
         get => _nothingModels;
         private set
@@ -90,7 +93,7 @@ public class NothingModelsListVM : ObservableObject, IMainWindowContentVM
         Active = nextType == MainWindowContentType.NothingModelsListVM;
     }
 
-    private ObservableCollection<NothingModelVM> GetNothingModels()
+    private ObservableCollection<INothingModelVM> GetNothingModels()
     {
         var strategy = _mainWindowManager.Strategy
             ?? throw new NullReferenceException(nameof(_mainWindowManager.Strategy));

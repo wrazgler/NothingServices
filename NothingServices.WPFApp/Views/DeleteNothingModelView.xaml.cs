@@ -1,4 +1,3 @@
-using System.Windows.Controls;
 using NothingServices.WPFApp.Controls;
 
 namespace NothingServices.WPFApp.Views;
@@ -6,7 +5,7 @@ namespace NothingServices.WPFApp.Views;
 /// <summary>
 /// Представление удалить модель
 /// </summary>
-public partial class DeleteNothingModelView : UserControl, IDialogControl
+public partial class DeleteNothingModelView : IDialogControl
 {
     /// <summary>
     /// Инициализация представления удалить модель
