@@ -38,7 +38,7 @@ dotnet dev-certs https --clean
 ```shell
 dotnet dev-certs https -ep .certificates/localhost.crt -p localhost --trust
 ```
-### 6. Запустить консольное приложение
+### 6. Запустить приложение WPF
 ```shell
 cd NothingServices.WPFApp\bin\Release\net8.0-windows
 ```
