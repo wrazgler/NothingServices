@@ -6,6 +6,7 @@ namespace NothingServices.WPFApp.Converters;
 /// <summary>
 /// Конвертер высоты окна уведомлений
 /// </summary>
+[ValueConversion(typeof(double[]), typeof(double))]
 public class NotificatorHeightConverter : IMultiValueConverter
 {
     /// <summary>
@@ -21,14 +22,13 @@ public class NotificatorHeightConverter : IMultiValueConverter
     /// <exception cref="ArgumentException">Тип элемента не соответствует конвертеру</exception>
     public object? Convert(object?[]? value, Type? targetType, object? parameter, CultureInfo? culture)
     {
-        if (value is null || value.Length < 2 || value[0] is null || value[1] is null)
+        if (value == null || value.Length != 2 || value[0] == null || value[1] == null)
             return Binding.DoNothing;
 
-        if (!double.TryParse(value[0]!.ToString(), out var value1)
-            || !double.TryParse(value[1]!.ToString(), out var value2))
-            return 0;
-
-        return value1 * value2;
+        var valid = double.TryParse(value[0]?.ToString()?.Replace(".", ","), out var value1);
+        valid &= double.TryParse(value[1]?.ToString()?.Replace(".", ","), out var value2);
+        var result = valid ? value1 * value2 : Binding.DoNothing;
+        return result;
     }
 
     /// <summary>
@@ -39,7 +39,7 @@ public class NotificatorHeightConverter : IMultiValueConverter
     /// <param name="parameter">Параметр конвертации</param>
     /// <param name="culture">Информация о специфике культуре</param>
     /// <exception cref="NotImplementedException">Обратное преобразование недопустимо</exception>
-    public object?[]? ConvertBack(object? value, Type[]? targetTypes, object? parameter, CultureInfo? culture)
+    public object?[] ConvertBack(object? value, Type[]? targetTypes, object? parameter, CultureInfo? culture)
     {
         throw new NotImplementedException("Обратное преобразование недопустимо");
     }

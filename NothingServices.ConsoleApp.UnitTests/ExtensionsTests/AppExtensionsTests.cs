@@ -1,5 +1,6 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using NothingServices.Abstractions.Configs;
 using NothingServices.Abstractions.Exceptions;
 using NothingServices.ConsoleApp.Configs;
 using NothingServices.ConsoleApp.Extensions;
@@ -102,5 +103,37 @@ public class AppExtensionsTests
 
         //Assert
         Assert.IsType<HttpClient>(result);
+    }
+
+    [Fact]
+    public void AddAppHttpClient_Throws_FileNotFoundException()
+    {
+        //Arrange
+        var dictionary = new Dictionary<string, string>(1)
+        {
+            {"NOTHING_CERTIFICATE_FILE_NAME", "error.crt"},
+            {"NOTHING_CERTIFICATE_PASSWORD", "localhost"},
+        };
+        var configuration = new ConfigurationBuilder()
+            .AddInMemoryCollection(dictionary!)
+            .Build();
+
+        //Act
+        var result = new Func<IServiceCollection>(() => new ServiceCollection()
+            .AddAppHttpClient(configuration));
+
+        //Assert
+        Assert.Throws<FileNotFoundException>(result);
+    }
+
+    [Fact]
+    public void AddAppHttpClient_Throws_ConfigurationNullException()
+    {
+        //Act
+        var result = new Func<IServiceCollection>(() => new ServiceCollection()
+            .AddAppHttpClient(Mock.Of<IConfiguration>()));
+
+        //Assert
+        Assert.Throws<ConfigurationNullException<CertificateConfig>>(result);
     }
 }

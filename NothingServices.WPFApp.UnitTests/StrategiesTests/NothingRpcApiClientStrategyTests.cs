@@ -38,7 +38,7 @@ public class NothingRpcApiClientStrategyTests
                     streamMock.Object,
                     Task.FromResult(new Metadata()),
                     () => Status.DefaultSuccess,
-                    () => new Metadata(),
+                    () => [],
                     () => { });
                 return asyncServerStreamingCall;
             });
@@ -48,16 +48,23 @@ public class NothingRpcApiClientStrategyTests
             clientMock.Object);
 
         //Act
-        var result = await nothingRpcApiClientStrategy.GetNothingModelsAsync();
+        var nothingModelVMs = await nothingRpcApiClientStrategy.GetNothingModelsAsync();
+        var result = nothingModelVMs.Count;
 
         //Assert
-        var assert = new ObservableCollection<INothingModelVM>()
-        {
-            Mock.Of<INothingModelVM>(nothingModel
-                => nothingModel.Id == nothingModels.Single().Id &&
-                   nothingModel.Name == nothingModels.Single().Name),
-        };
-        Assert.Equivalent(assert, result, true);
+        var assert = 1;
+        Assert.Equal(assert, result);
+        clientMock.Verify(
+            client => client.GetStream(
+                It.IsAny<Empty>(),
+                null,
+                null,
+                It.IsAny<CancellationToken>()),
+            Times.Once);
+        nothingModelVMFactoryMock.Verify(
+            factory => factory.Create(
+                It.Is<NothingModelDto>(model => model == nothingModels.Single())),
+            Times.Once);
     }
 
     [Fact]
@@ -335,7 +342,7 @@ public class NothingRpcApiClientStrategyTests
             Task.FromResult(response),
             Task.FromResult(new Metadata()),
             () => Status.DefaultSuccess,
-            () => new Metadata(),
+            () => [],
             () => { });
     }
 

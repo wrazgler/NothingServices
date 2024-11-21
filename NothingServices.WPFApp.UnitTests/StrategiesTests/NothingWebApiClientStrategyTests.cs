@@ -1,4 +1,3 @@
-using System.Collections.ObjectModel;
 using Microsoft.Extensions.DependencyInjection;
 using NothingServices.WPFApp.Clients;
 using NothingServices.WPFApp.Dtos;
@@ -27,16 +26,17 @@ public class NothingWebApiClientStrategyTests
             clientMock.Object);
 
         //Act
-        var result = await nothingWebApiClientStrategy.GetNothingModelsAsync();
+        var nothingModelVMs = await nothingWebApiClientStrategy.GetNothingModelsAsync();
+        var result = nothingModelVMs.Count;
 
         //Assert
-        var assert = new ObservableCollection<INothingModelVM>()
-        {
-            Mock.Of<INothingModelVM>(nothingModel
-                => nothingModel.Id == nothingModels.Single().Id &&
-                   nothingModel.Name == nothingModels.Single().Name),
-        };
-        Assert.Equivalent(assert, result, true);
+        var assert = 1;
+        Assert.Equal(assert, result);
+        clientMock.Verify(client => client.GetAsync(It.IsAny<CancellationToken>()),Times.Once);
+        nothingModelVMFactoryMock.Verify(
+            factory => factory.Create(
+                It.Is<NothingModelWebDto>(model => model == nothingModels.Single())),
+            Times.Once);
     }
 
     [Fact]

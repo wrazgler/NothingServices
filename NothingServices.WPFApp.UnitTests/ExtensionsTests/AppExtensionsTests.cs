@@ -1,5 +1,6 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using NothingServices.Abstractions.Configs;
 using NothingServices.Abstractions.Exceptions;
 using NothingServices.WPFApp.Configs;
 using NothingServices.WPFApp.Extensions;
@@ -73,10 +74,14 @@ public class AppExtensionsTests
         var assert = new[]
         {
             "NothingServices.WPFApp.Services.IAppVersionProvider",
+            "NothingServices.WPFApp.Services.IDialogService",
             "NothingServices.WPFApp.Services.IMainWindowManager",
-            "NothingServices.WPFApp.Services.INotificator",
+            "NothingServices.WPFApp.Services.INotificationService",
             "NothingServices.WPFApp.Services.StartupService",
+            "NothingServices.WPFApp.Factories.ICreateNothingModelVMFactory",
+            "NothingServices.WPFApp.Factories.IDeleteNothingModelVMFactory",
             "NothingServices.WPFApp.Factories.INothingModelVMFactory",
+            "NothingServices.WPFApp.Factories.IUpdateNothingModelVMFactory",
             "NothingServices.WPFApp.Strategies.NothingRpcApiClientStrategy",
             "NothingServices.WPFApp.Strategies.NothingWebApiClientStrategy",
         };
@@ -95,13 +100,18 @@ public class AppExtensionsTests
         //Assert
         var assert = new[]
         {
+            "NothingServices.WPFApp.Views.CreateNothingModelView",
+            "NothingServices.WPFApp.Views.DeleteNothingModelView",
             "NothingServices.WPFApp.Views.MainWindow",
+            "NothingServices.WPFApp.Views.UpdateNothingModelView",
             "NothingServices.WPFApp.ViewModels.ApiSelectionVM",
+            "NothingServices.WPFApp.ViewModels.DialogVM",
             "NothingServices.WPFApp.ViewModels.MainWindowVM",
             "NothingServices.WPFApp.ViewModels.NothingModelsListVM",
             "NothingServices.WPFApp.ViewModels.Buttons.BackButtonVM",
             "NothingServices.WPFApp.ViewModels.Buttons.GRpcApiButtonVM",
             "NothingServices.WPFApp.ViewModels.Buttons.RestApiButtonVM",
+            "NothingServices.WPFApp.Commands.CloseDialogCommand",
             "NothingServices.WPFApp.Commands.CreateCommand",
             "NothingServices.WPFApp.Commands.DeleteCommand",
             "NothingServices.WPFApp.Commands.OpenApiSelectionCommand",
@@ -136,5 +146,37 @@ public class AppExtensionsTests
 
         //Assert
         Assert.IsType<HttpClient>(result);
+    }
+
+    [Fact]
+    public void AddAppHttpClient_Throws_FileNotFoundException()
+    {
+        //Arrange
+        var dictionary = new Dictionary<string, string>(1)
+        {
+            {"NOTHING_CERTIFICATE_FILE_NAME", "error.crt"},
+            {"NOTHING_CERTIFICATE_PASSWORD", "localhost"},
+        };
+        var configuration = new ConfigurationBuilder()
+            .AddInMemoryCollection(dictionary!)
+            .Build();
+
+        //Act
+        var result = new Func<IServiceCollection>(() => new ServiceCollection()
+            .AddAppHttpClient(configuration));
+
+        //Assert
+        Assert.Throws<FileNotFoundException>(result);
+    }
+
+    [Fact]
+    public void AddAppHttpClient_Throws_ConfigurationNullException()
+    {
+        //Act
+        var result = new Func<IServiceCollection>(() => new ServiceCollection()
+            .AddAppHttpClient(Mock.Of<IConfiguration>()));
+
+        //Assert
+        Assert.Throws<ConfigurationNullException<CertificateConfig>>(result);
     }
 }
