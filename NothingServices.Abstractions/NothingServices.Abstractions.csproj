@@ -1,11 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <AssemblyVersion>1.0.1.0</AssemblyVersion>
+    <AssemblyVersion>1.0.2.0</AssemblyVersion>
     <Authors>Golovin Nikita</Authors>
     <Copyright>Copyright (C) Golovin Nikita 2024</Copyright>
     <Description>Пакет расширений для NothingServices</Description>
-    <FileVersion>1.0.1.0</FileVersion>
+    <FileVersion>1.0.2.0</FileVersion>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <ImplicitUsings>enable</ImplicitUsings>
@@ -21,7 +21,7 @@
     <RepositoryUrl>https://github.com/wrazgler/NothingServices</RepositoryUrl>
     <TargetFramework>net8.0</TargetFramework>
     <Title>NothingServices.Abstraction</Title>
-    <Version>1.0.1.0</Version>
+    <Version>1.0.2.0</Version>
   </PropertyGroup>
 
   <ItemGroup>

@@ -1,3 +1,4 @@
+using NothingServices.Abstractions.Exceptions;
 using NothingServices.WPFApp.Models;
 using NothingServices.WPFApp.Services;
 using NothingServices.WPFApp.ViewModels.Controls;
@@ -46,14 +47,24 @@ public class UpdateCommand(
     /// Обновить существующую модель
     /// </summary>
     /// <param name="parameter">Параметр команды</param>
+    /// <exception cref="ArgumentException">
+    /// Неверный тип входного параметра
+    /// </exception>
+    /// <exception cref="NullReferenceException">
+    /// Ошибка, возникшая при получении стратегии работы приложения
+    /// </exception>
     public override async void Execute(object? parameter)
     {
         try
         {
             var updateNothingModelVM = parameter as UpdateNothingModelVM
-                ?? throw new ArgumentException(parameter?.GetType().Name);
+                ?? throw new ArgumentException($"Некорректный тип параметра команды: {parameter?.GetType().Name}");
+            if (updateNothingModelVM.Id == 0)
+                throw new PropertyRequiredException(typeof(UpdateNothingModelVM), nameof(updateNothingModelVM.Id));
+            if (updateNothingModelVM.Name == null || string.IsNullOrEmpty(updateNothingModelVM.Name.Trim()))
+                throw new PropertyRequiredException(typeof(UpdateNothingModelVM), nameof(updateNothingModelVM.Name));
             var strategy = _mainWindowManager.Strategy
-                ?? throw new NullReferenceException(_mainWindowManager.Strategy?.GetType().Name);
+                ?? throw new NullReferenceException("Стратегия работы приложения не задана");
             var nothingModelVM = await strategy.UpdateNothingModelAsync(
                 updateNothingModelVM,
                 _cancellationTokenSource.Token);

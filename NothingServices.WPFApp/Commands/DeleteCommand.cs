@@ -43,6 +43,12 @@ public class DeleteCommand(
     /// Удалить модель
     /// </summary>
     /// <param name="parameter">Параметр команды</param>
+    /// <exception cref="ArgumentException">
+    /// Неверный тип входного параметра
+    /// </exception>
+    /// <exception cref="NullReferenceException">
+    /// Ошибка, возникшая при получении стратегии работы приложения
+    /// </exception>
     public override async void Execute(object? parameter)
     {
         try
