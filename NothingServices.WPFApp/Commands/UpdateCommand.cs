@@ -53,6 +53,9 @@ public class UpdateCommand(
     /// <exception cref="NullReferenceException">
     /// Ошибка, возникшая при получении стратегии работы приложения
     /// </exception>
+    /// <exception cref="PropertyRequiredException">
+    /// Требуемое поле не задано
+    /// </exception>
     public override async void Execute(object? parameter)
     {
         try

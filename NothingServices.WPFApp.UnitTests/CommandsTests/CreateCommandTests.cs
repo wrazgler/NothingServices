@@ -8,22 +8,20 @@ using NothingServices.WPFApp.ViewModels.Controls;
 
 namespace NothingServices.WPFApp.UnitTests.CommandsTests;
 
-public class UpdateCommandTests
+public class CreateCommandTests
 {
     [Fact]
     public void CanExecute_True()
     {
         //Arrange
-        var command = GetUpdateCommand(
+        var command = GetCreateCommand(
             Mock.Of<IDialogService>(),
             Mock.Of<IMainWindowManager>(),
             Mock.Of<INotificationService>());
-        var nothingModelVM = Mock.Of<INothingModelVM>(nothingModelVM
-            => nothingModelVM.Id == 1 && nothingModelVM.Name == "test");
-        var parameter = new UpdateNothingModelVM(
-            Mock.Of<IButtonVM>(),
-            Mock.Of<IButtonVM>(),
-            nothingModelVM);
+        var parameter = new CreateNothingModelVM(Mock.Of<IButtonVM>(), Mock.Of<IButtonVM>())
+        {
+            Name = "test",
+        };
 
         //Act
         var result = command.CanExecute(parameter);
@@ -33,41 +31,17 @@ public class UpdateCommandTests
     }
 
     [Fact]
-    public void CanExecute_Id_0_False()
-    {
-        //Arrange
-        var command = GetUpdateCommand(
-            Mock.Of<IDialogService>(),
-            Mock.Of<IMainWindowManager>(),
-            Mock.Of<INotificationService>());
-        var nothingModelVM = Mock.Of<INothingModelVM>(nothingModelVM
-            => nothingModelVM.Id == 0 && nothingModelVM.Name == "test");
-        var parameter = new UpdateNothingModelVM(
-            Mock.Of<IButtonVM>(),
-            Mock.Of<IButtonVM>(),
-            nothingModelVM);
-
-        //Act
-        var result = command.CanExecute(parameter);
-
-        //Assert
-        Assert.False(result);
-    }
-
-    [Fact]
     public void CanExecute_Name_Empty_False()
     {
         //Arrange
-        var command = GetUpdateCommand(
+        var command = GetCreateCommand(
             Mock.Of<IDialogService>(),
             Mock.Of<IMainWindowManager>(),
             Mock.Of<INotificationService>());
-        var nothingModelVM = Mock.Of<INothingModelVM>(nothingModelVM
-            => nothingModelVM.Id == 1 && nothingModelVM.Name == string.Empty);
-        var parameter = new UpdateNothingModelVM(
-            Mock.Of<IButtonVM>(),
-            Mock.Of<IButtonVM>(),
-            nothingModelVM);
+        var parameter = new CreateNothingModelVM(Mock.Of<IButtonVM>(), Mock.Of<IButtonVM>())
+        {
+            Name = string.Empty,
+        };
 
         //Act
         var result = command.CanExecute(parameter);
@@ -80,16 +54,14 @@ public class UpdateCommandTests
     public void CanExecute_Name_Trim_Empty_False()
     {
         //Arrange
-        var command = GetUpdateCommand(
+        var command = GetCreateCommand(
             Mock.Of<IDialogService>(),
             Mock.Of<IMainWindowManager>(),
             Mock.Of<INotificationService>());
-        var nothingModelVM = Mock.Of<INothingModelVM>(nothingModelVM
-            => nothingModelVM.Id == 1 && nothingModelVM.Name == "    ");
-        var parameter = new UpdateNothingModelVM(
-            Mock.Of<IButtonVM>(),
-            Mock.Of<IButtonVM>(),
-            nothingModelVM);
+        var parameter = new CreateNothingModelVM(Mock.Of<IButtonVM>(), Mock.Of<IButtonVM>())
+        {
+            Name = "   ",
+        };
 
         //Act
         var result = command.CanExecute(parameter);
@@ -102,7 +74,7 @@ public class UpdateCommandTests
     public void CanExecute_Parameter_Null_False()
     {
         //Arrange
-        var command = GetUpdateCommand(
+        var command = GetCreateCommand(
             Mock.Of<IDialogService>(),
             Mock.Of<IMainWindowManager>(),
             Mock.Of<INotificationService>());
@@ -118,7 +90,7 @@ public class UpdateCommandTests
     public void CanExecute_Parameter_Object_False()
     {
         //Arrange
-        var command = GetUpdateCommand(
+        var command = GetCreateCommand(
             Mock.Of<IDialogService>(),
             Mock.Of<IMainWindowManager>(),
             Mock.Of<INotificationService>());
@@ -138,19 +110,19 @@ public class UpdateCommandTests
         var mainWindowManagerMock = new Mock<IMainWindowManager>();
         var nothingModelVM = Mock.Of<INothingModelVM>(nothingModelVM
             => nothingModelVM.Id == 1 && nothingModelVM.Name == "test");
-        var parameter = new UpdateNothingModelVM(
-            Mock.Of<IButtonVM>(),
-            Mock.Of<IButtonVM>(),
-            nothingModelVM);
+        var parameter = new CreateNothingModelVM(Mock.Of<IButtonVM>(), Mock.Of<IButtonVM>())
+        {
+            Name = nothingModelVM.Name,
+        };
         var strategyMock = new Mock<INothingApiClientStrategy>();
-        strategyMock.Setup(strategy => strategy.UpdateNothingModelAsync(
-            It.Is<UpdateNothingModelVM>(updateNothingModelVM => updateNothingModelVM == parameter),
+        strategyMock.Setup(strategy => strategy.CreateNothingModelAsync(
+            It.Is<CreateNothingModelVM>(createNothingModelVM => createNothingModelVM == parameter),
             It.IsAny<CancellationToken>()))
             .ReturnsAsync(nothingModelVM);
         mainWindowManagerMock.SetupGet(mainWindowManager => mainWindowManager.Strategy)
             .Returns(strategyMock.Object);
         var notificationServiceMock = new Mock<INotificationService>();
-        var command = GetUpdateCommand(
+        var command = GetCreateCommand(
             dialogServiceMock.Object,
             mainWindowManagerMock.Object,
             notificationServiceMock.Object);
@@ -161,8 +133,8 @@ public class UpdateCommandTests
         //Assert
         mainWindowManagerMock.VerifyGet(mainWindowManager => mainWindowManager.Strategy, Times.Once);
         strategyMock.Verify(
-            strategy => strategy.UpdateNothingModelAsync(
-                It.Is<UpdateNothingModelVM>(updateNothingModelVM => updateNothingModelVM == parameter),
+            strategy => strategy.CreateNothingModelAsync(
+                It.Is<CreateNothingModelVM>(createNothingModelVM => createNothingModelVM == parameter),
                 It.IsAny<CancellationToken>()),
             Times.Once);
         mainWindowManagerMock.Verify(
@@ -172,7 +144,7 @@ public class UpdateCommandTests
         dialogServiceMock.Verify(dialogService => dialogService.CloseDialog(), Times.Once);
         notificationServiceMock.Verify(
             notificationService => notificationService.Notify(It.Is<string>(message
-                => message == $"Обновлено \"{nothingModelVM.Name}\"")),
+                => message == $"Создано \"{nothingModelVM.Name}\"")),
             Times.Once);
     }
 
@@ -181,7 +153,7 @@ public class UpdateCommandTests
     {
         //Arrange
         var notificationServiceMock = new Mock<INotificationService>();
-        var command = GetUpdateCommand(
+        var command = GetCreateCommand(
             Mock.Of<IDialogService>(),
             Mock.Of<IMainWindowManager>(),
             notificationServiceMock.Object);
@@ -197,46 +169,18 @@ public class UpdateCommandTests
     }
 
     [Fact]
-    public void Execute_Parameter_Id_0_Notify_Error()
-    {
-        //Arrange
-        var notificationServiceMock = new Mock<INotificationService>();
-        var command = GetUpdateCommand(
-            Mock.Of<IDialogService>(),
-            Mock.Of<IMainWindowManager>(),
-            notificationServiceMock.Object);
-        var nothingModelVM = Mock.Of<INothingModelVM>(nothingModelVM
-            => nothingModelVM.Id == 0 && nothingModelVM.Name == "test");
-        var parameter = new UpdateNothingModelVM(
-            Mock.Of<IButtonVM>(),
-            Mock.Of<IButtonVM>(),
-            nothingModelVM);
-
-        //Act
-        command.Execute(parameter);
-
-        //Assert
-        notificationServiceMock.Verify(
-            notificationService => notificationService.Notify(It.Is<string>(message
-                => message == "Поле Идентификатор модели не может быть пустым")),
-            Times.Once);
-    }
-
-    [Fact]
     public void Execute_Parameter_Name_Null_Notify_Error()
     {
         //Arrange
         var notificationServiceMock = new Mock<INotificationService>();
-        var command = GetUpdateCommand(
+        var command = GetCreateCommand(
             Mock.Of<IDialogService>(),
             Mock.Of<IMainWindowManager>(),
             notificationServiceMock.Object);
-        var nothingModelVM = Mock.Of<INothingModelVM>(nothingModelVM
-            => nothingModelVM.Id == 1 && nothingModelVM.Name == null!);
-        var parameter = new UpdateNothingModelVM(
-            Mock.Of<IButtonVM>(),
-            Mock.Of<IButtonVM>(),
-            nothingModelVM);
+        var parameter = new CreateNothingModelVM(Mock.Of<IButtonVM>(), Mock.Of<IButtonVM>())
+        {
+            Name = null!,
+        };
 
         //Act
         command.Execute(parameter);
@@ -253,16 +197,14 @@ public class UpdateCommandTests
     {
         //Arrange
         var notificationServiceMock = new Mock<INotificationService>();
-        var command = GetUpdateCommand(
+        var command = GetCreateCommand(
             Mock.Of<IDialogService>(),
             Mock.Of<IMainWindowManager>(),
             notificationServiceMock.Object);
-        var nothingModelVM = Mock.Of<INothingModelVM>(nothingModelVM
-            => nothingModelVM.Id == 1 && nothingModelVM.Name == string.Empty);
-        var parameter = new UpdateNothingModelVM(
-            Mock.Of<IButtonVM>(),
-            Mock.Of<IButtonVM>(),
-            nothingModelVM);
+        var parameter = new CreateNothingModelVM(Mock.Of<IButtonVM>(), Mock.Of<IButtonVM>())
+        {
+            Name = string.Empty,
+        };
 
         //Act
         command.Execute(parameter);
@@ -279,16 +221,14 @@ public class UpdateCommandTests
     {
         //Arrange
         var notificationServiceMock = new Mock<INotificationService>();
-        var command = GetUpdateCommand(
+        var command = GetCreateCommand(
             Mock.Of<IDialogService>(),
             Mock.Of<IMainWindowManager>(),
             notificationServiceMock.Object);
-        var nothingModelVM = Mock.Of<INothingModelVM>(nothingModelVM
-            => nothingModelVM.Id == 1 && nothingModelVM.Name == "   ");
-        var parameter = new UpdateNothingModelVM(
-            Mock.Of<IButtonVM>(),
-            Mock.Of<IButtonVM>(),
-            nothingModelVM);
+        var parameter = new CreateNothingModelVM(Mock.Of<IButtonVM>(), Mock.Of<IButtonVM>())
+        {
+            Name = "   ",
+        };
 
         //Act
         command.Execute(parameter);
@@ -305,16 +245,14 @@ public class UpdateCommandTests
     {
         //Arrange
         var notificationServiceMock = new Mock<INotificationService>();
-        var command = GetUpdateCommand(
+        var command = GetCreateCommand(
             Mock.Of<IDialogService>(),
             Mock.Of<IMainWindowManager>(),
             notificationServiceMock.Object);
-        var nothingModelVM = Mock.Of<INothingModelVM>(nothingModelVM
-            => nothingModelVM.Id == 1 && nothingModelVM.Name == "test");
-        var parameter = new UpdateNothingModelVM(
-            Mock.Of<IButtonVM>(),
-            Mock.Of<IButtonVM>(),
-            nothingModelVM);
+        var parameter = new CreateNothingModelVM(Mock.Of<IButtonVM>(), Mock.Of<IButtonVM>())
+        {
+            Name = "test",
+        };
 
         //Act
         command.Execute(parameter);
@@ -326,18 +264,18 @@ public class UpdateCommandTests
             Times.Once);
     }
 
-    private static UpdateCommand GetUpdateCommand(
+    private static CreateCommand GetCreateCommand(
         IDialogService dialogService,
         IMainWindowManager mainWindowManager,
         INotificationService notificationService)
     {
-        var updateCommand = new ServiceCollection()
-            .AddTransient<UpdateCommand>()
+        var createCommand = new ServiceCollection()
+            .AddTransient<CreateCommand>()
             .AddTransient(_ => dialogService)
             .AddTransient(_ => mainWindowManager)
             .AddTransient(_ => notificationService)
             .BuildServiceProvider()
-            .GetRequiredService<UpdateCommand>();
-        return updateCommand;
+            .GetRequiredService<CreateCommand>();
+        return createCommand;
     }
 }

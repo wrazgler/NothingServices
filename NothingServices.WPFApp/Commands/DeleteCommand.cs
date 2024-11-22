@@ -1,3 +1,4 @@
+using NothingServices.Abstractions.Exceptions;
 using NothingServices.WPFApp.Models;
 using NothingServices.WPFApp.Services;
 using NothingServices.WPFApp.ViewModels.Controls;
@@ -49,14 +50,19 @@ public class DeleteCommand(
     /// <exception cref="NullReferenceException">
     /// Ошибка, возникшая при получении стратегии работы приложения
     /// </exception>
+    /// <exception cref="PropertyRequiredException">
+    /// Требуемое поле не задано
+    /// </exception>
     public override async void Execute(object? parameter)
     {
         try
         {
             var deleteNothingModelVM = parameter as DeleteNothingModelVM
-                ?? throw new ArgumentException(parameter?.GetType().Name);
+                ?? throw new ArgumentException($"Некорректный тип параметра команды: {parameter?.GetType().Name}");
+            if (deleteNothingModelVM.Id == 0)
+                throw new PropertyRequiredException(typeof(DeleteNothingModelVM), nameof(deleteNothingModelVM.Id));
             var strategy = _mainWindowManager.Strategy
-                ?? throw new NullReferenceException(_mainWindowManager.Strategy?.GetType().Name);
+                ?? throw new NullReferenceException("Стратегия работы приложения не задана");
             var nothingModelVM = await strategy.DeleteNothingModelAsync(
                 deleteNothingModelVM,
                 _cancellationTokenSource.Token);
