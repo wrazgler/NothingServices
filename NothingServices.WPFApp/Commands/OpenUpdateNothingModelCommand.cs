@@ -1,7 +1,8 @@
+using NothingServices.Abstractions.Exceptions;
+using NothingServices.WPFApp.Controls;
 using NothingServices.WPFApp.Factories;
 using NothingServices.WPFApp.Services;
 using NothingServices.WPFApp.ViewModels.Controls;
-using NothingServices.WPFApp.Views;
 
 namespace NothingServices.WPFApp.Commands;
 
@@ -16,13 +17,13 @@ public class OpenUpdateNothingModelCommand(
     IUpdateNothingModelVMFactory updateNothingModelVMFactory,
     IDialogService dialogService,
     INotificationService notificationService,
-    UpdateNothingModelView updateNothingModelView)
+    IUpdateNothingModelView updateNothingModelView)
     : BaseCommand
 {
     private readonly IDialogService _dialogService = dialogService;
     private readonly INotificationService _notificationService = notificationService;
     private readonly IUpdateNothingModelVMFactory _updateNothingModelVMFactory = updateNothingModelVMFactory;
-    private readonly UpdateNothingModelView _updateNothingModelView = updateNothingModelView;
+    private readonly IUpdateNothingModelView _updateNothingModelView = updateNothingModelView;
 
     /// <summary>
     /// Проверка возможности выполнить команду открыть представление окна обновления существующей модели
@@ -30,7 +31,13 @@ public class OpenUpdateNothingModelCommand(
     /// <param name="parameter">Параметр команды</param>
     public override bool CanExecute(object? parameter)
     {
-        if (parameter is not NothingModelVM)
+        if (parameter is not INothingModelVM nothingModelVM)
+            return false;
+
+        if (nothingModelVM.Id == 0)
+            return false;
+
+        if (string.IsNullOrEmpty(nothingModelVM.Name.Trim()))
             return false;
 
         return true;
@@ -44,8 +51,12 @@ public class OpenUpdateNothingModelCommand(
     {
         try
         {
-            var nothingModelVM = parameter as NothingModelVM
+            var nothingModelVM = parameter as INothingModelVM
                 ?? throw new ArgumentException(parameter?.GetType().Name);
+            if (nothingModelVM.Id == 0)
+                throw new PropertyRequiredException(typeof(INothingModelVM), nameof(nothingModelVM.Id));
+            if (nothingModelVM.Name == null || string.IsNullOrEmpty(nothingModelVM.Name.Trim()))
+                throw new PropertyRequiredException(typeof(INothingModelVM), nameof(nothingModelVM.Name));
             var updateNothingModelVM = _updateNothingModelVMFactory.Create(nothingModelVM);
             _dialogService.OpenDialog(updateNothingModelVM, _updateNothingModelView);
         }

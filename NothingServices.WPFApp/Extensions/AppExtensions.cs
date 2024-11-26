@@ -9,6 +9,7 @@ using NothingServices.Abstractions.Extensions;
 using NothingServices.WPFApp.Clients;
 using NothingServices.WPFApp.Commands;
 using NothingServices.WPFApp.Configs;
+using NothingServices.WPFApp.Controls;
 using NothingServices.WPFApp.Factories;
 using NothingServices.WPFApp.Services;
 using NothingServices.WPFApp.Strategies;
@@ -87,10 +88,10 @@ public static class AppExtensions
     /// <returns>Коллекция сервисов с добавленными представления приложения</returns>
     public static IServiceCollection AddAppViews(this IServiceCollection services)
     {
-        services.AddScoped<CreateNothingModelView>();
-        services.AddScoped<DeleteNothingModelView>();
+        services.AddScoped<ICreateNothingModelView, CreateNothingModelView>();
+        services.AddScoped<IDeleteNothingModelView, DeleteNothingModelView>();
         services.AddScoped<MainWindow>();
-        services.AddScoped<UpdateNothingModelView>();
+        services.AddScoped<IUpdateNothingModelView, UpdateNothingModelView>();
 
         services.AddScoped<ApiSelectionVM>();
         services.AddScoped<DialogVM>();

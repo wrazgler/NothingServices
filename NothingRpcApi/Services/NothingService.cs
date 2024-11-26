@@ -38,9 +38,10 @@ public class NothingService(
     {
         try
         {
-            var nothingModels = await _dbContext.NothingModels.AsNoTracking()
-                .Select(model => _mapper.Map<NothingModelDto>(model))
+            var nothingModels = await _dbContext.NothingModels
+                .AsNoTracking()
                 .OrderBy(model => model.Id)
+                .Select(model => _mapper.Map<NothingModelDto>(model))
                 .ToArrayAsync(context.CancellationToken);
             foreach (var nothingModel in nothingModels)
             {

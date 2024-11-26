@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using CommunityToolkit.Mvvm.ComponentModel;
 using NothingServices.WPFApp.ViewModels.Buttons;
 
@@ -11,11 +12,13 @@ public class NothingModelVM : ObservableObject, INothingModelVM
     /// <summary>
     /// Идентификатор модели
     /// </summary>
+    [Description("Идентификатор модели")]
     public int Id { get; init; }
 
     /// <summary>
     /// Имя модели
     /// </summary>
+    [Description("Имя модели")]
     public required string Name { get; init; }
 
     /// <summary>

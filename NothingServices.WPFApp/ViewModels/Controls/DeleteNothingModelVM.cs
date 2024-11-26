@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using CommunityToolkit.Mvvm.ComponentModel;
 using NothingServices.WPFApp.ViewModels.Buttons;
 
@@ -20,6 +21,7 @@ public class DeleteNothingModelVM(
     /// <summary>
     /// Идентификатор модели
     /// </summary>
+    [Description("Идентификатор модели")]
     public int Id { get; } = nothingModelVM.Id;
 
     /// <summary>

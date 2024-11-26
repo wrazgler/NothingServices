@@ -5,7 +5,7 @@ namespace NothingServices.WPFApp.Views;
 /// <summary>
 /// Представление удалить модель
 /// </summary>
-public partial class DeleteNothingModelView : IDialogControl
+public partial class DeleteNothingModelView : IDeleteNothingModelView
 {
     /// <summary>
     /// Инициализация представления удалить модель

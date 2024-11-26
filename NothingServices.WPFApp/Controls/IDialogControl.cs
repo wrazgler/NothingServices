@@ -5,4 +5,8 @@ namespace NothingServices.WPFApp.Controls;
 /// </summary>
 public interface IDialogControl
 {
+    /// <summary>
+    /// Контекст данных в диалоговом окне
+    /// </summary>
+    public object DataContext { get; set; }
 }

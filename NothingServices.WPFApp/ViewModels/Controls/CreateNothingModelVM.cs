@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using CommunityToolkit.Mvvm.ComponentModel;
 using NothingServices.WPFApp.ViewModels.Buttons;
 
@@ -18,6 +19,7 @@ public class CreateNothingModelVM(
     /// <summary>
     /// Имя модели
     /// </summary>
+    [Description("Имя модели")]
     public string Name
     {
         get => _name;

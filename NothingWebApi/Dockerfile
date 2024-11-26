@@ -1,5 +1,5 @@
 # Base container
-FROM mcr.microsoft.com/dotnet/sdk AS sdk
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS sdk
 WORKDIR "/src"
 
 # Get arguments
@@ -53,7 +53,7 @@ RUN dotnet publish "NothingWebApi.csproj" \
     --no-restore
 
 # Application container
-FROM mcr.microsoft.com/dotnet/aspnet
+FROM mcr.microsoft.com/dotnet/aspnet:8.0
 WORKDIR "/app"
 
 # Get arguments

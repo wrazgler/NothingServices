@@ -100,10 +100,10 @@ public class AppExtensionsTests
         //Assert
         var assert = new[]
         {
-            "NothingServices.WPFApp.Views.CreateNothingModelView",
-            "NothingServices.WPFApp.Views.DeleteNothingModelView",
+            "NothingServices.WPFApp.Controls.ICreateNothingModelView",
+            "NothingServices.WPFApp.Controls.IDeleteNothingModelView",
             "NothingServices.WPFApp.Views.MainWindow",
-            "NothingServices.WPFApp.Views.UpdateNothingModelView",
+            "NothingServices.WPFApp.Controls.IUpdateNothingModelView",
             "NothingServices.WPFApp.ViewModels.ApiSelectionVM",
             "NothingServices.WPFApp.ViewModels.DialogVM",
             "NothingServices.WPFApp.ViewModels.MainWindowVM",

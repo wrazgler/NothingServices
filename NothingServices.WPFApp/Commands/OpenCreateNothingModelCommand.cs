@@ -1,6 +1,6 @@
+using NothingServices.WPFApp.Controls;
 using NothingServices.WPFApp.Factories;
 using NothingServices.WPFApp.Services;
-using NothingServices.WPFApp.Views;
 
 namespace NothingServices.WPFApp.Commands;
 
@@ -15,12 +15,12 @@ public class OpenCreateNothingModelCommand(
     ICreateNothingModelVMFactory createNothingModelVMFactory,
     IDialogService dialogService,
     INotificationService notificationService,
-    CreateNothingModelView createNothingModelView)
+    ICreateNothingModelView createNothingModelView)
     : BaseCommand
 {
     private readonly IDialogService _dialogService = dialogService;
     private readonly INotificationService _notificationService = notificationService;
-    private readonly CreateNothingModelView _createNothingModelView = createNothingModelView;
+    private readonly ICreateNothingModelView _createNothingModelView = createNothingModelView;
     private readonly ICreateNothingModelVMFactory _createNothingModelVMFactory = createNothingModelVMFactory;
 
     /// <summary>

@@ -1,4 +1,3 @@
-using System.Windows.Controls;
 using NothingServices.WPFApp.Controls;
 using NothingServices.WPFApp.ViewModels;
 using NothingServices.WPFApp.ViewModels.Controls;
@@ -28,7 +27,7 @@ public class DialogService(DialogVM dialogVM) : IDialogService
     /// <param name="dialogContentView">Представление, отображаемое в диалоговом окне</param>
     public void OpenDialog<TViewModel, TView>(TViewModel dialogContentVM, TView dialogContentView)
         where TViewModel: IDialogContentVM
-        where TView : Control, IDialogControl
+        where TView : IDialogControl
     {
         dialogContentView.DataContext = dialogContentVM;
         _dialogVM.Content = dialogContentView;

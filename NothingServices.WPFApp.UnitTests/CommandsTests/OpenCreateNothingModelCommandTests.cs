@@ -1,10 +1,10 @@
 using Microsoft.Extensions.DependencyInjection;
 using NothingServices.WPFApp.Commands;
+using NothingServices.WPFApp.Controls;
 using NothingServices.WPFApp.Factories;
 using NothingServices.WPFApp.Services;
 using NothingServices.WPFApp.ViewModels.Buttons;
 using NothingServices.WPFApp.ViewModels.Controls;
-using NothingServices.WPFApp.Views;
 
 namespace NothingServices.WPFApp.UnitTests.CommandsTests;
 
@@ -18,7 +18,7 @@ public class OpenCreateNothingModelCommandTests
             Mock.Of<ICreateNothingModelVMFactory>(),
             Mock.Of<IDialogService>(),
             Mock.Of<INotificationService>(),
-            Mock.Of<CreateNothingModelView>());
+            Mock.Of<ICreateNothingModelView>());
 
         //Act
         var result = command.CanExecute(null);
@@ -32,20 +32,20 @@ public class OpenCreateNothingModelCommandTests
     {
         //Arrange
         var createNothingModelVM = new CreateNothingModelVM(Mock.Of<IButtonVM>(),Mock.Of<IButtonVM>());
-        var createNothingModelView = Mock.Of<CreateNothingModelView>();
+        var createNothingModelView = Mock.Of<ICreateNothingModelView>();
         var createNothingModelVMFactoryMock = new Mock<ICreateNothingModelVMFactory>();
-        createNothingModelVMFactoryMock.Setup(createNothingModelVMFactory => createNothingModelVMFactory.Create())
+        createNothingModelVMFactoryMock
+            .Setup(createNothingModelVMFactory => createNothingModelVMFactory.Create())
             .Returns(createNothingModelVM);
         var dialogServiceMock = new Mock<IDialogService>();
         dialogServiceMock.Setup(dialogService => dialogService.OpenDialog(
                 It.Is<CreateNothingModelVM>(dialogContentVM => dialogContentVM == createNothingModelVM),
-                It.Is<CreateNothingModelView>(dialogContentView => dialogContentView == createNothingModelView)))
-            .Throws(new Exception("Fake exception"));
+                It.Is<ICreateNothingModelView>(dialogContentView => dialogContentView == createNothingModelView)));
         var command = GetOpenCreateNothingModelCommand(
             createNothingModelVMFactoryMock.Object,
             dialogServiceMock.Object,
             Mock.Of<INotificationService>(),
-            Mock.Of<CreateNothingModelView>());
+            createNothingModelView);
 
         //Act
         command.Execute(null);
@@ -55,7 +55,7 @@ public class OpenCreateNothingModelCommandTests
         dialogServiceMock.Verify(
             dialogService => dialogService.OpenDialog(
                 It.Is<CreateNothingModelVM>(dialogContentVM => dialogContentVM == createNothingModelVM),
-                It.Is<CreateNothingModelView>(dialogContentView => dialogContentView == createNothingModelView)),
+                It.Is<ICreateNothingModelView>(dialogContentView => dialogContentView == createNothingModelView)),
             Times.Once);
     }
 
@@ -64,14 +64,15 @@ public class OpenCreateNothingModelCommandTests
     {
         //Arrange
         var createNothingModelVMFactoryMock = new Mock<ICreateNothingModelVMFactory>();
-        createNothingModelVMFactoryMock.Setup(createNothingModelVMFactory => createNothingModelVMFactory.Create())
+        createNothingModelVMFactoryMock
+            .Setup(createNothingModelVMFactory => createNothingModelVMFactory.Create())
             .Throws(new Exception("Fake exception"));
         var notificationServiceMock = new Mock<INotificationService>();
         var command = GetOpenCreateNothingModelCommand(
             createNothingModelVMFactoryMock.Object,
             Mock.Of<IDialogService>(),
-            Mock.Of<INotificationService>(),
-            Mock.Of<CreateNothingModelView>());
+            notificationServiceMock.Object,
+            Mock.Of<ICreateNothingModelView>());
 
         //Act
         command.Execute(null);
@@ -87,7 +88,7 @@ public class OpenCreateNothingModelCommandTests
         ICreateNothingModelVMFactory createNothingModelVMFactory,
         IDialogService dialogService,
         INotificationService notificationService,
-        CreateNothingModelView createNothingModelView)
+        ICreateNothingModelView createNothingModelView)
     {
         var openCreateNothingModelCommand = new ServiceCollection()
             .AddTransient<OpenCreateNothingModelCommand>()

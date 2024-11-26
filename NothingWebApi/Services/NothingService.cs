@@ -26,9 +26,10 @@ public class NothingService(
     /// <returns>Список моделей</returns>
     public Task<NothingModelDto[]> GetAsync(CancellationToken cancellationToken = default)
     {
-        return _dbContext.NothingModels.AsNoTracking()
-            .Select(model => _mapper.Map<NothingModelDto>(model))
+        return _dbContext.NothingModels
+            .AsNoTracking()
             .OrderBy(model => model.Id)
+            .Select(model => _mapper.Map<NothingModelDto>(model))
             .ToArrayAsync(cancellationToken);
     }
 

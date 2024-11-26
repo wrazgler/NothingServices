@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations;
 using NothingServices.Abstractions.Extensions;
 
 namespace NothingServices.Abstractions.Exceptions;
@@ -5,7 +6,7 @@ namespace NothingServices.Abstractions.Exceptions;
 /// <summary>
 /// Ошибка отсутствия значения у требуемого поля
 /// </summary>
-public class PropertyRequiredException : ArgumentException
+public class PropertyRequiredException : ValidationException
 {
     private const string MessageFormat = "Поле {0} не может быть пустым";
 

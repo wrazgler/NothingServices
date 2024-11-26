@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using CommunityToolkit.Mvvm.ComponentModel;
 using NothingServices.WPFApp.ViewModels.Buttons;
 
@@ -21,11 +22,13 @@ public class UpdateNothingModelVM(
     /// <summary>
     /// Идентификатор модели
     /// </summary>
+    [Description("Идентификатор модели")]
     public int Id { get; } = nothingModelVM.Id;
 
     /// <summary>
     /// Имя модели
     /// </summary>
+    [Description("Имя модели")]
     public string Name
     {
         get => _name;

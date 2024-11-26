@@ -5,7 +5,7 @@ namespace NothingServices.WPFApp.Views;
 /// <summary>
 /// Представление создать модель
 /// </summary>
-public partial class CreateNothingModelView : IDialogControl
+public partial class CreateNothingModelView : ICreateNothingModelView
 {
     /// <summary>
     /// Инициализация представления создать модель

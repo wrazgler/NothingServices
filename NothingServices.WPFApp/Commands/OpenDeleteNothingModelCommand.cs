@@ -1,7 +1,8 @@
+using NothingServices.Abstractions.Exceptions;
+using NothingServices.WPFApp.Controls;
 using NothingServices.WPFApp.Factories;
 using NothingServices.WPFApp.Services;
 using NothingServices.WPFApp.ViewModels.Controls;
-using NothingServices.WPFApp.Views;
 
 namespace NothingServices.WPFApp.Commands;
 
@@ -16,10 +17,10 @@ public class OpenDeleteNothingModelCommand(
     IDeleteNothingModelVMFactory deleteNothingModelVMFactory,
     IDialogService dialogService,
     INotificationService notificationService,
-    DeleteNothingModelView deleteNothingModelView)
+    IDeleteNothingModelView deleteNothingModelView)
     : BaseCommand
 {
-    private readonly DeleteNothingModelView _deleteNothingModelView = deleteNothingModelView;
+    private readonly IDeleteNothingModelView _deleteNothingModelView = deleteNothingModelView;
     private readonly IDeleteNothingModelVMFactory _deleteNothingModelVMFactory = deleteNothingModelVMFactory;
     private readonly IDialogService _dialogService = dialogService;
     private readonly INotificationService _notificationService = notificationService;
@@ -30,7 +31,10 @@ public class OpenDeleteNothingModelCommand(
     /// <param name="parameter">Параметр команды</param>
     public override bool CanExecute(object? parameter)
     {
-        if (parameter is not NothingModelVM)
+        if (parameter is not INothingModelVM nothingModelVM)
+            return false;
+
+        if (nothingModelVM.Id == 0)
             return false;
 
         return true;
@@ -44,8 +48,10 @@ public class OpenDeleteNothingModelCommand(
     {
         try
         {
-            var nothingModelVM = parameter as NothingModelVM
+            var nothingModelVM = parameter as INothingModelVM
                 ?? throw new ArgumentException(parameter?.GetType().Name);
+            if (nothingModelVM.Id == 0)
+                throw new PropertyRequiredException(typeof(INothingModelVM), nameof(nothingModelVM.Id));
             var deleteNothingModelVM = _deleteNothingModelVMFactory.Create(nothingModelVM);
             _dialogService.OpenDialog(deleteNothingModelVM, _deleteNothingModelView);
 

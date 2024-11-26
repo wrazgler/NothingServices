@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using NothingServices.WPFApp.ViewModels.Buttons;
 
 namespace NothingServices.WPFApp.ViewModels.Controls;
@@ -10,11 +11,13 @@ public interface INothingModelVM
     /// <summary>
     /// Идентификатор модели
     /// </summary>
+    [Description("Идентификатор модели")]
     public int Id { get; }
 
     /// <summary>
     /// Имя модели
     /// </summary>
+    [Description("Имя модели")]
     public string Name { get; }
 
     /// <summary>
