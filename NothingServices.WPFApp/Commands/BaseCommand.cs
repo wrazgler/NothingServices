@@ -20,6 +20,9 @@ public abstract class BaseCommand : ICommand
     /// Проверка возможности выполнить команду
     /// </summary>
     /// <param name="parameter">Параметр команды</param>
+    /// <returns>
+    /// Возвращает <see langword="true"/>, если можно выполнить команду и <see langword="true"/>, если нельзя
+    /// </returns>
     public abstract bool CanExecute(object? parameter);
 
     /// <summary>

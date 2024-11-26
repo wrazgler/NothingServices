@@ -28,7 +28,7 @@ public class IconCharHasValueConverter : IValueConverter
             return false;
 
         if (value is not IconChar iconChar)
-            throw new ArgumentException(value?.GetType().Name);
+            throw new ArgumentException(value.GetType().Name);
 
         if (iconChar == IconChar.None)
             return false;

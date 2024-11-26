@@ -17,7 +17,7 @@ public class CreateCommand(
     IMainWindowManager mainWindowManager,
     INotificationService notificationService,
     CancellationTokenSource? cancellationTokenSource = null)
-    : BaseCommand
+    : BaseCommand, ICreateCommand
 {
     private readonly IDialogService _dialogService = dialogService;
     private readonly IMainWindowManager _mainWindowManager = mainWindowManager;
@@ -29,6 +29,9 @@ public class CreateCommand(
     /// Проверка возможности выполнить команду создать новую модель
     /// </summary>
     /// <param name="parameter">Параметр команды</param>
+    /// <returns>
+    /// Возвращает <see langword="true"/>, если можно выполнить команду и <see langword="true"/>, если нельзя
+    /// </returns>
     public override bool CanExecute(object? parameter)
     {
         if (parameter is not CreateNothingModelVM createNothingModelVM)
@@ -47,6 +50,9 @@ public class CreateCommand(
     /// <exception cref="ArgumentException">
     /// Неверный тип входного параметра
     /// </exception>
+    /// <exception cref="ArgumentNullException">
+    /// Параметр ссылается на <see langword="null"/>
+    /// </exception>
     /// <exception cref="NullReferenceException">
     /// Ошибка, возникшая при получении стратегии работы приложения
     /// </exception>
@@ -57,8 +63,10 @@ public class CreateCommand(
     {
         try
         {
+            if(parameter == null)
+                throw new ArgumentNullException(nameof(parameter));
             var createNothingModelVM = parameter as CreateNothingModelVM
-                ?? throw new ArgumentException($"Некорректный тип параметра команды: {parameter?.GetType().Name}");
+                ?? throw new ArgumentException($"Некорректный тип параметра команды: {parameter.GetType().Name}");
             if (createNothingModelVM.Name == null || string.IsNullOrEmpty(createNothingModelVM.Name.Trim()))
                 throw new PropertyRequiredException(typeof(CreateNothingModelVM), nameof(createNothingModelVM.Name));
             var strategy = _mainWindowManager.Strategy

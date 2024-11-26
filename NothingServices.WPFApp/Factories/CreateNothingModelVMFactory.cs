@@ -14,12 +14,12 @@ namespace NothingServices.WPFApp.Factories;
 /// Команда закрыть представление диалогового окна
 /// </param>
 public class CreateNothingModelVMFactory(
-    CloseDialogCommand closeDialogCommand,
-    CreateCommand createCommand)
+    ICloseDialogCommand closeDialogCommand,
+    ICreateCommand createCommand)
     : ICreateNothingModelVMFactory
 {
-    private readonly CloseDialogCommand _closeDialogCommand = closeDialogCommand;
-    private readonly CreateCommand _createCommand = createCommand;
+    private readonly ICloseDialogCommand _closeDialogCommand = closeDialogCommand;
+    private readonly ICreateCommand _createCommand = createCommand;
 
     /// <summary>
     /// Создать объект данных представления окна создать модель

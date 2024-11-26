@@ -10,7 +10,7 @@ namespace NothingServices.WPFApp.Commands;
 public class CloseDialogCommand(
     IDialogService dialogService,
     INotificationService notificationService)
-    : BaseCommand
+    : BaseCommand, ICloseDialogCommand
 {
     private readonly IDialogService _dialogService = dialogService;
     private readonly INotificationService _notificationService = notificationService;
@@ -19,6 +19,9 @@ public class CloseDialogCommand(
     /// Проверка возможности выполнить команду закрыть представление диалогового окна
     /// </summary>
     /// <param name="parameter">Параметр команды</param>
+    /// <returns>
+    /// Возвращает <see langword="true"/>, если можно выполнить команду и <see langword="true"/>, если нельзя
+    /// </returns>
     public override bool CanExecute(object? parameter)
     {
         return true;

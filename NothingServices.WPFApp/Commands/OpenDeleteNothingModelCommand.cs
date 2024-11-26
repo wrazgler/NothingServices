@@ -18,7 +18,7 @@ public class OpenDeleteNothingModelCommand(
     IDialogService dialogService,
     INotificationService notificationService,
     IDeleteNothingModelView deleteNothingModelView)
-    : BaseCommand
+    : BaseCommand, IOpenDeleteNothingModelCommand
 {
     private readonly IDeleteNothingModelView _deleteNothingModelView = deleteNothingModelView;
     private readonly IDeleteNothingModelVMFactory _deleteNothingModelVMFactory = deleteNothingModelVMFactory;
@@ -29,6 +29,9 @@ public class OpenDeleteNothingModelCommand(
     /// Проверка возможности выполнить команду открыть представление окна удалить существующую модель
     /// </summary>
     /// <param name="parameter">Параметр команды</param>
+    /// <returns>
+    /// Возвращает <see langword="true"/>, если можно выполнить команду и <see langword="true"/>, если нельзя
+    /// </returns>
     public override bool CanExecute(object? parameter)
     {
         if (parameter is not INothingModelVM nothingModelVM)
@@ -44,12 +47,23 @@ public class OpenDeleteNothingModelCommand(
     /// Открыть представление окна удалить существующую модель
     /// </summary>
     /// <param name="parameter">Параметр команды</param>
+    /// <exception cref="ArgumentException">
+    /// Неверный тип входного параметра
+    /// </exception>
+    /// <exception cref="ArgumentNullException">
+    /// Параметр ссылается на <see langword="null"/>
+    /// </exception>
+    /// <exception cref="PropertyRequiredException">
+    /// Требуемое поле не задано
+    /// </exception>
     public override void Execute(object? parameter)
     {
         try
         {
+            if(parameter == null)
+                throw new ArgumentNullException(nameof(parameter));
             var nothingModelVM = parameter as INothingModelVM
-                ?? throw new ArgumentException(parameter?.GetType().Name);
+                ?? throw new ArgumentException($"Некорректный тип параметра команды: {parameter.GetType().Name}");
             if (nothingModelVM.Id == 0)
                 throw new PropertyRequiredException(typeof(INothingModelVM), nameof(nothingModelVM.Id));
             var deleteNothingModelVM = _deleteNothingModelVMFactory.Create(nothingModelVM);

@@ -15,12 +15,12 @@ namespace NothingServices.WPFApp.Factories;
 /// Команда открыть представление окна обновления существующей модели
 /// </param>
 public class NothingModelVMFactory(
-    OpenDeleteNothingModelCommand openDeleteNothingModelCommand,
-    OpenUpdateNothingModelCommand openUpdateNothingModelCommand)
+    IOpenDeleteNothingModelCommand openDeleteNothingModelCommand,
+    IOpenUpdateNothingModelCommand openUpdateNothingModelCommand)
     : INothingModelVMFactory
 {
-    private readonly OpenDeleteNothingModelCommand _openDeleteNothingModelCommand = openDeleteNothingModelCommand;
-    private readonly OpenUpdateNothingModelCommand _openUpdateNothingModelCommand = openUpdateNothingModelCommand;
+    private readonly IOpenDeleteNothingModelCommand _openDeleteNothingModelCommand = openDeleteNothingModelCommand;
+    private readonly IOpenUpdateNothingModelCommand _openUpdateNothingModelCommand = openUpdateNothingModelCommand;
 
     /// <summary>
     /// Создать объект данных представления модели

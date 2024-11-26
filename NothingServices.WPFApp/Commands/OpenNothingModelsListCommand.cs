@@ -21,22 +21,35 @@ public class OpenNothingModelsListCommand(
     /// Проверка возможности выполнить команду открыть представление окна списка моделей
     /// </summary>
     /// <param name="parameter">Параметр команды</param>
+    /// <returns>
+    /// Возвращает <see langword="true"/>, если можно выполнить команду и <see langword="true"/>, если нельзя
+    /// </returns>
     public override bool CanExecute(object? parameter)
     {
-        var valid = parameter is INothingApiClientStrategy;
-        return valid;
+        if(parameter is not INothingApiClientStrategy)
+            return false;
+
+        return true;
     }
 
     /// <summary>
     /// Открыть представление окна списка моделей
     /// </summary>
     /// <param name="parameter">Параметр команды</param>
+    /// <exception cref="ArgumentException">
+    /// Неверный тип входного параметра
+    /// </exception>
+    /// <exception cref="ArgumentNullException">
+    /// Параметр ссылается на <see langword="null"/>
+    /// </exception>
     public override void Execute(object? parameter)
     {
         try
         {
+            if(parameter == null)
+                throw new ArgumentNullException(nameof(parameter));
             var strategy = parameter as INothingApiClientStrategy
-                ?? throw new ArgumentException(parameter?.GetType().Name);
+                ?? throw new ArgumentException($"Некорректный тип параметра команды: {parameter.GetType().Name}");
             _mainWindowManager.Strategy = strategy;
             _mainWindowManager.Next(MainWindowContentType.NothingModelsListVM);
         }

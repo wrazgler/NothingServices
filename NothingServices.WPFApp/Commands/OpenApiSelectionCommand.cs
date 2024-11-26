@@ -20,6 +20,9 @@ public class OpenApiSelectionCommand(
     /// Проверка возможности выполнить команду открыть представление окна выбора внешнего сервиса
     /// </summary>
     /// <param name="parameter">Параметр команды</param>
+    /// <returns>
+    /// Возвращает <see langword="true"/>, если можно выполнить команду и <see langword="true"/>, если нельзя
+    /// </returns>
     public override bool CanExecute(object? parameter)
     {
         return true;

@@ -111,15 +111,15 @@ public class AppExtensionsTests
             "NothingServices.WPFApp.ViewModels.Buttons.BackButtonVM",
             "NothingServices.WPFApp.ViewModels.Buttons.GRpcApiButtonVM",
             "NothingServices.WPFApp.ViewModels.Buttons.RestApiButtonVM",
-            "NothingServices.WPFApp.Commands.CloseDialogCommand",
-            "NothingServices.WPFApp.Commands.CreateCommand",
-            "NothingServices.WPFApp.Commands.DeleteCommand",
+            "NothingServices.WPFApp.Commands.ICloseDialogCommand",
+            "NothingServices.WPFApp.Commands.ICreateCommand",
+            "NothingServices.WPFApp.Commands.IDeleteCommand",
             "NothingServices.WPFApp.Commands.OpenApiSelectionCommand",
             "NothingServices.WPFApp.Commands.OpenCreateNothingModelCommand",
-            "NothingServices.WPFApp.Commands.OpenDeleteNothingModelCommand",
+            "NothingServices.WPFApp.Commands.IOpenDeleteNothingModelCommand",
             "NothingServices.WPFApp.Commands.OpenNothingModelsListCommand",
-            "NothingServices.WPFApp.Commands.OpenUpdateNothingModelCommand",
-            "NothingServices.WPFApp.Commands.UpdateCommand",
+            "NothingServices.WPFApp.Commands.IOpenUpdateNothingModelCommand",
+            "NothingServices.WPFApp.Commands.IUpdateCommand",
         };
         Assert.Equivalent(assert, result, true);
     }

@@ -149,6 +149,26 @@ public class CreateCommandTests
     }
 
     [Fact]
+    public void Execute_Parameter_Null_Notify_Error()
+    {
+        //Arrange
+        var notificationServiceMock = new Mock<INotificationService>();
+        var command = GetCreateCommand(
+            Mock.Of<IDialogService>(),
+            Mock.Of<IMainWindowManager>(),
+            notificationServiceMock.Object);
+
+        //Act
+        command.Execute(null);
+
+        //Assert
+        notificationServiceMock.Verify(
+            notificationService => notificationService.Notify(It.Is<string>(message
+                => message == "Value cannot be null. (Parameter 'parameter')")),
+            Times.Once);
+    }
+
+    [Fact]
     public void Execute_Parameter_Object_Notify_Error()
     {
         //Arrange

@@ -121,6 +121,27 @@ public class OpenDeleteNothingModelCommandTests
     }
 
     [Fact]
+    public void Execute_Parameter_Null_Notify_Error()
+    {
+        //Arrange
+        var notificationServiceMock = new Mock<INotificationService>();
+        var command = GetOpenDeleteNothingModelCommand(
+            Mock.Of<IDeleteNothingModelVMFactory>(),
+            Mock.Of<IDialogService>(),
+            notificationServiceMock.Object,
+            Mock.Of<IDeleteNothingModelView>());
+
+        //Act
+        command.Execute(null);
+
+        //Assert
+        notificationServiceMock.Verify(
+            notificationService => notificationService.Notify(It.Is<string>(message
+                => message == "Value cannot be null. (Parameter 'parameter')")),
+            Times.Once);
+    }
+
+    [Fact]
     public void Execute_Parameter_Object_Notify_Error()
     {
         //Arrange

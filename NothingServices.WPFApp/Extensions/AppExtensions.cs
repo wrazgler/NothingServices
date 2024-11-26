@@ -102,15 +102,15 @@ public static class AppExtensions
         services.AddScoped<GRpcApiButtonVM>();
         services.AddScoped<RestApiButtonVM>();
 
-        services.AddScoped<CloseDialogCommand>();
-        services.AddScoped<CreateCommand>();
-        services.AddScoped<DeleteCommand>();
+        services.AddScoped<ICloseDialogCommand, CloseDialogCommand>();
+        services.AddScoped<ICreateCommand, CreateCommand>();
+        services.AddScoped<IDeleteCommand, DeleteCommand>();
         services.AddScoped<OpenApiSelectionCommand>();
         services.AddScoped<OpenCreateNothingModelCommand>();
-        services.AddScoped<OpenDeleteNothingModelCommand>();
+        services.AddScoped<IOpenDeleteNothingModelCommand, OpenDeleteNothingModelCommand>();
         services.AddScoped<OpenNothingModelsListCommand>();
-        services.AddScoped<OpenUpdateNothingModelCommand>();
-        services.AddScoped<UpdateCommand>();
+        services.AddScoped<IOpenUpdateNothingModelCommand, OpenUpdateNothingModelCommand>();
+        services.AddScoped<IUpdateCommand, UpdateCommand>();
 
         return services;
     }

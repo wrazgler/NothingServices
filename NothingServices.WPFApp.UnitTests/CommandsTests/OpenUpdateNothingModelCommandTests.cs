@@ -147,7 +147,7 @@ public class OpenUpdateNothingModelCommandTests
             updateNothingModelView);
 
         //Act
-        command.Execute(null);
+        command.Execute(nothingModelVM);
 
         //Assert
         updateNothingModelVMFactoryMock.Verify(
@@ -158,6 +158,27 @@ public class OpenUpdateNothingModelCommandTests
             dialogService => dialogService.OpenDialog(
                 It.Is<UpdateNothingModelVM>(dialogContentVM => dialogContentVM == updateNothingModelVM),
                 It.Is<IUpdateNothingModelView>(dialogContentView => dialogContentView == updateNothingModelView)),
+            Times.Once);
+    }
+
+    [Fact]
+    public void Execute_Parameter_Null_Notify_Error()
+    {
+        //Arrange
+        var notificationServiceMock = new Mock<INotificationService>();
+        var command = GetOpenUpdateNothingModelCommand(
+            Mock.Of<IUpdateNothingModelVMFactory>(),
+            Mock.Of<IDialogService>(),
+            notificationServiceMock.Object,
+            Mock.Of<IUpdateNothingModelView>());
+
+        //Act
+        command.Execute(null);
+
+        //Assert
+        notificationServiceMock.Verify(
+            notificationService => notificationService.Notify(It.Is<string>(message
+                => message == "Value cannot be null. (Parameter 'parameter')")),
             Times.Once);
     }
 

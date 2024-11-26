@@ -14,12 +14,12 @@ namespace NothingServices.WPFApp.Factories;
 /// Команда закрыть представление диалогового окна
 /// </param>
 public class UpdateNothingModelVMFactory(
-    CloseDialogCommand closeDialogCommand,
-    UpdateCommand updateCommand)
+    ICloseDialogCommand closeDialogCommand,
+    IUpdateCommand updateCommand)
     : IUpdateNothingModelVMFactory
 {
-    private readonly CloseDialogCommand _closeDialogCommand = closeDialogCommand;
-    private readonly UpdateCommand _updateCommand = updateCommand;
+    private readonly ICloseDialogCommand _closeDialogCommand = closeDialogCommand;
+    private readonly IUpdateCommand _updateCommand = updateCommand;
 
     /// <summary>
     /// Создать объект данных представления окна обновить модель

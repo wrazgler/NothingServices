@@ -27,6 +27,9 @@ public class OpenCreateNothingModelCommand(
     /// Проверка возможности выполнить команду открыть представление окна создания новой модели
     /// </summary>
     /// <param name="parameter">Параметр команды</param>
+    /// <returns>
+    /// Возвращает <see langword="true"/>, если можно выполнить команду и <see langword="true"/>, если нельзя
+    /// </returns>
     public override bool CanExecute(object? parameter)
     {
         return true;

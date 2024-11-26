@@ -18,7 +18,7 @@ public class OpenUpdateNothingModelCommand(
     IDialogService dialogService,
     INotificationService notificationService,
     IUpdateNothingModelView updateNothingModelView)
-    : BaseCommand
+    : BaseCommand, IOpenUpdateNothingModelCommand
 {
     private readonly IDialogService _dialogService = dialogService;
     private readonly INotificationService _notificationService = notificationService;
@@ -29,6 +29,9 @@ public class OpenUpdateNothingModelCommand(
     /// Проверка возможности выполнить команду открыть представление окна обновления существующей модели
     /// </summary>
     /// <param name="parameter">Параметр команды</param>
+    /// <returns>
+    /// Возвращает <see langword="true"/>, если можно выполнить команду и <see langword="true"/>, если нельзя
+    /// </returns>
     public override bool CanExecute(object? parameter)
     {
         if (parameter is not INothingModelVM nothingModelVM)
@@ -47,12 +50,23 @@ public class OpenUpdateNothingModelCommand(
     /// Открыть представление окна обновления существующей модели
     /// </summary>
     /// <param name="parameter">Параметр команды</param>
+    /// <exception cref="ArgumentException">
+    /// Неверный тип входного параметра
+    /// </exception>
+    /// <exception cref="ArgumentNullException">
+    /// Параметр ссылается на <see langword="null"/>
+    /// </exception>
+    /// <exception cref="PropertyRequiredException">
+    /// Требуемое поле не задано
+    /// </exception>
     public override void Execute(object? parameter)
     {
         try
         {
+            if(parameter == null)
+                throw new ArgumentNullException(nameof(parameter));
             var nothingModelVM = parameter as INothingModelVM
-                ?? throw new ArgumentException(parameter?.GetType().Name);
+                ?? throw new ArgumentException($"Некорректный тип параметра команды: {parameter.GetType().Name}");
             if (nothingModelVM.Id == 0)
                 throw new PropertyRequiredException(typeof(INothingModelVM), nameof(nothingModelVM.Id));
             if (nothingModelVM.Name == null || string.IsNullOrEmpty(nothingModelVM.Name.Trim()))
