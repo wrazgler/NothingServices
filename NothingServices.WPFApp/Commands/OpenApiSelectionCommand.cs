@@ -41,7 +41,7 @@ public class OpenApiSelectionCommand(
         }
         catch (Exception ex)
         {
-            _notificationService.Notify(ex.Message);
+            _notificationService.Notify(ex.Message, ex.ToString());
         }
     }
 }

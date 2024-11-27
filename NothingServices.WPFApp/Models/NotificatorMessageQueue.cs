@@ -6,17 +6,17 @@ namespace NothingServices.WPFApp.Models;
 public class NotificatorMessageQueue
 {
     private readonly object _messagesLock = new();
-    private readonly LinkedList<string> _nodes = [];
+    private readonly LinkedList<NotificatorItem> _nodes = [];
 
     /// <summary>
     /// Добавляет новое сообщение в конец очереди
     /// </summary>
-    /// <param name="message">Новое сообщение</param>
-    public void AddLast(string message)
+    /// <param name="notificatorItem">Данные уведомления</param>
+    public void AddLast(NotificatorItem notificatorItem)
     {
         lock (_messagesLock)
         {
-            _nodes.AddLast(message);
+            _nodes.AddLast(notificatorItem);
         }
     }
 
@@ -24,7 +24,7 @@ public class NotificatorMessageQueue
     /// Получить первое сообщение из очереди
     /// </summary>
     /// <returns>Первое сообщение из очереди</returns>
-    public LinkedListNode<string>? GetFirst()
+    public LinkedListNode<NotificatorItem>? GetFirst()
     {
         lock (_messagesLock)
         {

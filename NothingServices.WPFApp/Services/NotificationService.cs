@@ -53,9 +53,15 @@ public class NotificationService(Dispatcher? dispatcher = null, TimeSpan? durati
     /// Отобразить уведомление в пользовательском интерфейсе
     /// </summary>
     /// <param name="message">Текст уведомления</param>
-    public void Notify(string message)
+    /// <param name="toolTip">Подсказка уведомления</param>
+    public void Notify(string message, string? toolTip = null)
     {
-        _notificatorMessageQueue.AddLast(message);
+        var notificatorItem = new NotificatorItem()
+        {
+            Message = message,
+            ToolTip = toolTip ?? message,
+        };
+        _notificatorMessageQueue.AddLast(notificatorItem);
         _dispatcher.InvokeAsync(ShowNextAsync);
     }
 
@@ -87,15 +93,16 @@ public class NotificationService(Dispatcher? dispatcher = null, TimeSpan? durati
                 return true;
 
             await Task.Delay(TimeSpan.FromSeconds(1));
-        };
+        }
         return false;
     }
 
-    private async Task ShowAsync(Notificator notificator, string message)
+    private async Task ShowAsync(Notificator notificator, NotificatorItem notificatorItem)
     {
         var content = new ContentControl
         {
-            Content = message,
+            Content = notificatorItem.Message,
+            ToolTip = notificatorItem.ToolTip,
         };
         notificator.EventWaitHandle = new ManualResetEvent(!notificator.IsMouseOver);
         notificator.Message = content;

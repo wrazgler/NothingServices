@@ -76,7 +76,7 @@ public class OpenUpdateNothingModelCommand(
         }
         catch (Exception ex)
         {
-            _notificationService.Notify(ex.Message);
+            _notificationService.Notify(ex.Message, ex.ToString());
         }
     }
 }

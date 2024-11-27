@@ -13,11 +13,11 @@ namespace NothingServices.WPFApp.ViewModels;
 /// <param name="notificationService">Сервис отображения уведомлений в пользовательском интерфейсе</param>
 public class MainWindowVM(
     IAppVersionProvider appVersionProvider,
+    IDialogVM dialogVM,
     INotificationService notificationService,
     ApiSelectionVM apiSelectionVM,
-    DialogVM dialogVM,
     NothingModelsListVM nothingModelsListVM)
-    : ObservableObject
+    : ObservableObject, IMainWindowVM
 {
     private const string TitleFormat = "Клиент работы с NothingServices - v{0}";
 
@@ -39,7 +39,7 @@ public class MainWindowVM(
     /// <summary>
     /// Данные представления диалогового окна
     /// </summary>
-    public DialogVM DialogVM { get; } = dialogVM;
+    public IDialogVM DialogVM { get; } = dialogVM;
 
     /// <summary>
     /// Данные представления окна списка моделей

@@ -32,5 +32,6 @@ public interface INotificationService
     /// Отобразить уведомление в пользовательском интерфейсе
     /// </summary>
     /// <param name="message">Текст уведомления</param>
-    void Notify(string message);
+    /// <param name="toolTip">Подсказка уведомления</param>
+    void Notify(string message, string? toolTip = null);
 }

@@ -57,7 +57,7 @@ public class OpenNothingModelsListCommand(
         {
             _mainWindowManager.Strategy = null;
             _mainWindowManager.Next(MainWindowContentType.ApiSelectionVM);
-            _notificationService.Notify(ex.Message);
+            _notificationService.Notify(ex.Message, ex.ToString());
         }
     }
 }

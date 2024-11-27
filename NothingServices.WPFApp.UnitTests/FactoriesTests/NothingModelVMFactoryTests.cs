@@ -15,7 +15,11 @@ public class NothingModelVMFactoryTests
         //Arrange
         var openDeleteNothingModelCommand = Mock.Of<IOpenDeleteNothingModelCommand>();
         var openUpdateNothingModelCommand = Mock.Of<IOpenUpdateNothingModelCommand>();
-        var nothingModelDto = Mock.Of<NothingModelDto>(model => model.Id == 1 && model.Name == "test");
+        var nothingModelDto = new NothingModelDto()
+        {
+            Id = 1,
+            Name = "test",
+        };
         var factory = GetNothingModelVMFactory(openDeleteNothingModelCommand, openUpdateNothingModelCommand);
 
         //Act

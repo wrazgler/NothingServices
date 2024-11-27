@@ -1,9 +1,11 @@
+using NothingServices.WPFApp.Controls;
+
 namespace NothingServices.WPFApp.Views;
 
 /// <summary>
 /// Представление главного окна
 /// </summary>
-public partial class MainWindow
+public partial class MainWindow : IMainWindow
 {
     /// <summary>
     /// Инициализация главного окна

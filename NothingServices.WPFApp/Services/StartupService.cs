@@ -1,6 +1,6 @@
+using NothingServices.WPFApp.Controls;
 using NothingServices.WPFApp.Models;
 using NothingServices.WPFApp.ViewModels;
-using NothingServices.WPFApp.Views;
 
 namespace NothingServices.WPFApp.Services;
 
@@ -12,12 +12,12 @@ namespace NothingServices.WPFApp.Services;
 /// <param name="mainWindowVM">Данные представления главного окна</param>
 public class StartupService(
     IMainWindowManager mainWindowManager,
-    MainWindow mainWindow,
-    MainWindowVM mainWindowVM)
+    IMainWindow mainWindow,
+    IMainWindowVM mainWindowVM)
 {
     private readonly IMainWindowManager _mainWindowManager = mainWindowManager;
-    private readonly MainWindow _mainWindow = mainWindow;
-    private readonly MainWindowVM _mainWindowVM = mainWindowVM;
+    private readonly IMainWindow _mainWindow = mainWindow;
+    private readonly IMainWindowVM _mainWindowVM = mainWindowVM;
 
     /// <summary>
     /// Бизнес логика запуска приложения

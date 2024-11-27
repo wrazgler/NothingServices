@@ -171,8 +171,9 @@ public class UpdateCommandTests
             Times.Once);
         dialogServiceMock.Verify(dialogService => dialogService.CloseDialog(), Times.Once);
         notificationServiceMock.Verify(
-            notificationService => notificationService.Notify(It.Is<string>(message
-                => message == $"Обновлено \"{nothingModelVM.Name}\"")),
+            notificationService => notificationService.Notify(
+                It.Is<string>(message => message == $"Обновлено \"{nothingModelVM.Name}\""),
+                It.IsAny<string>()),
             Times.Once);
     }
 
@@ -191,8 +192,9 @@ public class UpdateCommandTests
 
         //Assert
         notificationServiceMock.Verify(
-            notificationService => notificationService.Notify(It.Is<string>(message
-                => message == "Value cannot be null. (Parameter 'parameter')")),
+            notificationService => notificationService.Notify(
+                It.Is<string>(message => message == "Value cannot be null. (Parameter 'parameter')"),
+                It.IsAny<string>()),
             Times.Once);
     }
 
@@ -211,8 +213,9 @@ public class UpdateCommandTests
 
         //Assert
         notificationServiceMock.Verify(
-            notificationService => notificationService.Notify(It.Is<string>(message
-                => message == "Некорректный тип параметра команды: Object")),
+            notificationService => notificationService.Notify(
+                It.Is<string>(message => message == "Некорректный тип параметра команды: Object"),
+                It.IsAny<string>()),
             Times.Once);
     }
 
@@ -237,8 +240,9 @@ public class UpdateCommandTests
 
         //Assert
         notificationServiceMock.Verify(
-            notificationService => notificationService.Notify(It.Is<string>(message
-                => message == "Поле Идентификатор модели не может быть пустым")),
+            notificationService => notificationService.Notify(
+                It.Is<string>(message => message == "Поле Идентификатор модели не может быть пустым"),
+                It.IsAny<string>()),
             Times.Once);
     }
 
@@ -263,8 +267,9 @@ public class UpdateCommandTests
 
         //Assert
         notificationServiceMock.Verify(
-            notificationService => notificationService.Notify(It.Is<string>(message
-                => message == "Поле Имя модели не может быть пустым")),
+            notificationService => notificationService.Notify(
+                It.Is<string>(message => message == "Поле Имя модели не может быть пустым"),
+                It.IsAny<string>()),
             Times.Once);
     }
 
@@ -289,8 +294,9 @@ public class UpdateCommandTests
 
         //Assert
         notificationServiceMock.Verify(
-            notificationService => notificationService.Notify(It.Is<string>(message
-                => message == "Поле Имя модели не может быть пустым")),
+            notificationService => notificationService.Notify(
+                It.Is<string>(message => message == "Поле Имя модели не может быть пустым"),
+                It.IsAny<string>()),
             Times.Once);
     }
 
@@ -315,8 +321,9 @@ public class UpdateCommandTests
 
         //Assert
         notificationServiceMock.Verify(
-            notificationService => notificationService.Notify(It.Is<string>(message
-                => message == "Поле Имя модели не может быть пустым")),
+            notificationService => notificationService.Notify(
+                It.Is<string>(message => message == "Поле Имя модели не может быть пустым"),
+                It.IsAny<string>()),
             Times.Once);
     }
 
@@ -341,8 +348,9 @@ public class UpdateCommandTests
 
         //Assert
         notificationServiceMock.Verify(
-            notificationService => notificationService.Notify(It.Is<string>(message
-                => message == "Стратегия работы приложения не задана")),
+            notificationService => notificationService.Notify(
+                It.Is<string>(message => message == "Стратегия работы приложения не задана"),
+                It.IsAny<string>()),
             Times.Once);
     }
 

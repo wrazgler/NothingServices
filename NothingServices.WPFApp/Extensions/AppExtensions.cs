@@ -90,12 +90,12 @@ public static class AppExtensions
     {
         services.AddScoped<ICreateNothingModelView, CreateNothingModelView>();
         services.AddScoped<IDeleteNothingModelView, DeleteNothingModelView>();
-        services.AddScoped<MainWindow>();
+        services.AddScoped<IMainWindow, MainWindow>();
         services.AddScoped<IUpdateNothingModelView, UpdateNothingModelView>();
 
         services.AddScoped<ApiSelectionVM>();
-        services.AddScoped<DialogVM>();
-        services.AddScoped<MainWindowVM>();
+        services.AddScoped<IDialogVM, DialogVM>();
+        services.AddScoped<IMainWindowVM, MainWindowVM>();
         services.AddScoped<NothingModelsListVM>();
 
         services.AddScoped<BackButtonVM>();

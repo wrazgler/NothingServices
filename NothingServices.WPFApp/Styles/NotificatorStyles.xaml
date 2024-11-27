@@ -72,6 +72,7 @@
                           HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                           Margin="{TemplateBinding Padding}"
                           SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                          ToolTip="{TemplateBinding ToolTip}"
                           VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
           <ContentPresenter.Resources>
             <DataTemplate DataType="{x:Type system:String}">
@@ -81,8 +82,7 @@
                          Foreground="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType={x:Type controls:Notificator}}}"
                          Text="{Binding}"
                          TextAlignment="{Binding Path=(assistants:ElementAssistant.TextAlignment), RelativeSource={RelativeSource AncestorType={x:Type controls:Notificator}}}"
-                         TextWrapping="{Binding Path=(assistants:ElementAssistant.TextWrapping), RelativeSource={RelativeSource AncestorType={x:Type controls:Notificator}}}"
-                         ToolTip="{Binding }"/>
+                         TextWrapping="{Binding Path=(assistants:ElementAssistant.TextWrapping), RelativeSource={RelativeSource AncestorType={x:Type controls:Notificator}}}"/>
             </DataTemplate>
           </ContentPresenter.Resources>
         </ContentPresenter>

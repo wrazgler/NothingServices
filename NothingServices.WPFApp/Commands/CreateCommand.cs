@@ -80,7 +80,7 @@ public class CreateCommand(
         }
         catch (Exception ex)
         {
-            _notificationService.Notify(ex.Message);
+            _notificationService.Notify(ex.Message, ex.ToString());
         }
     }
 }

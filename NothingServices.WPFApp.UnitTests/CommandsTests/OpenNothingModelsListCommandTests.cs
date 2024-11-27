@@ -89,8 +89,9 @@ public class OpenNothingModelsListCommandTests
 
         //Assert
         notificationServiceMock.Verify(
-            notificationService => notificationService.Notify(It.Is<string>(message
-                => message == "Value cannot be null. (Parameter 'parameter')")),
+            notificationService => notificationService.Notify(
+                It.Is<string>(message => message == "Value cannot be null. (Parameter 'parameter')"),
+                It.IsAny<string>()),
             Times.Once);
     }
 
@@ -108,8 +109,9 @@ public class OpenNothingModelsListCommandTests
 
         //Assert
         notificationServiceMock.Verify(
-            notificationService => notificationService.Notify(It.Is<string>(message
-                => message == "Некорректный тип параметра команды: Object")),
+            notificationService => notificationService.Notify(
+                It.Is<string>(message => message == "Некорректный тип параметра команды: Object"),
+                It.IsAny<string>()),
             Times.Once);
     }
 

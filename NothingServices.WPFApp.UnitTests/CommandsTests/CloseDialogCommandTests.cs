@@ -54,8 +54,9 @@ public class CloseDialogCommandTests
 
         //Assert
         notificationServiceMock.Verify(
-            notificationService => notificationService.Notify(It.Is<string>(message
-                => message == "Fake exception")),
+            notificationService => notificationService.Notify(
+                It.Is<string>(message => message == "Fake exception"),
+                It.IsAny<string>()),
             Times.Once);
     }
 
