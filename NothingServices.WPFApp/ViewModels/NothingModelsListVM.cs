@@ -97,7 +97,7 @@ public class NothingModelsListVM : ObservableObject, IMainWindowContentVM
     {
         var strategy = _mainWindowManager.Strategy
             ?? throw new NullReferenceException(nameof(_mainWindowManager.Strategy));
-        var task = Task.Run(() => strategy.GetNothingModelsAsync(_cancellationTokenSource.Token));
+        var task = Task.Run(() => strategy.GetNothingModels(_cancellationTokenSource.Token));
         task.Wait();
         var nothingModels = task.Result;
         return nothingModels;

@@ -10,7 +10,7 @@ namespace NothingServices.ConsoleApp.IntegrationTests.ClientsTests;
 public class NothingWebApiClientTests
 {
     [Fact]
-    public async Task GetAsync_Equivalent()
+    public async Task Get_Equivalent()
     {
         try
         {
@@ -20,7 +20,7 @@ public class NothingWebApiClientTests
             var nothingWebApiClient = GetNothingWebApiClient();
 
             //Act
-            var result = await nothingWebApiClient.GetAsync();
+            var result = await nothingWebApiClient.Get();
 
             //Assert
             var expected = new NothingModelWebDto[]
@@ -41,7 +41,7 @@ public class NothingWebApiClientTests
     }
 
     [Fact]
-    public async Task GetAsync_Id_Equivalent()
+    public async Task Get_Id_Equivalent()
     {
         try
         {
@@ -52,7 +52,7 @@ public class NothingWebApiClientTests
             var id = 1;
 
             //Act
-            var result = await nothingWebApiClient.GetAsync(id);
+            var result = await nothingWebApiClient.Get(id);
 
             //Assert
             var expected = new NothingModelWebDto()
@@ -70,7 +70,7 @@ public class NothingWebApiClientTests
     }
 
     [Fact]
-    public async Task CreateAsync_Equivalent()
+    public async Task Create_Equivalent()
     {
         try
         {
@@ -84,7 +84,7 @@ public class NothingWebApiClientTests
             };
 
             //Act
-            var result = await nothingWebApiClient.CreateAsync(createNothingModelWebDto);
+            var result = await nothingWebApiClient.Create(createNothingModelWebDto);
 
             //Assert
             var expected = new NothingModelWebDto()
@@ -102,7 +102,7 @@ public class NothingWebApiClientTests
     }
 
     [Fact]
-    public async Task UpdateAsync_Equivalent()
+    public async Task Update_Equivalent()
     {
         try
         {
@@ -117,7 +117,7 @@ public class NothingWebApiClientTests
             };
 
             //Act
-            var result = await nothingWebApiClient.UpdateAsync(updateNothingModelWebDto);
+            var result = await nothingWebApiClient.Update(updateNothingModelWebDto);
 
             //Assert
             var expected = new NothingModelWebDto()
@@ -135,7 +135,7 @@ public class NothingWebApiClientTests
     }
 
     [Fact]
-    public async Task DeleteAsync_Equivalent()
+    public async Task Delete_Equivalent()
     {
         try
         {
@@ -146,7 +146,7 @@ public class NothingWebApiClientTests
             var id = 1;
 
             //Act
-            var result = await nothingWebApiClient.DeleteAsync(id);
+            var result = await nothingWebApiClient.Delete(id);
 
             //Assert
             var expected = new NothingModelWebDto()

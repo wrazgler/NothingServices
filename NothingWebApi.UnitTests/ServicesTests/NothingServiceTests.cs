@@ -14,7 +14,7 @@ namespace NothingWebApi.UnitTests.ServicesTests;
 public class NothingServiceTests
 {
     [Fact]
-    public async Task GetAsync_Equivalent()
+    public async Task Get_Equivalent()
     {
         //Arrange
         var nothingModels = GetNothingModels();
@@ -22,7 +22,7 @@ public class NothingServiceTests
         var nothingService = GetNothingService(dbContextMock.Object);
 
         //Act
-        var result = await nothingService.GetAsync();
+        var result = await nothingService.Get();
 
         //Assert
         var expected = nothingModels;
@@ -30,7 +30,7 @@ public class NothingServiceTests
     }
 
     [Fact]
-    public async Task GetAsync_ThrowsAsync_Exception()
+    public async Task Get_Throws_Exception()
     {
         //Arrange
         var dbContextOptions = new DbContextOptions<NothingWebApiDbContext>();
@@ -41,14 +41,14 @@ public class NothingServiceTests
         var nothingService = GetNothingService(dbContextMock.Object);
 
         //Act
-        var result = new Func<Task<NothingModelDto[]>>(() => nothingService.GetAsync());
+        var result = new Func<Task<NothingModelDto[]>>(() => nothingService.Get());
 
         //Assert
         await Assert.ThrowsAsync<Exception>(result);
     }
 
     [Fact]
-    public async Task GetAsync_Id_Equivalent()
+    public async Task Get_Id_Equivalent()
     {
         //Arrange
         var nothingModels = GetNothingModels();
@@ -56,7 +56,7 @@ public class NothingServiceTests
         var nothingService = GetNothingService(dbContextMock.Object);
 
         //Act
-        var result = await nothingService.GetAsync(1);
+        var result = await nothingService.Get(1);
 
         //Assert
         var expected = new NothingModelDto()
@@ -68,21 +68,21 @@ public class NothingServiceTests
     }
 
     [Fact]
-    public async Task GetAsync_Not_Exist_Id_Throws_ArgumentException()
+    public async Task Get_Not_Exist_Id_Throws_ArgumentException()
     {
         //Arrange
         var dbContextMock = GetDbContextMock([]);
         var nothingService = GetNothingService(dbContextMock.Object);
 
         //Act
-        var result = new Func<Task<NothingModelDto>>(() => nothingService.GetAsync(1));
+        var result = new Func<Task<NothingModelDto>>(() => nothingService.Get(1));
 
         //Assert
         await Assert.ThrowsAsync<ArgumentException>(result);
     }
 
     [Fact]
-    public async Task CreateAsync_Dto_Name_Equal()
+    public async Task Create_Dto_Name_Equal()
     {
         //Arrange
         var dbContextMock = GetDbContextMock([]);
@@ -93,7 +93,7 @@ public class NothingServiceTests
         };
 
         //Act
-        var nothingModel = await nothingService.CreateAsync(createNothingModelDto);
+        var nothingModel = await nothingService.Create(createNothingModelDto);
         var result = nothingModel.Name;
 
         //Assert
@@ -104,7 +104,7 @@ public class NothingServiceTests
     }
 
     [Fact]
-    public async Task CreateAsync_Db_Name_Equal()
+    public async Task Create_Db_Name_Equal()
     {
         //Arrange
         var nothingModels = new List<NothingModel>();
@@ -116,7 +116,7 @@ public class NothingServiceTests
         };
 
         //Act
-        await nothingService.CreateAsync(createNothingModelDto);
+        await nothingService.Create(createNothingModelDto);
         var result = nothingModels.Single().Name;
 
         //Assert
@@ -127,7 +127,7 @@ public class NothingServiceTests
     }
 
     [Fact]
-    public async Task CreateAsync_EmptyName_Throw_ArgumentNullException()
+    public async Task Create_EmptyName_Throw_ArgumentNullException()
     {
         //Arrange
         var dbContextMock = GetDbContextMock([]);
@@ -138,7 +138,7 @@ public class NothingServiceTests
         };
 
         //Act
-        var result = new Func<Task<NothingModelDto>>(() => nothingService.CreateAsync(createNothingModelDto));
+        var result = new Func<Task<NothingModelDto>>(() => nothingService.Create(createNothingModelDto));
 
         //Assert
         await Assert.ThrowsAsync<ArgumentNullException>(result);
@@ -147,7 +147,7 @@ public class NothingServiceTests
     }
 
     [Fact]
-    public async Task UpdateAsync_Dto_Name_Equal()
+    public async Task Update_Dto_Name_Equal()
     {
         //Arrange
         var nothingModels = GetNothingModels();
@@ -160,7 +160,7 @@ public class NothingServiceTests
         };
 
         //Act
-        var nothingModel = await nothingService.UpdateAsync(updateNothingModelDto);
+        var nothingModel = await nothingService.Update(updateNothingModelDto);
         var result = nothingModel.Name;
 
         //Assert
@@ -170,7 +170,7 @@ public class NothingServiceTests
     }
 
     [Fact]
-    public async Task UpdateAsync_Db_Name_Equal()
+    public async Task Update_Db_Name_Equal()
     {
         //Arrange
         var nothingModels = GetNothingModels();
@@ -183,7 +183,7 @@ public class NothingServiceTests
         };
 
         //Act
-        await nothingService.UpdateAsync(updateNothingModelDto);
+        await nothingService.Update(updateNothingModelDto);
         var result = nothingModels.Single().Name;
 
         //Assert
@@ -193,7 +193,7 @@ public class NothingServiceTests
     }
 
     [Fact]
-    public async Task UpdateAsync_Not_Exist_Id_Throws_ArgumentException()
+    public async Task UpdateNot_Exist_Id_Throws_ArgumentException()
     {
         //Arrange
         var dbContextMock = GetDbContextMock([]);
@@ -205,14 +205,14 @@ public class NothingServiceTests
         };
 
         //Act
-        var result = new Func<Task<NothingModelDto>>(() => nothingService.UpdateAsync(updateNothingModelDto));
+        var result = new Func<Task<NothingModelDto>>(() => nothingService.Update(updateNothingModelDto));
 
         //Assert
         await Assert.ThrowsAsync<ArgumentException>(result);
     }
 
     [Fact]
-    public async Task UpdateAsync_EmptyName_Throw_ArgumentNullException()
+    public async Task Update_EmptyName_Throw_ArgumentNullException()
     {
         //Arrange
         var dbContextMock = GetDbContextMock([]);
@@ -224,7 +224,7 @@ public class NothingServiceTests
         };
 
         //Act
-        var result = new Func<Task<NothingModelDto>>(() => nothingService.UpdateAsync(updateNothingModelDto));
+        var result = new Func<Task<NothingModelDto>>(() => nothingService.Update(updateNothingModelDto));
 
         //Assert
         await Assert.ThrowsAsync<ArgumentNullException>(result);
@@ -232,7 +232,7 @@ public class NothingServiceTests
     }
 
     [Fact]
-    public async Task DeleteAsync_Dto_Equivalent()
+    public async Task Delete_Dto_Equivalent()
     {
         //Arrange
         var nothingModels = GetNothingModels();
@@ -240,7 +240,7 @@ public class NothingServiceTests
         var nothingService = GetNothingService(dbContextMock.Object);
 
         //Act
-        var result = await nothingService.DeleteAsync(1);
+        var result = await nothingService.Delete(1);
 
         //Assert
         var expected = new NothingModelDto()
@@ -254,7 +254,7 @@ public class NothingServiceTests
     }
 
     [Fact]
-    public async Task DeleteAsync_Db_Any_False()
+    public async Task Delete_Db_Any_False()
     {
         //Arrange
         var nothingModels = GetNothingModels();
@@ -262,7 +262,7 @@ public class NothingServiceTests
         var nothingService = GetNothingService(dbContextMock.Object);
 
         //Act
-        await nothingService.DeleteAsync(1);
+        await nothingService.Delete(1);
 
         //Assert
         Assert.Empty(nothingModels);
@@ -271,14 +271,14 @@ public class NothingServiceTests
     }
 
     [Fact]
-    public async Task DeleteAsync_Not_Exist_Id_Throws_ArgumentException()
+    public async Task Delete_Not_Exist_Id_Throws_ArgumentException()
     {
         //Arrange
         var dbContextMock = GetDbContextMock([]);
         var nothingService = GetNothingService(dbContextMock.Object);
 
         //Act
-        var result = new Func<Task<NothingModelDto>>(() => nothingService.DeleteAsync(1));
+        var result = new Func<Task<NothingModelDto>>(() => nothingService.Delete(1));
 
         //Assert
         await Assert.ThrowsAsync<ArgumentException>(result);

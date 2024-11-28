@@ -6,14 +6,14 @@ namespace NothingWebApi.IntegrationTests.Extensions;
 
 internal static class DbContextExtensions
 {
-    internal static async Task<NothingWebApiDbContext> CreateNewDataBaseAsync(this IServiceProvider serviceProvider)
+    internal static async Task<NothingWebApiDbContext> CreateNewDataBase(this IServiceProvider serviceProvider)
     {
         var dbContext = serviceProvider.GetRequiredService<NothingWebApiDbContext>();
-        await dbContext.CreateNewDataBaseAsync();
+        await dbContext.CreateNewDataBase();
         return dbContext;
     }
     
-    internal static async Task<NothingWebApiDbContext> CreateNewDataBaseAsync(this NothingWebApiDbContext dbContext)
+    internal static async Task<NothingWebApiDbContext> CreateNewDataBase(this NothingWebApiDbContext dbContext)
     {
         await dbContext.Database.EnsureDeletedAsync();
         await dbContext.Database.EnsureCreatedAsync();
@@ -21,16 +21,16 @@ internal static class DbContextExtensions
         return dbContext;
     }
     
-    internal static async Task<NothingWebApiDbContext> AddNothingModelAsync(
+    internal static async Task<NothingWebApiDbContext> AddNothingModel(
         this IServiceProvider serviceProvider,
         string name = "Test")
     {
         var dbContext = serviceProvider.GetRequiredService<NothingWebApiDbContext>();
-        await dbContext.AddNothingModelAsync(name);
+        await dbContext.AddNothingModel(name);
         return dbContext;
     }
 
-    private static async Task<NothingWebApiDbContext> AddNothingModelAsync(
+    private static async Task<NothingWebApiDbContext> AddNothingModel(
         this NothingWebApiDbContext dbContext,
         string name = "Test")
     {

@@ -29,9 +29,9 @@ public class NothingWebApiClientStrategy(
     /// </summary>
     /// <param name="cancellationToken">Токен отмены</param>
     /// <returns>Коллекция данных представления модели</returns>
-    public async Task<ObservableCollection<INothingModelVM>> GetNothingModelsAsync(CancellationToken cancellationToken = default)
+    public async Task<ObservableCollection<INothingModelVM>> GetNothingModels(CancellationToken cancellationToken = default)
     {
-        var nothingModels = await _client.GetAsync(cancellationToken);
+        var nothingModels = await _client.Get(cancellationToken);
         var nothingModelVMs = nothingModels
             .Select(_factory.Create)
             .ToObservableCollection<INothingModelVM>();
@@ -43,12 +43,12 @@ public class NothingWebApiClientStrategy(
     /// </summary>
     /// <param name="createNothingModelVM">Данные представления создать модель</param>
     /// <param name="cancellationToken">Токен отмены</param>
-    public async Task<INothingModelVM> CreateNothingModelAsync(
+    public async Task<INothingModelVM> CreateNothingModel(
         CreateNothingModelVM createNothingModelVM,
         CancellationToken cancellationToken = default)
     {
         var createNothingModel = _mapper.Map<CreateNothingModelWebDto>(createNothingModelVM);
-        var nothingModel = await _client.CreateAsync(createNothingModel, cancellationToken);
+        var nothingModel = await _client.Create(createNothingModel, cancellationToken);
         var nothingModelVM = _factory.Create(nothingModel);
         return nothingModelVM;
     }
@@ -58,12 +58,12 @@ public class NothingWebApiClientStrategy(
     /// </summary>
     /// <param name="updateNothingModelVM">Данные представления обновить модель</param>
     /// <param name="cancellationToken">Токен отмены</param>
-    public async Task<INothingModelVM> UpdateNothingModelAsync(
+    public async Task<INothingModelVM> UpdateNothingModel(
         UpdateNothingModelVM updateNothingModelVM,
         CancellationToken cancellationToken = default)
     {
         var updateNothingModel = _mapper.Map<UpdateNothingModelWebDto>(updateNothingModelVM);
-        var nothingModel = await _client.UpdateAsync(updateNothingModel, cancellationToken);
+        var nothingModel = await _client.Update(updateNothingModel, cancellationToken);
         var nothingModelVM = _factory.Create(nothingModel);
         return nothingModelVM;
     }
@@ -73,11 +73,11 @@ public class NothingWebApiClientStrategy(
     /// </summary>
     /// <param name="deleteNothingModelVM">Данные представления удалить модель</param>
     /// <param name="cancellationToken">Токен отмены</param>
-    public async Task<INothingModelVM> DeleteNothingModelAsync(
+    public async Task<INothingModelVM> DeleteNothingModel(
         DeleteNothingModelVM deleteNothingModelVM,
         CancellationToken cancellationToken = default)
     {
-        var nothingModel = await _client.DeleteAsync(deleteNothingModelVM.Id, cancellationToken);
+        var nothingModel = await _client.Delete(deleteNothingModelVM.Id, cancellationToken);
         var nothingModelVM = _factory.Create(nothingModel);
         return nothingModelVM;
     }

@@ -115,7 +115,7 @@ public class CreateCommandTests
             Name = nothingModelVM.Name,
         };
         var strategyMock = new Mock<INothingApiClientStrategy>();
-        strategyMock.Setup(strategy => strategy.CreateNothingModelAsync(
+        strategyMock.Setup(strategy => strategy.CreateNothingModel(
             It.Is<CreateNothingModelVM>(createNothingModelVM => createNothingModelVM == parameter),
             It.IsAny<CancellationToken>()))
             .ReturnsAsync(nothingModelVM);
@@ -133,7 +133,7 @@ public class CreateCommandTests
         //Assert
         mainWindowManagerMock.VerifyGet(mainWindowManager => mainWindowManager.Strategy, Times.Once);
         strategyMock.Verify(
-            strategy => strategy.CreateNothingModelAsync(
+            strategy => strategy.CreateNothingModel(
                 It.Is<CreateNothingModelVM>(createNothingModelVM => createNothingModelVM == parameter),
                 It.IsAny<CancellationToken>()),
             Times.Once);

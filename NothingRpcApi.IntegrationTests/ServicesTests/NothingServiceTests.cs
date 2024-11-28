@@ -5,8 +5,8 @@ using Microsoft.Extensions.DependencyInjection;
 using NothingRpcApi.DbContexts;
 using NothingRpcApi.Dtos;
 using NothingRpcApi.Extensions;
+using NothingRpcApi.IntegrationTests.Extensions;
 using NothingRpcApi.Services;
-using NothingWebApi.IntegrationTests.Extensions;
 
 namespace NothingRpcApi.IntegrationTests.ServicesTests;
 
@@ -17,8 +17,8 @@ public class NothingServiceTests
     {
         //Arrange
         var serviceProvider = GetServiceProvider();
-        await serviceProvider.CreateNewDataBaseAsync();
-        await serviceProvider.AddNothingModelAsync();
+        await serviceProvider.CreateNewDataBase();
+        await serviceProvider.AddNothingModel();
         var nothingService = serviceProvider.GetRequiredService<INothingService>();
         var responseStreamMock = new Mock<IServerStreamWriter<NothingModelDto>>();
         var nothingModelDtos = new List<NothingModelDto>(1);
@@ -50,8 +50,8 @@ public class NothingServiceTests
     {
         //Arrange
         var serviceProvider = GetServiceProvider();
-        await serviceProvider.CreateNewDataBaseAsync();
-        await serviceProvider.AddNothingModelAsync();
+        await serviceProvider.CreateNewDataBase();
+        await serviceProvider.AddNothingModel();
         var nothingService = serviceProvider.GetRequiredService<INothingService>();
         var nothingModelIdDto = new NothingModelIdDto()
         {
@@ -76,8 +76,8 @@ public class NothingServiceTests
     {
         //Arrange
         var serviceProvider = GetServiceProvider();
-        await serviceProvider.CreateNewDataBaseAsync();
-        await serviceProvider.AddNothingModelAsync();
+        await serviceProvider.CreateNewDataBase();
+        await serviceProvider.AddNothingModel();
         var nothingService = serviceProvider.GetRequiredService<INothingService>();
         var createNothingModelDto = new CreateNothingModelDto()
         {
@@ -99,7 +99,7 @@ public class NothingServiceTests
     {
         //Arrange
         var serviceProvider = GetServiceProvider();
-        await serviceProvider.CreateNewDataBaseAsync();
+        await serviceProvider.CreateNewDataBase();
         var nothingService = serviceProvider.GetRequiredService<INothingService>();
         var createNothingModelDto = new CreateNothingModelDto()
         {
@@ -124,7 +124,7 @@ public class NothingServiceTests
     {
         //Arrange
         var serviceProvider = GetServiceProvider();
-        await serviceProvider.CreateNewDataBaseAsync();
+        await serviceProvider.CreateNewDataBase();
         var nothingService = serviceProvider.GetRequiredService<INothingService>();
         var createNothingModelDto = new CreateNothingModelDto()
         {
@@ -144,8 +144,8 @@ public class NothingServiceTests
     {
         //Arrange
         var serviceProvider = GetServiceProvider();
-        await serviceProvider.CreateNewDataBaseAsync();
-        await serviceProvider.AddNothingModelAsync();
+        await serviceProvider.CreateNewDataBase();
+        await serviceProvider.AddNothingModel();
         var nothingService = serviceProvider.GetRequiredService<INothingService>();
         var updateNothingModelDto = new UpdateNothingModelDto()
         {
@@ -168,8 +168,8 @@ public class NothingServiceTests
     {
         //Arrange
         var serviceProvider = GetServiceProvider();
-        await serviceProvider.CreateNewDataBaseAsync();
-        await serviceProvider.AddNothingModelAsync();
+        await serviceProvider.CreateNewDataBase();
+        await serviceProvider.AddNothingModel();
         var nothingService = serviceProvider.GetRequiredService<INothingService>();
         var updateNothingModelDto = new UpdateNothingModelDto()
         {
@@ -195,8 +195,8 @@ public class NothingServiceTests
     {
         //Arrange
         var serviceProvider = GetServiceProvider();
-        await serviceProvider.CreateNewDataBaseAsync();
-        await serviceProvider.AddNothingModelAsync();
+        await serviceProvider.CreateNewDataBase();
+        await serviceProvider.AddNothingModel();
         var nothingService = serviceProvider.GetRequiredService<INothingService>();
         var updateNothingModelDto = new UpdateNothingModelDto()
         {
@@ -217,8 +217,8 @@ public class NothingServiceTests
     {
         //Arrange
         var serviceProvider = GetServiceProvider();
-        await serviceProvider.CreateNewDataBaseAsync();
-        await serviceProvider.AddNothingModelAsync();
+        await serviceProvider.CreateNewDataBase();
+        await serviceProvider.AddNothingModel();
         var nothingService = serviceProvider.GetRequiredService<INothingService>();
         var nothingModelIdDto = new NothingModelIdDto()
         {
@@ -243,8 +243,8 @@ public class NothingServiceTests
     {
         //Arrange
         var serviceProvider = GetServiceProvider();
-        await serviceProvider.CreateNewDataBaseAsync();
-        await serviceProvider.AddNothingModelAsync();
+        await serviceProvider.CreateNewDataBase();
+        await serviceProvider.AddNothingModel();
         var nothingService = serviceProvider.GetRequiredService<INothingService>();
         var nothingModelIdDto = new NothingModelIdDto()
         {

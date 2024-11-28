@@ -15,7 +15,7 @@ namespace NothingServices.WPFApp.UnitTests.StrategiesTests;
 public class NothingRpcApiClientStrategyTests
 {
     [Fact]
-    public async Task GetNothingModelsAsync_Equivalent()
+    public async Task GetNothingModels_Equivalent()
     {
         //Arrange
         var nothingModels = GetNothingModels();
@@ -48,7 +48,7 @@ public class NothingRpcApiClientStrategyTests
             clientMock.Object);
 
         //Act
-        var nothingModelVMs = await nothingRpcApiClientStrategy.GetNothingModelsAsync();
+        var nothingModelVMs = await nothingRpcApiClientStrategy.GetNothingModels();
         var result = nothingModelVMs.Count;
 
         //Assert
@@ -68,7 +68,7 @@ public class NothingRpcApiClientStrategyTests
     }
 
     [Fact]
-    public async Task GetNothingModelsAsync_Throws_Exception()
+    public async Task GetNothingModels_Throws_Exception()
     {
         //Arrange
         var clientMock = new Mock<NothingRpcService.NothingRpcServiceClient>();
@@ -84,14 +84,14 @@ public class NothingRpcApiClientStrategyTests
             clientMock.Object);
 
         //Act
-        var result = new Func<Task>(() => nothingRpcApiClientStrategy.GetNothingModelsAsync());
+        var result = new Func<Task>(() => nothingRpcApiClientStrategy.GetNothingModels());
 
         //Assert
         await Assert.ThrowsAsync<Exception>(result);
     }
 
     [Fact]
-    public async Task CreateNothingModelAsync_Equivalent()
+    public async Task CreateNothingModel_Equivalent()
     {
         //Arrange
         var clientMock = new Mock<NothingRpcService.NothingRpcServiceClient>();
@@ -122,7 +122,7 @@ public class NothingRpcApiClientStrategyTests
         };
 
         //Act
-        await nothingRpcApiClientStrategy.CreateNothingModelAsync(createNothingModelVM);
+        await nothingRpcApiClientStrategy.CreateNothingModel(createNothingModelVM);
 
         //Assert
         clientMock.Verify(client => client.CreateAsync(
@@ -134,7 +134,7 @@ public class NothingRpcApiClientStrategyTests
     }
 
     [Fact]
-    public async Task CreateNothingModelAsync_Throws_Exception()
+    public async Task CreateNothingModel_Throws_Exception()
     {
         //Arrange
         var clientMock = new Mock<NothingRpcService.NothingRpcServiceClient>();
@@ -154,14 +154,14 @@ public class NothingRpcApiClientStrategyTests
         };
 
         //Act
-        var result = new Func<Task>(() => nothingRpcApiClientStrategy.CreateNothingModelAsync(createNothingModelVM));
+        var result = new Func<Task>(() => nothingRpcApiClientStrategy.CreateNothingModel(createNothingModelVM));
 
         //Assert
         await Assert.ThrowsAsync<Exception>(result);
     }
 
     [Fact]
-    public async Task UpdateNothingModelAsync_Equivalent()
+    public async Task UpdateNothingModel_Equivalent()
     {
         //Arrange
         var nothingModels = GetNothingModels();
@@ -198,7 +198,7 @@ public class NothingRpcApiClientStrategyTests
         };
 
         //Act
-        await nothingRpcApiClientStrategy.UpdateNothingModelAsync(updateNothingModelVM);
+        await nothingRpcApiClientStrategy.UpdateNothingModel(updateNothingModelVM);
 
         //Assert
         clientMock.Verify(client => client.UpdateAsync(
@@ -210,7 +210,7 @@ public class NothingRpcApiClientStrategyTests
     }
 
     [Fact]
-    public async Task UpdateNothingModelAsync_Throws_Exception()
+    public async Task UpdateNothingModel_Throws_Exception()
     {
         //Arrange
         var clientMock = new Mock<NothingRpcService.NothingRpcServiceClient>();
@@ -234,14 +234,14 @@ public class NothingRpcApiClientStrategyTests
         };
 
         //Act
-        var result = new Func<Task>(() => nothingRpcApiClientStrategy.UpdateNothingModelAsync(updateNothingModelVM));
+        var result = new Func<Task>(() => nothingRpcApiClientStrategy.UpdateNothingModel(updateNothingModelVM));
 
         //Assert
         await Assert.ThrowsAsync<Exception>(result);
     }
 
     [Fact]
-    public async Task DeleteNothingModelAsync_Equal()
+    public async Task DeleteNothingModel_Equal()
     {
         //Arrange
         var nothingModels = GetNothingModels();
@@ -269,7 +269,7 @@ public class NothingRpcApiClientStrategyTests
             nothingModelVM);
 
         //Act
-        await nothingRpcApiClientStrategy.DeleteNothingModelAsync(deleteNothingModelVM);
+        await nothingRpcApiClientStrategy.DeleteNothingModel(deleteNothingModelVM);
 
         //Assert
         clientMock.Verify(client => client.DeleteAsync(
@@ -281,7 +281,7 @@ public class NothingRpcApiClientStrategyTests
     }
 
     [Fact]
-    public async Task DeleteNothingModelAsync_Throws_Exception()
+    public async Task DeleteNothingModel_Throws_Exception()
     {
         //Arrange
         var clientMock = new Mock<NothingRpcService.NothingRpcServiceClient>();
@@ -302,7 +302,7 @@ public class NothingRpcApiClientStrategyTests
             nothingModelVM);
 
         //Act
-        var result = new Func<Task>(() => nothingRpcApiClientStrategy.DeleteNothingModelAsync(deleteNothingModelVM));
+        var result = new Func<Task>(() => nothingRpcApiClientStrategy.DeleteNothingModel(deleteNothingModelVM));
 
         //Assert
         await Assert.ThrowsAsync<Exception>(result);

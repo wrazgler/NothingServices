@@ -25,7 +25,7 @@ public class NothingWebApiClient(
     /// <param name="cancellationToken">Токен отмены</param>
     /// <returns>Список моделей</returns>
     /// <exception cref="JsonException">Ошибка десериализации ответа внешнего сервиса</exception>
-    public async Task<NothingModelWebDto[]> GetAsync(CancellationToken cancellationToken = default)
+    public async Task<NothingModelWebDto[]> Get(CancellationToken cancellationToken = default)
     {
         using var response = await _httpClient.GetAsync(_clientConfig.NothingWebApiUrl, cancellationToken);
         if (!response.IsSuccessStatusCode)
@@ -45,7 +45,7 @@ public class NothingWebApiClient(
     /// <param name="cancellationToken">Токен отмены</param>
     /// <returns>Объект модели</returns>
     /// <exception cref="JsonException">Ошибка десериализации ответа внешнего сервиса</exception>
-    public async Task<NothingModelWebDto> GetAsync(int id, CancellationToken cancellationToken = default)
+    public async Task<NothingModelWebDto> Get(int id, CancellationToken cancellationToken = default)
     {
         var requestUrl = Path.Combine(_clientConfig.NothingWebApiUrl, id.ToString());
         using var response = await _httpClient.GetAsync(requestUrl, cancellationToken);
@@ -66,7 +66,7 @@ public class NothingWebApiClient(
     /// <param name="cancellationToken">Токен отмены</param>
     /// <returns>Объект модели</returns>
     /// <exception cref="JsonException">Ошибка десериализации ответа внешнего сервиса</exception>
-    public async Task<NothingModelWebDto> CreateAsync(
+    public async Task<NothingModelWebDto> Create(
         CreateNothingModelWebDto createNothingModelWebDto,
         CancellationToken cancellationToken = default)
     {
@@ -91,7 +91,7 @@ public class NothingWebApiClient(
     /// <exception cref="JsonException">
     /// Ошибка десериализации ответа внешнего сервиса
     /// </exception>
-    public async Task<NothingModelWebDto> UpdateAsync(
+    public async Task<NothingModelWebDto> Update(
         UpdateNothingModelWebDto updateNothingModelWebDto,
         CancellationToken cancellationToken = default)
     {
@@ -115,7 +115,7 @@ public class NothingWebApiClient(
     /// <param name="cancellationToken">Токен отмены</param>
     /// <returns>Объект модели</returns>
     /// <exception cref="JsonException">Ошибка десериализации ответа внешнего сервиса</exception>
-    public async Task<NothingModelWebDto> DeleteAsync(int id, CancellationToken cancellationToken = default)
+    public async Task<NothingModelWebDto> Delete(int id, CancellationToken cancellationToken = default)
     {
         var requestUrl = Path.Combine(_clientConfig.NothingWebApiUrl, id.ToString());
         using var response = await _httpClient.DeleteAsync(requestUrl, cancellationToken);

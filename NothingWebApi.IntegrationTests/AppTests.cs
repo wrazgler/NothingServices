@@ -10,7 +10,7 @@ public class AppTests
     private const string AppUrl = "https://localhost:8259/nothing-web-api/NothingWebApi";
 
     [Fact]
-    public async Task GetAsync_Result_Equal()
+    public async Task Get_Result_Equal()
     {
         try
         {
@@ -42,7 +42,7 @@ public class AppTests
     }
 
     [Fact]
-    public async Task GetAsync_Id_Result_Equal()
+    public async Task Get_Id_Result_Equal()
     {
         try
         {
@@ -72,7 +72,7 @@ public class AppTests
     }
 
     [Fact]
-    public async Task CreateAsync_Result_Equal()
+    public async Task Create_Result_Equal()
     {
         try
         {
@@ -106,7 +106,7 @@ public class AppTests
     }
 
     [Fact]
-    public async Task UpdateAsync_Result_Equal()
+    public async Task Update_Result_Equal()
     {
         try
         {
@@ -141,7 +141,7 @@ public class AppTests
     }
 
     [Fact]
-    public async Task DeleteAsync_Result_Equal()
+    public async Task Delete_Result_Equal()
     {
         try
         {

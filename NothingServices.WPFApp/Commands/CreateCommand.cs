@@ -71,7 +71,7 @@ public class CreateCommand(
                 throw new PropertyRequiredException(typeof(CreateNothingModelVM), nameof(createNothingModelVM.Name));
             var strategy = _mainWindowManager.Strategy
                 ?? throw new NullReferenceException("Стратегия работы приложения не задана");
-            var nothingModelVM = await strategy.CreateNothingModelAsync(
+            var nothingModelVM = await strategy.CreateNothingModel(
                 createNothingModelVM,
                 _cancellationTokenSource.Token);
              _mainWindowManager.Next(MainWindowContentType.NothingModelsListVM);

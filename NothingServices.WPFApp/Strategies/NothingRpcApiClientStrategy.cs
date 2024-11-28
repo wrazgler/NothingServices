@@ -29,7 +29,7 @@ public class NothingRpcApiClientStrategy(
     /// </summary>
     /// <param name="cancellationToken">Токен отмены</param>
     /// <returns>Коллекция данных представления модели</returns>
-    public async Task<ObservableCollection<INothingModelVM>> GetNothingModelsAsync(CancellationToken cancellationToken = default)
+    public async Task<ObservableCollection<INothingModelVM>> GetNothingModels(CancellationToken cancellationToken = default)
     {
         var request = new Empty();
         var responseStream = _client.GetStream(request, cancellationToken: cancellationToken).ResponseStream;
@@ -47,7 +47,7 @@ public class NothingRpcApiClientStrategy(
     /// </summary>
     /// <param name="createNothingModelVM">Данные представления создать модель</param>
     /// <param name="cancellationToken">Токен отмены</param>
-    public async Task<INothingModelVM> CreateNothingModelAsync(
+    public async Task<INothingModelVM> CreateNothingModel(
         CreateNothingModelVM createNothingModelVM,
         CancellationToken cancellationToken = default)
     {
@@ -62,7 +62,7 @@ public class NothingRpcApiClientStrategy(
     /// </summary>
     /// <param name="updateNothingModelVM">Данные представления обновить модель</param>
     /// <param name="cancellationToken">Токен отмены</param>
-    public async Task<INothingModelVM> UpdateNothingModelAsync(
+    public async Task<INothingModelVM> UpdateNothingModel(
         UpdateNothingModelVM updateNothingModelVM,
         CancellationToken cancellationToken = default)
     {
@@ -77,7 +77,7 @@ public class NothingRpcApiClientStrategy(
     /// </summary>
     /// <param name="deleteNothingModelVM">Данные представления удалить модель</param>
     /// <param name="cancellationToken">Токен отмены</param>
-    public async Task<INothingModelVM> DeleteNothingModelAsync(
+    public async Task<INothingModelVM> DeleteNothingModel(
         DeleteNothingModelVM deleteNothingModelVM,
         CancellationToken cancellationToken = default)
     {

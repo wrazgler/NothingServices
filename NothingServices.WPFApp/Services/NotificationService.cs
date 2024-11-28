@@ -65,19 +65,19 @@ public class NotificationService(Dispatcher? dispatcher = null, TimeSpan? durati
             ToolTip = toolTip ?? message,
         };
         _notificatorMessageQueue.AddLast(notificatorItem);
-        _dispatcher.InvokeAsync(ShowNextAsync);
+        _dispatcher.InvokeAsync(ShowNext);
     }
 
-    private async Task ShowNextAsync()
+    private async Task ShowNext()
     {
         await _notificationSemaphore.WaitAsync();
         try
         {
-            if(Notificator == null || !await ValidateNotificatorAsync(Notificator))
+            if(Notificator == null || !await ValidateNotificator(Notificator))
                throw new NullReferenceException("Элемент окна уведомлений не задан");
             var messageNode = _notificatorMessageQueue.GetFirst()
                 ?? throw new NullReferenceException("Очередь уведомлений пуста");
-            await ShowAsync(Notificator, messageNode.Value);
+            await Show(Notificator, messageNode.Value);
         }
         finally
         {
@@ -85,7 +85,7 @@ public class NotificationService(Dispatcher? dispatcher = null, TimeSpan? durati
         }
     }
 
-    private async Task<bool> ValidateNotificatorAsync(INotificator? notificator)
+    private async Task<bool> ValidateNotificator(INotificator? notificator)
     {
         while (true)
         {
@@ -100,7 +100,7 @@ public class NotificationService(Dispatcher? dispatcher = null, TimeSpan? durati
         return false;
     }
 
-    private async Task ShowAsync(INotificator notificator, NotificatorItem notificatorItem)
+    private async Task Show(INotificator notificator, NotificatorItem notificatorItem)
     {
         var content = new ContentControl
         {

@@ -15,7 +15,7 @@ public class AppTests
     private readonly JsonSerializerOptions _jsonSerializerOptions = new() { WriteIndented = true };
 
     [Fact]
-    public async Task RunAsync_1_1_e_e_Equal()
+    public async Task Run_1_1_e_e_Equal()
     {
         try
         {
@@ -50,7 +50,7 @@ public class AppTests
     }
 
     [Fact]
-    public async Task RunAsync_1_2_1_e_e_Equal()
+    public async Task Run_1_2_1_e_e_Equal()
     {
         try
         {
@@ -85,7 +85,7 @@ public class AppTests
     }
 
     [Fact]
-    public async Task RunAsync_1_3_1_e_e_Equal()
+    public async Task Runc_1_3_1_e_e_Equal()
     {
         try
         {
@@ -121,7 +121,7 @@ public class AppTests
     }
 
     [Fact]
-    public async Task RunAsync_1_4_1_e_e_Equal()
+    public async Task Run_1_4_1_e_e_Equal()
     {
         try
         {
@@ -160,7 +160,7 @@ public class AppTests
     }
 
     [Fact]
-    public async Task RunAsync_1_5_1_e_e_Equal()
+    public async Task Run_1_5_1_e_e_Equal()
     {
         try
         {
@@ -195,7 +195,7 @@ public class AppTests
     }
 
     [Fact]
-    public async Task RunAsync_2_1_e_e_Equal()
+    public async Task Run_2_1_e_e_Equal()
     {
         try
         {
@@ -230,7 +230,7 @@ public class AppTests
     }
 
     [Fact]
-    public async Task RunAsync_2_2_1_e_e_Equal()
+    public async Task Run_2_2_1_e_e_Equal()
     {
         try
         {
@@ -265,7 +265,7 @@ public class AppTests
     }
 
     [Fact]
-    public async Task RunAsync_2_3_1_e_e_Equal()
+    public async Task Run_2_3_1_e_e_Equal()
     {
         try
         {
@@ -301,7 +301,7 @@ public class AppTests
     }
 
     [Fact]
-    public async Task RunAsync_2_4_1_e_e_Equal()
+    public async Task Run_2_4_1_e_e_Equal()
     {
         try
         {
@@ -340,7 +340,7 @@ public class AppTests
     }
 
     [Fact]
-    public async Task RunAsync_2_5_1_e_e_Equal()
+    public async Task Run_2_5_1_e_e_Equal()
     {
         try
         {

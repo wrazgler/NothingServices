@@ -12,13 +12,13 @@ namespace NothingServices.WPFApp.UnitTests.StrategiesTests;
 public class NothingWebApiClientStrategyTests
 {
     [Fact]
-    public async Task GetNothingModelsAsync_Equivalent()
+    public async Task GetNothingModels_Equivalent()
     {
         //Arrange
         var nothingModels = GetNothingModels();
         var clientMock = new Mock<INothingWebApiClient>();
         clientMock
-            .Setup(client => client.GetAsync(It.IsAny<CancellationToken>()))
+            .Setup(client => client.Get(It.IsAny<CancellationToken>()))
             .ReturnsAsync(nothingModels.ToArray());
         var nothingModelVMFactoryMock = GetNothingModelVMFactoryMock();
         var nothingWebApiClientStrategy = GetNothingWebApiClientStrategy(
@@ -26,13 +26,13 @@ public class NothingWebApiClientStrategyTests
             clientMock.Object);
 
         //Act
-        var nothingModelVMs = await nothingWebApiClientStrategy.GetNothingModelsAsync();
+        var nothingModelVMs = await nothingWebApiClientStrategy.GetNothingModels();
         var result = nothingModelVMs.Count;
 
         //Assert
         var expected = 1;
         Assert.Equal(expected, result);
-        clientMock.Verify(client => client.GetAsync(It.IsAny<CancellationToken>()),Times.Once);
+        clientMock.Verify(client => client.Get(It.IsAny<CancellationToken>()),Times.Once);
         nothingModelVMFactoryMock.Verify(
             factory => factory.Create(
                 It.Is<NothingModelWebDto>(model => model == nothingModels.Single())),
@@ -40,31 +40,31 @@ public class NothingWebApiClientStrategyTests
     }
 
     [Fact]
-    public async Task GetNothingModelsAsync_Throws_Exception()
+    public async Task GetNothingModels_Throws_Exception()
     {
         //Arrange
         var clientMock = new Mock<INothingWebApiClient>();
         clientMock
-            .Setup(client => client.GetAsync(It.IsAny<CancellationToken>()))
+            .Setup(client => client.Get(It.IsAny<CancellationToken>()))
             .Throws(new Exception("Fake exception"));
         var nothingWebApiClientStrategy = GetNothingWebApiClientStrategy(
             Mock.Of<INothingModelVMFactory>(),
             clientMock.Object);
 
         //Act
-        var result = new Func<Task>(() => nothingWebApiClientStrategy.GetNothingModelsAsync());
+        var result = new Func<Task>(() => nothingWebApiClientStrategy.GetNothingModels());
 
         //Assert
         await Assert.ThrowsAsync<Exception>(result);
     }
 
     [Fact]
-    public async Task CreateNothingModelAsync_Equivalent()
+    public async Task CreateNothingModel_Equivalent()
     {
         //Arrange
         var clientMock = new Mock<INothingWebApiClient>();
         clientMock
-            .Setup(client => client.CreateAsync(
+            .Setup(client => client.Create(
                 It.IsAny<CreateNothingModelWebDto>(),
                 It.IsAny<CancellationToken>()))
             .ReturnsAsync((CreateNothingModelWebDto createNothingModelWebDto, CancellationToken _) =>
@@ -87,22 +87,22 @@ public class NothingWebApiClientStrategyTests
         };
 
         //Act
-        await nothingWebApiClientStrategy.CreateNothingModelAsync(createNothingModelVM);
+        await nothingWebApiClientStrategy.CreateNothingModel(createNothingModelVM);
 
         //Assert
-        clientMock.Verify(client => client.CreateAsync(
+        clientMock.Verify(client => client.Create(
                 It.IsAny<CreateNothingModelWebDto>(),
                 It.IsAny<CancellationToken>()),
             Times.Once);
     }
 
     [Fact]
-    public async Task CreateNothingModelAsync_Throws_Exception()
+    public async Task CreateNothingModel_Throws_Exception()
     {
         //Arrange
         var clientMock = new Mock<INothingWebApiClient>();
         clientMock
-            .Setup(client => client.CreateAsync(
+            .Setup(client => client.Create(
                 It.IsAny<CreateNothingModelWebDto>(),
                 It.IsAny<CancellationToken>()))
             .Throws(new Exception("Fake exception"));
@@ -115,20 +115,20 @@ public class NothingWebApiClientStrategyTests
         };
 
         //Act
-        var result = new Func<Task>(() => nothingWebApiClientStrategy.CreateNothingModelAsync(createNothingModelVM));
+        var result = new Func<Task>(() => nothingWebApiClientStrategy.CreateNothingModel(createNothingModelVM));
 
         //Assert
         await Assert.ThrowsAsync<Exception>(result);
     }
 
     [Fact]
-    public async Task UpdateNothingModelAsync_Equivalent()
+    public async Task UpdateNothingModel_Equivalent()
     {
         //Arrange
         var nothingModels = GetNothingModels();
         var clientMock = new Mock<INothingWebApiClient>();
         clientMock
-            .Setup(client => client.UpdateAsync(
+            .Setup(client => client.Update(
                 It.IsAny<UpdateNothingModelWebDto>(),
                 It.IsAny<CancellationToken>()))
             .ReturnsAsync((UpdateNothingModelWebDto updateNothingModelWebDto, CancellationToken _) =>
@@ -156,22 +156,22 @@ public class NothingWebApiClientStrategyTests
         };
 
         //Act
-        await nothingWebApiClientStrategy.UpdateNothingModelAsync(updateNothingModelVM);
+        await nothingWebApiClientStrategy.UpdateNothingModel(updateNothingModelVM);
 
         //Assert
-        clientMock.Verify(client => client.UpdateAsync(
+        clientMock.Verify(client => client.Update(
                 It.IsAny<UpdateNothingModelWebDto>(),
                 It.IsAny<CancellationToken>()),
             Times.Once);
     }
 
     [Fact]
-    public async Task UpdateNothingModelAsync_Throws_Exception()
+    public async Task UpdateNothingModel_Throws_Exception()
     {
         //Arrange
         var clientMock = new Mock<INothingWebApiClient>();
         clientMock
-            .Setup(client => client.UpdateAsync(
+            .Setup(client => client.Update(
                 It.IsAny<UpdateNothingModelWebDto>(),
                 It.IsAny<CancellationToken>()))
             .Throws(new Exception("Fake exception"));
@@ -188,20 +188,20 @@ public class NothingWebApiClientStrategyTests
         };
 
         //Act
-        var result = new Func<Task>(() => nothingWebApiClientStrategy.UpdateNothingModelAsync(updateNothingModelVM));
+        var result = new Func<Task>(() => nothingWebApiClientStrategy.UpdateNothingModel(updateNothingModelVM));
 
         //Assert
         await Assert.ThrowsAsync<Exception>(result);
     }
 
     [Fact]
-    public async Task DeleteNothingModelAsync_Equivalent()
+    public async Task DeleteNothingModel_Equivalent()
     {
         //Arrange
         var nothingModels = GetNothingModels();
         var clientMock = new Mock<INothingWebApiClient>();
         clientMock
-            .Setup(client => client.DeleteAsync(It.IsAny<int>(), It.IsAny<CancellationToken>()))
+            .Setup(client => client.Delete(It.IsAny<int>(), It.IsAny<CancellationToken>()))
             .ReturnsAsync((int id, CancellationToken _) => nothingModels.Single(nothingModel => nothingModel.Id == id));
         var nothingModelVMFactoryMock = GetNothingModelVMFactoryMock();
         var nothingWebApiClientStrategy = GetNothingWebApiClientStrategy(
@@ -214,21 +214,21 @@ public class NothingWebApiClientStrategyTests
             nothingModelVM);
 
         //Act
-        await nothingWebApiClientStrategy.DeleteNothingModelAsync(deleteNothingModelVM);
+        await nothingWebApiClientStrategy.DeleteNothingModel(deleteNothingModelVM);
 
         //Assert
         clientMock.Verify(
-            client => client.DeleteAsync(It.IsAny<int>(), It.IsAny<CancellationToken>()),
+            client => client.Delete(It.IsAny<int>(), It.IsAny<CancellationToken>()),
             Times.Once);
     }
 
     [Fact]
-    public async Task DeleteNothingModelAsync_Throws_Exception()
+    public async Task DeleteNothingModel_Throws_Exception()
     {
         //Arrange
         var clientMock = new Mock<INothingWebApiClient>();
         clientMock
-            .Setup(client => client.DeleteAsync(It.IsAny<int>(), It.IsAny<CancellationToken>()))
+            .Setup(client => client.Delete(It.IsAny<int>(), It.IsAny<CancellationToken>()))
             .Throws(new Exception("Fake exception"));
         var nothingWebApiClientStrategy = GetNothingWebApiClientStrategy(
             Mock.Of<INothingModelVMFactory>(),
@@ -240,7 +240,7 @@ public class NothingWebApiClientStrategyTests
             nothingModelVM);
 
         //Act
-        var result = new Func<Task>(() => nothingWebApiClientStrategy.DeleteNothingModelAsync(deleteNothingModelVM));
+        var result = new Func<Task>(() => nothingWebApiClientStrategy.DeleteNothingModel(deleteNothingModelVM));
 
         //Assert
         await Assert.ThrowsAsync<Exception>(result);

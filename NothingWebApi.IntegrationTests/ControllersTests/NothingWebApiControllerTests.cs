@@ -11,16 +11,16 @@ namespace NothingWebApi.IntegrationTests.ControllersTests;
 public class NothingWebApiControllerTests
 {
     [Fact]
-    public async Task GetAsync_OkObjectResult()
+    public async Task Get_OkObjectResult()
     {
         //Arrange
         var serviceProvider = GetServiceProvider();
-        await serviceProvider.CreateNewDataBaseAsync();
-        await serviceProvider.AddNothingModelAsync();
+        await serviceProvider.CreateNewDataBase();
+        await serviceProvider.AddNothingModel();
         var controller = serviceProvider.GetRequiredService<NothingWebApiController>();
 
         //Act
-        var result = await controller.GetAsync(CancellationToken.None);
+        var result = await controller.Get(CancellationToken.None);
 
         //Assert
         var expected = new OkObjectResult(new List<NothingModelDto>(1)
@@ -35,16 +35,16 @@ public class NothingWebApiControllerTests
     }
 
     [Fact]
-    public async Task GetAsync_1_OkObjectResult()
+    public async Task Get_1_OkObjectResult()
     {
         //Arrange
         var serviceProvider = GetServiceProvider();
-        await serviceProvider.CreateNewDataBaseAsync();
-        await serviceProvider.AddNothingModelAsync();
+        await serviceProvider.CreateNewDataBase();
+        await serviceProvider.AddNothingModel();
         var controller = serviceProvider.GetRequiredService<NothingWebApiController>();
 
         //Act
-        var result = await controller.GetAsync(1, CancellationToken.None);
+        var result = await controller.Get(1, CancellationToken.None);
 
         //Assert
         var expected = new OkObjectResult(new NothingModelDto()
@@ -56,16 +56,16 @@ public class NothingWebApiControllerTests
     }
 
     [Fact]
-    public async Task GetAsync_0_BadRequestObjectResult()
+    public async Task Get_0_BadRequestObjectResult()
     {
         //Arrange
         var serviceProvider = GetServiceProvider();
-        await serviceProvider.CreateNewDataBaseAsync();
-        await serviceProvider.AddNothingModelAsync();
+        await serviceProvider.CreateNewDataBase();
+        await serviceProvider.AddNothingModel();
         var controller = serviceProvider.GetRequiredService<NothingWebApiController>();
 
         //Act
-        var result = await controller.GetAsync(0, CancellationToken.None);
+        var result = await controller.Get(0, CancellationToken.None);
 
         //Assert
         var expected = new BadRequestObjectResult("Sequence contains no elements");
@@ -73,11 +73,11 @@ public class NothingWebApiControllerTests
     }
 
     [Fact]
-    public async Task CreateAsync_OkObjectResult()
+    public async Task Create_OkObjectResult()
     {
         //Arrange
         var serviceProvider = GetServiceProvider();
-        await serviceProvider.CreateNewDataBaseAsync();
+        await serviceProvider.CreateNewDataBase();
         var controller = serviceProvider.GetRequiredService<NothingWebApiController>();
         var createNothingModelDto = new CreateNothingModelDto()
         {
@@ -86,7 +86,7 @@ public class NothingWebApiControllerTests
 
         //Act
         var result = await controller
-            .CreateAsync(createNothingModelDto, CancellationToken.None);
+            .Create(createNothingModelDto, CancellationToken.None);
 
         //Assert
         var expected = new OkObjectResult(new NothingModelDto()
@@ -98,11 +98,11 @@ public class NothingWebApiControllerTests
     }
 
     [Fact]
-    public async Task CreateAsync_EmptyName_BadRequestObjectResult()
+    public async Task Create_EmptyName_BadRequestObjectResult()
     {
         //Arrange
         var serviceProvider = GetServiceProvider();
-        await serviceProvider.CreateNewDataBaseAsync();
+        await serviceProvider.CreateNewDataBase();
         var controller = serviceProvider.GetRequiredService<NothingWebApiController>();
         var createNothingModelDto = new CreateNothingModelDto()
         {
@@ -111,7 +111,7 @@ public class NothingWebApiControllerTests
 
         //Act
         var result = await controller
-            .CreateAsync(createNothingModelDto, CancellationToken.None);
+            .Create(createNothingModelDto, CancellationToken.None);
 
         //Assert
         var expected = new BadRequestObjectResult("Name cannot be null or empty. (Parameter 'Name')");
@@ -119,16 +119,16 @@ public class NothingWebApiControllerTests
     }
 
     [Fact]
-    public async Task DeleteAsync_1_OkObjectResult()
+    public async Task Delete_1_OkObjectResult()
     {
         //Arrange
         var serviceProvider = GetServiceProvider();
-        await serviceProvider.CreateNewDataBaseAsync();
-        await serviceProvider.AddNothingModelAsync();
+        await serviceProvider.CreateNewDataBase();
+        await serviceProvider.AddNothingModel();
         var controller = serviceProvider.GetRequiredService<NothingWebApiController>();
 
         //Act
-        var result = await controller.DeleteAsync(1, CancellationToken.None);
+        var result = await controller.Delete(1, CancellationToken.None);
 
         //Assert
         var expected = new OkObjectResult(new NothingModelDto()
@@ -140,16 +140,16 @@ public class NothingWebApiControllerTests
     }
 
     [Fact]
-    public async Task DeleteAsync_0_BadRequestObjectResult()
+    public async Task Delete_0_BadRequestObjectResult()
     {
         //Arrange
         var serviceProvider = GetServiceProvider();
-        await serviceProvider.CreateNewDataBaseAsync();
-        await serviceProvider.AddNothingModelAsync();
+        await serviceProvider.CreateNewDataBase();
+        await serviceProvider.AddNothingModel();
         var controller = serviceProvider.GetRequiredService<NothingWebApiController>();
 
         //Act
-        var result = await controller.DeleteAsync(0, CancellationToken.None);
+        var result = await controller.Delete(0, CancellationToken.None);
 
         //Assert
         var expected = new BadRequestObjectResult("Sequence contains no elements");

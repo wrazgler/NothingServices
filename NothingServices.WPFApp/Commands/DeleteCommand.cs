@@ -71,7 +71,7 @@ public class DeleteCommand(
                 throw new PropertyRequiredException(typeof(DeleteNothingModelVM), nameof(deleteNothingModelVM.Id));
             var strategy = _mainWindowManager.Strategy
                 ?? throw new NullReferenceException("Стратегия работы приложения не задана");
-            var nothingModelVM = await strategy.DeleteNothingModelAsync(
+            var nothingModelVM = await strategy.DeleteNothingModel(
                 deleteNothingModelVM,
                 _cancellationTokenSource.Token);
             _mainWindowManager.Next(MainWindowContentType.NothingModelsListVM);

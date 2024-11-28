@@ -143,7 +143,7 @@ public class UpdateCommandTests
             Mock.Of<IButtonVM>(),
             nothingModelVM);
         var strategyMock = new Mock<INothingApiClientStrategy>();
-        strategyMock.Setup(strategy => strategy.UpdateNothingModelAsync(
+        strategyMock.Setup(strategy => strategy.UpdateNothingModel(
             It.Is<UpdateNothingModelVM>(updateNothingModelVM => updateNothingModelVM == parameter),
             It.IsAny<CancellationToken>()))
             .ReturnsAsync(nothingModelVM);
@@ -161,7 +161,7 @@ public class UpdateCommandTests
         //Assert
         mainWindowManagerMock.VerifyGet(mainWindowManager => mainWindowManager.Strategy, Times.Once);
         strategyMock.Verify(
-            strategy => strategy.UpdateNothingModelAsync(
+            strategy => strategy.UpdateNothingModel(
                 It.Is<UpdateNothingModelVM>(updateNothingModelVM => updateNothingModelVM == parameter),
                 It.IsAny<CancellationToken>()),
             Times.Once);

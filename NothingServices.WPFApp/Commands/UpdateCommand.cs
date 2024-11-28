@@ -76,7 +76,7 @@ public class UpdateCommand(
                 throw new PropertyRequiredException(typeof(UpdateNothingModelVM), nameof(updateNothingModelVM.Name));
             var strategy = _mainWindowManager.Strategy
                 ?? throw new NullReferenceException("Стратегия работы приложения не задана");
-            var nothingModelVM = await strategy.UpdateNothingModelAsync(
+            var nothingModelVM = await strategy.UpdateNothingModel(
                 updateNothingModelVM,
                 _cancellationTokenSource.Token);
             _mainWindowManager.Next(MainWindowContentType.NothingModelsListVM);

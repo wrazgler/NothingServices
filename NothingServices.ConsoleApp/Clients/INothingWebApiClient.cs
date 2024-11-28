@@ -16,7 +16,7 @@ public interface INothingWebApiClient
     /// <exception cref="JsonException">
     /// Ошибка десериализации ответа внешнего сервиса
     /// </exception>
-    Task<NothingModelWebDto[]> GetAsync(CancellationToken cancellationToken = default);
+    Task<NothingModelWebDto[]> Get(CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Получить модель с указанным идентификатором
@@ -27,7 +27,7 @@ public interface INothingWebApiClient
     /// <exception cref="JsonException">
     /// Ошибка десериализации ответа внешнего сервиса
     /// </exception>
-    Task<NothingModelWebDto> GetAsync(int id, CancellationToken cancellationToken = default);
+    Task<NothingModelWebDto> Get(int id, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Создать новую модель
@@ -38,7 +38,7 @@ public interface INothingWebApiClient
     /// <exception cref="JsonException">
     /// Ошибка десериализации ответа внешнего сервиса
     /// </exception>
-    Task<NothingModelWebDto> CreateAsync(
+    Task<NothingModelWebDto> Create(
         CreateNothingModelWebDto createNothingModelWebDto,
         CancellationToken cancellationToken = default);
 
@@ -51,7 +51,7 @@ public interface INothingWebApiClient
     /// <exception cref="JsonException">
     /// Ошибка десериализации ответа внешнего сервиса
     /// </exception>
-    Task<NothingModelWebDto> UpdateAsync(
+    Task<NothingModelWebDto> Update(
         UpdateNothingModelWebDto updateNothingModelWebDto,
         CancellationToken cancellationToken = default);
 
@@ -64,5 +64,5 @@ public interface INothingWebApiClient
     /// <exception cref="JsonException">
     /// Ошибка десериализации ответа внешнего сервиса
     /// </exception>
-    Task<NothingModelWebDto> DeleteAsync(int id, CancellationToken cancellationToken = default);
+    Task<NothingModelWebDto> Delete(int id, CancellationToken cancellationToken = default);
 }

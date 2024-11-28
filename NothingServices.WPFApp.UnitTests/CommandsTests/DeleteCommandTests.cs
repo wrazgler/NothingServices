@@ -97,7 +97,7 @@ public class DeleteCommandTests
             Mock.Of<IButtonVM>(),
             nothingModelVM);
         var strategyMock = new Mock<INothingApiClientStrategy>();
-        strategyMock.Setup(strategy => strategy.DeleteNothingModelAsync(
+        strategyMock.Setup(strategy => strategy.DeleteNothingModel(
             It.Is<DeleteNothingModelVM>(deleteNothingModelVM => deleteNothingModelVM == parameter),
             It.IsAny<CancellationToken>()))
             .ReturnsAsync(nothingModelVM);
@@ -115,7 +115,7 @@ public class DeleteCommandTests
         //Assert
         mainWindowManagerMock.VerifyGet(mainWindowManager => mainWindowManager.Strategy, Times.Once);
         strategyMock.Verify(
-            strategy => strategy.DeleteNothingModelAsync(
+            strategy => strategy.DeleteNothingModel(
                 It.Is<DeleteNothingModelVM>(deleteNothingModelVM => deleteNothingModelVM == parameter),
                 It.IsAny<CancellationToken>()),
             Times.Once);

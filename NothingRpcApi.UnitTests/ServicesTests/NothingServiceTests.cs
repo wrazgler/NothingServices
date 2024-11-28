@@ -41,7 +41,7 @@ public class NothingServiceTests
     }
 
     [Fact]
-    public async Task GetStream_ThrowsAsync_Exception()
+    public async Task GetStream_Throws_Exception()
     {
         //Arrange
         var dbContextOptions = new DbContextOptions<NothingRpcApiDbContext>();
@@ -86,7 +86,7 @@ public class NothingServiceTests
     }
 
     [Fact]
-    public async Task GetAsync_Not_Exist_Id_Throws_ArgumentException()
+    public async Task Get_Not_Exist_Id_Throws_ArgumentException()
     {
         //Arrange
         var dbContextMock = GetDbContextMock([]);
@@ -308,7 +308,7 @@ public class NothingServiceTests
     }
 
     [Fact]
-    public async Task DeleteAsync_Not_Exist_Id_Throws_ArgumentException()
+    public async Task Delete_Not_Exist_Id_Throws_ArgumentException()
     {
         //Arrange
         var dbContextMock = GetDbContextMock([]);

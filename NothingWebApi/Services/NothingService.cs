@@ -10,6 +10,7 @@ namespace NothingWebApi.Services;
 /// Сервис бизнес логики
 /// </summary>
 /// <param name="dbContext">Контекст базы данных</param>
+/// <param name="logger">Экземпляр <see cref="ILogger"/></param>
 /// <param name="mapper"><see cref="Mapper"/></param>
 public class NothingService(
     NothingWebApiDbContext dbContext,
@@ -26,7 +27,7 @@ public class NothingService(
     /// </summary>
     /// <param name="cancellationToken">Токен отмены</param>
     /// <returns>Список моделей</returns>
-    public Task<NothingModelDto[]> GetAsync(CancellationToken cancellationToken = default)
+    public Task<NothingModelDto[]> Get(CancellationToken cancellationToken = default)
     {
         try
         {
@@ -49,7 +50,7 @@ public class NothingService(
     /// <param name="id">Идентификатор модели</param>
     /// <param name="cancellationToken">Токен отмены</param>
     /// <returns>Объект модели</returns>
-    public async Task<NothingModelDto> GetAsync(int id, CancellationToken cancellationToken = default)
+    public async Task<NothingModelDto> Get(int id, CancellationToken cancellationToken = default)
     {
         try
         {
@@ -77,7 +78,7 @@ public class NothingService(
     /// <exception cref="ArgumentNullException">
     /// Ошибка валидации входных данных
     /// </exception>
-    public async Task<NothingModelDto> CreateAsync(
+    public async Task<NothingModelDto> Create(
         CreateNothingModelDto createNothingModelDto,
         CancellationToken cancellationToken = default)
     {
@@ -106,7 +107,7 @@ public class NothingService(
     /// <exception cref="ArgumentNullException">
     /// Ошибка валидации входных данных
     /// </exception>
-    public async Task<NothingModelDto> UpdateAsync(
+    public async Task<NothingModelDto> Update(
         UpdateNothingModelDto updateNothingModelDto,
         CancellationToken cancellationToken = default)
     {
@@ -135,7 +136,7 @@ public class NothingService(
     /// <param name="id">Идентификатор модели</param>
     /// <param name="cancellationToken">Токен отмены</param>
     /// <returns>Объект модели</returns>
-    public async Task<NothingModelDto> DeleteAsync(int id, CancellationToken cancellationToken = default)
+    public async Task<NothingModelDto> Delete(int id, CancellationToken cancellationToken = default)
     {
         try
         {

@@ -21,7 +21,7 @@ public class HostedService(
     /// <param name="cancellationToken">Токен отмены</param>
     public Task StartAsync(CancellationToken cancellationToken)
     {
-        return _loopService.DoWorkAsync(cancellationToken);
+        return _loopService.DoWork(cancellationToken);
     }
 
     /// <summary>

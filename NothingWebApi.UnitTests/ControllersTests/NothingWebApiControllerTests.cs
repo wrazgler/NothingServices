@@ -9,7 +9,7 @@ namespace NothingWebApi.UnitTests.ControllersTests;
 public class NothingWebApiControllerTests
 {
     [Fact]
-    public async Task GetAsync_OkObjectResult()
+    public async Task Get_OkObjectResult()
     {
         //Arrange
         var nothingModels = new []
@@ -18,12 +18,12 @@ public class NothingWebApiControllerTests
         };
         var nothingServiceMock = new Mock<INothingService>();
         nothingServiceMock
-            .Setup(nothingService => nothingService.GetAsync(It.IsAny<CancellationToken>()))
+            .Setup(nothingService => nothingService.Get(It.IsAny<CancellationToken>()))
             .ReturnsAsync(nothingModels);
         var controller = GetNothingWebApiController(nothingServiceMock.Object);
 
         //Act
-        var result = await controller.GetAsync(CancellationToken.None);
+        var result = await controller.Get(CancellationToken.None);
 
         //Assert
         var expected = new OkObjectResult(nothingModels);
@@ -31,17 +31,17 @@ public class NothingWebApiControllerTests
     }
 
     [Fact]
-    public async Task GetAsync_Throws_BadRequestObjectResult()
+    public async Task Get_Throws_BadRequestObjectResult()
     {
         //Arrange
         var nothingServiceMock = new Mock<INothingService>();
         nothingServiceMock
-            .Setup(nothingService => nothingService.GetAsync(It.IsAny<CancellationToken>()))
+            .Setup(nothingService => nothingService.Get(It.IsAny<CancellationToken>()))
             .ThrowsAsync(new Exception("Fake exception"));
         var controller = GetNothingWebApiController(nothingServiceMock.Object);
 
         //Act
-        var result = await controller.GetAsync(CancellationToken.None);
+        var result = await controller.Get(CancellationToken.None);
 
         //Assert
         var expected = new BadRequestObjectResult("Fake exception");
@@ -49,18 +49,18 @@ public class NothingWebApiControllerTests
     }
 
     [Fact]
-    public async Task GetAsync_Id_OkObjectResult()
+    public async Task Get_Id_OkObjectResult()
     {
         //Arrange
         var nothingModel = GetNothingModelDto();
         var nothingServiceMock = new Mock<INothingService>();
         nothingServiceMock
-            .Setup(nothingService => nothingService.GetAsync(It.Is<int>(id => id == nothingModel.Id),It.IsAny<CancellationToken>()))
+            .Setup(nothingService => nothingService.Get(It.Is<int>(id => id == nothingModel.Id),It.IsAny<CancellationToken>()))
             .ReturnsAsync(nothingModel);
         var controller = GetNothingWebApiController(nothingServiceMock.Object);
 
         //Act
-        var result = await controller.GetAsync(nothingModel.Id, CancellationToken.None);
+        var result = await controller.Get(nothingModel.Id, CancellationToken.None);
 
         //Assert
         var expected = new OkObjectResult(nothingModel);
@@ -68,17 +68,17 @@ public class NothingWebApiControllerTests
     }
 
     [Fact]
-    public async Task GetAsync_Id_BadRequestObjectResult()
+    public async Task Get_Id_BadRequestObjectResult()
     {
         //Arrange
         var nothingServiceMock = new Mock<INothingService>();
         nothingServiceMock
-            .Setup(nothingService => nothingService.GetAsync(It.IsAny<int>(),It.IsAny<CancellationToken>()))
+            .Setup(nothingService => nothingService.Get(It.IsAny<int>(),It.IsAny<CancellationToken>()))
             .ThrowsAsync(new Exception("Fake exception"));
         var controller = GetNothingWebApiController(nothingServiceMock.Object);
 
         //Act
-        var result = await controller.GetAsync(1, CancellationToken.None);
+        var result = await controller.Get(1, CancellationToken.None);
 
         //Assert
         var expected = new BadRequestObjectResult("Fake exception");
@@ -86,12 +86,12 @@ public class NothingWebApiControllerTests
     }
 
     [Fact]
-    public async Task CreateAsync_OkObjectResult()
+    public async Task Create_OkObjectResult()
     {
         //Arrange
         var nothingServiceMock = new Mock<INothingService>();
         nothingServiceMock
-            .Setup(nothingService => nothingService.CreateAsync(
+            .Setup(nothingService => nothingService.Create(
                 It.IsAny<CreateNothingModelDto>(),
                 It.IsAny<CancellationToken>()))
             .ReturnsAsync((CreateNothingModelDto x, CancellationToken _) => new NothingModelDto()
@@ -107,7 +107,7 @@ public class NothingWebApiControllerTests
 
         //Act
         var result = await controller
-            .CreateAsync(createNothingModelDto, CancellationToken.None);
+            .Create(createNothingModelDto, CancellationToken.None);
 
         //Assert
         var expected = new OkObjectResult(new NothingModelDto()
@@ -119,12 +119,12 @@ public class NothingWebApiControllerTests
     }
 
     [Fact]
-    public async Task CreateAsync_BadRequestObjectResult()
+    public async Task Create_BadRequestObjectResult()
     {
         //Arrange
         var nothingServiceMock = new Mock<INothingService>();
         nothingServiceMock
-            .Setup(nothingService => nothingService.CreateAsync(
+            .Setup(nothingService => nothingService.Create(
                 It.IsAny<CreateNothingModelDto>(),
                 It.IsAny<CancellationToken>()))
             .ThrowsAsync(new Exception("Fake exception"));
@@ -136,7 +136,7 @@ public class NothingWebApiControllerTests
 
         //Act
         var result = await controller
-            .CreateAsync(createNothingModelDto, CancellationToken.None);
+            .Create(createNothingModelDto, CancellationToken.None);
 
         //Assert
         var expected = new BadRequestObjectResult("Fake exception");
@@ -144,12 +144,12 @@ public class NothingWebApiControllerTests
     }
 
     [Fact]
-    public async Task UpdateAsync_OkObjectResult()
+    public async Task Update_OkObjectResult()
     {
         //Arrange
         var nothingServiceMock = new Mock<INothingService>();
         nothingServiceMock
-            .Setup(nothingService => nothingService.UpdateAsync(
+            .Setup(nothingService => nothingService.Update(
                 It.IsAny<UpdateNothingModelDto>(),
                 It.IsAny<CancellationToken>()))
             .ReturnsAsync((UpdateNothingModelDto x, CancellationToken _) => new NothingModelDto()
@@ -166,7 +166,7 @@ public class NothingWebApiControllerTests
 
         //Act
         var result = await controller
-            .UpdateAsync(updateNothingModelDto, CancellationToken.None);
+            .Update(updateNothingModelDto, CancellationToken.None);
 
         //Assert
         var expected = new OkObjectResult(new NothingModelDto()
@@ -178,12 +178,12 @@ public class NothingWebApiControllerTests
     }
 
     [Fact]
-    public async Task UpdateAsync_BadRequestObjectResult()
+    public async Task Update_BadRequestObjectResult()
     {
         //Arrange
         var nothingServiceMock = new Mock<INothingService>();
         nothingServiceMock
-            .Setup(nothingService => nothingService.UpdateAsync(
+            .Setup(nothingService => nothingService.Update(
                 It.IsAny<UpdateNothingModelDto>(),
                 It.IsAny<CancellationToken>()))
             .ThrowsAsync(new Exception("Fake exception"));
@@ -196,7 +196,7 @@ public class NothingWebApiControllerTests
 
         //Act
         var result = await controller
-            .UpdateAsync(updateNothingModelDto, CancellationToken.None);
+            .Update(updateNothingModelDto, CancellationToken.None);
 
         //Assert
         var expected = new BadRequestObjectResult("Fake exception");
@@ -204,20 +204,20 @@ public class NothingWebApiControllerTests
     }
 
     [Fact]
-    public async Task DeleteAsync_OkObjectResult()
+    public async Task Delete_OkObjectResult()
     {
         //Arrange
         var nothingModel = GetNothingModelDto();
         var nothingServiceMock = new Mock<INothingService>();
         nothingServiceMock
-            .Setup(nothingService => nothingService.DeleteAsync(
+            .Setup(nothingService => nothingService.Delete(
                 It.Is<int>(id => id == nothingModel.Id),
                 It.IsAny<CancellationToken>()))
             .ReturnsAsync(nothingModel);
         var controller = GetNothingWebApiController(nothingServiceMock.Object);
 
         //Act
-        var result = await controller.DeleteAsync(1, CancellationToken.None);
+        var result = await controller.Delete(1, CancellationToken.None);
 
         //Assert
         var expected = new OkObjectResult(nothingModel);
@@ -225,19 +225,19 @@ public class NothingWebApiControllerTests
     }
 
     [Fact]
-    public async Task DeleteAsync_BadRequestObjectResult()
+    public async Task Delete_BadRequestObjectResult()
     {
         //Arrange
         var nothingServiceMock = new Mock<INothingService>();
         nothingServiceMock
-            .Setup(nothingService => nothingService.DeleteAsync(
+            .Setup(nothingService => nothingService.Delete(
                 It.IsAny<int>(),
                 It.IsAny<CancellationToken>()))
             .ThrowsAsync(new Exception("Fake exception"));
         var controller = GetNothingWebApiController(nothingServiceMock.Object);
 
         //Act
-        var result = await controller.DeleteAsync(0, CancellationToken.None);
+        var result = await controller.Delete(0, CancellationToken.None);
 
         //Assert
         var expected = new BadRequestObjectResult("Fake exception");

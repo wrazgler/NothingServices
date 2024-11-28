@@ -24,31 +24,31 @@ public abstract class NothingApiClientStrategy(IConsoleService consoleService)
     /// Вывести в консоль список моделей
     /// </summary>
     /// <param name="cancellationToken">Токен отмены</param>
-    public abstract Task GetNothingModelsAsync(CancellationToken cancellationToken = default);
+    public abstract Task GetNothingModels(CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Вывести в консоль модель с указанным идентификатором
     /// </summary>
     /// <param name="cancellationToken">Токен отмены</param>
-    public abstract Task GetNothingModelAsync(CancellationToken cancellationToken = default);
+    public abstract Task GetNothingModel(CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Создать новую модель
     /// </summary>
     /// <param name="cancellationToken">Токен отмены</param>
-    public abstract Task CreateNothingModelAsync(CancellationToken cancellationToken = default);
+    public abstract Task CreateNothingModel(CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Обновить существующую модель
     /// </summary>
     /// <param name="cancellationToken">Токен отмены</param>
-    public abstract Task UpdateNothingModelAsync(CancellationToken cancellationToken = default);
+    public abstract Task UpdateNothingModel(CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Удалить модель
     /// </summary>
     /// <param name="cancellationToken">Токен отмены</param>
-    public abstract Task DeleteNothingModelAsync(CancellationToken cancellationToken = default);
+    public abstract Task DeleteNothingModel(CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Получить идентификатор модели из консоли

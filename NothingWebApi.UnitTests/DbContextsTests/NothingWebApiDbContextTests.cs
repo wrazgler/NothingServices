@@ -9,7 +9,7 @@ namespace NothingWebApi.UnitTests.DbContextsTests;
 public class NothingWebApiDbContextTests
 {
     [Fact]
-    public async Task CreateAsync_Db_Empty()
+    public async Task Create_Db_Empty()
     {
         //Arrange
         var dbContext = await GetDbContext();
@@ -25,7 +25,7 @@ public class NothingWebApiDbContextTests
     }
 
     [Fact]
-    public async Task AddAsync_Db_Equivalent()
+    public async Task Add_Db_Equivalent()
     {
         //Arrange
         var dbContext = await GetDbContext();

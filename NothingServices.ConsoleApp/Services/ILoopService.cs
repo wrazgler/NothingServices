@@ -9,5 +9,5 @@ public interface ILoopService
     /// Выполнение работы приложения
     /// </summary>
     /// <param name="cancellationToken">Токен отмены</param>
-    Task DoWorkAsync(CancellationToken cancellationToken = default);
+    Task DoWork(CancellationToken cancellationToken = default);
 }
