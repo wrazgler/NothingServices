@@ -14,13 +14,13 @@ public class TypeExtensionsTests
         //Arrange
         var type = typeof(TestClass);
         var propertyName = nameof(TestClass.TestProperty);
-        
+
         //Act
         var result = type.GetDefaultValue(propertyName);
-        
+
         //Assert
-        var assert = "defaultValue";
-        Assert.Equal(assert, result);
+        var expected = "defaultValue";
+        Assert.Equal(expected, result);
     }
 
     [Fact]
@@ -34,8 +34,8 @@ public class TypeExtensionsTests
         var result = type.GetDefaultValue<string>(propertyName);
 
         //Assert
-        var assert = "defaultValue";
-        Assert.Equal(assert, result);
+        var expected = "defaultValue";
+        Assert.Equal(expected, result);
     }
 
     [Fact]
@@ -49,8 +49,8 @@ public class TypeExtensionsTests
         var result = type.GetDescription(propertyName);
 
         //Assert
-        var assert = "description";
-        Assert.Equal(assert, result);
+        var expected = "description";
+        Assert.Equal(expected, result);
     }
 
     [Fact]
@@ -64,8 +64,8 @@ public class TypeExtensionsTests
         var result = type.GetJsonPropertyName(propertyName);
 
         //Assert
-        var assert = "jsonName";
-        Assert.Equal(assert, result);
+        var expected = "jsonName";
+        Assert.Equal(expected, result);
     }
 
     [Fact]
@@ -78,8 +78,8 @@ public class TypeExtensionsTests
         var result = type.GetTableName();
 
         //Assert
-        var assert = "test_class_table";
-        Assert.Equal(assert, result);
+        var expected = "test_class_table";
+        Assert.Equal(expected, result);
     }
 
     [Fact]
@@ -92,8 +92,8 @@ public class TypeExtensionsTests
         var result = type.GetPgName();
 
         //Assert
-        var assert = "pg_name";
-        Assert.Equal(assert, result);
+        var expected = "pg_name";
+        Assert.Equal(expected, result);
     }
 
     [PgName("pg_name")]

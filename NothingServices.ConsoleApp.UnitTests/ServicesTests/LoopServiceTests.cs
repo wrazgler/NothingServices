@@ -23,8 +23,8 @@ public class LoopServiceTests
         var result = stringBuilder.ToString();
 
         //Assert
-        var assert = GetAssert("NothingRpcApiClientStrategy.GetNothingModelsAsync");
-        Assert.Equal(assert, result);
+        var expected = GetAssert("NothingRpcApiClientStrategy.GetNothingModelsAsync");
+        Assert.Equal(expected, result);
     }
 
     [Fact]
@@ -40,8 +40,8 @@ public class LoopServiceTests
         var result = stringBuilder.ToString();
 
         //Assert
-        var assert = GetAssert("NothingRpcApiClientStrategy.GetNothingModelAsync");
-        Assert.Equal(assert, result);
+        var expected = GetAssert("NothingRpcApiClientStrategy.GetNothingModelAsync");
+        Assert.Equal(expected, result);
     }
 
     [Fact]
@@ -57,8 +57,8 @@ public class LoopServiceTests
         var result = stringBuilder.ToString();
 
         //Assert
-        var assert = GetAssert("NothingRpcApiClientStrategy.CreateNothingModelAsync");
-        Assert.Equal(assert, result);
+        var expected = GetAssert("NothingRpcApiClientStrategy.CreateNothingModelAsync");
+        Assert.Equal(expected, result);
     }
 
     [Fact]
@@ -74,8 +74,8 @@ public class LoopServiceTests
         var result = stringBuilder.ToString();
 
         //Assert
-        var assert = GetAssert("NothingRpcApiClientStrategy.UpdateNothingModelAsync");
-        Assert.Equal(assert, result);
+        var expected = GetAssert("NothingRpcApiClientStrategy.UpdateNothingModelAsync");
+        Assert.Equal(expected, result);
     }
 
     [Fact]
@@ -91,8 +91,8 @@ public class LoopServiceTests
         var result = stringBuilder.ToString();
 
         //Assert
-        var assert = GetAssert("NothingRpcApiClientStrategy.DeleteNothingModelAsync");
-        Assert.Equal(assert, result);
+        var expected = GetAssert("NothingRpcApiClientStrategy.DeleteNothingModelAsync");
+        Assert.Equal(expected, result);
     }
 
     [Fact]
@@ -108,8 +108,8 @@ public class LoopServiceTests
         var result = stringBuilder.ToString();
 
         //Assert
-        var assert = GetAssert("NothingWebApiClientStrategy.GetNothingModelsAsync");
-        Assert.Equal(assert, result);
+        var expected = GetAssert("NothingWebApiClientStrategy.GetNothingModelsAsync");
+        Assert.Equal(expected, result);
     }
 
     [Fact]
@@ -125,8 +125,8 @@ public class LoopServiceTests
         var result = stringBuilder.ToString();
 
         //Assert
-        var assert = GetAssert("NothingWebApiClientStrategy.GetNothingModelAsync");
-        Assert.Equal(assert, result);
+        var expected = GetAssert("NothingWebApiClientStrategy.GetNothingModelAsync");
+        Assert.Equal(expected, result);
     }
 
     [Fact]
@@ -142,8 +142,8 @@ public class LoopServiceTests
         var result = stringBuilder.ToString();
 
         //Assert
-        var assert = GetAssert("NothingWebApiClientStrategy.CreateNothingModelAsync");
-        Assert.Equal(assert, result);
+        var expected = GetAssert("NothingWebApiClientStrategy.CreateNothingModelAsync");
+        Assert.Equal(expected, result);
     }
 
     [Fact]
@@ -159,8 +159,8 @@ public class LoopServiceTests
         var result = stringBuilder.ToString();
 
         //Assert
-        var assert = GetAssert("NothingWebApiClientStrategy.UpdateNothingModelAsync");
-        Assert.Equal(assert, result);
+        var expected = GetAssert("NothingWebApiClientStrategy.UpdateNothingModelAsync");
+        Assert.Equal(expected, result);
     }
 
     [Fact]
@@ -176,8 +176,8 @@ public class LoopServiceTests
         var result = stringBuilder.ToString();
 
         //Assert
-        var assert = GetAssert("NothingWebApiClientStrategy.DeleteNothingModelAsync");
-        Assert.Equal(assert, result);
+        var expected = GetAssert("NothingWebApiClientStrategy.DeleteNothingModelAsync");
+        Assert.Equal(expected, result);
     }
 
     [Fact]
@@ -193,7 +193,7 @@ public class LoopServiceTests
         var result = stringBuilder.ToString();
 
         //Assert
-        var assert = new StringBuilder()
+        var expected = new StringBuilder()
             .AppendLine("Выберите клиент")
             .AppendLine("1: NothingRpcApi")
             .AppendLine("2: NothingWebApi")
@@ -201,7 +201,7 @@ public class LoopServiceTests
             .AppendLine()
             .AppendLine("Работа приложения завершена")
             .ToString();
-        Assert.Equal(assert, result);
+        Assert.Equal(expected, result);
     }
 
     [Fact]
@@ -218,10 +218,10 @@ public class LoopServiceTests
         var result = stringBuilder.ToString();
 
         //Assert
-        var assert = new StringBuilder()
+        var expected = new StringBuilder()
             .AppendLine("Работа приложения завершена")
             .ToString();
-        Assert.Equal(assert, result);
+        Assert.Equal(expected, result);
     }
 
     [Fact]
@@ -237,7 +237,7 @@ public class LoopServiceTests
         var result = stringBuilder.ToString();
 
         //Assert
-        var assert = new StringBuilder()
+        var expected = new StringBuilder()
             .AppendLine("Выберите клиент")
             .AppendLine("1: NothingRpcApi")
             .AppendLine("2: NothingWebApi")
@@ -251,7 +251,7 @@ public class LoopServiceTests
             .AppendLine()
             .AppendLine("Работа приложения завершена")
             .ToString();
-        Assert.Equal(assert, result);
+        Assert.Equal(expected, result);
     }
 
     [Fact]
@@ -267,7 +267,7 @@ public class LoopServiceTests
         var result = stringBuilder.ToString();
 
         //Assert
-        var assert = new StringBuilder()
+        var expected = new StringBuilder()
             .AppendLine("Выберите клиент")
             .AppendLine("1: NothingRpcApi")
             .AppendLine("2: NothingWebApi")
@@ -288,7 +288,7 @@ public class LoopServiceTests
             .AppendLine()
             .AppendLine("Работа приложения завершена")
             .ToString();
-        Assert.Equal(assert, result);
+        Assert.Equal(expected, result);
     }
 
     [Fact]
@@ -304,7 +304,7 @@ public class LoopServiceTests
         var result = stringBuilder.ToString();
 
         //Assert
-        var assert = new StringBuilder()
+        var expected = new StringBuilder()
             .AppendLine("Выберите клиент")
             .AppendLine("1: NothingRpcApi")
             .AppendLine("2: NothingWebApi")
@@ -334,7 +334,7 @@ public class LoopServiceTests
             .AppendLine()
             .AppendLine("Работа приложения завершена")
             .ToString();
-        Assert.Equal(assert, result);
+        Assert.Equal(expected, result);
     }
 
     private static string GetAssert(string methodResult)

@@ -30,6 +30,11 @@ public class NothingWebApiClient(
     public async Task<NothingModelWebDto[]> GetAsync(CancellationToken cancellationToken = default)
     {
         using var response = await _httpClient.GetAsync(_clientConfig.NothingWebApiUrl, cancellationToken);
+        if (!response.IsSuccessStatusCode)
+        {
+            var message = await response.Content.ReadAsStringAsync(cancellationToken);
+            throw new Exception(message);
+        }
         var nothingModels = await response.Content.ReadFromJsonAsync<NothingModelWebDto[]>(cancellationToken)
             ?? throw new JsonException("Не удалось десериализовать ответ внешнего сервиса");
         return nothingModels;
@@ -46,6 +51,11 @@ public class NothingWebApiClient(
     {
         var requestUrl = Path.Combine(_clientConfig.NothingWebApiUrl, id.ToString());
         using var response = await _httpClient.GetAsync(requestUrl, cancellationToken);
+        if (!response.IsSuccessStatusCode)
+        {
+            var message = await response.Content.ReadAsStringAsync(cancellationToken);
+            throw new Exception(message);
+        }
         var nothingModel = await response.Content.ReadFromJsonAsync<NothingModelWebDto>(cancellationToken)
             ?? throw new JsonException("Не удалось десериализовать ответ внешнего сервиса");
         return nothingModel;
@@ -64,6 +74,11 @@ public class NothingWebApiClient(
     {
         var content = JsonContent.Create(createNothingModelWebDto);
         using var response = await _httpClient.PostAsync(_clientConfig.NothingWebApiUrl, content, cancellationToken);
+        if (!response.IsSuccessStatusCode)
+        {
+            var message = await response.Content.ReadAsStringAsync(cancellationToken);
+            throw new Exception(message);
+        }
         var nothingModel = await response.Content.ReadFromJsonAsync<NothingModelWebDto>(cancellationToken)
             ?? throw new JsonException("Не удалось десериализовать ответ внешнего сервиса");
         return nothingModel;
@@ -85,6 +100,11 @@ public class NothingWebApiClient(
 
         var content = JsonContent.Create(updateNothingModelWebDto);
         using var response = await _httpClient.PutAsync(_clientConfig.NothingWebApiUrl, content, cancellationToken);
+        if (!response.IsSuccessStatusCode)
+        {
+            var message = await response.Content.ReadAsStringAsync(cancellationToken);
+            throw new Exception(message);
+        }
         var nothingModel = await response.Content.ReadFromJsonAsync<NothingModelWebDto>(cancellationToken)
             ?? throw new JsonException("Не удалось десериализовать ответ внешнего сервиса");
         return nothingModel;
@@ -101,6 +121,11 @@ public class NothingWebApiClient(
     {
         var requestUrl = Path.Combine(_clientConfig.NothingWebApiUrl, id.ToString());
         using var response = await _httpClient.DeleteAsync(requestUrl, cancellationToken);
+        if (!response.IsSuccessStatusCode)
+        {
+            var message = await response.Content.ReadAsStringAsync(cancellationToken);
+            throw new Exception(message);
+        }
         var nothingModel = await response.Content.ReadFromJsonAsync<NothingModelWebDto>(cancellationToken)
             ?? throw new JsonException("Не удалось десериализовать ответ внешнего сервиса");
         return nothingModel;

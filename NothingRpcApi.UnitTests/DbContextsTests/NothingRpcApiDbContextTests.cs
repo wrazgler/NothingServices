@@ -45,12 +45,12 @@ public class NothingRpcApiDbContextTests
             .SingleAsync();
 
         //Assert
-        var assert = new NothingModel()
+        var expected = new NothingModel()
         {
             Id = 1,
             Name = "Test",
         };
-        Assert.Equivalent(assert, result, true);
+        Assert.Equivalent(expected, result, true);
     }
 
     [Fact]

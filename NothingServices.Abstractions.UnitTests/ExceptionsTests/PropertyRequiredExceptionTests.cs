@@ -12,8 +12,8 @@ public class PropertyRequiredExceptionTests
         var result = new PropertyRequiredException(typeof(TestClass), nameof(TestClass.TestProperty)).Message;
 
         //Assert
-        var assert = "Поле description не может быть пустым";
-        Assert.Equal(assert, result);
+        var expected = "Поле description не может быть пустым";
+        Assert.Equal(expected, result);
     }
 
     private class TestClass

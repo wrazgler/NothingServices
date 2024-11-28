@@ -36,8 +36,8 @@ public class NothingServiceTests
         var result = nothingModelDtos;
 
         //Assert
-        var assert = nothingModels;
-        Assert.Equivalent(assert, result, true);
+        var expected = nothingModels;
+        Assert.Equivalent(expected, result, true);
     }
 
     [Fact]
@@ -77,27 +77,23 @@ public class NothingServiceTests
             .Get(nothingModelIdDto, Mock.Of<ServerCallContext>());
 
         //Assert
-        var assert = new NothingModelDto()
+        var expected = new NothingModelDto()
         {
             Id = 1,
             Name = "Test",
         };
-        Assert.Equivalent(assert, result, true);
+        Assert.Equivalent(expected, result, true);
     }
 
     [Fact]
-    public async Task Get_ThrowsAsync_Exception()
+    public async Task GetAsync_Not_Exist_Id_Throws_ArgumentException()
     {
         //Arrange
-        var dbContextOptions = new DbContextOptions<NothingRpcApiDbContext>();
-        var dbContextMock = new Mock<NothingRpcApiDbContext>(dbContextOptions);
-        dbContextMock
-            .SetupGet(dbContext => dbContext.NothingModels)
-            .Throws(new Exception("Fake exception"));
+        var dbContextMock = GetDbContextMock([]);
         var nothingService = GetNothingService(dbContextMock.Object);
         var nothingModelIdDto = new NothingModelIdDto()
         {
-            Id = 0,
+            Id = 1,
         };
 
         //Act
@@ -105,7 +101,7 @@ public class NothingServiceTests
             => nothingService.Get(nothingModelIdDto, Mock.Of<ServerCallContext>()));
 
         //Assert
-        await Assert.ThrowsAsync<Exception>(result);
+        await Assert.ThrowsAsync<ArgumentException>(result);
     }
 
     [Fact]
@@ -125,8 +121,8 @@ public class NothingServiceTests
         var result = nothingModel.Name;
 
         //Assert
-        var assert = "Test";
-        Assert.Equal(assert, result);
+        var expected = "Test";
+        Assert.Equal(expected, result);
         dbContextMock.Verify(db => db.NothingModels.AddAsync(It.IsAny<NothingModel>(), It.IsAny<CancellationToken>()), Times.Once);
         dbContextMock.Verify(db => db.SaveChangesAsync(It.IsAny<CancellationToken>()), Times.Once);
     }
@@ -148,8 +144,8 @@ public class NothingServiceTests
         var result = nothingModels.Single().Name;
 
         //Assert
-        var assert = "Test";
-        Assert.Equal(assert, result);
+        var expected = "Test";
+        Assert.Equal(expected, result);
         dbContextMock.Verify(db => db.NothingModels.AddAsync(It.IsAny<NothingModel>(), It.IsAny<CancellationToken>()), Times.Once);
         dbContextMock.Verify(db => db.SaveChangesAsync(It.IsAny<CancellationToken>()), Times.Once);
     }
@@ -194,8 +190,8 @@ public class NothingServiceTests
         var result = nothingModel.Name;
 
         //Assert
-        var assert = "New Name";
-        Assert.Equal(assert, result);
+        var expected = "New Name";
+        Assert.Equal(expected, result);
         dbContextMock.Verify(db => db.SaveChangesAsync(It.IsAny<CancellationToken>()), Times.Once);
     }
 
@@ -217,8 +213,8 @@ public class NothingServiceTests
         var result = nothingModels.Single().Name;
 
         //Assert
-        var assert = "New Name";
-        Assert.Equal(assert, result);
+        var expected = "New Name";
+        Assert.Equal(expected, result);
         dbContextMock.Verify(db => db.SaveChangesAsync(It.IsAny<CancellationToken>()), Times.Once);
     }
 
@@ -244,6 +240,26 @@ public class NothingServiceTests
     }
 
     [Fact]
+    public async Task Update_Not_Exist_Id_Throws_ArgumentException()
+    {
+        //Arrange
+        var dbContextMock = GetDbContextMock([]);
+        var nothingService = GetNothingService(dbContextMock.Object);
+        var updateNothingModelDto = new UpdateNothingModelDto()
+        {
+            Id = 1,
+            Name = "Test",
+        };
+
+        //Act
+        var result = new Func<Task<NothingModelDto>>(()
+            => nothingService.Update(updateNothingModelDto, Mock.Of<ServerCallContext>()));
+
+        //Assert
+        await Assert.ThrowsAsync<ArgumentException>(result);
+    }
+
+    [Fact]
     public async Task Delete_Dto_Equivalent()
     {
         //Arrange
@@ -260,12 +276,12 @@ public class NothingServiceTests
             .Delete(nothingModelIdDto, Mock.Of<ServerCallContext>());
 
         //Assert
-        var assert = new NothingModelDto()
+        var expected = new NothingModelDto()
         {
             Id = 1,
             Name = "Test",
         };
-        Assert.Equivalent(assert, result, true);
+        Assert.Equivalent(expected, result, true);
         dbContextMock.Verify(db => db.NothingModels.Remove(It.IsAny<NothingModel>()), Times.Once);
         dbContextMock.Verify(db => db.SaveChangesAsync(It.IsAny<CancellationToken>()), Times.Once);
     }
@@ -292,18 +308,14 @@ public class NothingServiceTests
     }
 
     [Fact]
-    public async Task Delete_ThrowsAsync_Exception()
+    public async Task DeleteAsync_Not_Exist_Id_Throws_ArgumentException()
     {
         //Arrange
-        var dbContextOptions = new DbContextOptions<NothingRpcApiDbContext>();
-        var dbContextMock = new Mock<NothingRpcApiDbContext>(dbContextOptions);
-        dbContextMock
-            .SetupGet(dbContext => dbContext.NothingModels)
-            .Throws(new Exception("Fake exception"));
+        var dbContextMock = GetDbContextMock([]);
         var nothingService = GetNothingService(dbContextMock.Object);
         var nothingModelIdDto = new NothingModelIdDto()
         {
-            Id = 0,
+            Id = 1,
         };
 
         //Act
@@ -311,7 +323,7 @@ public class NothingServiceTests
             => nothingService.Delete(nothingModelIdDto, Mock.Of<ServerCallContext>()));
 
         //Assert
-        await Assert.ThrowsAsync<Exception>(result);
+        await Assert.ThrowsAsync<ArgumentException>(result);
     }
 
     private static List<NothingModel> GetNothingModels()

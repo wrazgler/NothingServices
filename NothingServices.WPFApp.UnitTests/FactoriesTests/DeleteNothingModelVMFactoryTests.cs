@@ -21,11 +21,11 @@ public class DeleteNothingModelVMFactoryTests
         var result = factory.Create(nothingModelVM);
 
         //Assert
-        var assert = new DeleteNothingModelVM(
+        var expected = new DeleteNothingModelVM(
             new CancelButtonVM(closeDialogCommand),
             new DeleteButtonVM(deleteCommand),
             nothingModelVM);
-        Assert.Equivalent(assert, result, true);
+        Assert.Equivalent(expected, result, true);
     }
 
     private static IDeleteNothingModelVMFactory GetDeleteNothingModelVMFactory(

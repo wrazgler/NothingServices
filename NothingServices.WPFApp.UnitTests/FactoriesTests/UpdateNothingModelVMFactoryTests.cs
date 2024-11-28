@@ -21,11 +21,11 @@ public class UpdateNothingModelVMFactoryTests
         var result = factory.Create(nothingModelVM);
 
         //Assert
-        var assert = new UpdateNothingModelVM(
+        var expected = new UpdateNothingModelVM(
             new CancelButtonVM(closeDialogCommand),
             new UpdateButtonVM(updateCommand),
             nothingModelVM);
-        Assert.Equivalent(assert, result, true);
+        Assert.Equivalent(expected, result, true);
     }
 
     private static IUpdateNothingModelVMFactory GetUpdateNothingModelVMFactory(

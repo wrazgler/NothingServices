@@ -16,8 +16,8 @@ public class NotificatorHeightConverterTests
         var result = converter.Convert([2.0, 3.0], typeof(bool), null, CultureInfo.InvariantCulture);
 
         //Assert
-        var assert = 6.0;
-        Assert.Equal(assert, result);
+        var expected = 6.0;
+        Assert.Equal(expected, result);
     }
 
     [Fact]
@@ -30,8 +30,8 @@ public class NotificatorHeightConverterTests
         var result = converter.Convert(["2,0", 3.0], typeof(double), null, CultureInfo.InvariantCulture);
 
         //Assert
-        var assert = 6.0;
-        Assert.Equal(assert, result);
+        var expected = 6.0;
+        Assert.Equal(expected, result);
     }
 
     [Fact]
@@ -44,8 +44,8 @@ public class NotificatorHeightConverterTests
         var result = converter.Convert([2.0, "3,0"], typeof(double), null, CultureInfo.InvariantCulture);
 
         //Assert
-        var assert = 6.0;
-        Assert.Equal(assert, result);
+        var expected = 6.0;
+        Assert.Equal(expected, result);
     }
 
     [Fact]
@@ -58,8 +58,8 @@ public class NotificatorHeightConverterTests
         var result = converter.Convert(["2.0", "3.0"], typeof(double), null, CultureInfo.InvariantCulture);
 
         //Assert
-        var assert = 6.0;
-        Assert.Equal(assert, result);
+        var expected = 6.0;
+        Assert.Equal(expected, result);
     }
 
     [Fact]
@@ -72,8 +72,8 @@ public class NotificatorHeightConverterTests
         var result = converter.Convert(["2,0", "3,0"], typeof(double), null, CultureInfo.InvariantCulture);
 
         //Assert
-        var assert = 6.0;
-        Assert.Equal(assert, result);
+        var expected = 6.0;
+        Assert.Equal(expected, result);
     }
 
     [Fact]
@@ -86,8 +86,8 @@ public class NotificatorHeightConverterTests
         var result = converter.Convert(null, typeof(double), null, CultureInfo.InvariantCulture);
 
         //Assert
-        var assert = Binding.DoNothing;
-        Assert.Equal(assert, result);
+        var expected = Binding.DoNothing;
+        Assert.Equal(expected, result);
     }
 
     [Fact]
@@ -100,8 +100,8 @@ public class NotificatorHeightConverterTests
         var result = converter.Convert([1.0], typeof(double), null, CultureInfo.InvariantCulture);
 
         //Assert
-        var assert = Binding.DoNothing;
-        Assert.Equal(assert, result);
+        var expected = Binding.DoNothing;
+        Assert.Equal(expected, result);
     }
 
     [Fact]
@@ -114,8 +114,8 @@ public class NotificatorHeightConverterTests
         var result = converter.Convert([1.0, 2.0, 3.0], typeof(double), null, CultureInfo.InvariantCulture);
 
         //Assert
-        var assert = Binding.DoNothing;
-        Assert.Equal(assert, result);
+        var expected = Binding.DoNothing;
+        Assert.Equal(expected, result);
     }
 
     [Fact]
@@ -128,8 +128,8 @@ public class NotificatorHeightConverterTests
         var result = converter.Convert([null, 2.0], typeof(double), null, CultureInfo.InvariantCulture);
 
         //Assert
-        var assert = Binding.DoNothing;
-        Assert.Equal(assert, result);
+        var expected = Binding.DoNothing;
+        Assert.Equal(expected, result);
     }
 
     [Fact]
@@ -142,8 +142,8 @@ public class NotificatorHeightConverterTests
         var result = converter.Convert([1.0 , null], typeof(double), null, CultureInfo.InvariantCulture);
 
         //Assert
-        var assert = Binding.DoNothing;
-        Assert.Equal(assert, result);
+        var expected = Binding.DoNothing;
+        Assert.Equal(expected, result);
     }
 
     [Fact]
@@ -156,8 +156,8 @@ public class NotificatorHeightConverterTests
         var result = converter.Convert(["test", 2.0], typeof(double), null, CultureInfo.InvariantCulture);
 
         //Assert
-        var assert = Binding.DoNothing;
-        Assert.Equal(assert, result);
+        var expected = Binding.DoNothing;
+        Assert.Equal(expected, result);
     }
 
     [Fact]
@@ -170,8 +170,8 @@ public class NotificatorHeightConverterTests
         var result = converter.Convert([1.0 , "test"], typeof(double), null, CultureInfo.InvariantCulture);
 
         //Assert
-        var assert = Binding.DoNothing;
-        Assert.Equal(assert, result);
+        var expected = Binding.DoNothing;
+        Assert.Equal(expected, result);
     }
 
     [Fact]

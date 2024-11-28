@@ -9,6 +9,11 @@ namespace NothingServices.WPFApp.Services;
 public interface INotificationService
 {
     /// <summary>
+    /// Элемент окна уведомлений
+    /// </summary>
+    public INotificator? Notificator { get; }
+
+    /// <summary>
     /// Привязать элемент окна уведомлений
     /// </summary>
     /// <param name="notificator">Элемент окна уведомлений</param>
@@ -16,7 +21,7 @@ public interface INotificationService
     /// <exception cref="ArgumentNullException">
     /// Ошибка, аргумент является пустой ссылкой
     /// </exception>
-    Action Pair(Notificator notificator);
+    Action Pair(INotificator notificator);
 
     /// <summary>
     /// Проверить, что потоки элемента окна уведомлений и сервиса отображения уведомлений совпадают

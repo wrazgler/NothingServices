@@ -20,12 +20,12 @@ public class CertificateConfigTests
         var result =  configuration.GetConfig<CertificateConfig>();
 
         //Assert
-        var assert = new CertificateConfig()
+        var expected = new CertificateConfig()
         {
             FileName = "localhost.crt",
             Password = "localhost",
         };
-        Assert.Equivalent(assert, result, true);
+        Assert.Equivalent(expected, result, true);
     }
 
     [Fact]
@@ -41,12 +41,12 @@ public class CertificateConfigTests
         var result = services.GetRequiredService<IOptions<CertificateConfig>>().Value;
 
         //Assert
-        var assert = new CertificateConfig()
+        var expected = new CertificateConfig()
         {
             FileName = "localhost.crt",
             Password = "localhost",
         };
-        Assert.Equivalent(assert, result, true);
+        Assert.Equivalent(expected, result, true);
     }
 
     [Fact]

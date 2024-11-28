@@ -13,10 +13,12 @@ namespace NothingWebApi.Services;
 /// <param name="mapper"><see cref="Mapper"/></param>
 public class NothingService(
     NothingWebApiDbContext dbContext,
+    ILogger<NothingService> logger,
     IMapper mapper)
     : INothingService
 {
     private readonly NothingWebApiDbContext _dbContext = dbContext;
+    private readonly ILogger<NothingService> _logger = logger;
     private readonly IMapper _mapper = mapper;
 
     /// <summary>
@@ -26,11 +28,19 @@ public class NothingService(
     /// <returns>Список моделей</returns>
     public Task<NothingModelDto[]> GetAsync(CancellationToken cancellationToken = default)
     {
-        return _dbContext.NothingModels
-            .AsNoTracking()
-            .OrderBy(model => model.Id)
-            .Select(model => _mapper.Map<NothingModelDto>(model))
-            .ToArrayAsync(cancellationToken);
+        try
+        {
+            return _dbContext.NothingModels
+                .AsNoTracking()
+                .OrderBy(model => model.Id)
+                .Select(model => _mapper.Map<NothingModelDto>(model))
+                .ToArrayAsync(cancellationToken);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex.ToString());
+            throw;
+        }
     }
 
     /// <summary>
@@ -39,12 +49,23 @@ public class NothingService(
     /// <param name="id">Идентификатор модели</param>
     /// <param name="cancellationToken">Токен отмены</param>
     /// <returns>Объект модели</returns>
-    public Task<NothingModelDto> GetAsync(int id, CancellationToken cancellationToken = default)
+    public async Task<NothingModelDto> GetAsync(int id, CancellationToken cancellationToken = default)
     {
-        return _dbContext.NothingModels.AsNoTracking()
-            .Where(model => model.Id == id)
-            .Select(model => _mapper.Map<NothingModelDto>(model))
-            .SingleAsync(cancellationToken);
+        try
+        {
+            var nothingModelDto = await _dbContext.NothingModels.AsNoTracking()
+                .Where(model => model.Id == id)
+                .Select(model => _mapper.Map<NothingModelDto>(model))
+                .SingleOrDefaultAsync(cancellationToken);
+            if(nothingModelDto == null)
+                throw new ArgumentException($"Не удалось найти модель с идентификатором {id}.");
+            return nothingModelDto;
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex.ToString());
+            throw;
+        }
     }
 
     /// <summary>
@@ -60,12 +81,20 @@ public class NothingService(
         CreateNothingModelDto createNothingModelDto,
         CancellationToken cancellationToken = default)
     {
-        if(string.IsNullOrEmpty(createNothingModelDto.Name))
-            throw new ArgumentNullException(nameof(createNothingModelDto.Name), "Name cannot be null or empty.");
-        var model = _mapper.Map<NothingModel>(createNothingModelDto);
-        await _dbContext.NothingModels.AddAsync(model, cancellationToken);
-        await _dbContext.SaveChangesAsync(cancellationToken);
-        return _mapper.Map<NothingModelDto>(model);
+        try
+        {
+            if(string.IsNullOrEmpty(createNothingModelDto.Name))
+                throw new ArgumentNullException(nameof(createNothingModelDto.Name), "Имя не может быть пустым.");
+            var model = _mapper.Map<NothingModel>(createNothingModelDto);
+            await _dbContext.NothingModels.AddAsync(model, cancellationToken);
+            await _dbContext.SaveChangesAsync(cancellationToken);
+            return _mapper.Map<NothingModelDto>(model);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex.ToString());
+            throw;
+        }
     }
 
     /// <summary>
@@ -81,13 +110,23 @@ public class NothingService(
         UpdateNothingModelDto updateNothingModelDto,
         CancellationToken cancellationToken = default)
     {
-        if (string.IsNullOrEmpty(updateNothingModelDto.Name))
-            throw new ArgumentNullException(nameof(updateNothingModelDto.Name), "Name cannot be null or empty.");
-        var model = await _dbContext.NothingModels
-            .SingleAsync(model => model.Id == updateNothingModelDto.Id, cancellationToken);
-        model.Name = updateNothingModelDto.Name;
-        await _dbContext.SaveChangesAsync(cancellationToken);
-        return _mapper.Map<NothingModelDto>(model);
+        try
+        {
+            if (string.IsNullOrEmpty(updateNothingModelDto.Name))
+                throw new ArgumentNullException(nameof(updateNothingModelDto.Name), "Имя не может быть пустым.");
+            var model = await _dbContext.NothingModels
+                .SingleOrDefaultAsync(model => model.Id == updateNothingModelDto.Id, cancellationToken);
+            if(model == null)
+                throw new ArgumentException($"Не удалось найти модель с идентификатором {updateNothingModelDto.Id}.");
+            model.Name = updateNothingModelDto.Name;
+            await _dbContext.SaveChangesAsync(cancellationToken);
+            return _mapper.Map<NothingModelDto>(model);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex.ToString());
+            throw;
+        }
     }
 
     /// <summary>
@@ -98,10 +137,20 @@ public class NothingService(
     /// <returns>Объект модели</returns>
     public async Task<NothingModelDto> DeleteAsync(int id, CancellationToken cancellationToken = default)
     {
-        var model = await _dbContext.NothingModels
-            .SingleAsync(model => model.Id == id, cancellationToken);
-        _dbContext.NothingModels.Remove(model);
-        await _dbContext.SaveChangesAsync(cancellationToken);
-        return _mapper.Map<NothingModelDto>(model);
+        try
+        {
+            var model = await _dbContext.NothingModels
+                .SingleOrDefaultAsync(model => model.Id == id, cancellationToken);
+            if(model == null)
+                throw new ArgumentException($"Не удалось найти модель с идентификатором {id}.");
+            _dbContext.NothingModels.Remove(model);
+            await _dbContext.SaveChangesAsync(cancellationToken);
+            return _mapper.Map<NothingModelDto>(model);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex.ToString());
+            throw;
+        }
     }
 }

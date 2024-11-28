@@ -17,8 +17,8 @@ public class AppExtensionsTests
             .Count;
 
         //Assert
-        var assert = 5;
-        Assert.Equal(assert, result);
+        var expected = 5;
+        Assert.Equal(expected, result);
     }
 
     [Fact]

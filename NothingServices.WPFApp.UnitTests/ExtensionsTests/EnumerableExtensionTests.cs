@@ -15,7 +15,7 @@ public class EnumerableExtensionTests
         var result = items.ToObservableCollection();
 
         //Assert
-        var assert = new ObservableCollection<string> {"a", "b", "c"};
-        Assert.Equivalent(assert, result, true);
+        var expected = new ObservableCollection<string> {"a", "b", "c"};
+        Assert.Equivalent(expected, result, true);
     }
 }

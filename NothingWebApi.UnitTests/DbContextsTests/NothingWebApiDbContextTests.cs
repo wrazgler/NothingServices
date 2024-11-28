@@ -14,7 +14,7 @@ public class NothingWebApiDbContextTests
         //Arrange
         var dbContext = await GetDbContext();
         await dbContext.Database.EnsureCreatedAsync();
-        
+
         //Act
         var result = await dbContext.NothingModels
             .AsNoTracking()
@@ -23,7 +23,7 @@ public class NothingWebApiDbContextTests
         //Assert
         Assert.Empty(result);
     }
-    
+
     [Fact]
     public async Task AddAsync_Db_Equivalent()
     {
@@ -35,7 +35,7 @@ public class NothingWebApiDbContextTests
         {
             Name = "Test",
         };
-        
+
         //Act
         await dbContext.NothingModels.AddAsync(nothingModel);
         await dbContext.SaveChangesAsync();
@@ -45,14 +45,14 @@ public class NothingWebApiDbContextTests
             .SingleAsync();
 
         //Assert
-        var assert = new NothingModel()
+        var expected = new NothingModel()
         {
             Id = 1,
             Name = "Test",
         };
-        Assert.Equivalent(assert, result, true);
+        Assert.Equivalent(expected, result, true);
     }
-    
+
     [Fact]
     public async Task Remove_Db_Equivalent()
     {
@@ -66,7 +66,7 @@ public class NothingWebApiDbContextTests
         await dbContext.NothingModels.AddAsync(nothingModel);
         await dbContext.SaveChangesAsync();
         dbContext.ChangeTracker.Clear();
-        
+
         //Act
         dbContext.NothingModels.Remove(nothingModel);
         await dbContext.SaveChangesAsync();
@@ -78,7 +78,7 @@ public class NothingWebApiDbContextTests
         //Assert
         Assert.Empty(result);
     }
-    
+
     private static async Task<NothingWebApiDbContext> GetDbContext()
     {
         var dbContext = new ServiceCollection()

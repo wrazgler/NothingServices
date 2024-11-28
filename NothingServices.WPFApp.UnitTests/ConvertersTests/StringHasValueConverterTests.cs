@@ -15,8 +15,8 @@ public class StringHasValueConverterTests
         var result = converter.Convert("value", typeof(bool), null, CultureInfo.InvariantCulture);
 
         //Assert
-        var assert = true;
-        Assert.Equal(assert, result);
+        var expected = true;
+        Assert.Equal(expected, result);
     }
 
     [Fact]
@@ -29,8 +29,8 @@ public class StringHasValueConverterTests
         var result = converter.Convert(string.Empty, typeof(bool), null, CultureInfo.InvariantCulture);
 
         //Assert
-        var assert = false;
-        Assert.Equal(assert, result);
+        var expected = false;
+        Assert.Equal(expected, result);
     }
 
     [Fact]
@@ -43,8 +43,8 @@ public class StringHasValueConverterTests
         var result = converter.Convert(null, typeof(bool), null, CultureInfo.InvariantCulture);
 
         //Assert
-        var assert = false;
-        Assert.Equal(assert, result);
+        var expected = false;
+        Assert.Equal(expected, result);
     }
 
     [Fact]

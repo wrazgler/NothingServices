@@ -31,10 +31,10 @@ public class NothingWebApiClientStrategyTests
         var result = stringBuilder.ToString();
 
         //Assert
-        var assert = string.Concat(
+        var expected = string.Concat(
             JsonSerializer.Serialize(nothingModels, _jsonSerializerOptions),
             Environment.NewLine);
-        Assert.Equal(assert, result);
+        Assert.Equal(expected, result);
     }
 
     [Fact]
@@ -74,12 +74,12 @@ public class NothingWebApiClientStrategyTests
         var result = stringBuilder.ToString();
 
         //Assert
-        var assert = string.Concat(
+        var expected = string.Concat(
             "Введите идентификатор",
             Environment.NewLine,
             JsonSerializer.Serialize(nothingModels.Single(), _jsonSerializerOptions),
             Environment.NewLine);
-        Assert.Equal(assert, result);
+        Assert.Equal(expected, result);
     }
 
     [Fact]
@@ -164,7 +164,7 @@ public class NothingWebApiClientStrategyTests
         var result = stringBuilder.ToString();
 
         //Assert
-        var assert = string.Concat(
+        var expected = string.Concat(
             "Введите имя модели",
             Environment.NewLine,
             JsonSerializer.Serialize(new NothingModelWebDto()
@@ -173,7 +173,7 @@ public class NothingWebApiClientStrategyTests
                 Name = name,
             }, _jsonSerializerOptions),
             Environment.NewLine);
-        Assert.Equal(assert, result);
+        Assert.Equal(expected, result);
     }
 
     [Fact]
@@ -272,7 +272,7 @@ public class NothingWebApiClientStrategyTests
         var result = stringBuilder.ToString();
 
         //Assert
-        var assert = string.Concat(
+        var expected = string.Concat(
             "Введите идентификатор",
             Environment.NewLine,
             "Введите имя модели",
@@ -283,7 +283,7 @@ public class NothingWebApiClientStrategyTests
                 Name = name,
             }, _jsonSerializerOptions),
             Environment.NewLine);
-        Assert.Equal(assert, result);
+        Assert.Equal(expected, result);
     }
 
     [Fact]
@@ -395,12 +395,12 @@ public class NothingWebApiClientStrategyTests
         var result = stringBuilder.ToString();
 
         //Assert
-        var assert = string.Concat(
+        var expected = string.Concat(
             "Введите идентификатор",
             Environment.NewLine,
             JsonSerializer.Serialize(nothingModels.Single(), _jsonSerializerOptions),
             Environment.NewLine);
-        Assert.Equal(assert, result);
+        Assert.Equal(expected, result);
     }
 
     [Fact]

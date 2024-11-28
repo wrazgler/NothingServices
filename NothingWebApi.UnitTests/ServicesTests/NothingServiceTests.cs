@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using Moq.EntityFrameworkCore;
 using NothingWebApi.DbContexts;
 using NothingWebApi.Dtos;
@@ -24,8 +25,26 @@ public class NothingServiceTests
         var result = await nothingService.GetAsync();
 
         //Assert
-        var assert = nothingModels;
-        Assert.Equivalent(assert, result, true);
+        var expected = nothingModels;
+        Assert.Equivalent(expected, result, true);
+    }
+
+    [Fact]
+    public async Task GetAsync_ThrowsAsync_Exception()
+    {
+        //Arrange
+        var dbContextOptions = new DbContextOptions<NothingWebApiDbContext>();
+        var dbContextMock = new Mock<NothingWebApiDbContext>(dbContextOptions);
+        dbContextMock
+            .SetupGet(dbContext => dbContext.NothingModels)
+            .Throws(new Exception("Fake exception"));
+        var nothingService = GetNothingService(dbContextMock.Object);
+
+        //Act
+        var result = new Func<Task<NothingModelDto[]>>(() => nothingService.GetAsync());
+
+        //Assert
+        await Assert.ThrowsAsync<Exception>(result);
     }
 
     [Fact]
@@ -40,12 +59,26 @@ public class NothingServiceTests
         var result = await nothingService.GetAsync(1);
 
         //Assert
-        var assert = new NothingModelDto()
+        var expected = new NothingModelDto()
         {
             Id = 1,
             Name = "Test",
         };
-        Assert.Equivalent(assert, result, true);
+        Assert.Equivalent(expected, result, true);
+    }
+
+    [Fact]
+    public async Task GetAsync_Not_Exist_Id_Throws_ArgumentException()
+    {
+        //Arrange
+        var dbContextMock = GetDbContextMock([]);
+        var nothingService = GetNothingService(dbContextMock.Object);
+
+        //Act
+        var result = new Func<Task<NothingModelDto>>(() => nothingService.GetAsync(1));
+
+        //Assert
+        await Assert.ThrowsAsync<ArgumentException>(result);
     }
 
     [Fact]
@@ -64,8 +97,8 @@ public class NothingServiceTests
         var result = nothingModel.Name;
 
         //Assert
-        var assert = "Test";
-        Assert.Equal(assert, result);
+        var expected = "Test";
+        Assert.Equal(expected, result);
         dbContextMock.Verify(db => db.NothingModels.AddAsync(It.IsAny<NothingModel>(),It.IsAny<CancellationToken>()), Times.Once);
         dbContextMock.Verify(db => db.SaveChangesAsync(It.IsAny<CancellationToken>()), Times.Once);
     }
@@ -87,8 +120,8 @@ public class NothingServiceTests
         var result = nothingModels.Single().Name;
 
         //Assert
-        var assert = "Test";
-        Assert.Equal(assert, result);
+        var expected = "Test";
+        Assert.Equal(expected, result);
         dbContextMock.Verify(db => db.NothingModels.AddAsync(It.IsAny<NothingModel>(),It.IsAny<CancellationToken>()), Times.Once);
         dbContextMock.Verify(db => db.SaveChangesAsync(It.IsAny<CancellationToken>()), Times.Once);
     }
@@ -131,8 +164,8 @@ public class NothingServiceTests
         var result = nothingModel.Name;
 
         //Assert
-        var assert = "New Name";
-        Assert.Equal(assert, result);
+        var expected = "New Name";
+        Assert.Equal(expected, result);
         dbContextMock.Verify(db => db.SaveChangesAsync(It.IsAny<CancellationToken>()), Times.Once);
     }
 
@@ -154,9 +187,28 @@ public class NothingServiceTests
         var result = nothingModels.Single().Name;
 
         //Assert
-        var assert = "New Name";
-        Assert.Equal(assert, result);
+        var expected = "New Name";
+        Assert.Equal(expected, result);
         dbContextMock.Verify(db => db.SaveChangesAsync(It.IsAny<CancellationToken>()), Times.Once);
+    }
+
+    [Fact]
+    public async Task UpdateAsync_Not_Exist_Id_Throws_ArgumentException()
+    {
+        //Arrange
+        var dbContextMock = GetDbContextMock([]);
+        var nothingService = GetNothingService(dbContextMock.Object);
+        var updateNothingModelDto = new UpdateNothingModelDto()
+        {
+            Id = 1,
+            Name = "New Name",
+        };
+
+        //Act
+        var result = new Func<Task<NothingModelDto>>(() => nothingService.UpdateAsync(updateNothingModelDto));
+
+        //Assert
+        await Assert.ThrowsAsync<ArgumentException>(result);
     }
 
     [Fact]
@@ -191,12 +243,12 @@ public class NothingServiceTests
         var result = await nothingService.DeleteAsync(1);
 
         //Assert
-        var assert = new NothingModelDto()
+        var expected = new NothingModelDto()
         {
             Id = 1,
             Name = "Test",
         };
-        Assert.Equivalent(assert, result, true);
+        Assert.Equivalent(expected, result, true);
         dbContextMock.Verify(db => db.NothingModels.Remove(It.IsAny<NothingModel>()), Times.Once);
         dbContextMock.Verify(db => db.SaveChangesAsync(It.IsAny<CancellationToken>()), Times.Once);
     }
@@ -218,6 +270,20 @@ public class NothingServiceTests
         dbContextMock.Verify(db => db.SaveChangesAsync(It.IsAny<CancellationToken>()), Times.Once);
     }
 
+    [Fact]
+    public async Task DeleteAsync_Not_Exist_Id_Throws_ArgumentException()
+    {
+        //Arrange
+        var dbContextMock = GetDbContextMock([]);
+        var nothingService = GetNothingService(dbContextMock.Object);
+
+        //Act
+        var result = new Func<Task<NothingModelDto>>(() => nothingService.DeleteAsync(1));
+
+        //Assert
+        await Assert.ThrowsAsync<ArgumentException>(result);
+    }
+
     private static IList<NothingModel> GetNothingModels()
     {
         var nothingModels = new List<NothingModel>()
@@ -236,6 +302,7 @@ public class NothingServiceTests
         var nothingService = new ServiceCollection()
             .AddScoped(_ => dbContext)
             .AddTransient<INothingService, NothingService>()
+            .AddTransient(_ => Mock.Of<ILogger<NothingService>>())
             .AddAppAutoMapper()
             .BuildServiceProvider()
             .GetRequiredService<INothingService>();

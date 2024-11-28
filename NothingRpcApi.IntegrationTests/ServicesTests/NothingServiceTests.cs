@@ -34,7 +34,7 @@ public class NothingServiceTests
         var result = nothingModelDtos;
 
         //Assert
-        var assert = new NothingModelDto[]
+        var expected = new NothingModelDto[]
         {
             new()
             {
@@ -42,7 +42,7 @@ public class NothingServiceTests
             Name = "Test",
             }
         };
-        Assert.Equivalent(assert, result, true);
+        Assert.Equivalent(expected, result, true);
     }
 
     [Fact]
@@ -63,12 +63,12 @@ public class NothingServiceTests
             .Get(nothingModelIdDto, Mock.Of<ServerCallContext>());
 
         //Assert
-        var assert = new NothingModelDto()
+        var expected = new NothingModelDto()
         {
             Id = nothingModelIdDto.Id,
             Name = "Test",
         };
-        Assert.Equivalent(assert, result, true);
+        Assert.Equivalent(expected, result, true);
     }
 
     [Fact]
@@ -90,8 +90,8 @@ public class NothingServiceTests
         var result = nothingModel.Name;
 
         //Assert
-        var assert = "Test";
-        Assert.Equal(assert, result);
+        var expected = "Test";
+        Assert.Equal(expected, result);
     }
 
     [Fact]
@@ -115,8 +115,8 @@ public class NothingServiceTests
         var result = nothingModel.Name;
 
         //Assert
-        var assert = "Test";
-        Assert.Equal(assert, result);
+        var expected = "Test";
+        Assert.Equal(expected, result);
     }
 
     [Fact]
@@ -159,8 +159,8 @@ public class NothingServiceTests
         var result = nothingModel.Name;
 
         //Assert
-        var assert = "New Name";
-        Assert.Equal(assert, result);
+        var expected = "New Name";
+        Assert.Equal(expected, result);
     }
 
     [Fact]
@@ -186,8 +186,8 @@ public class NothingServiceTests
         var result = nothingModel.Name;
 
         //Assert
-        var assert = "New Name";
-        Assert.Equal(assert, result);
+        var expected = "New Name";
+        Assert.Equal(expected, result);
     }
 
     [Fact]
@@ -230,12 +230,12 @@ public class NothingServiceTests
             .Delete(nothingModelIdDto, Mock.Of<ServerCallContext>());
 
         //Assert
-        var assert = new NothingModelDto()
+        var expected = new NothingModelDto()
         {
             Id = 1,
             Name = "Test",
         };
-        Assert.Equivalent(assert, result, true);
+        Assert.Equivalent(expected, result, true);
     }
 
     [Fact]

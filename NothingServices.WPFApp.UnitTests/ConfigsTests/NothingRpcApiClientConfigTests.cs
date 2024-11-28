@@ -19,11 +19,11 @@ public class NothingRpcApiClientConfigTests
         var result =  configuration.GetConfig<NothingRpcApiClientConfig>();
 
         //Assert
-        var assert = new NothingRpcApiClientConfig()
+        var expected = new NothingRpcApiClientConfig()
         {
             BaseUrl = "https://localhost:8400/nothing-grpc-api",
         };
-        Assert.Equivalent(assert, result, true);
+        Assert.Equivalent(expected, result, true);
     }
 
     [Fact]
@@ -39,11 +39,11 @@ public class NothingRpcApiClientConfigTests
         var result = services.GetRequiredService<IOptions<NothingRpcApiClientConfig>>().Value;
 
         //Assert
-        var assert = new NothingRpcApiClientConfig()
+        var expected = new NothingRpcApiClientConfig()
         {
             BaseUrl = "https://localhost:8400/nothing-grpc-api",
         };
-        Assert.Equivalent(assert, result, true);
+        Assert.Equivalent(expected, result, true);
     }
 
     [Fact]

@@ -19,7 +19,10 @@ public class NotificationService(Dispatcher? dispatcher = null, TimeSpan? durati
     private readonly SemaphoreSlim _notificationSemaphore = new(1, 1);
     private readonly TimeSpan _duration = duration ?? new TimeSpan(0, 0, 0, 2);
 
-    private Notificator? Notificator { get; set; }
+    /// <summary>
+    /// Элемент окна уведомлений
+    /// </summary>
+    public INotificator? Notificator { get; private set; }
 
     /// <summary>
     /// Привязать элемент окна уведомлений
@@ -29,7 +32,7 @@ public class NotificationService(Dispatcher? dispatcher = null, TimeSpan? durati
     /// <exception cref="ArgumentNullException">
     /// Ошибка, аргумент является пустой ссылкой
     /// </exception>
-    public Action Pair(Notificator notificator)
+    public Action Pair(INotificator notificator)
     {
         Notificator = notificator ?? throw new ArgumentNullException(nameof(notificator));
         return () => Notificator = null;
@@ -82,7 +85,7 @@ public class NotificationService(Dispatcher? dispatcher = null, TimeSpan? durati
         }
     }
 
-    private async Task<bool> ValidateNotificatorAsync(Notificator? notificator)
+    private async Task<bool> ValidateNotificatorAsync(INotificator? notificator)
     {
         while (true)
         {
@@ -97,7 +100,7 @@ public class NotificationService(Dispatcher? dispatcher = null, TimeSpan? durati
         return false;
     }
 
-    private async Task ShowAsync(Notificator notificator, NotificatorItem notificatorItem)
+    private async Task ShowAsync(INotificator notificator, NotificatorItem notificatorItem)
     {
         var content = new ContentControl
         {

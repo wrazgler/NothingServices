@@ -19,11 +19,11 @@ public class NothingWebApiClientConfigTests
         var result =  configuration.GetConfig<NothingWebApiClientConfig>();
 
         //Assert
-        var assert = new NothingWebApiClientConfig()
+        var expected = new NothingWebApiClientConfig()
         {
             BaseUrl = "https://localhost:8200/nothing-web-api",
         };
-        Assert.Equivalent(assert, result, true);
+        Assert.Equivalent(expected, result, true);
     }
 
     [Fact]
@@ -39,11 +39,11 @@ public class NothingWebApiClientConfigTests
         var result = services.GetRequiredService<IOptions<NothingWebApiClientConfig>>().Value;
 
         //Assert
-        var assert = new NothingWebApiClientConfig()
+        var expected = new NothingWebApiClientConfig()
         {
             BaseUrl = "https://localhost:8200/nothing-web-api",
         };
-        Assert.Equivalent(assert, result, true);
+        Assert.Equivalent(expected, result, true);
     }
 
     [Fact]

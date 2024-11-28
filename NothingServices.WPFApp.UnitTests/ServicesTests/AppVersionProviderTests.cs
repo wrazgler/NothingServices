@@ -14,7 +14,7 @@ public class AppVersionProviderTests
         var result = appVersionProvider.GetVersion();
 
         //Assert
-        var assert = new Version("1.0.0.0");
-        Assert.Equivalent(assert, result);
+        var expected = new Version("1.0.0.0");
+        Assert.Equivalent(expected, result);
     }
 }

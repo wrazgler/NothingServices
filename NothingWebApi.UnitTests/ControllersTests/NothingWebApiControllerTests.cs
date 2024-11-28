@@ -26,8 +26,8 @@ public class NothingWebApiControllerTests
         var result = await controller.GetAsync(CancellationToken.None);
 
         //Assert
-        var assert = new OkObjectResult(nothingModels);
-        Assert.Equivalent(assert, result, true);
+        var expected = new OkObjectResult(nothingModels);
+        Assert.Equivalent(expected, result, true);
     }
 
     [Fact]
@@ -44,8 +44,8 @@ public class NothingWebApiControllerTests
         var result = await controller.GetAsync(CancellationToken.None);
 
         //Assert
-        var assert = new BadRequestObjectResult("Fake exception");
-        Assert.Equivalent(assert, result, true);
+        var expected = new BadRequestObjectResult("Fake exception");
+        Assert.Equivalent(expected, result, true);
     }
 
     [Fact]
@@ -63,8 +63,8 @@ public class NothingWebApiControllerTests
         var result = await controller.GetAsync(nothingModel.Id, CancellationToken.None);
 
         //Assert
-        var assert = new OkObjectResult(nothingModel);
-        Assert.Equivalent(assert, result, true);
+        var expected = new OkObjectResult(nothingModel);
+        Assert.Equivalent(expected, result, true);
     }
 
     [Fact]
@@ -81,8 +81,8 @@ public class NothingWebApiControllerTests
         var result = await controller.GetAsync(1, CancellationToken.None);
 
         //Assert
-        var assert = new BadRequestObjectResult("Fake exception");
-        Assert.Equivalent(assert, result, true);
+        var expected = new BadRequestObjectResult("Fake exception");
+        Assert.Equivalent(expected, result, true);
     }
 
     [Fact]
@@ -110,12 +110,12 @@ public class NothingWebApiControllerTests
             .CreateAsync(createNothingModelDto, CancellationToken.None);
 
         //Assert
-        var assert = new OkObjectResult(new NothingModelDto()
+        var expected = new OkObjectResult(new NothingModelDto()
         {
             Id = 1,
             Name = createNothingModelDto.Name,
         });
-        Assert.Equivalent(assert, result, true);
+        Assert.Equivalent(expected, result, true);
     }
 
     [Fact]
@@ -139,8 +139,8 @@ public class NothingWebApiControllerTests
             .CreateAsync(createNothingModelDto, CancellationToken.None);
 
         //Assert
-        var assert = new BadRequestObjectResult("Fake exception");
-        Assert.Equivalent(assert, result, true);
+        var expected = new BadRequestObjectResult("Fake exception");
+        Assert.Equivalent(expected, result, true);
     }
 
     [Fact]
@@ -169,12 +169,12 @@ public class NothingWebApiControllerTests
             .UpdateAsync(updateNothingModelDto, CancellationToken.None);
 
         //Assert
-        var assert = new OkObjectResult(new NothingModelDto()
+        var expected = new OkObjectResult(new NothingModelDto()
         {
             Id = 1,
             Name = updateNothingModelDto.Name,
         });
-        Assert.Equivalent(assert, result, true);
+        Assert.Equivalent(expected, result, true);
     }
 
     [Fact]
@@ -199,8 +199,8 @@ public class NothingWebApiControllerTests
             .UpdateAsync(updateNothingModelDto, CancellationToken.None);
 
         //Assert
-        var assert = new BadRequestObjectResult("Fake exception");
-        Assert.Equivalent(assert, result, true);
+        var expected = new BadRequestObjectResult("Fake exception");
+        Assert.Equivalent(expected, result, true);
     }
 
     [Fact]
@@ -220,8 +220,8 @@ public class NothingWebApiControllerTests
         var result = await controller.DeleteAsync(1, CancellationToken.None);
 
         //Assert
-        var assert = new OkObjectResult(nothingModel);
-        Assert.Equivalent(assert, result, true);
+        var expected = new OkObjectResult(nothingModel);
+        Assert.Equivalent(expected, result, true);
     }
 
     [Fact]
@@ -240,8 +240,8 @@ public class NothingWebApiControllerTests
         var result = await controller.DeleteAsync(0, CancellationToken.None);
 
         //Assert
-        var assert = new BadRequestObjectResult("Fake exception");
-        Assert.Equivalent(assert, result, true);
+        var expected = new BadRequestObjectResult("Fake exception");
+        Assert.Equivalent(expected, result, true);
     }
 
     private static NothingModelDto GetNothingModelDto()

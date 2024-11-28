@@ -20,10 +20,10 @@ public class CreateNothingModelVMFactoryTests
         var result = factory.Create();
 
         //Assert
-        var assert = new CreateNothingModelVM(
+        var expected = new CreateNothingModelVM(
             new CancelButtonVM(closeDialogCommand),
             new CreateButtonVM(createCommand));
-        Assert.Equivalent(assert, result, true);
+        Assert.Equivalent(expected, result, true);
     }
 
     private static ICreateNothingModelVMFactory GetCreateNothingModelVMFactory(

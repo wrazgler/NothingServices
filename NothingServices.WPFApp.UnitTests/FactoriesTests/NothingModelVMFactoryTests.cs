@@ -26,14 +26,14 @@ public class NothingModelVMFactoryTests
         var result = factory.Create(nothingModelDto);
 
         //Assert
-        var assert = new NothingModelVM()
+        var expected = new NothingModelVM()
         {
             Id = nothingModelDto.Id,
             Name = nothingModelDto.Name,
             DeleteButtonVM = new DeleteButtonVM(openDeleteNothingModelCommand),
             UpdateButtonVM = new UpdateButtonVM(openUpdateNothingModelCommand),
         };
-        Assert.Equivalent(assert, result, true);
+        Assert.Equivalent(expected, result, true);
     }
 
     private static INothingModelVMFactory GetNothingModelVMFactory(

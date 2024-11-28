@@ -23,7 +23,7 @@ public class NothingWebApiControllerTests
         var result = await controller.GetAsync(CancellationToken.None);
 
         //Assert
-        var assert = new OkObjectResult(new List<NothingModelDto>(1)
+        var expected = new OkObjectResult(new List<NothingModelDto>(1)
         {
             new()
             {
@@ -31,9 +31,9 @@ public class NothingWebApiControllerTests
                 Name = "Test",
             }
         });
-        Assert.Equivalent(assert, result, true);
+        Assert.Equivalent(expected, result, true);
     }
-    
+
     [Fact]
     public async Task GetAsync_1_OkObjectResult()
     {
@@ -47,14 +47,14 @@ public class NothingWebApiControllerTests
         var result = await controller.GetAsync(1, CancellationToken.None);
 
         //Assert
-        var assert = new OkObjectResult(new NothingModelDto()
+        var expected = new OkObjectResult(new NothingModelDto()
         {
             Id = 1,
             Name = "Test",
         });
-        Assert.Equivalent(assert, result, true);
+        Assert.Equivalent(expected, result, true);
     }
-    
+
     [Fact]
     public async Task GetAsync_0_BadRequestObjectResult()
     {
@@ -68,10 +68,10 @@ public class NothingWebApiControllerTests
         var result = await controller.GetAsync(0, CancellationToken.None);
 
         //Assert
-        var assert = new BadRequestObjectResult("Sequence contains no elements");
-        Assert.Equivalent(assert, result, true);
+        var expected = new BadRequestObjectResult("Sequence contains no elements");
+        Assert.Equivalent(expected, result, true);
     }
-    
+
     [Fact]
     public async Task CreateAsync_OkObjectResult()
     {
@@ -89,14 +89,14 @@ public class NothingWebApiControllerTests
             .CreateAsync(createNothingModelDto, CancellationToken.None);
 
         //Assert
-        var assert = new OkObjectResult(new NothingModelDto()
+        var expected = new OkObjectResult(new NothingModelDto()
         {
             Id = 1,
             Name = "Test",
         });
-        Assert.Equivalent(assert, result, true);
+        Assert.Equivalent(expected, result, true);
     }
-    
+
     [Fact]
     public async Task CreateAsync_EmptyName_BadRequestObjectResult()
     {
@@ -114,10 +114,10 @@ public class NothingWebApiControllerTests
             .CreateAsync(createNothingModelDto, CancellationToken.None);
 
         //Assert
-        var assert = new BadRequestObjectResult("Name cannot be null or empty. (Parameter 'Name')");
-        Assert.Equivalent(assert, result, true);
+        var expected = new BadRequestObjectResult("Name cannot be null or empty. (Parameter 'Name')");
+        Assert.Equivalent(expected, result, true);
     }
-    
+
     [Fact]
     public async Task DeleteAsync_1_OkObjectResult()
     {
@@ -131,14 +131,14 @@ public class NothingWebApiControllerTests
         var result = await controller.DeleteAsync(1, CancellationToken.None);
 
         //Assert
-        var assert = new OkObjectResult(new NothingModelDto()
+        var expected = new OkObjectResult(new NothingModelDto()
         {
             Id = 1,
             Name = "Test",
         });
-        Assert.Equivalent(assert, result, true);
+        Assert.Equivalent(expected, result, true);
     }
-    
+
     [Fact]
     public async Task DeleteAsync_0_BadRequestObjectResult()
     {
@@ -152,10 +152,10 @@ public class NothingWebApiControllerTests
         var result = await controller.DeleteAsync(0, CancellationToken.None);
 
         //Assert
-        var assert = new BadRequestObjectResult("Sequence contains no elements");
-        Assert.Equivalent(assert, result, true);
+        var expected = new BadRequestObjectResult("Sequence contains no elements");
+        Assert.Equivalent(expected, result, true);
     }
-    
+
     private static ServiceProvider GetServiceProvider()
     {
         var serviceProvider = new ServiceCollection()
@@ -166,5 +166,5 @@ public class NothingWebApiControllerTests
             .AddTransient<NothingWebApiController>()
             .BuildServiceProvider();
         return serviceProvider;
-    } 
+    }
 }

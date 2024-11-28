@@ -27,11 +27,11 @@ public class AutoMapperExtensionsTests
         var result = mapper.Map<CreateNothingModelDto>(createNothingModelVM);
 
         //Assert
-        var assert = new CreateNothingModelDto()
+        var expected = new CreateNothingModelDto()
         {
             Name = name,
         };
-        Assert.Equivalent(assert, result, true);
+        Assert.Equivalent(expected, result, true);
     }
 
     [Fact]
@@ -72,11 +72,11 @@ public class AutoMapperExtensionsTests
         var result = mapper.Map<CreateNothingModelWebDto>(createNothingModelVM);
 
         //Assert
-        var assert = new CreateNothingModelWebDto()
+        var expected = new CreateNothingModelWebDto()
         {
             Name = name,
         };
-        Assert.Equivalent(assert, result, true);
+        Assert.Equivalent(expected, result, true);
     }
 
     [Fact]
@@ -118,11 +118,11 @@ public class AutoMapperExtensionsTests
         var result = mapper.Map<NothingModelIdDto>(deleteNothingModelVM);
 
         //Assert
-        var assert = new NothingModelIdDto()
+        var expected = new NothingModelIdDto()
         {
             Id = id,
         };
-        Assert.Equivalent(assert, result, true);
+        Assert.Equivalent(expected, result, true);
     }
 
     [Fact]
@@ -166,12 +166,12 @@ public class AutoMapperExtensionsTests
         var result = mapper.Map<UpdateNothingModelDto>(updateNothingModelVM);
 
         //Assert
-        var assert = new UpdateNothingModelDto()
+        var expected = new UpdateNothingModelDto()
         {
             Id = id,
             Name = name,
         };
-        Assert.Equivalent(assert, result, true);
+        Assert.Equivalent(expected, result, true);
     }
 
     [Fact]
@@ -216,12 +216,12 @@ public class AutoMapperExtensionsTests
         var result = mapper.Map<UpdateNothingModelWebDto>(updateNothingModelVM);
 
         //Assert
-        var assert = new UpdateNothingModelWebDto()
+        var expected = new UpdateNothingModelWebDto()
         {
             Id = id,
             Name = name,
         };
-        Assert.Equivalent(assert, result, true);
+        Assert.Equivalent(expected, result, true);
     }
 
     [Fact]

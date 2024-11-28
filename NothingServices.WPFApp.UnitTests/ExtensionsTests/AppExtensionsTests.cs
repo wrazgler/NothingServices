@@ -28,12 +28,12 @@ public class AppExtensionsTests
             .ToArray();
 
         //Assert
-        var assert = new[]
+        var expected = new[]
         {
             "NothingServices.WPFApp.Clients.NothingRpcService+NothingRpcServiceClient",
             "NothingServices.WPFApp.Clients.INothingWebApiClient",
         };
-        Assert.Equivalent(assert, result, true);
+        Assert.Equivalent(expected, result, true);
     }
 
     [Fact]
@@ -57,8 +57,8 @@ public class AppExtensionsTests
             .ToArray();
 
         //Assert
-        var assert = "Microsoft.Extensions.Options.IConfigureOptions`1[NothingServices.WPFApp.Configs.NothingWebApiClientConfig]";
-        Assert.Contains(assert, result);
+        var expected = "Microsoft.Extensions.Options.IConfigureOptions`1[NothingServices.WPFApp.Configs.NothingWebApiClientConfig]";
+        Assert.Contains(expected, result);
     }
 
     [Fact]
@@ -71,7 +71,7 @@ public class AppExtensionsTests
             .ToArray();
 
         //Assert
-        var assert = new[]
+        var expected = new[]
         {
             "NothingServices.WPFApp.Services.IAppVersionProvider",
             "NothingServices.WPFApp.Services.IDialogService",
@@ -85,7 +85,7 @@ public class AppExtensionsTests
             "NothingServices.WPFApp.Strategies.NothingRpcApiClientStrategy",
             "NothingServices.WPFApp.Strategies.NothingWebApiClientStrategy",
         };
-        Assert.Equivalent(assert, result, true);
+        Assert.Equivalent(expected, result, true);
     }
 
     [Fact]
@@ -98,7 +98,7 @@ public class AppExtensionsTests
             .ToArray();
 
         //Assert
-        var assert = new[]
+        var expected = new[]
         {
             "NothingServices.WPFApp.Controls.ICreateNothingModelView",
             "NothingServices.WPFApp.Controls.IDeleteNothingModelView",
@@ -121,7 +121,7 @@ public class AppExtensionsTests
             "NothingServices.WPFApp.Commands.IOpenUpdateNothingModelCommand",
             "NothingServices.WPFApp.Commands.IUpdateCommand",
         };
-        Assert.Equivalent(assert, result, true);
+        Assert.Equivalent(expected, result, true);
     }
 
     [Fact]

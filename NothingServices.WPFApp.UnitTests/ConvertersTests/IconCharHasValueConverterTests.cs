@@ -16,8 +16,8 @@ public class IconCharHasValueConverterTests
         var result = converter.Convert(IconChar.Egg, typeof(bool), null, CultureInfo.InvariantCulture);
 
         //Assert
-        var assert = true;
-        Assert.Equal(assert, result);
+        var expected = true;
+        Assert.Equal(expected, result);
     }
 
     [Fact]
@@ -30,8 +30,8 @@ public class IconCharHasValueConverterTests
         var result = converter.Convert(IconChar.None, typeof(bool), null, CultureInfo.InvariantCulture);
 
         //Assert
-        var assert = false;
-        Assert.Equal(assert, result);
+        var expected = false;
+        Assert.Equal(expected, result);
     }
 
     [Fact]
@@ -44,8 +44,8 @@ public class IconCharHasValueConverterTests
         var result = converter.Convert(null, typeof(bool), null, CultureInfo.InvariantCulture);
 
         //Assert
-        var assert = false;
-        Assert.Equal(assert, result);
+        var expected = false;
+        Assert.Equal(expected, result);
     }
 
     [Fact]

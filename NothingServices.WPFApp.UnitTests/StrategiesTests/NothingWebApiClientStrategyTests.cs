@@ -30,8 +30,8 @@ public class NothingWebApiClientStrategyTests
         var result = nothingModelVMs.Count;
 
         //Assert
-        var assert = 1;
-        Assert.Equal(assert, result);
+        var expected = 1;
+        Assert.Equal(expected, result);
         clientMock.Verify(client => client.GetAsync(It.IsAny<CancellationToken>()),Times.Once);
         nothingModelVMFactoryMock.Verify(
             factory => factory.Create(

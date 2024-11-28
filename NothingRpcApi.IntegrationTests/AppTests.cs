@@ -30,7 +30,7 @@ public class AppTests
             }
 
             //Assert
-            var assert = new NothingModelDto[]
+            var expected = new NothingModelDto[]
             {
                 new()
                 {
@@ -38,7 +38,7 @@ public class AppTests
                     Name = "Test",
                 }
             };
-            Assert.Equivalent(assert, result);
+            Assert.Equivalent(expected, result);
             await StopApp();
         }
         finally
@@ -65,12 +65,12 @@ public class AppTests
             var result = await client.GetAsync(request);
 
             //Assert
-            var assert = new NothingModelDto()
+            var expected = new NothingModelDto()
             {
                 Id = request.Id,
                 Name = "Test",
             };
-            Assert.Equivalent(assert, result);
+            Assert.Equivalent(expected, result);
             await StopApp();
         }
         finally
@@ -97,12 +97,12 @@ public class AppTests
             var result = await client.CreateAsync(createNothingModelDto);
 
             //Assert
-            var assert = new NothingModelDto()
+            var expected = new NothingModelDto()
             {
                 Id = 2,
                 Name = createNothingModelDto.Name,
             };
-            Assert.Equivalent(assert, result);
+            Assert.Equivalent(expected, result);
             await StopApp();
         }
         finally
@@ -130,12 +130,12 @@ public class AppTests
             var result = await client.UpdateAsync(updateNothingModelDto);
 
             //Assert
-            var assert = new NothingModelDto()
+            var expected = new NothingModelDto()
             {
                 Id = updateNothingModelDto.Id,
                 Name = updateNothingModelDto.Name,
             };
-            Assert.Equivalent(assert, result);
+            Assert.Equivalent(expected, result);
             await StopApp();
         }
         finally
@@ -162,12 +162,12 @@ public class AppTests
             var result = await client.DeleteAsync(request);
 
             //Assert
-            var assert = new NothingModelDto()
+            var expected = new NothingModelDto()
             {
                 Id = request.Id,
                 Name = "Test",
             };
-            Assert.Equivalent(assert, result);
+            Assert.Equivalent(expected, result);
             await StopApp();
         }
         finally

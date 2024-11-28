@@ -39,8 +39,8 @@ public class AppTests
                     Name = "Test",
                 }
             };
-            var assert = GetAssert(JsonSerializer.Serialize(nothingModels, _jsonSerializerOptions));
-            Assert.Equal(assert, result);
+            var expected = GetAssert(JsonSerializer.Serialize(nothingModels, _jsonSerializerOptions));
+            Assert.Equal(expected, result);
             await StopApp();
         }
         finally
@@ -71,11 +71,11 @@ public class AppTests
                 Id = 1,
                 Name = "Test",
             };
-            var assert = GetAssert(string.Concat(
+            var expected = GetAssert(string.Concat(
                 "Введите идентификатор",
                 Environment.NewLine,
                 JsonSerializer.Serialize(nothingModel, _jsonSerializerOptions)));
-            Assert.Equal(assert, result);
+            Assert.Equal(expected, result);
             await StopApp();
         }
         finally
@@ -107,11 +107,11 @@ public class AppTests
                 Id = 2,
                 Name = newName,
             };
-            var assert = GetAssert(string.Concat(
+            var expected = GetAssert(string.Concat(
                 "Введите имя модели",
                 Environment.NewLine,
                 JsonSerializer.Serialize(nothingModel, _jsonSerializerOptions)));
-            Assert.Equal(assert, result);
+            Assert.Equal(expected, result);
             await StopApp();
         }
         finally
@@ -144,13 +144,13 @@ public class AppTests
                 Id = id,
                 Name = newName,
             };
-            var assert = GetAssert(string.Concat(
+            var expected = GetAssert(string.Concat(
                 "Введите идентификатор",
                 Environment.NewLine,
                 "Введите имя модели",
                 Environment.NewLine,
                 JsonSerializer.Serialize(nothingModel, _jsonSerializerOptions)));
-            Assert.Equal(assert, result);
+            Assert.Equal(expected, result);
             await StopApp();
         }
         finally
@@ -181,11 +181,11 @@ public class AppTests
                 Id = 1,
                 Name = "Test",
             };
-            var assert = GetAssert(string.Concat(
+            var expected = GetAssert(string.Concat(
                 "Введите идентификатор",
                 Environment.NewLine,
                 JsonSerializer.Serialize(nothingModel, _jsonSerializerOptions)));
-            Assert.Equal(assert, result);
+            Assert.Equal(expected, result);
             await StopApp();
         }
         finally
@@ -219,8 +219,8 @@ public class AppTests
                     Name = "Test",
                 }
             };
-            var assert = GetAssert(JsonSerializer.Serialize(nothingModels, _jsonSerializerOptions));
-            Assert.Equal(assert, result);
+            var expected = GetAssert(JsonSerializer.Serialize(nothingModels, _jsonSerializerOptions));
+            Assert.Equal(expected, result);
             await StopApp();
         }
         finally
@@ -251,11 +251,11 @@ public class AppTests
                 Id = 1,
                 Name = "Test",
             };
-            var assert = GetAssert(string.Concat(
+            var expected = GetAssert(string.Concat(
                 "Введите идентификатор",
                 Environment.NewLine,
                 JsonSerializer.Serialize(nothingModel, _jsonSerializerOptions)));
-            Assert.Equal(assert, result);
+            Assert.Equal(expected, result);
             await StopApp();
         }
         finally
@@ -287,11 +287,11 @@ public class AppTests
                 Id = 2,
                 Name = newName,
             };
-            var assert = GetAssert(string.Concat(
+            var expected = GetAssert(string.Concat(
                 "Введите имя модели",
                 Environment.NewLine,
                 JsonSerializer.Serialize(nothingModel, _jsonSerializerOptions)));
-            Assert.Equal(assert, result);
+            Assert.Equal(expected, result);
             await StopApp();
         }
         finally
@@ -324,13 +324,13 @@ public class AppTests
                 Id = id,
                 Name = newName,
             };
-            var assert = GetAssert(string.Concat(
+            var expected = GetAssert(string.Concat(
                 "Введите идентификатор",
                 Environment.NewLine,
                 "Введите имя модели",
                 Environment.NewLine,
                 JsonSerializer.Serialize(nothingModel, _jsonSerializerOptions)));
-            Assert.Equal(assert, result);
+            Assert.Equal(expected, result);
             await StopApp();
         }
         finally
@@ -361,11 +361,11 @@ public class AppTests
                 Id = 1,
                 Name = "Test",
             };
-            var assert = GetAssert(string.Concat(
+            var expected = GetAssert(string.Concat(
                 "Введите идентификатор",
                 Environment.NewLine,
                 JsonSerializer.Serialize(nothingModel, _jsonSerializerOptions)));
-            Assert.Equal(assert, result);
+            Assert.Equal(expected, result);
             await StopApp();
         }
         finally

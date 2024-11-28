@@ -28,12 +28,12 @@ public class AutoMapperExtensionsTests
         var result = mapper.Map<NothingModelDto>(nothingModel);
 
         //Assert
-        var assert = new NothingModelDto()
+        var expected = new NothingModelDto()
         {
             Id = id,
             Name = name,
         };
-        Assert.Equivalent(assert, result, true);
+        Assert.Equivalent(expected, result, true);
     }
 
     [Fact]
@@ -75,12 +75,12 @@ public class AutoMapperExtensionsTests
         var result = mapper.Map<NothingModel>(createNothingModelDto);
 
         //Assert
-        var assert = new NothingModel()
+        var expected = new NothingModel()
         {
             Id = 0,
             Name = name,
         };
-        Assert.Equivalent(assert, result, true);
+        Assert.Equivalent(expected, result, true);
     }
 
     [Fact]

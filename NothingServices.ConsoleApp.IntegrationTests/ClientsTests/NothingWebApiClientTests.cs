@@ -23,7 +23,7 @@ public class NothingWebApiClientTests
             var result = await nothingWebApiClient.GetAsync();
 
             //Assert
-            var assert = new NothingModelWebDto[]
+            var expected = new NothingModelWebDto[]
             {
                 new()
                 {
@@ -31,7 +31,7 @@ public class NothingWebApiClientTests
                     Name = "Test",
                 }
             };
-            Assert.Equivalent(assert, result, true);
+            Assert.Equivalent(expected, result, true);
             await StopApp();
         }
         finally
@@ -55,12 +55,12 @@ public class NothingWebApiClientTests
             var result = await nothingWebApiClient.GetAsync(id);
 
             //Assert
-            var assert = new NothingModelWebDto()
+            var expected = new NothingModelWebDto()
             {
                 Id = id,
                 Name = "Test",
             };
-            Assert.Equivalent(assert, result, true);
+            Assert.Equivalent(expected, result, true);
             await StopApp();
         }
         finally
@@ -87,12 +87,12 @@ public class NothingWebApiClientTests
             var result = await nothingWebApiClient.CreateAsync(createNothingModelWebDto);
 
             //Assert
-            var assert = new NothingModelWebDto()
+            var expected = new NothingModelWebDto()
             {
                 Id = 2,
                 Name = createNothingModelWebDto.Name,
             };
-            Assert.Equivalent(assert, result, true);
+            Assert.Equivalent(expected, result, true);
             await StopApp();
         }
         finally
@@ -120,12 +120,12 @@ public class NothingWebApiClientTests
             var result = await nothingWebApiClient.UpdateAsync(updateNothingModelWebDto);
 
             //Assert
-            var assert = new NothingModelWebDto()
+            var expected = new NothingModelWebDto()
             {
                 Id = updateNothingModelWebDto.Id,
                 Name = updateNothingModelWebDto.Name,
             };
-            Assert.Equivalent(assert, result, true);
+            Assert.Equivalent(expected, result, true);
             await StopApp();
         }
         finally
@@ -149,12 +149,12 @@ public class NothingWebApiClientTests
             var result = await nothingWebApiClient.DeleteAsync(id);
 
             //Assert
-            var assert = new NothingModelWebDto()
+            var expected = new NothingModelWebDto()
             {
                 Id = id,
                 Name = "Test",
             };
-            Assert.Equivalent(assert, result, true);
+            Assert.Equivalent(expected, result, true);
             await StopApp();
         }
         finally
