@@ -104,6 +104,8 @@ jobs:
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '8.0.x'
+      - name: Delete Nuget.Config
+        run: del Nuget.Config
       - name: Restore NothingServices.Abstractions
         run: dotnet restore NothingServices.Abstractions/NothingServices.Abstractions.csproj
       - name: Build NothingServices.Abstractions
