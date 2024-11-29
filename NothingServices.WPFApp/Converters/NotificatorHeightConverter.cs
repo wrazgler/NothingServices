@@ -22,13 +22,30 @@ public class NotificatorHeightConverter : IMultiValueConverter
     /// <exception cref="ArgumentException">Тип элемента не соответствует конвертеру</exception>
     public object? Convert(object?[]? value, Type? targetType, object? parameter, CultureInfo? culture)
     {
-        if (value == null || value.Length != 2 || value[0] == null || value[1] == null)
+        if (value is not { Length: 2 } || value[0] == null || value[1] == null)
             return Binding.DoNothing;
-
-        var valid = double.TryParse(value[0]?.ToString()?.Replace(".", ","), out var value1);
-        valid &= double.TryParse(value[1]?.ToString()?.Replace(".", ","), out var value2);
+        var valid = TryGetValue(value[0], out var value1);
+        valid &= TryGetValue(value[1], out var value2);
         var result = valid ? value1 * value2 : Binding.DoNothing;
         return result;
+    }
+
+    private static bool TryGetValue(object? value, out double result)
+    {
+        switch (value)
+        {
+            case double doubleValue:
+                result = doubleValue;
+                return true;
+            case string stringValue:
+            {
+                var valid = double.TryParse(stringValue.Trim().Replace(".", ","), out result);
+                return valid;
+            }
+            default:
+                result = 0;
+                return false;
+        }
     }
 
     /// <summary>

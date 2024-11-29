@@ -226,7 +226,7 @@ jobs:
       - name: Build NothingServices.Abstractions
         run: dotnet publish NothingServices.Abstractions/NothingServices.Abstractions.csproj --configuration "Release" --no-restore
       - name: Pack NothingServices.Abstractions
-        run: dotnet pack NothingServices.Abstractions/NothingServices.Abstractions.csproj --configuration "Release" --no-build -output "/home/runner/.nuget/NuGet"
+        run: dotnet pack NothingServices.Abstractions/NothingServices.Abstractions.csproj --configuration "Release" --no-build --output "/home/runner/.nuget/NuGet"
       - name: Add Nuget
         run: dotnet nuget add source "." --name "NothingServices.Abstractions"
       - name: Clean Certificate
