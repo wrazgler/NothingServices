@@ -106,8 +106,6 @@ jobs:
           dotnet-version: '8.0.x'
       - name: Delete Nuget.Config
         run: del Nuget.Config
-      - name: Move Nuget.Config
-        run: move Nuget.Config TempNuget/Nuget.Config
       - name: Restore NothingServices.Abstractions
         run: dotnet restore NothingServices.Abstractions/NothingServices.Abstractions.csproj
       - name: Build NothingServices.Abstractions
