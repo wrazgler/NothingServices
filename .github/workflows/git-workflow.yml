@@ -315,7 +315,7 @@ jobs:
       - name: Clean Certificate
         run: dotnet dev-certs https --clean
       - name: Add Certificate
-        run: dotnet dev-certs https -ep ${{ github.workspace }}/.certificates/localhost.crt -p localhost --trust
+        run: dotnet dev-certs https -ep .certificates/localhost.crt -p localhost --trust
       - name: Restore NothingServices.WPFApp.IntegrationTests
         run: dotnet restore NothingServices.WPFApp.IntegrationTests/NothingServices.WPFApp.IntegrationTests.csproj
       - name: Build NothingServices.WPFApp.IntegrationTests
