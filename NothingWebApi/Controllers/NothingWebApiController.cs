@@ -22,7 +22,7 @@ public class NothingWebApiController(INothingService nothingService) : Controlle
     [HttpGet]
     [ProducesResponseType(typeof(NothingModelDto[]), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> Get(CancellationToken cancellationToken)
+    public async Task<IActionResult> Get(CancellationToken cancellationToken = default)
     {
         try
         {
@@ -46,7 +46,7 @@ public class NothingWebApiController(INothingService nothingService) : Controlle
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> Get(
         [FromRoute] int id,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken = default)
     {
         try
         {
@@ -78,7 +78,7 @@ public class NothingWebApiController(INothingService nothingService) : Controlle
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> Create(
         [FromBody] CreateNothingModelDto createNothingModelDto,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken = default)
     {
         try
         {
@@ -111,7 +111,7 @@ public class NothingWebApiController(INothingService nothingService) : Controlle
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> Update(
         [FromBody] UpdateNothingModelDto updateNothingModelDto,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken = default)
     {
         try
         {
@@ -135,7 +135,7 @@ public class NothingWebApiController(INothingService nothingService) : Controlle
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> Delete(
         [FromRoute] int id,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken = default)
     {
         try
         {

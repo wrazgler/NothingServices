@@ -122,7 +122,7 @@ public class NothingRpcApiClientStrategy(
         }
     }
 
-    private NothingModelIdDto GetNothingModelIdDto(CancellationToken cancellationToken)
+    private NothingModelIdDto GetNothingModelIdDto(CancellationToken cancellationToken = default)
     {
         var id = GetId(cancellationToken);
         return new NothingModelIdDto()
@@ -131,7 +131,7 @@ public class NothingRpcApiClientStrategy(
         };
     }
 
-    private CreateNothingModelDto GetCreateNothingModelDto(CancellationToken cancellationToken)
+    private CreateNothingModelDto GetCreateNothingModelDto(CancellationToken cancellationToken = default)
     {
         var name = GetName(cancellationToken);
         return new CreateNothingModelDto()
@@ -140,7 +140,7 @@ public class NothingRpcApiClientStrategy(
         };
     }
 
-    private UpdateNothingModelDto GetUpdateNothingModelDto(CancellationToken cancellationToken)
+    private UpdateNothingModelDto GetUpdateNothingModelDto(CancellationToken cancellationToken = default)
     {
         var id = GetId(cancellationToken);
         var name = GetName(cancellationToken);

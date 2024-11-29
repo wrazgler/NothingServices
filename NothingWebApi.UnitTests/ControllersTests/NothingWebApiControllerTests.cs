@@ -60,7 +60,7 @@ public class NothingWebApiControllerTests
         var controller = GetNothingWebApiController(nothingServiceMock.Object);
 
         //Act
-        var result = await controller.Get(nothingModel.Id, CancellationToken.None);
+        var result = await controller.Get(nothingModel.Id);
 
         //Assert
         var expected = new OkObjectResult(nothingModel);
@@ -78,7 +78,7 @@ public class NothingWebApiControllerTests
         var controller = GetNothingWebApiController(nothingServiceMock.Object);
 
         //Act
-        var result = await controller.Get(1, CancellationToken.None);
+        var result = await controller.Get(1);
 
         //Assert
         var expected = new BadRequestObjectResult("Fake exception");
@@ -107,7 +107,7 @@ public class NothingWebApiControllerTests
 
         //Act
         var result = await controller
-            .Create(createNothingModelDto, CancellationToken.None);
+            .Create(createNothingModelDto);
 
         //Assert
         var expected = new OkObjectResult(new NothingModelDto()
@@ -136,7 +136,7 @@ public class NothingWebApiControllerTests
 
         //Act
         var result = await controller
-            .Create(createNothingModelDto, CancellationToken.None);
+            .Create(createNothingModelDto);
 
         //Assert
         var expected = new BadRequestObjectResult("Fake exception");
@@ -166,7 +166,7 @@ public class NothingWebApiControllerTests
 
         //Act
         var result = await controller
-            .Update(updateNothingModelDto, CancellationToken.None);
+            .Update(updateNothingModelDto);
 
         //Assert
         var expected = new OkObjectResult(new NothingModelDto()
@@ -196,7 +196,7 @@ public class NothingWebApiControllerTests
 
         //Act
         var result = await controller
-            .Update(updateNothingModelDto, CancellationToken.None);
+            .Update(updateNothingModelDto);
 
         //Assert
         var expected = new BadRequestObjectResult("Fake exception");
@@ -217,7 +217,7 @@ public class NothingWebApiControllerTests
         var controller = GetNothingWebApiController(nothingServiceMock.Object);
 
         //Act
-        var result = await controller.Delete(1, CancellationToken.None);
+        var result = await controller.Delete(1);
 
         //Assert
         var expected = new OkObjectResult(nothingModel);
@@ -237,7 +237,7 @@ public class NothingWebApiControllerTests
         var controller = GetNothingWebApiController(nothingServiceMock.Object);
 
         //Act
-        var result = await controller.Delete(0, CancellationToken.None);
+        var result = await controller.Delete(0);
 
         //Assert
         var expected = new BadRequestObjectResult("Fake exception");

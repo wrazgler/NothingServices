@@ -126,7 +126,7 @@ public class NothingWebApiClientStrategy(
         };
     }
 
-    private UpdateNothingModelWebDto GetUpdateNothingModelDto(CancellationToken cancellationToken)
+    private UpdateNothingModelWebDto GetUpdateNothingModelDto(CancellationToken cancellationToken = default)
     {
         var id = GetId(cancellationToken);
         var name = GetName(cancellationToken);

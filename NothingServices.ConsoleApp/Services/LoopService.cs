@@ -41,8 +41,8 @@ public class LoopService(
             {
                 "1" => CommunicateNothingApi(_nothingRpcApiClientStrategy, cancellationToken),
                 "2" => CommunicateNothingApi(_nothingWebApiClientStrategy, cancellationToken),
-                "e" => Task.Run(() => work = false, CancellationToken.None),
-                _ => Task.Run(() => PrintReadError(inputKey), CancellationToken.None),
+                "e" => Task.Run(() => work = false),
+                _ => Task.Run(() => PrintReadError(inputKey)),
             };
             await task;
         }
@@ -52,7 +52,7 @@ public class LoopService(
 
     private async Task CommunicateNothingApi(
         INothingApiClientStrategy nothingWebApiClientStrategy,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken = default)
     {
         var communicate = true;
         while (communicate && !cancellationToken.IsCancellationRequested)
@@ -73,8 +73,8 @@ public class LoopService(
                 "3" => nothingWebApiClientStrategy.CreateNothingModel(cancellationToken),
                 "4" => nothingWebApiClientStrategy.UpdateNothingModel(cancellationToken),
                 "5" => nothingWebApiClientStrategy.DeleteNothingModel(cancellationToken),
-                "e" => Task.Run(() => communicate = false, CancellationToken.None),
-                _ => Task.Run(() => PrintReadError(inputKey), CancellationToken.None),
+                "e" => Task.Run(() => communicate = false),
+                _ => Task.Run(() => PrintReadError(inputKey)),
             };
             await task;
         }

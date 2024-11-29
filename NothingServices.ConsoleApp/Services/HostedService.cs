@@ -19,7 +19,7 @@ public class HostedService(
     /// Запуск приложения
     /// </summary>
     /// <param name="cancellationToken">Токен отмены</param>
-    public Task StartAsync(CancellationToken cancellationToken)
+    public Task StartAsync(CancellationToken cancellationToken = default)
     {
         return _loopService.DoWork(cancellationToken);
     }
@@ -28,7 +28,7 @@ public class HostedService(
     /// Остановка приложения
     /// </summary>
     /// <param name="cancellationToken">Токен отмены</param>
-    public Task StopAsync(CancellationToken cancellationToken)
+    public Task StopAsync(CancellationToken cancellationToken = default)
     {
         _lifetime.StopApplication();
         return Task.CompletedTask;

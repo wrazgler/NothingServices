@@ -39,7 +39,7 @@ public class NothingServiceTests
             new()
             {
                 Id = 1,
-            Name = "Test",
+                Name = "Test",
             }
         };
         Assert.Equivalent(expected, result, true);
@@ -69,6 +69,27 @@ public class NothingServiceTests
             Name = "Test",
         };
         Assert.Equivalent(expected, result, true);
+    }
+
+    [Fact]
+    public async Task Get_Id_0_Throw_ArgumentNullException()
+    {
+        //Arrange
+        var serviceProvider = GetServiceProvider();
+        await serviceProvider.CreateNewDataBase();
+        await serviceProvider.AddNothingModel();
+        var nothingService = serviceProvider.GetRequiredService<INothingService>();
+        var nothingModelIdDto = new NothingModelIdDto()
+        {
+            Id = 0,
+        };
+
+        //Act
+        var result = new Func<Task<NothingModelDto>>(()
+            => nothingService.Get(nothingModelIdDto, Mock.Of<ServerCallContext>()));
+
+        //Assert
+        await Assert.ThrowsAsync<ArgumentException>(result);
     }
 
     [Fact]
@@ -213,6 +234,28 @@ public class NothingServiceTests
     }
 
     [Fact]
+    public async Task Update_Id_0_Throw_ArgumentNullException()
+    {
+        //Arrange
+        var serviceProvider = GetServiceProvider();
+        await serviceProvider.CreateNewDataBase();
+        await serviceProvider.AddNothingModel();
+        var nothingService = serviceProvider.GetRequiredService<INothingService>();
+        var updateNothingModelDto = new UpdateNothingModelDto()
+        {
+            Id = 0,
+            Name = "Test",
+        };
+
+        //Act
+        var result = new Func<Task<NothingModelDto>>(()
+            => nothingService.Update(updateNothingModelDto, Mock.Of<ServerCallContext>()));
+
+        //Assert
+        await Assert.ThrowsAsync<ArgumentException>(result);
+    }
+
+    [Fact]
     public async Task Delete_Dto_Equivalent()
     {
         //Arrange
@@ -260,6 +303,27 @@ public class NothingServiceTests
 
         //Assert
         Assert.False(result);
+    }
+
+    [Fact]
+    public async Task Delete_Id_0_Throw_ArgumentNullException()
+    {
+        //Arrange
+        var serviceProvider = GetServiceProvider();
+        await serviceProvider.CreateNewDataBase();
+        await serviceProvider.AddNothingModel();
+        var nothingService = serviceProvider.GetRequiredService<INothingService>();
+        var nothingModelIdDto = new NothingModelIdDto()
+        {
+            Id = 0,
+        };
+
+        //Act
+        var result = new Func<Task<NothingModelDto>>(()
+            => nothingService.Delete(nothingModelIdDto, Mock.Of<ServerCallContext>()));
+
+        //Assert
+        await Assert.ThrowsAsync<ArgumentException>(result);
     }
 
     private static ServiceProvider GetServiceProvider()

@@ -55,7 +55,7 @@ public abstract class NothingApiClientStrategy(IConsoleService consoleService)
     /// </summary>
     /// <param name="cancellationToken">Токен отмены</param>
     /// <returns>Идентификатор модели</returns>
-    protected int GetId(CancellationToken cancellationToken)
+    protected int GetId(CancellationToken cancellationToken = default)
     {
         while (!cancellationToken.IsCancellationRequested)
         {
@@ -76,7 +76,7 @@ public abstract class NothingApiClientStrategy(IConsoleService consoleService)
     /// </summary>
     /// <param name="cancellationToken">Токен отмены</param>
     /// <returns>Имя модели</returns>
-    protected string GetName(CancellationToken cancellationToken)
+    protected string GetName(CancellationToken cancellationToken = default)
     {
         while (!cancellationToken.IsCancellationRequested)
         {
