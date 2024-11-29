@@ -21,8 +21,8 @@ public class ApiSelectionVM : ObservableObject, IMainWindowContentVM
     /// <param name="restApiButtonVM">Кнопка Rest Api</param>
     public ApiSelectionVM(
         IMainWindowManager mainWindowManager,
-        GRpcApiButtonVM gRpcApiButtonVM,
-        RestApiButtonVM restApiButtonVM)
+        IGRpcApiButtonVM gRpcApiButtonVM,
+        IRestApiButtonVM restApiButtonVM)
     {
         _mainWindowManager = mainWindowManager;
         _mainWindowManager.OnNext += OnNext;
@@ -49,12 +49,12 @@ public class ApiSelectionVM : ObservableObject, IMainWindowContentVM
     /// <summary>
     /// Кнопка gRpc Api
     /// </summary>
-    public GRpcApiButtonVM GRpcApiButtonVM { get; }
+    public IGRpcApiButtonVM GRpcApiButtonVM { get; }
 
     /// <summary>
     /// Кнопка Rest Api
     /// </summary>
-    public RestApiButtonVM RestApiButtonVM { get; }
+    public IRestApiButtonVM RestApiButtonVM { get; }
 
     private void OnNext(MainWindowContentType nextType)
     {

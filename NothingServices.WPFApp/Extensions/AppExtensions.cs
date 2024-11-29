@@ -99,8 +99,8 @@ public static class AppExtensions
         services.AddScoped<NothingModelsListVM>();
 
         services.AddScoped<BackButtonVM>();
-        services.AddScoped<GRpcApiButtonVM>();
-        services.AddScoped<RestApiButtonVM>();
+        services.AddScoped<IGRpcApiButtonVM, GRpcApiButtonVM>();
+        services.AddScoped<IRestApiButtonVM, RestApiButtonVM>();
 
         services.AddScoped<ICloseDialogCommand, CloseDialogCommand>();
         services.AddScoped<ICreateCommand, CreateCommand>();

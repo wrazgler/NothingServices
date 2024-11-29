@@ -13,7 +13,7 @@ namespace NothingServices.WPFApp.ViewModels.Buttons;
 public class RestApiButtonVM(
     NothingWebApiClientStrategy strategy,
     OpenNothingModelsListCommand openNothingModelsListCommand)
-    : ObservableObject, IButtonVM
+    : ObservableObject, IRestApiButtonVM
 {
     /// <summary>
     /// Текст кнопки Rest Api

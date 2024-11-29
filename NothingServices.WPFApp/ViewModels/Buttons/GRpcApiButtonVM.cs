@@ -13,7 +13,7 @@ namespace NothingServices.WPFApp.ViewModels.Buttons;
 public class GRpcApiButtonVM(
     NothingRpcApiClientStrategy strategy,
     OpenNothingModelsListCommand openNothingModelsListCommand)
-    : ObservableObject, IButtonVM
+    : ObservableObject, IGRpcApiButtonVM
 {
     /// <summary>
     /// Текст кнопки gRpc Api
