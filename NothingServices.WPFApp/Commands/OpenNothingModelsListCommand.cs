@@ -12,7 +12,7 @@ namespace NothingServices.WPFApp.Commands;
 public class OpenNothingModelsListCommand(
     IMainWindowManager mainWindowManager,
     INotificationService notificationService)
-    : BaseCommand
+    : BaseCommand, IOpenNothingModelsListCommand
 {
     private readonly IMainWindowManager _mainWindowManager = mainWindowManager;
     private readonly INotificationService _notificationService = notificationService;

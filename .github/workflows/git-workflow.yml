@@ -111,9 +111,9 @@ jobs:
       - name: Build NothingServices.Abstractions
         run: dotnet publish NothingServices.Abstractions/NothingServices.Abstractions.csproj --configuration "Release" --no-restore
       - name: Pack NothingServices.Abstractions
-        run: dotnet pack NothingServices.Abstractions/NothingServices.Abstractions.csproj --configuration "Release" --output "/home/runner/.nuget/NuGet"
+        run: dotnet pack NothingServices.Abstractions/NothingServices.Abstractions.csproj --configuration "Release" --output "C:\Program Files\dotnet\library-packs"
       - name: Add Nuget
-        run: dotnet nuget add source "C:\Program Files\dotnet\library-packs" --name "NothingServices.Abstractions"
+        run: dotnet nuget add source "." --name "NothingServices.Abstractions"
       - name: Restore NothingServices.WPFApp
         run: dotnet restore NothingServices.WPFApp/NothingServices.WPFApp.csproj
       - name: Build NothingServices.WPFApp

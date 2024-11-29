@@ -27,8 +27,8 @@ public class NothingModelsListVM : ObservableObject, IMainWindowContentVM
     /// <param name="cancellationTokenSource">Объект управления токена отмены</param>
     public NothingModelsListVM(
         IMainWindowManager mainWindowManager,
-        BackButtonVM backButtonVM,
-        OpenCreateNothingModelCommand openCreateNothingModelCommand,
+        IBackButtonVM backButtonVM,
+        IOpenNothingModelsListCommand openCreateNothingModelCommand,
         CancellationTokenSource? cancellationTokenSource = null)
     {
         _cancellationTokenSource = cancellationTokenSource ?? new CancellationTokenSource();

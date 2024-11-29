@@ -108,7 +108,7 @@ public class AppExtensionsTests
             "NothingServices.WPFApp.ViewModels.IDialogVM",
             "NothingServices.WPFApp.ViewModels.IMainWindowVM",
             "NothingServices.WPFApp.ViewModels.NothingModelsListVM",
-            "NothingServices.WPFApp.ViewModels.Buttons.BackButtonVM",
+            "NothingServices.WPFApp.ViewModels.Buttons.IBackButtonVM",
             "NothingServices.WPFApp.ViewModels.Buttons.IGRpcApiButtonVM",
             "NothingServices.WPFApp.ViewModels.Buttons.IRestApiButtonVM",
             "NothingServices.WPFApp.Commands.ICloseDialogCommand",
@@ -117,7 +117,7 @@ public class AppExtensionsTests
             "NothingServices.WPFApp.Commands.OpenApiSelectionCommand",
             "NothingServices.WPFApp.Commands.OpenCreateNothingModelCommand",
             "NothingServices.WPFApp.Commands.IOpenDeleteNothingModelCommand",
-            "NothingServices.WPFApp.Commands.OpenNothingModelsListCommand",
+            "NothingServices.WPFApp.Commands.IOpenNothingModelsListCommand",
             "NothingServices.WPFApp.Commands.IOpenUpdateNothingModelCommand",
             "NothingServices.WPFApp.Commands.IUpdateCommand",
         };

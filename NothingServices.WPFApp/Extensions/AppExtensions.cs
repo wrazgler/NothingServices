@@ -98,7 +98,7 @@ public static class AppExtensions
         services.AddScoped<IMainWindowVM, MainWindowVM>();
         services.AddScoped<NothingModelsListVM>();
 
-        services.AddScoped<BackButtonVM>();
+        services.AddScoped<IBackButtonVM, BackButtonVM>();
         services.AddScoped<IGRpcApiButtonVM, GRpcApiButtonVM>();
         services.AddScoped<IRestApiButtonVM, RestApiButtonVM>();
 
@@ -108,7 +108,7 @@ public static class AppExtensions
         services.AddScoped<OpenApiSelectionCommand>();
         services.AddScoped<OpenCreateNothingModelCommand>();
         services.AddScoped<IOpenDeleteNothingModelCommand, OpenDeleteNothingModelCommand>();
-        services.AddScoped<OpenNothingModelsListCommand>();
+        services.AddScoped<IOpenNothingModelsListCommand, OpenNothingModelsListCommand>();
         services.AddScoped<IOpenUpdateNothingModelCommand, OpenUpdateNothingModelCommand>();
         services.AddScoped<IUpdateCommand, UpdateCommand>();
 
