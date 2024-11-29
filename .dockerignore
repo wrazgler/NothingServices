@@ -36,6 +36,7 @@
 
 # Nuget
 **/Nuget.Config
+**/Nuget
 
 # Images
 **/.jpg

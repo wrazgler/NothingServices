@@ -22,4 +22,4 @@
 [Oo]bj/
 
 # Nuget
-.nupkg
+*.nupkg

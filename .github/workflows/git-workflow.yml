@@ -17,21 +17,6 @@ jobs:
         run: dotnet restore NothingServices.Abstractions/NothingServices.Abstractions.csproj
       - name: Build NothingServices.Abstractions
         run: dotnet build NothingServices.Abstractions/NothingServices.Abstractions.csproj --configuration "Release" --no-restore
-  UnitTest_NothingServices_Abstractions:
-    runs-on: ubuntu-latest
-    needs: Build_NothingServices_Abstractions
-    steps:
-      - uses: actions/checkout@v4
-      - name: Setup dotnet
-        uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: '8.0.x'
-      - name: Restore NothingServices.Abstractions.UnitTests
-        run: dotnet restore NothingServices.Abstractions.UnitTests/NothingServices.Abstractions.UnitTests.csproj
-      - name: Build NothingServices.Abstractions.UnitTests
-        run: dotnet build NothingServices.Abstractions.UnitTests/NothingServices.Abstractions.UnitTests.csproj --configuration "Release" --no-restore
-      - name: Test NothingServices.Abstractions.UnitTests
-        run: dotnet test NothingServices.Abstractions.UnitTests/NothingServices.Abstractions.UnitTests.csproj --configuration "Release" --no-restore --no-build
   Build_NothingRpcApi:
     runs-on: ubuntu-latest
     needs: UnitTest_NothingServices_Abstractions
@@ -46,7 +31,7 @@ jobs:
       - name: Build NothingServices.Abstractions
         run: dotnet publish NothingServices.Abstractions/NothingServices.Abstractions.csproj --configuration "Release" --no-restore
       - name: Pack NothingServices.Abstractions
-        run: dotnet pack NothingServices.Abstractions/NothingServices.Abstractions.csproj --configuration "Release" --output "/home/runner/.nuget/NuGet"
+        run: dotnet pack NothingServices.Abstractions/NothingServices.Abstractions.csproj --configuration "Release" --no-build --output "/home/runner/.nuget/NuGet"
       - name: Add Nuget
         run: dotnet nuget add source "." --name "NothingServices.Abstractions"
       - name: Restore NothingRpcApi
@@ -67,7 +52,7 @@ jobs:
       - name: Build NothingServices.Abstractions
         run: dotnet publish NothingServices.Abstractions/NothingServices.Abstractions.csproj --configuration "Release" --no-restore
       - name: Pack NothingServices.Abstractions
-        run: dotnet pack NothingServices.Abstractions/NothingServices.Abstractions.csproj --configuration "Release" --output "/home/runner/.nuget/NuGet"
+        run: dotnet pack NothingServices.Abstractions/NothingServices.Abstractions.csproj --configuration "Release" --no-build --output "/home/runner/.nuget/NuGet"
       - name: Add Nuget
         run: dotnet nuget add source "." --name "NothingServices.Abstractions"
       - name: Restore NothingWebApi
@@ -88,7 +73,7 @@ jobs:
       - name: Build NothingServices.Abstractions
         run: dotnet publish NothingServices.Abstractions/NothingServices.Abstractions.csproj --configuration "Release" --no-restore
       - name: Pack NothingServices.Abstractions
-        run: dotnet pack NothingServices.Abstractions/NothingServices.Abstractions.csproj --configuration "Release" --output "/home/runner/.nuget/NuGet"
+        run: dotnet pack NothingServices.Abstractions/NothingServices.Abstractions.csproj --configuration "Release" --no-build --output "/home/runner/.nuget/NuGet"
       - name: Add Nuget
         run: dotnet nuget add source "." --name "NothingServices.Abstractions"
       - name: Restore NothingServices.ConsoleApp
@@ -104,20 +89,33 @@ jobs:
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '8.0.x'
-      - name: Delete Nuget.Config
-        run: del Nuget.Config
       - name: Restore NothingServices.Abstractions
         run: dotnet restore NothingServices.Abstractions/NothingServices.Abstractions.csproj
       - name: Build NothingServices.Abstractions
         run: dotnet publish NothingServices.Abstractions/NothingServices.Abstractions.csproj --configuration "Release" --no-restore
       - name: Pack NothingServices.Abstractions
-        run: dotnet pack NothingServices.Abstractions/NothingServices.Abstractions.csproj --configuration "Release" --output "C:\Program Files\dotnet\library-packs"
+        run: dotnet pack NothingServices.Abstractions/NothingServices.Abstractions.csproj --configuration "Release" --no-build --output "C:\Program Files\dotnet\library-packs"
       - name: Add Nuget
         run: dotnet nuget add source "." --name "NothingServices.Abstractions"
       - name: Restore NothingServices.WPFApp
         run: dotnet restore NothingServices.WPFApp/NothingServices.WPFApp.csproj
       - name: Build NothingServices.WPFApp
         run: dotnet publish NothingServices.WPFApp/NothingServices.WPFApp.csproj --configuration "Release" --no-restore
+  UnitTest_NothingServices_Abstractions:
+    runs-on: ubuntu-latest
+    needs: Build_NothingServices_Abstractions
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup dotnet
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+      - name: Restore NothingServices.Abstractions.UnitTests
+        run: dotnet restore NothingServices.Abstractions.UnitTests/NothingServices.Abstractions.UnitTests.csproj
+      - name: Build NothingServices.Abstractions.UnitTests
+        run: dotnet build NothingServices.Abstractions.UnitTests/NothingServices.Abstractions.UnitTests.csproj --configuration "Release" --no-restore
+      - name: Test NothingServices.Abstractions.UnitTests
+        run: dotnet test NothingServices.Abstractions.UnitTests/NothingServices.Abstractions.UnitTests.csproj --configuration "Release" --no-restore --no-build
   UnitTest_NothingRpcApi:
     runs-on: ubuntu-latest
     needs: Build_NothingRpcApi
@@ -132,7 +130,7 @@ jobs:
       - name: Build NothingServices.Abstractions
         run: dotnet publish NothingServices.Abstractions/NothingServices.Abstractions.csproj --configuration "Release" --no-restore
       - name: Pack NothingServices.Abstractions
-        run: dotnet pack NothingServices.Abstractions/NothingServices.Abstractions.csproj --configuration "Release" --output "/home/runner/.nuget/NuGet"
+        run: dotnet pack NothingServices.Abstractions/NothingServices.Abstractions.csproj --configuration "Release" --no-build --output "/home/runner/.nuget/NuGet"
       - name: Add Nuget
         run: dotnet nuget add source "." --name "NothingServices.Abstractions"
       - name: Restore NothingRpcApi.UnitTests
@@ -155,7 +153,7 @@ jobs:
       - name: Build NothingServices.Abstractions
         run: dotnet publish NothingServices.Abstractions/NothingServices.Abstractions.csproj --configuration "Release" --no-restore
       - name: Pack NothingServices.Abstractions
-        run: dotnet pack NothingServices.Abstractions/NothingServices.Abstractions.csproj --configuration "Release" --output "/home/runner/.nuget/NuGet"
+        run: dotnet pack NothingServices.Abstractions/NothingServices.Abstractions.csproj --configuration "Release" --no-build --output "/home/runner/.nuget/NuGet"
       - name: Add Nuget
         run: dotnet nuget add source "." --name "NothingServices.Abstractions"
       - name: Restore NothingWebApi.UnitTests
@@ -178,7 +176,7 @@ jobs:
       - name: Build NothingServices.Abstractions
         run: dotnet publish NothingServices.Abstractions/NothingServices.Abstractions.csproj --configuration "Release" --no-restore
       - name: Pack NothingServices.Abstractions
-        run: dotnet pack NothingServices.Abstractions/NothingServices.Abstractions.csproj --configuration "Release" --output "/home/runner/.nuget/NuGet"
+        run: dotnet pack NothingServices.Abstractions/NothingServices.Abstractions.csproj --configuration "Release" --no-build --output "/home/runner/.nuget/NuGet"
       - name: Add Nuget
         run: dotnet nuget add source "." --name "NothingServices.Abstractions"
       - name: Restore NothingServices.ConsoleApp.UnitTests
@@ -196,14 +194,12 @@ jobs:
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '8.0.x'
-      - name: Delete Nuget.Config
-        run: del Nuget.Config
       - name: Restore NothingServices.Abstractions
         run: dotnet restore NothingServices.Abstractions/NothingServices.Abstractions.csproj
       - name: Build NothingServices.Abstractions
         run: dotnet publish NothingServices.Abstractions/NothingServices.Abstractions.csproj --configuration "Release" --no-restore
       - name: Pack NothingServices.Abstractions
-        run: dotnet pack NothingServices.Abstractions/NothingServices.Abstractions.csproj --configuration "Release" --output "/home/runner/.nuget/NuGet"
+        run: dotnet pack NothingServices.Abstractions/NothingServices.Abstractions.csproj --configuration "Release" --no-build --output "C:\Program Files\dotnet\library-packs"
       - name: Add Nuget
         run: dotnet nuget add source "." --name "NothingServices.Abstractions"
       - name: Restore NothingServices.WPFApp.UnitTests
@@ -226,7 +222,7 @@ jobs:
       - name: Build NothingServices.Abstractions
         run: dotnet publish NothingServices.Abstractions/NothingServices.Abstractions.csproj --configuration "Release" --no-restore
       - name: Pack NothingServices.Abstractions
-        run: dotnet pack NothingServices.Abstractions/NothingServices.Abstractions.csproj --configuration "Release" --output "/home/runner/.nuget/NuGet"
+        run: dotnet pack NothingServices.Abstractions/NothingServices.Abstractions.csproj --configuration "Release" --no-build -output "/home/runner/.nuget/NuGet"
       - name: Add Nuget
         run: dotnet nuget add source "." --name "NothingServices.Abstractions"
       - name: Clean Certificate
@@ -253,7 +249,7 @@ jobs:
       - name: Build NothingServices.Abstractions
         run: dotnet publish NothingServices.Abstractions/NothingServices.Abstractions.csproj --configuration "Release" --no-restore
       - name: Pack NothingServices.Abstractions
-        run: dotnet pack NothingServices.Abstractions/NothingServices.Abstractions.csproj --configuration "Release" --output "/home/runner/.nuget/NuGet"
+        run: dotnet pack NothingServices.Abstractions/NothingServices.Abstractions.csproj --configuration "Release" --no-build --output "/home/runner/.nuget/NuGet"
       - name: Add Nuget
         run: dotnet nuget add source "." --name "NothingServices.Abstractions"
       - name: Clean Certificate
@@ -280,7 +276,7 @@ jobs:
       - name: Build NothingServices.Abstractions
         run: dotnet publish NothingServices.Abstractions/NothingServices.Abstractions.csproj --configuration "Release" --no-restore
       - name: Pack NothingServices.Abstractions
-        run: dotnet pack NothingServices.Abstractions/NothingServices.Abstractions.csproj --configuration "Release" --output "/home/runner/.nuget/NuGet"
+        run: dotnet pack NothingServices.Abstractions/NothingServices.Abstractions.csproj --configuration "Release" --no-build --output "/home/runner/.nuget/NuGet"
       - name: Add Nuget
         run: dotnet nuget add source "." --name "NothingServices.Abstractions"
       - name: Clean Certificate
@@ -302,14 +298,12 @@ jobs:
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '8.0.x'
-      - name: Delete Nuget.Config
-        run: del Nuget.Config
       - name: Restore NothingServices.Abstractions
         run: dotnet restore NothingServices.Abstractions/NothingServices.Abstractions.csproj
       - name: Build NothingServices.Abstractions
         run: dotnet publish NothingServices.Abstractions/NothingServices.Abstractions.csproj --configuration "Release" --no-restore
       - name: Pack NothingServices.Abstractions
-        run: dotnet pack NothingServices.Abstractions/NothingServices.Abstractions.csproj --configuration "Release" --output "/home/runner/.nuget/NuGet"
+        run: dotnet pack NothingServices.Abstractions/NothingServices.Abstractions.csproj --configuration "Release" --no-build --output "C:\Program Files\dotnet\library-packs"
       - name: Add Nuget
         run: dotnet nuget add source "." --name "NothingServices.Abstractions"
       - name: Clean Certificate
