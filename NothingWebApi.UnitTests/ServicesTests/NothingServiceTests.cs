@@ -193,6 +193,29 @@ public class NothingServiceTests
     }
 
     [Fact]
+    public async Task Update_Trim_Db_Name_Equal()
+    {
+        //Arrange
+        var nothingModels = GetNothingModels();
+        var dbContextMock = GetDbContextMock(nothingModels);
+        var nothingService = GetNothingService(dbContextMock.Object);
+        var updateNothingModelDto = new UpdateNothingModelDto()
+        {
+            Id = 1,
+            Name = " New Name ",
+        };
+
+        //Act
+        await nothingService.Update(updateNothingModelDto);
+        var result = nothingModels.Single().Name;
+
+        //Assert
+        var expected = "New Name";
+        Assert.Equal(expected, result);
+        dbContextMock.Verify(db => db.SaveChangesAsync(It.IsAny<CancellationToken>()), Times.Once);
+    }
+
+    [Fact]
     public async Task UpdateNot_Exist_Id_Throws_ArgumentException()
     {
         //Arrange

@@ -1,9 +1,9 @@
 name: CI/CD
 on:
   push:
-    branches: [ "develop", "main" ]
+    branches: [ "develop", "main", "master", "Feature_NothingServices.WPFApp" ]
   pull_request:
-    branches: [ "develop", "main" ]
+    branches: [ "develop", "main", "master" ]
 jobs:
   Build_NothingServices_Abstractions:
     runs-on: ubuntu-latest

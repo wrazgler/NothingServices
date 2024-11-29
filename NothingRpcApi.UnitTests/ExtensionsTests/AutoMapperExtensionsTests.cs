@@ -83,6 +83,31 @@ public class AutoMapperExtensionsTests
     }
 
     [Fact]
+    public void Map_CreateNothingModelDto_To_NothingModel_Trim_Success()
+    {
+        //Arrange
+        var mapper = new ServiceCollection()
+            .AddAppAutoMapper()
+            .BuildServiceProvider()
+            .GetRequiredService<IMapper>();
+        var createNothingModelDto = new CreateNothingModelDto()
+        {
+            Name =  " Test Name "
+        };
+
+        //Act
+        var result = mapper.Map<NothingModel>(createNothingModelDto);
+
+        //Assert
+        var expected = new NothingModel()
+        {
+            Id = 0,
+            Name = "Test Name",
+        };
+        Assert.Equivalent(expected, result, true);
+    }
+
+    [Fact]
     public void Map_NothingModel_To_CreateNothingModelDto_Throws_AutoMapperMappingException()
     {
         //Arrange

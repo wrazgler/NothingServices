@@ -16,11 +16,12 @@ public static class AutoMapperExtensions
     /// <returns>Коллекция сервисов с добавленной конфигурацией <see cref="Mapper"/></returns>
     public static IServiceCollection AddAppAutoMapper(this IServiceCollection services)
     {
-        services.AddAutoMapper(configuration => 
+        services.AddAutoMapper(configuration =>
         {
             configuration.AllowNullCollections = true;
             configuration.CreateMap<NothingModel, NothingModelDto>();
-            configuration.CreateMap<CreateNothingModelDto, NothingModel>();
+            configuration.CreateMap<CreateNothingModelDto, NothingModel>()
+                .ForMember(model => model.Name, member => member.MapFrom(dto => dto.Name.Trim()));
         });
         return services;
     }

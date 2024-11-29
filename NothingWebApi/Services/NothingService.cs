@@ -84,7 +84,7 @@ public class NothingService(
     {
         try
         {
-            if(string.IsNullOrEmpty(createNothingModelDto.Name))
+            if(string.IsNullOrEmpty(createNothingModelDto.Name.Trim()))
                 throw new ArgumentNullException(nameof(createNothingModelDto.Name), "Имя не может быть пустым.");
             var model = _mapper.Map<NothingModel>(createNothingModelDto);
             await _dbContext.NothingModels.AddAsync(model, cancellationToken);
@@ -113,13 +113,13 @@ public class NothingService(
     {
         try
         {
-            if (string.IsNullOrEmpty(updateNothingModelDto.Name))
+            if (string.IsNullOrEmpty(updateNothingModelDto.Name.Trim()))
                 throw new ArgumentNullException(nameof(updateNothingModelDto.Name), "Имя не может быть пустым.");
             var model = await _dbContext.NothingModels
                 .SingleOrDefaultAsync(model => model.Id == updateNothingModelDto.Id, cancellationToken);
             if(model == null)
                 throw new ArgumentException($"Не удалось найти модель с идентификатором {updateNothingModelDto.Id}.");
-            model.Name = updateNothingModelDto.Name;
+            model.Name = updateNothingModelDto.Name.Trim();
             await _dbContext.SaveChangesAsync(cancellationToken);
             return _mapper.Map<NothingModelDto>(model);
         }
