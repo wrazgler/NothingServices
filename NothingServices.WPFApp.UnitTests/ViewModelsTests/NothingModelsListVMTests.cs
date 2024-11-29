@@ -8,19 +8,18 @@ namespace NothingServices.WPFApp.UnitTests.ViewModelsTests;
 
 public class NothingModelsListVMTests
 {
-
     [Fact]
     public void Next_Active_True()
     {
         //Arrange
-        var mainWindowManager = new Mock<IMainWindowManager>();
+        var mainWindowManager = new MainWindowManager();
         var nothingModelsListVM = new NothingModelsListVM(
-            mainWindowManager.Object,
+            mainWindowManager,
             Mock.Of<IBackButtonVM>(),
             Mock.Of<IOpenNothingModelsListCommand>());
 
         //Act
-        mainWindowManager.Object.Next(MainWindowContentType.NothingModelsListVM);
+        mainWindowManager.Next(MainWindowContentType.NothingModelsListVM);
         var result = nothingModelsListVM.Active;
 
         //Assert
@@ -31,14 +30,14 @@ public class NothingModelsListVMTests
     public void Next_Active_False()
     {
         //Arrange
-        var mainWindowManager = new Mock<IMainWindowManager>();
+        var mainWindowManager = new MainWindowManager();
         var nothingModelsListVM = new NothingModelsListVM(
-            mainWindowManager.Object,
+            mainWindowManager,
             Mock.Of<IBackButtonVM>(),
             Mock.Of<IOpenNothingModelsListCommand>());
 
         //Act
-        mainWindowManager.Object.Next(MainWindowContentType.ApiSelectionVM);
+        mainWindowManager.Next(MainWindowContentType.ApiSelectionVM);
         var result = nothingModelsListVM.Active;
 
         //Assert
