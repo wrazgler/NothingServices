@@ -33,7 +33,7 @@ jobs:
       - name: Restore NothingServices.Abstractions
         run: dotnet restore NothingServices.Abstractions/NothingServices.Abstractions.csproj
       - name: Build NothingServices.Abstractions
-        run: dotnet publish NothingServices.Abstractions/NothingServices.Abstractions.csproj --configuration "Release" --no-restore
+        run: dotnet build NothingServices.Abstractions/NothingServices.Abstractions.csproj --configuration "Release" --no-restore
       - name: Pack NothingServices.Abstractions
         run: dotnet pack NothingServices.Abstractions/NothingServices.Abstractions.csproj --configuration "Release" --no-build --output "/home/runner/.nuget/NuGet"
       - name: Add Nuget
@@ -56,7 +56,7 @@ jobs:
       - name: Restore NothingServices.Abstractions
         run: dotnet restore NothingServices.Abstractions/NothingServices.Abstractions.csproj
       - name: Build NothingServices.Abstractions
-        run: dotnet publish NothingServices.Abstractions/NothingServices.Abstractions.csproj --configuration "Release" --no-restore
+        run: dotnet build NothingServices.Abstractions/NothingServices.Abstractions.csproj --configuration "Release" --no-restore
       - name: Pack NothingServices.Abstractions
         run: dotnet pack NothingServices.Abstractions/NothingServices.Abstractions.csproj --configuration "Release" --no-build --output "/home/runner/.nuget/NuGet"
       - name: Add Nuget
@@ -79,7 +79,7 @@ jobs:
       - name: Restore NothingServices.Abstractions
         run: dotnet restore NothingServices.Abstractions/NothingServices.Abstractions.csproj
       - name: Build NothingServices.Abstractions
-        run: dotnet publish NothingServices.Abstractions/NothingServices.Abstractions.csproj --configuration "Release" --no-restore
+        run: dotnet build NothingServices.Abstractions/NothingServices.Abstractions.csproj --configuration "Release" --no-restore
       - name: Pack NothingServices.Abstractions
         run: dotnet pack NothingServices.Abstractions/NothingServices.Abstractions.csproj --configuration "Release" --no-build --output "/home/runner/.nuget/NuGet"
       - name: Add Nuget
@@ -104,7 +104,7 @@ jobs:
       - name: Restore NothingServices.Abstractions
         run: dotnet restore NothingServices.Abstractions/NothingServices.Abstractions.csproj
       - name: Build NothingServices.Abstractions
-        run: dotnet publish NothingServices.Abstractions/NothingServices.Abstractions.csproj --configuration "Release" --no-restore
+        run: dotnet build NothingServices.Abstractions/NothingServices.Abstractions.csproj --configuration "Release" --no-restore
       - name: Pack NothingServices.Abstractions
         run: dotnet pack NothingServices.Abstractions/NothingServices.Abstractions.csproj --configuration "Release" --no-build --output "C:\Program Files\dotnet\library-packs"
       - name: Add Nuget
