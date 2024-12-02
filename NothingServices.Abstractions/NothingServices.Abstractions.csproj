@@ -7,6 +7,7 @@
     <Description>Пакет расширений для NothingServices</Description>
     <FileVersion>1.0.0.0</FileVersion>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <ImplicitUsings>enable</ImplicitUsings>
     <IsPackable>true</IsPackable>
     <LangVersion>latest</LangVersion>
@@ -36,8 +37,11 @@
   </ItemGroup>
 
   <Target Name="Pack Nuget" AfterTargets="Build">
-    <Exec Command="dotnet pack NothingServices.Abstractions.csproj --configuration $(Configuration) --no-build --no-restore --output ../Nuget"
-          WorkingDirectory="$(ProjectDir)" />
+    <ItemGroup>
+      <NugetFiles Include="$(ProjectDir)/bin/$(Configuration)/*.nupkg"/>
+    </ItemGroup>
+    <Copy SourceFiles="@(NugetFiles)"
+          DestinationFolder="$(SolutionDir)/Nuget" />
   </Target>
 
 </Project>
