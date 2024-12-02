@@ -39,7 +39,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Update="appsettings.AppTesting.json">
+    <Content Include="appsettings.AppTesting.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
