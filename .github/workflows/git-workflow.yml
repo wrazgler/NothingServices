@@ -7,31 +7,29 @@ on:
 jobs:
   Build_NothingServices_Abstractions:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        dotnet-version: [ '9.0.x', '8.0.x' ]
     steps:
       - uses: actions/checkout@v4
       - name: Setup dotnet ${{ matrix.dotnet-version }}
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: ${{ matrix.dotnet-version }}
+          dotnet-version: |
+            8.0.x
+            9.0.x
       - name: Restore NothingServices.Abstractions
         run: dotnet restore NothingServices.Abstractions/NothingServices.Abstractions.csproj --framework ${{ matrix.dotnet-version }}
       - name: Build NothingServices.Abstractions
         run: dotnet build NothingServices.Abstractions/NothingServices.Abstractions.csproj --configuration "Release" --framework ${{ matrix.dotnet-version }} --no-restore
   Build_NothingRpcApi:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        dotnet-version: [ '8.0.x', '9.0.x' ]
     needs: UnitTest_NothingServices_Abstractions
     steps:
       - uses: actions/checkout@v4
       - name: Setup dotnet
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: ${{ matrix.dotnet-version }}
+          dotnet-version: |
+            8.0.x
+            9.0.x
       - name: Restore NothingServices.Abstractions
         run: dotnet restore NothingServices.Abstractions/NothingServices.Abstractions.csproj
       - name: Build NothingServices.Abstractions
@@ -46,16 +44,15 @@ jobs:
         run: dotnet build NothingRpcApi/NothingRpcApi.csproj --configuration "Release" --no-restore
   Build_NothingWebApi:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        dotnet-version: [ '8.0.x', '9.0.x' ]
     needs: UnitTest_NothingServices_Abstractions
     steps:
       - uses: actions/checkout@v4
       - name: Setup dotnet
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: ${{ matrix.dotnet-version }}
+          dotnet-version: |
+            8.0.x
+            9.0.x
       - name: Restore NothingServices.Abstractions
         run: dotnet restore NothingServices.Abstractions/NothingServices.Abstractions.csproj
       - name: Build NothingServices.Abstractions
@@ -70,16 +67,15 @@ jobs:
         run: dotnet build NothingWebApi/NothingWebApi.csproj --configuration "Release" --no-restore
   Build_NothingServices_ConsoleApp:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        dotnet-version: [ '8.0.x', '9.0.x' ]
     needs: UnitTest_NothingServices_Abstractions
     steps:
       - uses: actions/checkout@v4
       - name: Setup dotnet
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: ${{ matrix.dotnet-version }}
+          dotnet-version: |
+            8.0.x
+            9.0.x
       - name: Restore NothingServices.Abstractions
         run: dotnet restore NothingServices.Abstractions/NothingServices.Abstractions.csproj
       - name: Build NothingServices.Abstractions
@@ -94,16 +90,15 @@ jobs:
         run: dotnet publish NothingServices.ConsoleApp/NothingServices.ConsoleApp.csproj --configuration "Release" --no-restore
   Build_NothingServices_WPFApp:
     runs-on: windows-latest
-    strategy:
-      matrix:
-        dotnet-version: [ '8.0.x', '9.0.x' ]
     needs: UnitTest_NothingServices_Abstractions
     steps:
       - uses: actions/checkout@v4
       - name: Setup dotnet
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: ${{ matrix.dotnet-version }}
+          dotnet-version: |
+            8.0.x
+            9.0.x
       - name: Create Nuget directory
         run: md Nuget
       - name: Restore NothingServices.Abstractions
@@ -120,16 +115,15 @@ jobs:
         run: dotnet publish NothingServices.WPFApp/NothingServices.WPFApp.csproj --configuration "Release" --no-restore
   UnitTest_NothingServices_Abstractions:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        dotnet-version: [ '8.0.x', '9.0.x' ]
     needs: Build_NothingServices_Abstractions
     steps:
       - uses: actions/checkout@v4
       - name: Setup dotnet
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: ${{ matrix.dotnet-version }}
+          dotnet-version: |
+            8.0.x
+            9.0.x
       - name: Restore NothingServices.Abstractions.UnitTests
         run: dotnet restore NothingServices.Abstractions.UnitTests/NothingServices.Abstractions.UnitTests.csproj
       - name: Build NothingServices.Abstractions.UnitTests
@@ -144,7 +138,9 @@ jobs:
       - name: Setup dotnet
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: ${{ matrix.dotnet-version }}
+          dotnet-version: |
+            8.0.x
+            9.0.x
       - name: Restore NothingServices.Abstractions
         run: dotnet restore NothingServices.Abstractions/NothingServices.Abstractions.csproj
       - name: Build NothingServices.Abstractions
@@ -161,16 +157,15 @@ jobs:
         run: dotnet test NothingRpcApi.UnitTests/NothingRpcApi.UnitTests.csproj --configuration "Release" --no-restore --no-build
   UnitTest_NothingWebApi:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        dotnet-version: [ '8.0.x', '9.0.x' ]
     needs: Build_NothingWebApi
     steps:
       - uses: actions/checkout@v4
       - name: Setup dotnet
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: ${{ matrix.dotnet-version }}
+          dotnet-version: |
+            8.0.x
+            9.0.x
       - name: Restore NothingServices.Abstractions
         run: dotnet restore NothingServices.Abstractions/NothingServices.Abstractions.csproj
       - name: Build NothingServices.Abstractions
@@ -187,16 +182,15 @@ jobs:
         run: dotnet test NothingWebApi.UnitTests/NothingWebApi.UnitTests.csproj --configuration "Release" --no-restore --no-build
   UnitTest_NothingServices_ConsoleApp:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        dotnet-version: [ '8.0.x', '9.0.x' ]
     needs: Build_NothingServices_ConsoleApp
     steps:
       - uses: actions/checkout@v4
       - name: Setup dotnet
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: ${{ matrix.dotnet-version }}
+          dotnet-version: |
+            8.0.x
+            9.0.x
       - name: Restore NothingServices.Abstractions
         run: dotnet restore NothingServices.Abstractions/NothingServices.Abstractions.csproj
       - name: Build NothingServices.Abstractions
@@ -213,16 +207,15 @@ jobs:
         run: dotnet test NothingServices.ConsoleApp.UnitTests/NothingServices.ConsoleApp.UnitTests.csproj --configuration "Release" --no-restore --no-build
   UnitTest_NothingServices_WPFApp:
     runs-on: windows-latest
-    strategy:
-      matrix:
-        dotnet-version: [ '8.0.x', '9.0.x' ]
     needs: Build_NothingServices_WPFApp
     steps:
       - uses: actions/checkout@v4
       - name: Setup dotnet
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: ${{ matrix.dotnet-version }}
+          dotnet-version: |
+            8.0.x
+            9.0.x
       - name: Create Nuget directory
         run: md Nuget
       - name: Restore NothingServices.Abstractions
@@ -241,16 +234,15 @@ jobs:
         run: dotnet test NothingServices.WPFApp.UnitTests/NothingServices.WPFApp.UnitTests.csproj --configuration "Release" --no-restore --no-build
   IntegrationTest_NothingRpcApi:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        dotnet-version: [ '8.0.x', '9.0.x' ]
     needs: UnitTest_NothingRpcApi
     steps:
       - uses: actions/checkout@v4
       - name: Setup dotnet
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: ${{ matrix.dotnet-version }}
+          dotnet-version: |
+            8.0.x
+            9.0.x
       - name: Restore NothingServices.Abstractions
         run: dotnet restore NothingServices.Abstractions/NothingServices.Abstractions.csproj
       - name: Build NothingServices.Abstractions
@@ -271,16 +263,15 @@ jobs:
         run: dotnet test NothingRpcApi.IntegrationTests/NothingRpcApi.IntegrationTests.csproj --configuration "Release" --no-restore --no-build
   IntegrationTest_NothingWebApi:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        dotnet-version: [ '8.0.x', '9.0.x' ]
     needs: UnitTest_NothingWebApi
     steps:
       - uses: actions/checkout@v4
       - name: Setup dotnet
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: ${{ matrix.dotnet-version }}
+          dotnet-version: |
+            8.0.x
+            9.0.x
       - name: Restore NothingServices.Abstractions
         run: dotnet restore NothingServices.Abstractions/NothingServices.Abstractions.csproj
       - name: Build NothingServices.Abstractions
@@ -301,16 +292,15 @@ jobs:
         run: dotnet test NothingWebApi.IntegrationTests/NothingWebApi.IntegrationTests.csproj --configuration "Release" --no-restore --no-build
   IntegrationTest_NothingServices_ConsoleApp:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        dotnet-version: [ '8.0.x', '9.0.x' ]
     needs: [UnitTest_NothingServices_ConsoleApp, IntegrationTest_NothingRpcApi, IntegrationTest_NothingWebApi]
     steps:
       - uses: actions/checkout@v4
       - name: Setup dotnet
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: ${{ matrix.dotnet-version }}
+          dotnet-version: |
+            8.0.x
+            9.0.x
       - name: Restore NothingServices.Abstractions
         run: dotnet restore NothingServices.Abstractions/NothingServices.Abstractions.csproj
       - name: Build NothingServices.Abstractions
@@ -331,16 +321,15 @@ jobs:
         run: dotnet test NothingServices.ConsoleApp.IntegrationTests/NothingServices.ConsoleApp.IntegrationTests.csproj --configuration "Release" --no-restore --no-build
   IntegrationTest_NothingServices_WPFApp:
     runs-on: windows-latest
-    strategy:
-      matrix:
-        dotnet-version: [ '8.0.x', '9.0.x' ]
     needs: [ UnitTest_NothingServices_WPFApp, IntegrationTest_NothingRpcApi, IntegrationTest_NothingWebApi ]
     steps:
       - uses: actions/checkout@v4
       - name: Setup dotnet
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: ${{ matrix.dotnet-version }}
+          dotnet-version: |
+            8.0.x
+            9.0.x
       - name: Create Nuget directory
         run: md Nuget
       - name: Restore NothingServices.Abstractions
