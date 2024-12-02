@@ -7,9 +7,6 @@ on:
 jobs:
   Build_NothingServices_Abstractions:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        dotnet-version: [ '9.0', '8.0' ]
     steps:
       - uses: actions/checkout@v4
       - name: Setup dotnet
