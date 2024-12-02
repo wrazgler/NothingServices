@@ -17,9 +17,9 @@ jobs:
         with:
           dotnet-version: ${{ matrix.dotnet-version }}
       - name: Restore NothingServices.Abstractions
-        run: dotnet restore NothingServices.Abstractions/NothingServices.Abstractions.csproj
+        run: dotnet restore NothingServices.Abstractions/NothingServices.Abstractions.csproj --framework ${{ matrix.dotnet-version }}
       - name: Build NothingServices.Abstractions
-        run: dotnet build NothingServices.Abstractions/NothingServices.Abstractions.csproj --configuration "Release" --no-restore
+        run: dotnet build NothingServices.Abstractions/NothingServices.Abstractions.csproj --configuration "Release" --framework ${{ matrix.dotnet-version }} --no-restore
   Build_NothingRpcApi:
     runs-on: ubuntu-latest
     strategy:
