@@ -15,11 +15,13 @@ jobs:
       - name: Setup dotnet ${{ matrix.dotnet-version }}
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: ${{ matrix.dotnet-version }}
+          dotnet-version: |
+            9.0.x
+            8.0.x
       - name: Restore NothingServices.Abstractions
-        run: dotnet restore NothingServices.Abstractions/NothingServices.Abstractions.csproj --framework net${{ matrix.dotnet-version }}
+        run: dotnet restore NothingServices.Abstractions/NothingServices.Abstractions.csproj
       - name: Build NothingServices.Abstractions
-        run: dotnet build NothingServices.Abstractions/NothingServices.Abstractions.csproj --configuration "Release" --framework net${{ matrix.dotnet-version }} --no-restore
+        run: dotnet build NothingServices.Abstractions/NothingServices.Abstractions.csproj --configuration "Release" --no-restore
   Build_NothingRpcApi:
     runs-on: ubuntu-latest
     needs: UnitTest_NothingServices_Abstractions
