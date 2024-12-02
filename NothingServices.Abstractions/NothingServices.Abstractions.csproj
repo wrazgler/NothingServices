@@ -35,8 +35,8 @@
     <None Include="README.md" Pack="true" PackagePath="\" />
   </ItemGroup>
 
-  <Target Name="Pack Nuget" AfterTargets="Build" Condition="$(TargetFramework)=='net9.0'">
-    <Exec Command="dotnet pack NothingServices.Abstractions.csproj --configuration $(Configuration) --no-build --output ../Nuget"
+  <Target Name="Pack Nuget" AfterTargets="Build">
+    <Exec Command="dotnet pack NothingServices.Abstractions.csproj --configuration $(Configuration) --no-build --no-restore --output ../Nuget"
           WorkingDirectory="$(ProjectDir)" />
   </Target>
 
