@@ -11,7 +11,7 @@
     <LangVersion>latest</LangVersion>
     <Nullable>enable</Nullable>
     <RepositoryUrl>https://github.com/wrazgler/NothingServices</RepositoryUrl>
-    <TargetFramework>net8.0-windows</TargetFramework>
+    <TargetFrameworks>net9.0-windows;net8.0-windows</TargetFrameworks>
     <Title>NothingServices.WPFApp.UnitTests</Title>
   </PropertyGroup>
 
