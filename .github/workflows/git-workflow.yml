@@ -7,18 +7,19 @@ on:
 jobs:
   Build_NothingServices_Abstractions:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        dotnet-version: [ '9.0', '8.0' ]
     steps:
       - uses: actions/checkout@v4
       - name: Setup dotnet ${{ matrix.dotnet-version }}
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: |
-            8.0.x
-            9.0.x
+          dotnet-version: ${{ matrix.dotnet-version }}
       - name: Restore NothingServices.Abstractions
-        run: dotnet restore NothingServices.Abstractions/NothingServices.Abstractions.csproj --framework ${{ matrix.dotnet-version }}
+        run: dotnet restore NothingServices.Abstractions/NothingServices.Abstractions.csproj --framework net${{ matrix.dotnet-version }}
       - name: Build NothingServices.Abstractions
-        run: dotnet build NothingServices.Abstractions/NothingServices.Abstractions.csproj --configuration "Release" --framework ${{ matrix.dotnet-version }} --no-restore
+        run: dotnet build NothingServices.Abstractions/NothingServices.Abstractions.csproj --configuration "Release" --framework net${{ matrix.dotnet-version }} --no-restore
   Build_NothingRpcApi:
     runs-on: ubuntu-latest
     needs: UnitTest_NothingServices_Abstractions
@@ -27,9 +28,7 @@ jobs:
       - name: Setup dotnet
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: |
-            8.0.x
-            9.0.x
+          dotnet-version: 8.0.x
       - name: Restore NothingServices.Abstractions
         run: dotnet restore NothingServices.Abstractions/NothingServices.Abstractions.csproj
       - name: Build NothingServices.Abstractions
@@ -50,9 +49,7 @@ jobs:
       - name: Setup dotnet
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: |
-            8.0.x
-            9.0.x
+          dotnet-version: 8.0.x
       - name: Restore NothingServices.Abstractions
         run: dotnet restore NothingServices.Abstractions/NothingServices.Abstractions.csproj
       - name: Build NothingServices.Abstractions
@@ -73,9 +70,7 @@ jobs:
       - name: Setup dotnet
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: |
-            8.0.x
-            9.0.x
+          dotnet-version: 8.0.x
       - name: Restore NothingServices.Abstractions
         run: dotnet restore NothingServices.Abstractions/NothingServices.Abstractions.csproj
       - name: Build NothingServices.Abstractions
@@ -96,9 +91,7 @@ jobs:
       - name: Setup dotnet
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: |
-            8.0.x
-            9.0.x
+          dotnet-version: 8.0.x
       - name: Create Nuget directory
         run: md Nuget
       - name: Restore NothingServices.Abstractions
@@ -121,9 +114,7 @@ jobs:
       - name: Setup dotnet
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: |
-            8.0.x
-            9.0.x
+          dotnet-version: 8.0.x
       - name: Restore NothingServices.Abstractions.UnitTests
         run: dotnet restore NothingServices.Abstractions.UnitTests/NothingServices.Abstractions.UnitTests.csproj
       - name: Build NothingServices.Abstractions.UnitTests
@@ -138,9 +129,7 @@ jobs:
       - name: Setup dotnet
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: |
-            8.0.x
-            9.0.x
+          dotnet-version: 8.0.x
       - name: Restore NothingServices.Abstractions
         run: dotnet restore NothingServices.Abstractions/NothingServices.Abstractions.csproj
       - name: Build NothingServices.Abstractions
@@ -163,9 +152,7 @@ jobs:
       - name: Setup dotnet
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: |
-            8.0.x
-            9.0.x
+          dotnet-version: 8.0.x
       - name: Restore NothingServices.Abstractions
         run: dotnet restore NothingServices.Abstractions/NothingServices.Abstractions.csproj
       - name: Build NothingServices.Abstractions
@@ -188,9 +175,7 @@ jobs:
       - name: Setup dotnet
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: |
-            8.0.x
-            9.0.x
+          dotnet-version: 8.0.x
       - name: Restore NothingServices.Abstractions
         run: dotnet restore NothingServices.Abstractions/NothingServices.Abstractions.csproj
       - name: Build NothingServices.Abstractions
@@ -213,9 +198,7 @@ jobs:
       - name: Setup dotnet
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: |
-            8.0.x
-            9.0.x
+          dotnet-version: 8.0.x
       - name: Create Nuget directory
         run: md Nuget
       - name: Restore NothingServices.Abstractions
@@ -240,9 +223,7 @@ jobs:
       - name: Setup dotnet
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: |
-            8.0.x
-            9.0.x
+          dotnet-version: 8.0.x
       - name: Restore NothingServices.Abstractions
         run: dotnet restore NothingServices.Abstractions/NothingServices.Abstractions.csproj
       - name: Build NothingServices.Abstractions
@@ -269,9 +250,7 @@ jobs:
       - name: Setup dotnet
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: |
-            8.0.x
-            9.0.x
+          dotnet-version: 8.0.x
       - name: Restore NothingServices.Abstractions
         run: dotnet restore NothingServices.Abstractions/NothingServices.Abstractions.csproj
       - name: Build NothingServices.Abstractions
@@ -298,9 +277,7 @@ jobs:
       - name: Setup dotnet
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: |
-            8.0.x
-            9.0.x
+          dotnet-version: 8.0.x
       - name: Restore NothingServices.Abstractions
         run: dotnet restore NothingServices.Abstractions/NothingServices.Abstractions.csproj
       - name: Build NothingServices.Abstractions
@@ -327,9 +304,7 @@ jobs:
       - name: Setup dotnet
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: |
-            8.0.x
-            9.0.x
+          dotnet-version: 8.0.x
       - name: Create Nuget directory
         run: md Nuget
       - name: Restore NothingServices.Abstractions
