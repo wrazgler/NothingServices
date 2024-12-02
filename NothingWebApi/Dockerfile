@@ -19,6 +19,7 @@ COPY "./NothingServices.Abstractions/" "."
 
 # Restore Nuget
 RUN dotnet restore "NothingServices.Abstractions.csproj"
+
 # Build Nuget
 RUN dotnet build "NothingServices.Abstractions.csproj" \
     --configuration $CONFIGURATION \
