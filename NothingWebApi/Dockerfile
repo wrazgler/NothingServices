@@ -20,16 +20,24 @@ COPY "./NothingServices.Abstractions/" "."
 # Restore Nuget
 RUN dotnet restore "NothingServices.Abstractions.csproj"
 
+# Build Nuget
+RUN dotnet build "NothingServices.Abstractions.csproj" \
+    --configuration $CONFIGURATION \
+    --no-restore
+
 # Publish Nuget
 RUN dotnet publish "NothingServices.Abstractions.csproj" \
     --configuration $CONFIGURATION \
     --output /app/publish/ \
+    --no-build \
     --no-restore
 
 # Pack Nuget
 RUN dotnet pack "NothingServices.Abstractions.csproj" \
     --configuration $CONFIGURATION \
-    --output /app/publish/
+    --output /app/publish/ \
+    --no-build \
+    -no-restore
 
 # Project container
 FROM sdk AS build
