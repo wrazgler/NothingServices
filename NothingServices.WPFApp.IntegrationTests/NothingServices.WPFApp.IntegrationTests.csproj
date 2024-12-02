@@ -4,6 +4,7 @@
     <Authors>Golovin Nikita</Authors>
     <Copyright>Copyright (C) Golovin Nikita 2024</Copyright>
     <Description>Интеграционные тесты WPF клиента</Description>
+    <EnableWindowsTargeting>true</EnableWindowsTargeting>
     <ImplicitUsings>enable</ImplicitUsings>
     <IsPackable>false</IsPackable>
     <IsTestProject>true</IsTestProject>
@@ -34,7 +35,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\NothingWebApi\NothingWebApi.csproj" />
+    <ProjectReference Include="..\NothingServices.WPFApp\NothingServices.WPFApp.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="appsettings.AppTesting.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <Target Name="Create certificate" BeforeTargets="Build" Condition="$(Configuration)=='Debug'">
