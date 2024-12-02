@@ -1,5 +1,5 @@
 ﻿# Base container
-FROM mcr.microsoft.com/dotnet/sdk:8.0 AS sdk
+FROM mcr.microsoft.com/dotnet/sdk:9.0 AS sdk
 WORKDIR "/src"
 
 # Get arguments
@@ -25,19 +25,12 @@ RUN dotnet build "NothingServices.Abstractions.csproj" \
     --configuration $CONFIGURATION \
     --no-restore
 
-# Publish Nuget
-RUN dotnet publish "NothingServices.Abstractions.csproj" \
-    --configuration $CONFIGURATION \
-    --output /app/publish/ \
-    --no-build \
-    --no-restore
-
 # Pack Nuget
 RUN dotnet pack "NothingServices.Abstractions.csproj" \
     --configuration $CONFIGURATION \
     --output /app/publish/ \
     --no-build \
-    -no-restore
+    --no-restore
 
 # Project container
 FROM sdk AS build
@@ -57,6 +50,7 @@ RUN dotnet restore "NothingRpcApi.csproj"
 # Publish project
 RUN dotnet publish "NothingRpcApi.csproj" \
     --configuration $CONFIGURATION \
+    --framework net8.0 \
     --output /app/publish/ \
     --no-restore
 
