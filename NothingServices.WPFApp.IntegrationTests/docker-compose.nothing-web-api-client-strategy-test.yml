@@ -27,8 +27,8 @@ services:
     depends_on:
       - wpf_nothing_web_api_client_strategy_test_postgres_db
     environment:
-      ASPNETCORE_HTTP_PORTS: "8969"
-      ASPNETCORE_HTTPS_PORTS: "9069"
+      ASPNETCORE_HTTP_PORTS: "7759"
+      ASPNETCORE_HTTPS_PORTS: "7859"
       PATH_BASE: "/nothing-web-api"
       POSTGRES_HOST: "wpf_nothing_web_api_client_strategy_test_postgres_db"
       POSTGRES_PORT: "5432"
@@ -40,8 +40,8 @@ services:
     networks:
       - default
     ports:
-      - "8969:8969"
-      - "9069:9069"
+      - "7759:7759"
+      - "7859:7859"
     restart: unless-stopped
 networks:
   default:
