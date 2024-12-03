@@ -7,6 +7,15 @@
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance Type=controls:NothingModelVM}">
 
+  <UserControl.Resources>
+    <ResourceDictionary>
+      <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/NothingServices.WPFApp;v1.0.0.0;component/Styles/MenuStyles.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/NothingServices.WPFApp;v1.0.0.0;component/Styles/NothingModelViewStyles.xaml"/>
+      </ResourceDictionary.MergedDictionaries>
+    </ResourceDictionary>
+  </UserControl.Resources>
+
   <Border x:Name="NothingModelViewBorder"
           Style="{StaticResource NothingModelViewBorder}">
     <Border.ContextMenu>

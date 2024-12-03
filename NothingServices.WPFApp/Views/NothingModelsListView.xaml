@@ -8,6 +8,15 @@
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance Type=viewModels:NothingModelsListVM}">
 
+  <UserControl.Resources>
+    <ResourceDictionary>
+      <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/NothingServices.WPFApp;v1.0.0.0;component/Styles/MenuStyles.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/NothingServices.WPFApp;v1.0.0.0;component/Styles/NothingModelsListViewStyles.xaml"/>
+      </ResourceDictionary.MergedDictionaries>
+    </ResourceDictionary>
+  </UserControl.Resources>
+
   <Grid x:Name="NothingModelsListViewGrid">
     <Grid.RowDefinitions>
       <RowDefinition Height="*"/>

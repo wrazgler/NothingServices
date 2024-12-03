@@ -5,6 +5,7 @@
 
   <ResourceDictionary.MergedDictionaries>
     <ResourceDictionary Source="pack://application:,,,/NothingServices.WPFApp;v1.0.0.0;component/Styles/Colors.xaml"/>
+    <ResourceDictionary Source="pack://application:,,,/NothingServices.WPFApp;v1.0.0.0;component/Styles/Converters.xaml"/>
   </ResourceDictionary.MergedDictionaries>
 
   <ControlTemplate x:Key="MenuItemTemplate" TargetType="{x:Type MenuItem}">

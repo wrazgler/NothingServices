@@ -8,6 +8,10 @@
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance Type=controls:UpdateNothingModelVM}">
 
+  <UserControl.Resources>
+    <ResourceDictionary Source="pack://application:,,,/NothingServices.WPFApp;v1.0.0.0;component/Styles/UpdateNothingModelViewStyles.xaml"/>
+  </UserControl.Resources>
+
   <Border x:Name="UpdateNothingModelViewBorder"
           Style="{StaticResource UpdateNothingModelViewBorder}">
     <Grid x:Name="UpdateNothingModelViewGrid">

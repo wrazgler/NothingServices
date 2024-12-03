@@ -7,6 +7,10 @@
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance Type=viewModels:ApiSelectionVM}">
 
+  <UserControl.Resources>
+    <ResourceDictionary Source="pack://application:,,,/NothingServices.WPFApp;v1.0.0.0;component/Styles/ApiSelectionViewStyles.xaml"/>
+  </UserControl.Resources>
+
   <Grid x:Name="ApiSelectionViewGrid">
     <Grid.ColumnDefinitions>
       <ColumnDefinition Width="*" />

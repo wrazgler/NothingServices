@@ -7,6 +7,10 @@
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance Type=controls:DeleteNothingModelVM}">
 
+  <UserControl.Resources>
+    <ResourceDictionary Source="pack://application:,,,/NothingServices.WPFApp;v1.0.0.0;component/Styles/DeleteNothingModelViewStyles.xaml"/>
+  </UserControl.Resources>
+
   <Border x:Name="DeleteNothingModelViewBorder"
           Style="{StaticResource DeleteNothingModelViewBorder}">
     <Grid x:Name="DeleteNothingModelViewGrid">

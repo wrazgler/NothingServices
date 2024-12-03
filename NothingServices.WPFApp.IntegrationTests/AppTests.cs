@@ -3,7 +3,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using NothingServices.WPFApp.Extensions;
+using NothingServices.WPFApp.Models;
 using NothingServices.WPFApp.Services;
+using NothingServices.WPFApp.Strategies;
 using NothingServices.WPFApp.ViewModels;
 
 namespace NothingServices.WPFApp.IntegrationTests;
@@ -11,22 +13,66 @@ namespace NothingServices.WPFApp.IntegrationTests;
 public class AppTests
 {
     [Fact]
-    public async Task NothingModels_Contain_Single_Element()
+    public async Task NothingModels_WebApiClient_Contain_Single_Element()
     {
         try
         {
             //Arrange
             await StopApp(0);
             await StartApp();
-            var app = new App();
             var host = GetHost();
-            var startupService = host.Services.GetRequiredService<StartupService>();
-            //var mainWindowVM = host.Services.GetRequiredService<MainWindowVM>();
+            var uiThread = new Thread(parameter =>
+            {
+                var hostThread = parameter as IHost ?? throw new ArgumentNullException(nameof(parameter));
+                var startupService = hostThread.Services.GetRequiredService<StartupService>();
+                startupService.Start();
+                var mainWindowManager = hostThread.Services.GetRequiredService<IMainWindowManager>();
+                mainWindowManager.Strategy = hostThread.Services.GetRequiredService<NothingWebApiClientStrategy>();
+                mainWindowManager.Next(MainWindowContentType.NothingModelsListVM);
+            });
+            uiThread.SetApartmentState(ApartmentState.STA);
 
             //Act
-            startupService.Start();
-            app.InitializeComponent();
-            var mainWindowVM = app.MainWindow?.DataContext as MainWindowVM;
+            uiThread.Start(host);
+            Thread.Sleep(2000);
+            var mainWindowVM = host.Services.GetRequiredService<IMainWindowVM>();
+            var result = mainWindowVM?.NothingModelsListVM.NothingModels
+                ?? throw new NullReferenceException();
+
+            //Assert
+            Assert.Single(result);
+            await StopApp();
+        }
+        finally
+        {
+            await StopApp();
+        }
+    }
+
+    [Fact]
+    public async Task NothingModels_gRpcApi_Contain_Single_Element()
+    {
+        try
+        {
+            //Arrange
+            await StopApp(0);
+            await StartApp();
+            var host = GetHost();
+            var uiThread = new Thread(parameter =>
+            {
+                var hostThread = parameter as IHost ?? throw new ArgumentNullException(nameof(parameter));
+                var startupService = hostThread.Services.GetRequiredService<StartupService>();
+                startupService.Start();
+                var mainWindowManager = hostThread.Services.GetRequiredService<IMainWindowManager>();
+                mainWindowManager.Strategy = hostThread.Services.GetRequiredService<NothingRpcApiClientStrategy>();
+                mainWindowManager.Next(MainWindowContentType.NothingModelsListVM);
+            });
+            uiThread.SetApartmentState(ApartmentState.STA);
+
+            //Act
+            uiThread.Start(host);
+            Thread.Sleep(2000);
+            var mainWindowVM = host.Services.GetRequiredService<IMainWindowVM>();
             var result = mainWindowVM?.NothingModelsListVM.NothingModels
                 ?? throw new NullReferenceException();
 

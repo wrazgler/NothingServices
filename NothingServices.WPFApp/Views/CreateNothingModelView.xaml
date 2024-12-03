@@ -8,6 +8,10 @@
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance Type=controls:CreateNothingModelVM}">
 
+  <UserControl.Resources>
+    <ResourceDictionary Source="pack://application:,,,/NothingServices.WPFApp;v1.0.0.0;component/Styles/CreateNothingModelViewStyles.xaml"/>
+  </UserControl.Resources>
+
   <Border x:Name="CreateNothingModelViewBorder"
           Style="{StaticResource CreateNothingModelViewBorder}">
     <Grid x:Name="CreateNothingModelViewGrid">

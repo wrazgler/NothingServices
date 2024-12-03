@@ -12,6 +12,15 @@
         Height="400" Width="600"
         Title="{Binding Path=Title}">
 
+  <Window.Resources>
+    <ResourceDictionary>
+      <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/NothingServices.WPFApp;v1.0.0.0;component/Styles/DialogStyles.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/NothingServices.WPFApp;v1.0.0.0;component/Styles/NotificatorStyles.xaml"/>
+      </ResourceDictionary.MergedDictionaries>
+    </ResourceDictionary>
+  </Window.Resources>
+
   <Grid x:Name="MainWindowGrid">
     <views:ApiSelectionView x:Name="ApiSelectionView"
                             DataContext="{Binding Path=ApiSelectionVM}"
