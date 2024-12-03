@@ -11,7 +11,7 @@ services:
     networks:
       - default
     ports:
-      - "5659:5432"
+      - "6159:5432"
     restart: unless-stopped
     volumes:
       - wpf_nothing_web_api_client_strategy_test_postgres_db:/var/lib/wpf_nothing_web_api_client_strategy_test_postgres_db

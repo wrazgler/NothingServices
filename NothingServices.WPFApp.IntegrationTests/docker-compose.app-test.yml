@@ -11,7 +11,7 @@ services:
     networks:
       - default
     ports:
-      - "5559:5432"
+      - "5859:5432"
     restart: unless-stopped
     volumes:
       - wpf_app_test_postgres_nothing_grpc_api_db:/var/lib/wpf_app_test_postgres_nothing_grpc_api_db
@@ -26,7 +26,7 @@ services:
     networks:
       - default
     ports:
-      - "5659:5432"
+      - "5959:5432"
     restart: unless-stopped
     volumes:
       - wpf_app_test_postgres_nothing_web_api_db:/var/lib/wpf_app_test_postgres_nothing_web_api_db
