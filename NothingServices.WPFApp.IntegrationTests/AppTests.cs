@@ -34,7 +34,7 @@ public class AppTests
 
             //Act
             uiThread.Start(host);
-            Thread.Sleep(2000);
+            Thread.Sleep(5000);
             var mainWindowVM = host.Services.GetRequiredService<IMainWindowVM>();
             var result = mainWindowVM.NothingModelsListVM.NothingModels
                          ?? throw new NullReferenceException();
@@ -71,7 +71,7 @@ public class AppTests
 
             //Act
             uiThread.Start(host);
-            Thread.Sleep(2000);
+            Thread.Sleep(5000);
             var mainWindowVM = host.Services.GetRequiredService<IMainWindowVM>();
             var result = mainWindowVM.NothingModelsListVM.NothingModels
                 ?? throw new NullReferenceException();
@@ -89,7 +89,7 @@ public class AppTests
     private static IHost GetHost()
     {
         var configuration = new ConfigurationBuilder()
-            .AddJsonFile("appsettings.AppTesting.json")
+            .AddJsonFile("appsettings.App.Testing.json")
             .Build();
         var hostBuilder = Host.CreateDefaultBuilder();
         hostBuilder.ConfigureAppConfiguration((_, configurationBuilder) =>

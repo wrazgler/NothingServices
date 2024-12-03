@@ -166,7 +166,7 @@ public class NothingWebApiClientTests
     private static INothingWebApiClient GetNothingWebApiClient()
     {
         var configuration = new ConfigurationBuilder()
-            .AddJsonFile("appsettings.NothingWebApiClientTesting.json")
+            .AddJsonFile("appsettings.NothingWebApiClient.Testing.json")
             .Build();
         var services = new ServiceCollection();
         services.AddAppConfigs(configuration);

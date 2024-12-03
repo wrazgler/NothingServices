@@ -411,7 +411,7 @@ public class AppTests
     private static IHost GetHost()
     {
         var configuration = new ConfigurationBuilder()
-            .AddJsonFile("appsettings.AppTesting.json")
+            .AddJsonFile("appsettings.App.Testing.json")
             .Build();
         var hostBuilder = Host.CreateDefaultBuilder();
         hostBuilder.ConfigureServices((_, services) =>
