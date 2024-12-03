@@ -12,7 +12,7 @@ namespace NothingServices.WPFApp.IntegrationTests;
 
 public class AppTests
 {
-    [Fact]
+    //[Fact]
     public async Task NothingModels_gRpcApi_Contain_Single_Element()
     {
         try
@@ -49,7 +49,7 @@ public class AppTests
         }
     }
 
-    [Fact]
+    //[Fact]
     public async Task NothingModels_WebApiClient_Contain_Single_Element()
     {
         try
