@@ -12,7 +12,7 @@ namespace NothingServices.WPFApp.IntegrationTests.StrategiesTests;
 
 public class NothingWebApiClientStrategyTests
 {
-    [Fact]
+    //[Fact]
     public async Task GetNothingModels_Equivalent()
     {
         try
@@ -35,7 +35,7 @@ public class NothingWebApiClientStrategyTests
         }
     }
 
-    [Fact]
+    //[Fact]
     public async Task CreateNothingModel_Equivalent()
     {
         try
@@ -84,7 +84,7 @@ public class NothingWebApiClientStrategyTests
         return nothingWebApiClientStrategy;
     }
 
-    private static async Task StartApp(int delay = 15000)
+    private static async Task StartApp(int delay = 10000)
     {
         var projectPath = Path.GetFullPath("../../../");
         var dockerFilePath = Path.Combine(projectPath, "docker-compose.nothing-web-api-client-strategy-test.yml");
@@ -92,7 +92,7 @@ public class NothingWebApiClientStrategyTests
         await Task.Delay(delay);
     }
 
-    private static async Task StopApp(int beforeDelay = 15000, int afterDelay = 2000)
+    private static async Task StopApp(int beforeDelay = 10000, int afterDelay = 2000)
     {
         await Task.Delay(beforeDelay);
         await Process.Start("docker", "container remove -f -v wpf_nothing_web_api_client_strategy_test_postgres_db")

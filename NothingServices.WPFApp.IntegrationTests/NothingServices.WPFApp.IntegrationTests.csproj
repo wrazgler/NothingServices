@@ -48,6 +48,9 @@
     <Content Include="appsettings.NothingWebApiClientStrategy.Testing.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Update="appsettings.NothingWebApiClient.Testing.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <Target Name="Create certificate" BeforeTargets="Build" Condition="$(Configuration)=='Debug'">
