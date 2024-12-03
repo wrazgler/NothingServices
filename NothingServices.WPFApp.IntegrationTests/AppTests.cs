@@ -34,7 +34,7 @@ public class AppTests
 
             //Act
             uiThread.Start(host);
-            Thread.Sleep(5000);
+            Thread.Sleep(2000);
             var mainWindowVM = host.Services.GetRequiredService<IMainWindowVM>();
             var result = mainWindowVM.NothingModelsListVM.NothingModels
                          ?? throw new NullReferenceException();
@@ -71,7 +71,7 @@ public class AppTests
 
             //Act
             uiThread.Start(host);
-            Thread.Sleep(5000);
+            Thread.Sleep(2000);
             var mainWindowVM = host.Services.GetRequiredService<IMainWindowVM>();
             var result = mainWindowVM.NothingModelsListVM.NothingModels
                 ?? throw new NullReferenceException();
