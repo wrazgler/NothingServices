@@ -189,13 +189,13 @@ public class NothingWebApiClientTests
     private static async Task StopApp(int beforeDelay = 10000, int afterDelay = 2000)
     {
         await Task.Delay(beforeDelay);
-        await Process.Start("docker", "container remove -f -v console_nothing_web_api_test_postgres_nothing_web_api_db")
+        await Process.Start("docker", "container remove -f -v console_nothing_web_api_test_postgres_db")
             .WaitForExitAsync();
         await Process.Start("docker", "container remove -f console_nothing_web_api_test_nothing_web_api")
             .WaitForExitAsync();
         await Process.Start("docker", "image remove -f console_nothing_web_api_test_nothing_web_api")
             .WaitForExitAsync();
-        await Process.Start("docker", "volume remove -f console_nothing_web_api_test_nothing_services_console_nothing_web_api_test_postgres_nothing_web_api_db")
+        await Process.Start("docker", "volume remove -f console_nothing_web_api_test_nothing_services_console_nothing_web_api_test_postgres_db")
             .WaitForExitAsync();
         await Task.Delay(afterDelay);
     }

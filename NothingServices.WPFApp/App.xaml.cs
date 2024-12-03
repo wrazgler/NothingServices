@@ -29,6 +29,7 @@ public partial class App
             services.AddAppHttpClient(context.Configuration);
             services.AddAppClients(context.Configuration);
             services.AddAppServices();
+            services.AddAppViewModels();
             services.AddAppViews();
         });
         var host = hostBuilder.Build();

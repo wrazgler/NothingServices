@@ -1,8 +1,8 @@
 name: console_nothing_web_api_test
 services:
-  console_nothing_web_api_test_postgres_nothing_web_api_db:
+  console_nothing_web_api_test_postgres_db:
     image: postgres
-    container_name: console_nothing_web_api_test_postgres_nothing_web_api_db
+    container_name: console_nothing_web_api_test_postgres_db
     environment:
       POSTGRES_PORT: "5432"
       POSTGRES_DB: "nothing_web_api_db"
@@ -14,7 +14,7 @@ services:
       - "5759:5432"
     restart: unless-stopped
     volumes:
-      - console_nothing_web_api_test_postgres_nothing_web_api_db:/var/lib/console_nothing_web_api_test_postgres_nothing_web_api_db
+      - console_nothing_web_api_test_postgres_db:/var/lib/console_nothing_web_api_test_postgres_db
   console_nothing_web_api_test_nothing_web_api:
     image: console_nothing_web_api_test_nothing_web_api
     container_name: console_nothing_web_api_test_nothing_web_api
@@ -25,18 +25,18 @@ services:
       context: ../
       dockerfile: NothingWebApi/Dockerfile
     depends_on:
-      - console_nothing_web_api_test_postgres_nothing_web_api_db
+      - console_nothing_web_api_test_postgres_db
     environment:
       ASPNETCORE_HTTP_PORTS: "8959"
       ASPNETCORE_HTTPS_PORTS: "9059"
       PATH_BASE: "/nothing-web-api"
-      POSTGRES_HOST: "console_nothing_web_api_test_postgres_nothing_web_api_db"
+      POSTGRES_HOST: "console_nothing_web_api_test_postgres_db"
       POSTGRES_PORT: "5432"
       POSTGRES_DB: "nothing_web_api_db"
       POSTGRES_USER: "nothing_web_api"
       POSTGRES_PASSWORD: "nothing_web_api"
     links:
-      - console_nothing_web_api_test_postgres_nothing_web_api_db
+      - console_nothing_web_api_test_postgres_db
     networks:
       - default
     ports:
@@ -47,4 +47,4 @@ networks:
   default:
     driver: bridge
 volumes:
-  console_nothing_web_api_test_postgres_nothing_web_api_db:
+  console_nothing_web_api_test_postgres_db:

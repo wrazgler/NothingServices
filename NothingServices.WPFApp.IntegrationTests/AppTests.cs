@@ -103,6 +103,7 @@ public class AppTests
             services.AddAppHttpClient(configuration);
             services.AddAppClients(configuration);
             services.AddAppServices();
+            services.AddAppViewModels();
             services.AddAppViews();
         });
         var host = hostBuilder.Build();

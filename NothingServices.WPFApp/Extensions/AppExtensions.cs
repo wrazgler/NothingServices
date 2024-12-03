@@ -82,17 +82,12 @@ public static class AppExtensions
     }
 
     /// <summary>
-    /// Добавить представления приложения в коллекцию сервисов
+    /// Добавить данные представлений приложения в коллекцию сервисов
     /// </summary>
     /// <param name="services">Коллекция сервисов</param>
-    /// <returns>Коллекция сервисов с добавленными представления приложения</returns>
-    public static IServiceCollection AddAppViews(this IServiceCollection services)
+    /// <returns>Коллекция сервисов с добавленными данными представлений приложения</returns>
+    public static IServiceCollection AddAppViewModels(this IServiceCollection services)
     {
-        services.AddScoped<ICreateNothingModelView, CreateNothingModelView>();
-        services.AddScoped<IDeleteNothingModelView, DeleteNothingModelView>();
-        services.AddScoped<IMainWindow, MainWindow>();
-        services.AddScoped<IUpdateNothingModelView, UpdateNothingModelView>();
-
         services.AddScoped<ApiSelectionVM>();
         services.AddScoped<IDialogVM, DialogVM>();
         services.AddScoped<IMainWindowVM, MainWindowVM>();
@@ -112,6 +107,20 @@ public static class AppExtensions
         services.AddScoped<IOpenUpdateNothingModelCommand, OpenUpdateNothingModelCommand>();
         services.AddScoped<IUpdateCommand, UpdateCommand>();
 
+        return services;
+    }
+
+    /// <summary>
+    /// Добавить представления приложения в коллекцию сервисов
+    /// </summary>
+    /// <param name="services">Коллекция сервисов</param>
+    /// <returns>Коллекция сервисов с добавленными представления приложения</returns>
+    public static IServiceCollection AddAppViews(this IServiceCollection services)
+    {
+        services.AddScoped<ICreateNothingModelView, CreateNothingModelView>();
+        services.AddScoped<IDeleteNothingModelView, DeleteNothingModelView>();
+        services.AddScoped<IMainWindow, MainWindow>();
+        services.AddScoped<IUpdateNothingModelView, UpdateNothingModelView>();
         return services;
     }
 

@@ -89,21 +89,17 @@ public class AppExtensionsTests
     }
 
     [Fact]
-    public void AddAppViews_Services_Equivalent()
+    public void AddAppViewModels_Services_Equivalent()
     {
         //Act
         var result = new ServiceCollection()
-            .AddAppViews()
+            .AddAppViewModels()
             .Select(x => x.ServiceType.ToString())
             .ToArray();
 
         //Assert
         var expected = new[]
         {
-            "NothingServices.WPFApp.Controls.ICreateNothingModelView",
-            "NothingServices.WPFApp.Controls.IDeleteNothingModelView",
-            "NothingServices.WPFApp.Controls.IMainWindow",
-            "NothingServices.WPFApp.Controls.IUpdateNothingModelView",
             "NothingServices.WPFApp.ViewModels.ApiSelectionVM",
             "NothingServices.WPFApp.ViewModels.IDialogVM",
             "NothingServices.WPFApp.ViewModels.IMainWindowVM",
@@ -120,6 +116,26 @@ public class AppExtensionsTests
             "NothingServices.WPFApp.Commands.IOpenNothingModelsListCommand",
             "NothingServices.WPFApp.Commands.IOpenUpdateNothingModelCommand",
             "NothingServices.WPFApp.Commands.IUpdateCommand",
+        };
+        Assert.Equivalent(expected, result, true);
+    }
+
+    [Fact]
+    public void AddAppViews_Services_Equivalent()
+    {
+        //Act
+        var result = new ServiceCollection()
+            .AddAppViews()
+            .Select(x => x.ServiceType.ToString())
+            .ToArray();
+
+        //Assert
+        var expected = new[]
+        {
+            "NothingServices.WPFApp.Controls.ICreateNothingModelView",
+            "NothingServices.WPFApp.Controls.IDeleteNothingModelView",
+            "NothingServices.WPFApp.Controls.IMainWindow",
+            "NothingServices.WPFApp.Controls.IUpdateNothingModelView",
         };
         Assert.Equivalent(expected, result, true);
     }
