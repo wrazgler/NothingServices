@@ -48,7 +48,7 @@
     <Content Include="appsettings.NothingWebApiClientStrategy.Testing.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Update="appsettings.NothingWebApiClient.Testing.json">
+    <Content Include="appsettings.NothingWebApiClient.Testing.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
