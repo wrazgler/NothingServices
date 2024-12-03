@@ -101,7 +101,7 @@ public class NothingRpcApiClientStrategyTests
             .WaitForExitAsync();
         await Process.Start("docker", "image remove -f wpf_nothing_grpc_api_client_strategy_test_nothing_grpc_api")
             .WaitForExitAsync();
-        await Process.Start("docker", "volume remove -f wpf_nothing_grpc_api_client_strategy_test_nothing_services_wpf_app_test_postgres_db")
+        await Process.Start("docker", "volume remove -f wpf_nothing_grpc_api_client_strategy_test_wpf_nothing_grpc_api_client_strategy_test_postgres_db")
             .WaitForExitAsync();
         await Task.Delay(afterDelay);
     }

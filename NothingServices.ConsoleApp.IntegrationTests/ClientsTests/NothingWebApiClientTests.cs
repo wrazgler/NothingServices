@@ -195,7 +195,7 @@ public class NothingWebApiClientTests
             .WaitForExitAsync();
         await Process.Start("docker", "image remove -f console_nothing_web_api_test_nothing_web_api")
             .WaitForExitAsync();
-        await Process.Start("docker", "volume remove -f console_nothing_web_api_test_nothing_services_console_nothing_web_api_test_postgres_db")
+        await Process.Start("docker", "volume remove -f console_nothing_web_api_test_console_nothing_web_api_test_postgres_db")
             .WaitForExitAsync();
         await Task.Delay(afterDelay);
     }
