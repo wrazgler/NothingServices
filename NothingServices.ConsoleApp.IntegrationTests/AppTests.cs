@@ -473,7 +473,7 @@ public class AppTests
             .WaitForExitAsync();
         await Process.Start("docker", "volume remove -f console_app_test_nothing_services_console_app_test_postgres_nothing_grpc_api_db")
             .WaitForExitAsync();
-        await Process.Start("docker", "volume remove -f console_test_nothing_services_console_app_test_postgres_nothing_web_api_db")
+        await Process.Start("docker", "volume remove -f console_app_test_nothing_services_console_app_test_postgres_nothing_web_api_db")
             .WaitForExitAsync();
         await Task.Delay(afterDelay);
     }

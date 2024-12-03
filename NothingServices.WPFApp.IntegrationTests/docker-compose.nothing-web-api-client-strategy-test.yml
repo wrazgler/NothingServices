@@ -1,0 +1,50 @@
+name: wpf_nothing_web_api_client_strategy_test
+services:
+  wpf_nothing_web_api_client_strategy_test_postgres_nothing_web_api_db:
+    image: postgres
+    container_name: wpf_nothing_web_api_client_strategy_test_postgres_nothing_web_api_db
+    environment:
+      POSTGRES_PORT: "5432"
+      POSTGRES_DB: "nothing_web_api_db"
+      POSTGRES_USER: "nothing_web_api"
+      POSTGRES_PASSWORD: "nothing_web_api"
+    networks:
+      - default
+    ports:
+      - "5659:5432"
+    restart: unless-stopped
+    volumes:
+      - wpf_nothing_web_api_client_strategy_test_postgres_nothing_web_api_db:/var/lib/wpf_nothing_web_api_client_strategy_test_postgres_nothing_web_api_db
+  wpf_nothing_web_api_client_strategy_test_nothing_web_api:
+    image: wpf_nothing_web_api_client_strategy_test_nothing_web_api
+    container_name: wpf_nothing_web_api_client_strategy_test_nothing_web_api
+    build:
+      args:
+        CERTIFICATE_PASSWORD: "localhost"
+        CONFIGURATION: "Release"
+      context: ../
+      dockerfile: NothingWebApi/Dockerfile
+    depends_on:
+      - wpf_nothing_web_api_client_strategy_test_postgres_nothing_web_api_db
+    environment:
+      ASPNETCORE_HTTP_PORTS: "7759"
+      ASPNETCORE_HTTPS_PORTS: "7859"
+      PATH_BASE: "/nothing-web-api"
+      POSTGRES_HOST: "wpf_nothing_web_api_client_strategy_test_postgres_nothing_web_api_db"
+      POSTGRES_PORT: "5432"
+      POSTGRES_DB: "nothing_web_api_db"
+      POSTGRES_USER: "nothing_web_api"
+      POSTGRES_PASSWORD: "nothing_web_api"
+    links:
+      - wpf_nothing_web_api_client_strategy_test_postgres_nothing_web_api_db
+    networks:
+      - default
+    ports:
+      - "7759:7759"
+      - "7859:7859"
+    restart: unless-stopped
+networks:
+  default:
+    driver: bridge
+volumes:
+  wpf_nothing_web_api_client_strategy_test_postgres_nothing_web_api_db:

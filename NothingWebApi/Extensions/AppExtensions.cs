@@ -47,7 +47,7 @@ public static class AppExtensions
     /// <returns>Коллекция сервисов с добавленными сервисами приложения</returns>
     public static IServiceCollection AddAppServices(this IServiceCollection services)
     {
-        services.AddTransient<INothingService, NothingService>();
+        services.AddScoped<INothingService, NothingService>();
         return services;
     }
 

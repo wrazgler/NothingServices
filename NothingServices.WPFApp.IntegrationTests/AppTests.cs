@@ -13,43 +13,6 @@ namespace NothingServices.WPFApp.IntegrationTests;
 public class AppTests
 {
     [Fact]
-    public async Task NothingModels_WebApiClient_Contain_Single_Element()
-    {
-        try
-        {
-            //Arrange
-            await StopApp(0);
-            await StartApp();
-            var host = GetHost();
-            var uiThread = new Thread(parameter =>
-            {
-                var hostThread = parameter as IHost ?? throw new ArgumentNullException(nameof(parameter));
-                var startupService = hostThread.Services.GetRequiredService<StartupService>();
-                startupService.Start();
-                var mainWindowManager = hostThread.Services.GetRequiredService<IMainWindowManager>();
-                mainWindowManager.Strategy = hostThread.Services.GetRequiredService<NothingWebApiClientStrategy>();
-                mainWindowManager.Next(MainWindowContentType.NothingModelsListVM);
-            });
-            uiThread.SetApartmentState(ApartmentState.STA);
-
-            //Act
-            uiThread.Start(host);
-            Thread.Sleep(2000);
-            var mainWindowVM = host.Services.GetRequiredService<IMainWindowVM>();
-            var result = mainWindowVM?.NothingModelsListVM.NothingModels
-                ?? throw new NullReferenceException();
-
-            //Assert
-            Assert.Single(result);
-            await StopApp();
-        }
-        finally
-        {
-            await StopApp();
-        }
-    }
-
-    [Fact]
     public async Task NothingModels_gRpcApi_Contain_Single_Element()
     {
         try
@@ -73,7 +36,44 @@ public class AppTests
             uiThread.Start(host);
             Thread.Sleep(2000);
             var mainWindowVM = host.Services.GetRequiredService<IMainWindowVM>();
-            var result = mainWindowVM?.NothingModelsListVM.NothingModels
+            var result = mainWindowVM.NothingModelsListVM.NothingModels
+                         ?? throw new NullReferenceException();
+
+            //Assert
+            Assert.Single(result);
+            await StopApp();
+        }
+        finally
+        {
+            await StopApp();
+        }
+    }
+
+    [Fact]
+    public async Task NothingModels_WebApiClient_Contain_Single_Element()
+    {
+        try
+        {
+            //Arrange
+            await StopApp(0);
+            await StartApp();
+            var host = GetHost();
+            var uiThread = new Thread(parameter =>
+            {
+                var hostThread = parameter as IHost ?? throw new ArgumentNullException(nameof(parameter));
+                var startupService = hostThread.Services.GetRequiredService<StartupService>();
+                startupService.Start();
+                var mainWindowManager = hostThread.Services.GetRequiredService<IMainWindowManager>();
+                mainWindowManager.Strategy = hostThread.Services.GetRequiredService<NothingWebApiClientStrategy>();
+                mainWindowManager.Next(MainWindowContentType.NothingModelsListVM);
+            });
+            uiThread.SetApartmentState(ApartmentState.STA);
+
+            //Act
+            uiThread.Start(host);
+            Thread.Sleep(2000);
+            var mainWindowVM = host.Services.GetRequiredService<IMainWindowVM>();
+            var result = mainWindowVM.NothingModelsListVM.NothingModels
                 ?? throw new NullReferenceException();
 
             //Assert
@@ -134,7 +134,7 @@ public class AppTests
             .WaitForExitAsync();
         await Process.Start("docker", "volume remove -f wpf_app_test_nothing_services_wpf_app_test_postgres_nothing_grpc_api_db")
             .WaitForExitAsync();
-        await Process.Start("docker", "volume remove -f wpf_test_nothing_services_wpf_app_test_postgres_nothing_web_api_db")
+        await Process.Start("docker", "volume remove -f wpf_app_test_nothing_services_wpf_app_test_postgres_nothing_web_api_db")
             .WaitForExitAsync();
         await Task.Delay(afterDelay);
     }
