@@ -27,8 +27,8 @@ services:
     depends_on:
       - wpf_nothing_grpc_api_client_strategy_test_postgres_db
     environment:
-      ASPNETCORE_HTTP_PORTS: "7159"
-      ASPNETCORE_HTTPS_PORTS: "7259"
+      ASPNETCORE_HTTP_PORTS: "8369"
+      ASPNETCORE_HTTPS_PORTS: "8469"
       PATH_BASE: "/nothing-grpc-api"
       POSTGRES_HOST: "wpf_nothing_grpc_api_client_strategy_test_postgres_db"
       POSTGRES_PORT: "5432"
@@ -40,8 +40,8 @@ services:
     networks:
       - default
     ports:
-      - "7159:7159"
-      - "7259:7259"
+      - "8369:8369"
+      - "8469:8469"
     restart: unless-stopped
 networks:
   default:

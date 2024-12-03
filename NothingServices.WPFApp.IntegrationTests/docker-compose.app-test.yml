@@ -42,8 +42,8 @@ services:
     depends_on:
       - wpf_app_test_postgres_nothing_grpc_api_db
     environment:
-      ASPNETCORE_HTTP_PORTS: "9559"
-      ASPNETCORE_HTTPS_PORTS: "9659"
+      ASPNETCORE_HTTP_PORTS: "7969"
+      ASPNETCORE_HTTPS_PORTS: "8069"
       PATH_BASE: "/nothing-grpc-api"
       POSTGRES_HOST: "wpf_app_test_postgres_nothing_grpc_api_db"
       POSTGRES_PORT: "5432"
@@ -55,8 +55,8 @@ services:
     networks:
       - default
     ports:
-      - "9559:9559"
-      - "9659:9659"
+      - "7969:7969"
+      - "8069:8069"
     restart: unless-stopped
   wpf_app_test_nothing_web_api:
     image: wpf_app_test_nothing_web_api
@@ -70,8 +70,8 @@ services:
     depends_on:
       - wpf_app_test_postgres_nothing_web_api_db
     environment:
-      ASPNETCORE_HTTP_PORTS: "9359"
-      ASPNETCORE_HTTPS_PORTS: "9459"
+      ASPNETCORE_HTTP_PORTS: "8169"
+      ASPNETCORE_HTTPS_PORTS: "8269"
       PATH_BASE: "/nothing-web-api"
       POSTGRES_HOST: "wpf_app_test_postgres_nothing_web_api_db"
       POSTGRES_PORT: "5432"
@@ -83,8 +83,8 @@ services:
     networks:
       - default
     ports:
-      - "9359:9359"
-      - "9459:9459"
+      - "8169:8169"
+      - "8269:8269"
     restart: unless-stopped
 networks:
   default:
