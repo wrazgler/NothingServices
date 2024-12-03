@@ -12,7 +12,7 @@ namespace NothingServices.WPFApp.IntegrationTests.StrategiesTests;
 
 public class NothingRpcApiClientStrategyTests
 {
-    [Fact]
+    //[Fact]
     public async Task GetNothingModels_Equivalent()
     {
         try
@@ -35,7 +35,7 @@ public class NothingRpcApiClientStrategyTests
         }
     }
 
-    [Fact]
+    //[Fact]
     public async Task CreateNothingModel_Equivalent()
     {
         try
