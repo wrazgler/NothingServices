@@ -18,13 +18,16 @@ public class AppTests
             //Arrange
             await StopApp(0);
             await StartApp();
+            var app = new App();
             var host = GetHost();
             var startupService = host.Services.GetRequiredService<StartupService>();
-            var mainWindowVM = host.Services.GetRequiredService<MainWindowVM>();
+            //var mainWindowVM = host.Services.GetRequiredService<MainWindowVM>();
 
             //Act
             startupService.Start();
-            var result = mainWindowVM.NothingModelsListVM.NothingModels
+            app.InitializeComponent();
+            var mainWindowVM = app.MainWindow?.DataContext as MainWindowVM;
+            var result = mainWindowVM?.NothingModelsListVM.NothingModels
                 ?? throw new NullReferenceException();
 
             //Assert
