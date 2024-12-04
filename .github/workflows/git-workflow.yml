@@ -348,12 +348,14 @@ jobs:
           dotnet-version: |
             9.0.x
             8.0.x
+      - name: Docker info
+        run: docker info
+      - name: Folder
+        run: tree "C:\Program Files\Docker"
       - name: cd
         run: cd "C:\Program Files"
       - name: Switch docker engine
         run: DockerCli.exe -SwitchLinuxEngine
-      - name: Docker info
-        run: docker info
       - name: Create Nuget directory
         run: md Nuget
       - name: Restore NothingServices.Abstractions
