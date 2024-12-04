@@ -39,6 +39,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="..\.dockerignore">
+      <Link>.dockerignore</Link>
+      <DependentUpon>NothingRpcApi.Dockerfile</DependentUpon>
+    </Content>
+    <Content Include="..\.dockerignore">
+      <Link>.dockerignore</Link>
+      <DependentUpon>NothingWebApi.Dockerfile</DependentUpon>
+    </Content>
     <Content Include="appsettings.App.Testing.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -47,6 +55,11 @@
     </Content>
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="NothingRpcApi.Dockerfile" />
+    <None Include="NothingWebApi.Dockerfile" />
+  </ItemGroup>
+  
   <Target Name="Create certificate" BeforeTargets="Build" Condition="$(Configuration)=='Debug'">
     <Exec Command="dotnet dev-certs https -ep .certificates/localhost.crt -p localhost --trust"
           WorkingDirectory="$(SolutionDir)" />
