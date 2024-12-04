@@ -348,6 +348,8 @@ jobs:
           dotnet-version: |
             9.0.x
             8.0.x
+      - name: Docker info
+        run: docker info
       - name: Create Nuget directory
         run: md Nuget
       - name: Restore NothingServices.Abstractions
@@ -359,7 +361,7 @@ jobs:
       - name: Add Nuget
         run: dotnet nuget add source "." --name "NothingServices.Abstractions"
       - name: Docker pull postgres
-        run: docker pull postgres:ltsc2022
+        run: docker pull postgres
       - name: Docker pull sdk
         run: docker pull mcr.microsoft.com/dotnet/sdk:9.0-ltsc2022
       - name: Docker pull aspnet
