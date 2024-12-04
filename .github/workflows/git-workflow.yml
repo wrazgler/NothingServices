@@ -330,18 +330,8 @@ jobs:
           dotnet-version: |
             9.0.x
             8.0.x
-      - name: Overwrite config
-        run: copy NothingServices.WPFApp.IntegrationTests/daemon.json C:\ProgramData\docker\config\daemon.json
-      - name: Read daemon.json
-        run: type C:\ProgramData\docker\config\daemon.json
-      - name: Docker restart
-        run: restart-service *docker*
-      - name: Docker context
-        run: docker context use desktop-linux
-      - name: Docker version
-        run: docker version
       - name: Docker run
-        run: docker run mcr.microsoft.com/dotnet/sdk:9.0
+        run: docker run mcr.microsoft.com/dotnet/sdk:9.0-amd64
       - name: Create Nuget directory
         run: md Nuget
       - name: Restore NothingServices.Abstractions
