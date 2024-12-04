@@ -348,9 +348,10 @@ jobs:
           dotnet-version: |
             9.0.x
             8.0.x
+      - name: cd
+        run: cd "C:\ProgramFiles\Docker\Docker"
       - name: Switch docker engine
-      - run: cd "C:\ProgramFiles\Docker\Docker"
-      - run: DockerCli.exe" -SwitchLinuxEngine
+        run: DockerCli.exe -SwitchLinuxEngine
       - name: Docker info
         run: docker info
       - name: Create Nuget directory
