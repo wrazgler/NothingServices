@@ -331,7 +331,7 @@ jobs:
             9.0.x
             8.0.x
       - name: Docker run
-        run: docker run mcr.microsoft.com/dotnet/sdk:8.0-windowsservercore-ltsc2022
+        run: docker run mcr.microsoft.com/dotnet/sdk:9.0-windowsservercore-ltsc2022
       - name: Create Nuget directory
         run: md Nuget
       - name: Restore NothingServices.Abstractions
