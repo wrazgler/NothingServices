@@ -351,9 +351,9 @@ jobs:
       - name: Docker info
         run: docker info
       - name: Folder
-        run: tree "C:\ProgramData\Docker\Docker" /f
+        run: dir "C:\Program Files"
       - name: Switch docker engine
-        run: C:\ProgramData\Docker\Docker\DockerCli.exe -SwitchLinuxEngine
+        run: DockerCli.exe "C:\Program Files\Docker\Docker" -SwitchLinuxEngine
       - name: Create Nuget directory
         run: md Nuget
       - name: Restore NothingServices.Abstractions
