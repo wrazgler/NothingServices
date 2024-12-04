@@ -349,7 +349,8 @@ jobs:
             9.0.x
             8.0.x
       - name: Switch docker engine
-        run: C:\ProgramFiles\Docker\Docker\DockerCli.exe -SwitchLinuxEngine
+      - run: cd "C:\ProgramFiles\Docker\Docker"
+      - run: DockerCli.exe" -SwitchLinuxEngine
       - name: Docker info
         run: docker info
       - name: Create Nuget directory
