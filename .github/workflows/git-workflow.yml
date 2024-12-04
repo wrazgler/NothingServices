@@ -338,8 +338,6 @@ jobs:
         run: restart-service *docker*
       - name: Docker version
         run: docker version
-      - name: Dockerd
-        run: dockerd --experimental
       - name: Docker version
         run: docker version
       - name: Docker run
