@@ -349,7 +349,7 @@ jobs:
             9.0.x
             8.0.x
       - name: cd
-        run: cd "C:\ProgramFiles\Docker\Docker"
+        run: cd "C:\Program Files\Docker\Docker"
       - name: Switch docker engine
         run: DockerCli.exe -SwitchLinuxEngine
       - name: Docker info
