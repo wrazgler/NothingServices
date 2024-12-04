@@ -348,12 +348,12 @@ jobs:
           dotnet-version: |
             9.0.x
             8.0.x
+      - name: Setup docker
+        uses: docker/setup-buildx-action@v3
       - name: Docker info
         run: docker info
       - name: Folder
-        run: dir "D:\"
-      - name: Folder
-        run: dir "D:\a"
+        run: dir "D:\Program Files"
       - name: Switch docker engine
         run: DockerCli.exe "C:\Program Files\Docker\Docker" -SwitchLinuxEngine
       - name: Create Nuget directory
