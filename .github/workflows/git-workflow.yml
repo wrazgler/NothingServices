@@ -330,6 +330,8 @@ jobs:
           dotnet-version: |
             9.0.x
             8.0.x
+      - name: Check ports
+        run: netstat -a
       - name: Create Nuget directory
         run: md Nuget
       - name: Restore NothingServices.Abstractions
