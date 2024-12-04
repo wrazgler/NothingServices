@@ -23,7 +23,7 @@ services:
         CERTIFICATE_PASSWORD: "localhost"
         CONFIGURATION: "Release"
       context: ../
-      dockerfile: NothingWebApi/Dockerfile
+      dockerfile: NothingServices.WPFApp.IntegrationTests/NothingWebApi.Dockerfile
     depends_on:
       - wpf_nothing_web_api_test_postgres_db
     environment:
