@@ -351,11 +351,11 @@ jobs:
       - name: Docker info
         run: docker info
       - name: Folder
-        run: dir "C:\Program Files"
+        run: dir "D:\Program Files"
       - name: Folder
-        run: dir "C:\ProgramData"
+        run: dir "D:\ProgramData"
       - name: Folder
-        run: dir "C:\ProgramData\docker"
+        run: dir "D:\ProgramData\docker"
       - name: Switch docker engine
         run: DockerCli.exe "C:\Program Files\Docker\Docker" -SwitchLinuxEngine
       - name: Create Nuget directory
