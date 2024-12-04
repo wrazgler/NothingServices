@@ -320,7 +320,7 @@ jobs:
       - name: IntegrationTest NothingServices.ConsoleApp
         run: dotnet test NothingServices.ConsoleApp.IntegrationTests/NothingServices.ConsoleApp.IntegrationTests.csproj --configuration "Release" --no-restore --no-build
   IntegrationTest_NothingServices_WPFApp:
-    runs-on: windows-latest
+    runs-on: windows-2019
     #needs: [ UnitTest_NothingServices_WPFApp, IntegrationTest_NothingRpcApi, IntegrationTest_NothingWebApi ]
     steps:
       - uses: actions/checkout@v4
