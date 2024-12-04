@@ -338,7 +338,7 @@ jobs:
       - name: IntegrationTest NothingServices.ConsoleApp
         run: dotnet test NothingServices.ConsoleApp.IntegrationTests/NothingServices.ConsoleApp.IntegrationTests.csproj --configuration "Release" --no-restore --no-build
   IntegrationTest_NothingServices_WPFApp:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     #needs: [ UnitTest_NothingServices_WPFApp, IntegrationTest_NothingRpcApi, IntegrationTest_NothingWebApi ]
     steps:
       - uses: actions/checkout@v4
@@ -348,18 +348,16 @@ jobs:
           dotnet-version: |
             9.0.x
             8.0.x
-      - name: Download docker
-        run: wget https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64
-      - name: Install docker
-        run: Docker Desktop Installer.exe install
-      - name: Create Nuget directory
-        run: md Nuget
+      - name: sdk
+        run: dotnet --list-sdks
+      - name: runtime
+        run: dotnet --list-runtimes
       - name: Restore NothingServices.Abstractions
         run: dotnet restore NothingServices.Abstractions/NothingServices.Abstractions.csproj
       - name: Build NothingServices.Abstractions
         run: dotnet build NothingServices.Abstractions/NothingServices.Abstractions.csproj --configuration "Release" --no-restore
       - name: Pack NothingServices.Abstractions
-        run: dotnet pack NothingServices.Abstractions/NothingServices.Abstractions.csproj --configuration "Release" --no-build --no-restore --output "C:\Program Files\dotnet\library-packs"
+        run: dotnet pack NothingServices.Abstractions/NothingServices.Abstractions.csproj --configuration "Release" --no-build --no-restore --output "/home/runner/.nuget/NuGet"
       - name: Add Nuget
         run: dotnet nuget add source "." --name "NothingServices.Abstractions"
       - name: Docker pull postgres
