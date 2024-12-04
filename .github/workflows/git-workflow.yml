@@ -331,11 +331,15 @@ jobs:
             9.0.x
             8.0.x
       - name: Overwrite config
-        run: copy /y NothingServices.WPFApp.IntegrationTests/daemon.json C:\ProgramData\docker\config\daemon.json
+        run: copy NothingServices.WPFApp.IntegrationTests/daemon.json C:\ProgramData\docker\config\daemon.json
       - name: Read daemon.json
         run: type C:\ProgramData\docker\config\daemon.json
       - name: Docker restart
         run: restart-service *docker*
+      - name: Docker version
+        run: docker version
+      - name: Dockerd
+        run: dockerd --experimental
       - name: Docker version
         run: docker version
       - name: Docker run
