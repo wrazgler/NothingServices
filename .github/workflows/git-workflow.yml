@@ -330,13 +330,15 @@ jobs:
           dotnet-version: |
             9.0.x
             8.0.x
-      - name: override config
-        run: copy NothingServices.WPFApp.IntegrationTests/daemon.json C:\ProgramData\docker\config\daemon.json
-      - name: daemon.json
+      - name: Overwrite config
+        run: copy /y NothingServices.WPFApp.IntegrationTests/daemon.json C:\ProgramData\docker\config\daemon.json
+      - name: Read daemon.json
         run: type C:\ProgramData\docker\config\daemon.json
+      - name: Docker restart
+        run: restart-service *docker*
       - name: Docker version
         run: docker version
-      - name: Docker
+      - name: Docker run
         run: docker run mcr.microsoft.com/dotnet/sdk:9.0
       - name: Create Nuget directory
         run: md Nuget
