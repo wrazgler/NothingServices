@@ -336,8 +336,8 @@ jobs:
         run: type C:\ProgramData\docker\config\daemon.json
       - name: Docker restart
         run: restart-service *docker*
-      - name: Docker version
-        run: docker version
+      - name: Docker context
+        run: docker context use desktop-linux
       - name: Docker version
         run: docker version
       - name: Docker run
