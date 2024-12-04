@@ -348,10 +348,6 @@ jobs:
           dotnet-version: |
             9.0.x
             8.0.x
-      - name: sdk
-        run: dotnet --list-sdks
-      - name: runtime
-        run: dotnet --list-runtimes
       - name: Create Nuget directory
         run: md Nuget
       - name: Restore NothingServices.Abstractions
@@ -363,11 +359,11 @@ jobs:
       - name: Add Nuget
         run: dotnet nuget add source "." --name "NothingServices.Abstractions"
       - name: Docker pull postgres
-        run: docker pull postgres
+        run: docker pull postgres:ltsc2022
       - name: Docker pull sdk
-        run: docker pull mcr.microsoft.com/dotnet/sdk:9.0
+        run: docker pull mcr.microsoft.com/dotnet/sdk:9.0-ltsc2022
       - name: Docker pull aspnet
-        run: docker pull mcr.microsoft.com/dotnet/aspnet:8.0
+        run: docker pull mcr.microsoft.com/dotnet/aspnet:8.0-ltsc2022
       - name: Restore NothingServices.WPFApp.IntegrationTests
         run: dotnet restore NothingServices.WPFApp.IntegrationTests/NothingServices.WPFApp.IntegrationTests.csproj
       - name: Build NothingServices.WPFApp.IntegrationTests
