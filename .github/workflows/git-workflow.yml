@@ -255,6 +255,10 @@ jobs:
         run: dotnet dev-certs https --clean
       - name: Add Certificate
         run: dotnet dev-certs https -ep ${{ github.workspace }}/.certificates/localhost.crt -p localhost --trust
+      - name: Docker pull sdk
+        run: docker pull mcr.microsoft.com/dotnet/sdk:9.0
+      - name: Docker pull aspnet
+        run: docker pull mcr.microsoft.com/dotnet/aspnet:8.0
       - name: Restore NothingRpcApi.IntegrationTests
         run: dotnet restore NothingRpcApi.IntegrationTests/NothingRpcApi.IntegrationTests.csproj
       - name: Build NothingRpcApi.IntegrationTests
@@ -284,6 +288,10 @@ jobs:
         run: dotnet dev-certs https --clean
       - name: Add Certificate
         run: dotnet dev-certs https -ep ${{ github.workspace }}/.certificates/localhost.crt -p localhost --trust
+      - name: Docker pull sdk
+        run: docker pull mcr.microsoft.com/dotnet/sdk:9.0
+      - name: Docker pull aspnet
+        run: docker pull mcr.microsoft.com/dotnet/aspnet:8.0
       - name: Restore NothingWebApi.IntegrationTests
         run: dotnet restore NothingWebApi.IntegrationTests/NothingWebApi.IntegrationTests.csproj
       - name: Build NothingWebApi.IntegrationTests
@@ -313,6 +321,10 @@ jobs:
         run: dotnet dev-certs https --clean
       - name: Add Certificate
         run: dotnet dev-certs https -ep ${{ github.workspace }}/.certificates/localhost.crt -p localhost --trust
+      - name: Docker pull sdk
+        run: docker pull mcr.microsoft.com/dotnet/sdk:9.0
+      - name: Docker pull aspnet
+        run: docker pull mcr.microsoft.com/dotnet/aspnet:8.0
       - name: Restore NothingServices.ConsoleApp.IntegrationTests
         run: dotnet restore NothingServices.ConsoleApp.IntegrationTests/NothingServices.ConsoleApp.IntegrationTests.csproj
       - name: Build NothingServices.ConsoleApp.IntegrationTests
@@ -330,8 +342,12 @@ jobs:
           dotnet-version: |
             9.0.x
             8.0.x
+      - name: Docker pull sdk
+        run: docker pull mcr.microsoft.com/dotnet/sdk:9.0-windowsservercore-ltsc2022
+      - name: Docker pull aspnet
+        run: docker pull mcr.microsoft.com/dotnet/aspnet:8.0-windowsservercore-ltsc2022
       - name: Docker run
-        run: docker compose -f ${{ github.workspace }}\NothingServices.WPFApp.IntegrationTests\docker-compose.app-test.yml up -d
+        run: docker compose -f ${{ github.workspace }}/NothingServices.WPFApp.IntegrationTests/docker-compose.app-test.yml up -d
       - name: Create Nuget directory
         run: md Nuget
       - name: Restore NothingServices.Abstractions
