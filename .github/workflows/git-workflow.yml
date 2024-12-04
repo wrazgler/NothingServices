@@ -349,7 +349,7 @@ jobs:
             9.0.x
             8.0.x
       - name: Docker pull postgres
-        run: docker pull postgres:17.2-alpine3.20
+        run: docker pull postgres:17.2-bullseye
       - name: Docker pull sdk
         run: docker pull mcr.microsoft.com/dotnet/sdk:9.0-windowsservercore-ltsc2022
       - name: Docker pull aspnet
