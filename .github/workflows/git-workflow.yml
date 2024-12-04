@@ -351,7 +351,7 @@ jobs:
       - name: Docker info
         run: docker info
       - name: Folder
-        run: tree "C:\Program Files\Docker"
+        run: tree "C:\ProgramData\Docker"
       - name: cd
         run: cd "C:\Program Files"
       - name: Switch docker engine
