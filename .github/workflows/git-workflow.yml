@@ -351,7 +351,7 @@ jobs:
       - name: Download docker
         run: wget https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64
       - name: Install docker
-        run: "Docker Desktop Installer.exe" install
+        run: Docker Desktop Installer.exe install
       - name: Create Nuget directory
         run: md Nuget
       - name: Restore NothingServices.Abstractions
