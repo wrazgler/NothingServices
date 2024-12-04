@@ -331,7 +331,7 @@ jobs:
             9.0.x
             8.0.x
       - name: Docker compose up
-        run: docker compose up -d
+        run: docker compose up
       - name: Create Nuget directory
         run: md Nuget
       - name: Restore NothingServices.Abstractions
