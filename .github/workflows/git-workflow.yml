@@ -320,7 +320,7 @@ jobs:
       - name: IntegrationTest NothingServices.ConsoleApp
         run: dotnet test NothingServices.ConsoleApp.IntegrationTests/NothingServices.ConsoleApp.IntegrationTests.csproj --configuration "Release" --no-restore --no-build
   IntegrationTest_NothingServices_WPFApp:
-    runs-on: windows-2019
+    runs-on: windows-latest
     #needs: [ UnitTest_NothingServices_WPFApp, IntegrationTest_NothingRpcApi, IntegrationTest_NothingWebApi ]
     steps:
       - uses: actions/checkout@v4
@@ -330,10 +330,10 @@ jobs:
           dotnet-version: |
             9.0.x
             8.0.x
-      - name: Docker experimental
-        run: dockerd --experimental
+      - name: Docker version
+        run: docker version
       - name: Docker
-        run: docker --experimental run mcr.microsoft.com/dotnet/sdk:9.0
+        run: docker run mcr.microsoft.com/dotnet/sdk:9.0
       - name: Create Nuget directory
         run: md Nuget
       - name: Restore NothingServices.Abstractions
