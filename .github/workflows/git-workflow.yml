@@ -320,7 +320,7 @@ jobs:
       - name: IntegrationTest NothingServices.ConsoleApp
         run: dotnet test NothingServices.ConsoleApp.IntegrationTests/NothingServices.ConsoleApp.IntegrationTests.csproj --configuration "Release" --no-restore --no-build
   IntegrationTest_NothingServices_WPFApp:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     #needs: [ UnitTest_NothingServices_WPFApp, IntegrationTest_NothingRpcApi, IntegrationTest_NothingWebApi ]
     steps:
       - uses: actions/checkout@v4
@@ -330,8 +330,6 @@ jobs:
           dotnet-version: |
             9.0.x
             8.0.x
-      - name: Check ports
-        run: netstat -a
       - name: Create Nuget directory
         run: md Nuget
       - name: Restore NothingServices.Abstractions
