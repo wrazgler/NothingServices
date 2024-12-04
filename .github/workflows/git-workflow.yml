@@ -348,14 +348,10 @@ jobs:
           dotnet-version: |
             9.0.x
             8.0.x
-      - name: Docker pull postgres
-        run: docker pull postgres:17.2-windowsservercore-ltsc2022
-      - name: Docker pull sdk
-        run: docker pull mcr.microsoft.com/dotnet/sdk:9.0-windowsservercore-ltsc2022
-      - name: Docker pull aspnet
-        run: docker pull mcr.microsoft.com/dotnet/aspnet:8.0-windowsservercore-ltsc2022
-      - name: Docker run
-        run: docker compose -f ${{ github.workspace }}/NothingServices.WPFApp.IntegrationTests/docker-compose.app-test.yml up -d
+      - name: Download docker
+        run: wget https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64
+      - name: Install docker
+        run: "Docker Desktop Installer.exe" install
       - name: Create Nuget directory
         run: md Nuget
       - name: Restore NothingServices.Abstractions
@@ -366,6 +362,12 @@ jobs:
         run: dotnet pack NothingServices.Abstractions/NothingServices.Abstractions.csproj --configuration "Release" --no-build --no-restore --output "C:\Program Files\dotnet\library-packs"
       - name: Add Nuget
         run: dotnet nuget add source "." --name "NothingServices.Abstractions"
+      - name: Docker pull postgres
+        run: docker pull postgres
+      - name: Docker pull sdk
+        run: docker pull mcr.microsoft.com/dotnet/sdk:9.0
+      - name: Docker pull aspnet
+        run: docker pull mcr.microsoft.com/dotnet/aspnet:8.0
       - name: Restore NothingServices.WPFApp.IntegrationTests
         run: dotnet restore NothingServices.WPFApp.IntegrationTests/NothingServices.WPFApp.IntegrationTests.csproj
       - name: Build NothingServices.WPFApp.IntegrationTests
