@@ -330,6 +330,8 @@ jobs:
           dotnet-version: |
             9.0.x
             8.0.x
+      - name: daemon.json
+        run: type %programdata%\docker\config\daemon.json
       - name: Docker version
         run: docker version
       - name: Docker
