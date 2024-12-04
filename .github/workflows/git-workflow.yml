@@ -330,8 +330,8 @@ jobs:
           dotnet-version: |
             9.0.x
             8.0.x
-      - name: Docker compose up
-        run: docker compose up
+      - name: Docker
+        run: docker run -d --name postgres_nothing_grpc_api_db -p 5400:5432 -e POSTGRES_DB=nothing_grpc_api_db -e POSTGRES_USER=nothing_grpc_api -e POSTGRES_PASSWORD=nothing_grpc_api -v postgres_nothing_grpc_api_db:/var/lib/postgres_nothing_grpc_api_db postgres
       - name: Create Nuget directory
         run: md Nuget
       - name: Restore NothingServices.Abstractions
