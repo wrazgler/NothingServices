@@ -354,8 +354,10 @@ jobs:
           dotnet-version: |
             9.0.x
             8.0.x
-      - name: Switch docker engine
-        run:  C:\Windows\system32\dockerd.exe --experimental
+      - name: Install container
+        run:  Install-Module -Name DockerMsftProvider -Repository PSGallery -Force
+      - name: Install docker
+        run:  Install-Package -Name docker -ProviderName DockerMsftProvider
       - name: Docker info
         run: docker info
       - name: Create Nuget directory
