@@ -355,7 +355,7 @@ jobs:
             9.0.x
             8.0.x
       - name: Switch docker engine
-        run:  C:\Windows\system32\docker.exe -SwitchLinuxEngine
+        run:  C:\Windows\system32\dockerd.exe --experimental
       - name: Docker info
         run: docker info
       - name: Create Nuget directory
