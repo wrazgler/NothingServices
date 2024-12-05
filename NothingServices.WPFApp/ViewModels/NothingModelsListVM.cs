@@ -28,7 +28,7 @@ public class NothingModelsListVM : ObservableObject, IMainWindowContentVM
     public NothingModelsListVM(
         IMainWindowManager mainWindowManager,
         IBackButtonVM backButtonVM,
-        IOpenNothingModelsListCommand openCreateNothingModelCommand,
+        IOpenCreateNothingModelCommand openCreateNothingModelCommand,
         CancellationTokenSource? cancellationTokenSource = null)
     {
         _cancellationTokenSource = cancellationTokenSource ?? new CancellationTokenSource();

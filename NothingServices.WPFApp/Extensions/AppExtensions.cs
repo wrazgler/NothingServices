@@ -101,7 +101,7 @@ public static class AppExtensions
         services.AddScoped<ICreateCommand, CreateCommand>();
         services.AddScoped<IDeleteCommand, DeleteCommand>();
         services.AddScoped<OpenApiSelectionCommand>();
-        services.AddScoped<OpenCreateNothingModelCommand>();
+        services.AddScoped<IOpenCreateNothingModelCommand, OpenCreateNothingModelCommand>();
         services.AddScoped<IOpenDeleteNothingModelCommand, OpenDeleteNothingModelCommand>();
         services.AddScoped<IOpenNothingModelsListCommand, OpenNothingModelsListCommand>();
         services.AddScoped<IOpenUpdateNothingModelCommand, OpenUpdateNothingModelCommand>();

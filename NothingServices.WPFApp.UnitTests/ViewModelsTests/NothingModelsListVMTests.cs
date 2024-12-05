@@ -19,7 +19,7 @@ public class NothingModelsListVMTests
         var nothingModelsListVM = new NothingModelsListVM(
             mainWindowManager,
             Mock.Of<IBackButtonVM>(),
-            Mock.Of<IOpenNothingModelsListCommand>());
+            Mock.Of<IOpenCreateNothingModelCommand>());
 
         //Act
         mainWindowManager.Next(MainWindowContentType.NothingModelsListVM);
@@ -37,7 +37,7 @@ public class NothingModelsListVMTests
         var nothingModelsListVM = new NothingModelsListVM(
             mainWindowManager,
             Mock.Of<IBackButtonVM>(),
-            Mock.Of<IOpenNothingModelsListCommand>());
+            Mock.Of<IOpenCreateNothingModelCommand>());
 
         //Act
         mainWindowManager.Next(MainWindowContentType.ApiSelectionVM);
@@ -55,7 +55,7 @@ public class NothingModelsListVMTests
         var nothingModelsListVM = new NothingModelsListVM(
             mainWindowManager,
             Mock.Of<IBackButtonVM>(),
-            Mock.Of<IOpenNothingModelsListCommand>());
+            Mock.Of<IOpenCreateNothingModelCommand>());
         var nothingModels = new ObservableCollection<INothingModelVM>()
         {
             Mock.Of<INothingModelVM>(nothingModelVM

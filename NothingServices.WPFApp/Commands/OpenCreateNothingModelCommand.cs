@@ -16,7 +16,7 @@ public class OpenCreateNothingModelCommand(
     IDialogService dialogService,
     INotificationService notificationService,
     ICreateNothingModelView createNothingModelView)
-    : BaseCommand
+    : BaseCommand, IOpenCreateNothingModelCommand
 {
     private readonly IDialogService _dialogService = dialogService;
     private readonly INotificationService _notificationService = notificationService;

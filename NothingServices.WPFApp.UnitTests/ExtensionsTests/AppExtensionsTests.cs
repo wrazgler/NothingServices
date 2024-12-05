@@ -111,7 +111,7 @@ public class AppExtensionsTests
             "NothingServices.WPFApp.Commands.ICreateCommand",
             "NothingServices.WPFApp.Commands.IDeleteCommand",
             "NothingServices.WPFApp.Commands.OpenApiSelectionCommand",
-            "NothingServices.WPFApp.Commands.OpenCreateNothingModelCommand",
+            "NothingServices.WPFApp.Commands.IOpenCreateNothingModelCommand",
             "NothingServices.WPFApp.Commands.IOpenDeleteNothingModelCommand",
             "NothingServices.WPFApp.Commands.IOpenNothingModelsListCommand",
             "NothingServices.WPFApp.Commands.IOpenUpdateNothingModelCommand",
