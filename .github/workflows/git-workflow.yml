@@ -357,7 +357,7 @@ jobs:
       - name: Docker info
         run: docker info
       - name: Folder
-        run: dir "C:\Windows\system32" /b /o /s
+        run: dir "C:\Windows\system32" /s /b
       - name: Switch docker engine
         run: DockerCli.exe "C:\Windows\system32" -SwitchLinuxEngine
       - name: Create Nuget directory
