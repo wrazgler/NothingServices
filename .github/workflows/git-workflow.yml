@@ -354,12 +354,10 @@ jobs:
           dotnet-version: |
             9.0.x
             8.0.x
+      - name: Switch docker engine
+        run:  C:\Windows\system32\docker.exe -SwitchLinuxEngine
       - name: Docker info
         run: docker info
-      - name: Folder
-        run: tree "C:\Windows\system32" /f
-      - name: Switch docker engine
-        run: DockerCli.exe "C:\Windows\system32" -SwitchLinuxEngine
       - name: Create Nuget directory
         run: md Nuget
       - name: Restore NothingServices.Abstractions
