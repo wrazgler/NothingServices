@@ -354,16 +354,12 @@ jobs:
           dotnet-version: |
             9.0.x
             8.0.x
-      - name: Setup docker
-        uses: docker/setup-buildx-action@v3
-        with:
-          buildkitd-flags: --experimental
       - name: Docker info
         run: docker info
       - name: Folder
-        run: dir "D:\Program Files"
+        run: dir "C:\Windows\system32" /b /o /s
       - name: Switch docker engine
-        run: DockerCli.exe "C:\Program Files\Docker\Docker" -SwitchLinuxEngine
+        run: DockerCli.exe "C:\Windows\system32" -SwitchLinuxEngine
       - name: Create Nuget directory
         run: md Nuget
       - name: Restore NothingServices.Abstractions
