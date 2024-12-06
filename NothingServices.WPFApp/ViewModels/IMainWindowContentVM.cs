@@ -8,5 +8,5 @@ public interface IMainWindowContentVM
     /// <summary>
     /// Нужно ли отображать контент на главном окне
     /// </summary>
-    public bool Active { get; set; }
+    public bool Active { get; }
 }

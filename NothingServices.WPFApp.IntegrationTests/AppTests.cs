@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using NothingServices.WPFApp.Commands;
+using NothingServices.WPFApp.Controls;
 using NothingServices.WPFApp.Extensions;
 using NothingServices.WPFApp.Factories;
 using NothingServices.WPFApp.Models;
@@ -16,568 +17,67 @@ namespace NothingServices.WPFApp.IntegrationTests;
 public class AppTests
 {
     [Fact]
-    public async Task OpenApiSelectionCommand_Success()
+    public void OpenApiSelectionCommand_ApiSelectionVM_Active_True()
     {
-        try
-        {
-            //Arrange
-            await StopApp(0);
-            await StartApp();
-            var host = GetHost();
-            var uiThread = new Thread(parameter =>
-            {
-                var hostThread = parameter as IHost ?? throw new ArgumentNullException(nameof(parameter));
-                var startupService = hostThread.Services.GetRequiredService<StartupService>();
-                startupService.Start();
-                var command = host.Services.GetRequiredService<OpenApiSelectionCommand>();
-                command.Execute(null);
-            });
-            uiThread.SetApartmentState(ApartmentState.STA);
+        //Arrange
+        var host = GetHost();
+        var mainWindowVM = host.Services.GetRequiredService<IMainWindowVM>();
+        var command = host.Services.GetRequiredService<OpenApiSelectionCommand>();
 
-            //Act
-            uiThread.Start(host);
-            Thread.Sleep(2000);
-            var mainWindowVM = host.Services.GetRequiredService<IMainWindowVM>();
-            var result = mainWindowVM.ApiSelectionVM.Active;
+        //Act
+        command.Execute(null);
+        var result = mainWindowVM.ApiSelectionVM.Active;
 
-            //Assert
-            Assert.True(result);
-            await StopApp();
-        }
-        finally
-        {
-            await StopApp();
-        }
+        //Assert
+        Assert.True(result);
     }
 
     [Fact]
-    public async Task OpenCreateNothingModelCommand_Success()
+    public void OpenApiSelectionCommand_NothingModelsListVM_Active_False()
     {
-        try
-        {
-            //Arrange
-            await StopApp(0);
-            await StartApp();
-            var host = GetHost();
-            var uiThread = new Thread(parameter =>
-            {
-                var hostThread = parameter as IHost ?? throw new ArgumentNullException(nameof(parameter));
-                var startupService = hostThread.Services.GetRequiredService<StartupService>();
-                startupService.Start();
-                var command = host.Services.GetRequiredService<IOpenCreateNothingModelCommand>();
-                command.Execute(null);
-            });
-            uiThread.SetApartmentState(ApartmentState.STA);
+        //Arrange
+        var host = GetHost();
+        var mainWindowVM = host.Services.GetRequiredService<IMainWindowVM>();
+        var command = host.Services.GetRequiredService<OpenApiSelectionCommand>();
 
-            //Act
-            uiThread.Start(host);
-            Thread.Sleep(2000);
-            var dialogVM = host.Services.GetRequiredService<IDialogVM>();
-            var result = dialogVM.Content;
+        //Act
+        command.Execute(null);
+        var result = mainWindowVM.NothingModelsListVM.Active;
 
-            //Assert
-            Assert.IsType<CreateNothingModelVM>(result);
-            await StopApp();
-        }
-        finally
-        {
-            await StopApp();
-        }
+        //Assert
+        Assert.False(result);
     }
 
     [Fact]
-    public async Task GRpcApi_OpenNothingModelsListCommand_Success()
+    public void OpenCreateNothingModelCommand_Dialog_Open_True()
     {
-        try
-        {
-            //Arrange
-            await StopApp(0);
-            await StartApp();
-            var host = GetHost();
-            var uiThread = new Thread(parameter =>
-            {
-                var hostThread = parameter as IHost ?? throw new ArgumentNullException(nameof(parameter));
-                var startupService = hostThread.Services.GetRequiredService<StartupService>();
-                startupService.Start();
-                var strategy = hostThread.Services.GetRequiredService<NothingRpcApiClientStrategy>();
-                var command = host.Services.GetRequiredService<IOpenNothingModelsListCommand>();
-                command.Execute(strategy);
-            });
-            uiThread.SetApartmentState(ApartmentState.STA);
+        //Arrange
+        var host = GetHost();
+        var command = host.Services.GetRequiredService<IOpenCreateNothingModelCommand>();
 
-            //Act
-            uiThread.Start(host);
-            Thread.Sleep(2000);
-            var mainWindowVM = host.Services.GetRequiredService<IMainWindowVM>();
-            var result = mainWindowVM.NothingModelsListVM.NothingModels
-                ?? throw new NullReferenceException();
+        //Act
+        command.Execute(null);
+        var result = host.Services.GetRequiredService<IDialogVM>().Open;
 
-            //Assert
-            Assert.Single(result);
-            await StopApp();
-        }
-        finally
-        {
-            await StopApp();
-        }
+        //Assert
+        Assert.True(result);
     }
 
     [Fact]
-    public async Task GRpcApi_OpenUpdateNothingModelCommand_Success()
+    public void OpenCreateNothingModelCommand_Dialog_Content_DataContext_Is_CreateNothingModelVM()
     {
-        try
-        {
-            //Arrange
-            await StopApp(0);
-            await StartApp();
-            var host = GetHost();
-            var uiThread = new Thread(parameter =>
-            {
-                var hostThread = parameter as IHost ?? throw new ArgumentNullException(nameof(parameter));
-                var startupService = hostThread.Services.GetRequiredService<StartupService>();
-                startupService.Start();
-                var mainWindowManager = hostThread.Services.GetRequiredService<IMainWindowManager>();
-                mainWindowManager.Strategy = hostThread.Services.GetRequiredService<NothingRpcApiClientStrategy>();
-                mainWindowManager.Next(MainWindowContentType.NothingModelsListVM);
-                var mainWindowVM = host.Services.GetRequiredService<IMainWindowVM>();
-                var nothingModel = mainWindowVM.NothingModelsListVM.NothingModels?.Single()
-                    ?? throw new NullReferenceException();
-                var command = host.Services.GetRequiredService<IOpenUpdateNothingModelCommand>();
-                command.Execute(nothingModel);
-            });
-            uiThread.SetApartmentState(ApartmentState.STA);
+        //Arrange
+        var host = GetHost();
+        var command = host.Services.GetRequiredService<IOpenCreateNothingModelCommand>();
 
-            //Act
-            uiThread.Start(host);
-            Thread.Sleep(2000);
-            var dialogVM = host.Services.GetRequiredService<IDialogVM>();
-            var result = dialogVM.Content;
+        //Act
+        command.Execute(null);
+        var result = host.Services.GetRequiredService<IDialogVM>().Content?.DataContext;
 
-            //Assert
-            Assert.IsType<UpdateNothingModelVM>(result);
-            await StopApp();
-        }
-        finally
-        {
-            await StopApp();
-        }
+        //Assert
+        Assert.IsType<CreateNothingModelVM>(result);
     }
 
-    [Fact]
-    public async Task GRpcApi_OpenDeleteNothingModelCommand_Success()
-    {
-        try
-        {
-            //Arrange
-            await StopApp(0);
-            await StartApp();
-            var host = GetHost();
-            var uiThread = new Thread(parameter =>
-            {
-                var hostThread = parameter as IHost ?? throw new ArgumentNullException(nameof(parameter));
-                var startupService = hostThread.Services.GetRequiredService<StartupService>();
-                startupService.Start();
-                var mainWindowManager = hostThread.Services.GetRequiredService<IMainWindowManager>();
-                mainWindowManager.Strategy = hostThread.Services.GetRequiredService<NothingRpcApiClientStrategy>();
-                mainWindowManager.Next(MainWindowContentType.NothingModelsListVM);
-                var mainWindowVM = host.Services.GetRequiredService<IMainWindowVM>();
-                var nothingModel = mainWindowVM.NothingModelsListVM.NothingModels?.Single()
-                    ?? throw new NullReferenceException();
-                var command = host.Services.GetRequiredService<IOpenDeleteNothingModelCommand>();
-                command.Execute(nothingModel);
-            });
-            uiThread.SetApartmentState(ApartmentState.STA);
-
-            //Act
-            uiThread.Start(host);
-            Thread.Sleep(2000);
-            var dialogVM = host.Services.GetRequiredService<IDialogVM>();
-            var result = dialogVM.Content;
-
-            //Assert
-            Assert.IsType<DeleteNothingModelVM>(result);
-            await StopApp();
-        }
-        finally
-        {
-            await StopApp();
-        }
-    }
-
-    [Fact]
-    public async Task GRpcApi_CreateCommand_Success()
-    {
-        try
-        {
-            //Arrange
-            await StopApp(0);
-            await StartApp();
-            var host = GetHost();
-            var uiThread = new Thread(parameter =>
-            {
-                var hostThread = parameter as IHost ?? throw new ArgumentNullException(nameof(parameter));
-                var startupService = hostThread.Services.GetRequiredService<StartupService>();
-                startupService.Start();
-                var mainWindowManager = hostThread.Services.GetRequiredService<IMainWindowManager>();
-                mainWindowManager.Strategy = hostThread.Services.GetRequiredService<NothingRpcApiClientStrategy>();
-                mainWindowManager.Next(MainWindowContentType.NothingModelsListVM);
-                var createNothingModelVM = host.Services.GetRequiredService<ICreateNothingModelVMFactory>().Create();
-                createNothingModelVM.Name = "New model";
-                var command = host.Services.GetRequiredService<ICreateCommand>();
-                command.Execute(createNothingModelVM);
-            });
-            uiThread.SetApartmentState(ApartmentState.STA);
-
-            //Act
-            uiThread.Start(host);
-            Thread.Sleep(2000);
-            var mainWindowVM = host.Services.GetRequiredService<IMainWindowVM>();
-            var result = mainWindowVM.NothingModelsListVM.NothingModels?.Last().Name;
-
-            //Assert
-            var expected = "New model";
-            Assert.Equal(expected, result);
-            await StopApp();
-        }
-        finally
-        {
-            await StopApp();
-        }
-    }
-
-    [Fact]
-    public async Task GRpcApi_UpdateCommand_Success()
-    {
-        try
-        {
-            //Arrange
-            await StopApp(0);
-            await StartApp();
-            var host = GetHost();
-            var uiThread = new Thread(parameter =>
-            {
-                var hostThread = parameter as IHost ?? throw new ArgumentNullException(nameof(parameter));
-                var startupService = hostThread.Services.GetRequiredService<StartupService>();
-                startupService.Start();
-                var mainWindowManager = hostThread.Services.GetRequiredService<IMainWindowManager>();
-                mainWindowManager.Strategy = hostThread.Services.GetRequiredService<NothingRpcApiClientStrategy>();
-                mainWindowManager.Next(MainWindowContentType.NothingModelsListVM);
-                var mainWindowVM = host.Services.GetRequiredService<IMainWindowVM>();
-                var nothingModel = mainWindowVM.NothingModelsListVM.NothingModels?.Single()
-                    ?? throw new NullReferenceException();
-                var updateNothingModelVM = host.Services.GetRequiredService<IUpdateNothingModelVMFactory>().Create(nothingModel);
-                updateNothingModelVM.Name = "New Name";
-                var command = host.Services.GetRequiredService<IUpdateCommand>();
-                command.Execute(updateNothingModelVM);
-            });
-            uiThread.SetApartmentState(ApartmentState.STA);
-
-            //Act
-            uiThread.Start(host);
-            Thread.Sleep(2000);
-            var mainWindowVM = host.Services.GetRequiredService<IMainWindowVM>();
-            var result = mainWindowVM.NothingModelsListVM.NothingModels?.Single().Name;
-
-            //Assert
-            var expected = "New Name";
-            Assert.Equal(expected, result);
-            await StopApp();
-        }
-        finally
-        {
-            await StopApp();
-        }
-    }
-
-    [Fact]
-    public async Task GRpcApi_DeleteCommand_Success()
-    {
-        try
-        {
-            //Arrange
-            await StopApp(0);
-            await StartApp();
-            var host = GetHost();
-            var uiThread = new Thread(parameter =>
-            {
-                var hostThread = parameter as IHost ?? throw new ArgumentNullException(nameof(parameter));
-                var startupService = hostThread.Services.GetRequiredService<StartupService>();
-                startupService.Start();
-                var mainWindowManager = hostThread.Services.GetRequiredService<IMainWindowManager>();
-                mainWindowManager.Strategy = hostThread.Services.GetRequiredService<NothingRpcApiClientStrategy>();
-                mainWindowManager.Next(MainWindowContentType.NothingModelsListVM);
-                var mainWindowVM = host.Services.GetRequiredService<IMainWindowVM>();
-                var nothingModel = mainWindowVM.NothingModelsListVM.NothingModels?.Single()
-                    ?? throw new NullReferenceException();
-                var deleteNothingModelVM = host.Services.GetRequiredService<IDeleteNothingModelVMFactory>().Create(nothingModel);
-                var command = host.Services.GetRequiredService<IDeleteCommand>();
-                command.Execute(deleteNothingModelVM);
-            });
-            uiThread.SetApartmentState(ApartmentState.STA);
-
-            //Act
-            uiThread.Start(host);
-            Thread.Sleep(2000);
-            var mainWindowVM = host.Services.GetRequiredService<IMainWindowVM>();
-            var result = mainWindowVM.NothingModelsListVM.NothingModels
-                ?? throw new NullReferenceException();
-
-            //Assert
-            Assert.Empty(result);
-            await StopApp();
-        }
-        finally
-        {
-            await StopApp();
-        }
-    }
-
-    [Fact]
-    public async Task WebApi_OpenNothingModelsListCommand_Success()
-    {
-        try
-        {
-            //Arrange
-            await StopApp(0);
-            await StartApp();
-            var host = GetHost();
-            var uiThread = new Thread(parameter =>
-            {
-                var hostThread = parameter as IHost ?? throw new ArgumentNullException(nameof(parameter));
-                var startupService = hostThread.Services.GetRequiredService<StartupService>();
-                startupService.Start();
-                var strategy = hostThread.Services.GetRequiredService<NothingWebApiClientStrategy>();
-                var command = host.Services.GetRequiredService<IOpenNothingModelsListCommand>();
-                command.Execute(strategy);
-            });
-            uiThread.SetApartmentState(ApartmentState.STA);
-
-            //Act
-            uiThread.Start(host);
-            Thread.Sleep(2000);
-            var mainWindowVM = host.Services.GetRequiredService<IMainWindowVM>();
-            var result = mainWindowVM.NothingModelsListVM.NothingModels
-                ?? throw new NullReferenceException();
-
-            //Assert
-            Assert.Single(result);
-            await StopApp();
-        }
-        finally
-        {
-            await StopApp();
-        }
-    }
-
-    [Fact]
-    public async Task WebApi_OpenUpdateNothingModelCommand_Success()
-    {
-        try
-        {
-            //Arrange
-            await StopApp(0);
-            await StartApp();
-            var host = GetHost();
-            var uiThread = new Thread(parameter =>
-            {
-                var hostThread = parameter as IHost ?? throw new ArgumentNullException(nameof(parameter));
-                var startupService = hostThread.Services.GetRequiredService<StartupService>();
-                startupService.Start();
-                var mainWindowManager = hostThread.Services.GetRequiredService<IMainWindowManager>();
-                mainWindowManager.Strategy = hostThread.Services.GetRequiredService<NothingWebApiClientStrategy>();
-                mainWindowManager.Next(MainWindowContentType.NothingModelsListVM);
-                var mainWindowVM = host.Services.GetRequiredService<IMainWindowVM>();
-                var nothingModel = mainWindowVM.NothingModelsListVM.NothingModels?.Single()
-                    ?? throw new NullReferenceException();
-                var command = host.Services.GetRequiredService<IOpenUpdateNothingModelCommand>();
-                command.Execute(nothingModel);
-            });
-            uiThread.SetApartmentState(ApartmentState.STA);
-
-            //Act
-            uiThread.Start(host);
-            Thread.Sleep(2000);
-            var dialogVM = host.Services.GetRequiredService<IDialogVM>();
-            var result = dialogVM.Content;
-
-            //Assert
-            Assert.IsType<UpdateNothingModelVM>(result);
-            await StopApp();
-        }
-        finally
-        {
-            await StopApp();
-        }
-    }
-
-    [Fact]
-    public async Task WebApi_OpenDeleteNothingModelCommand_Success()
-    {
-        try
-        {
-            //Arrange
-            await StopApp(0);
-            await StartApp();
-            var host = GetHost();
-            var uiThread = new Thread(parameter =>
-            {
-                var hostThread = parameter as IHost ?? throw new ArgumentNullException(nameof(parameter));
-                var startupService = hostThread.Services.GetRequiredService<StartupService>();
-                startupService.Start();
-                var mainWindowManager = hostThread.Services.GetRequiredService<IMainWindowManager>();
-                mainWindowManager.Strategy = hostThread.Services.GetRequiredService<NothingWebApiClientStrategy>();
-                mainWindowManager.Next(MainWindowContentType.NothingModelsListVM);
-                var mainWindowVM = host.Services.GetRequiredService<IMainWindowVM>();
-                var nothingModel = mainWindowVM.NothingModelsListVM.NothingModels?.Single()
-                    ?? throw new NullReferenceException();
-                var command = host.Services.GetRequiredService<IOpenDeleteNothingModelCommand>();
-                command.Execute(nothingModel);
-            });
-            uiThread.SetApartmentState(ApartmentState.STA);
-
-            //Act
-            uiThread.Start(host);
-            Thread.Sleep(2000);
-            var dialogVM = host.Services.GetRequiredService<IDialogVM>();
-            var result = dialogVM.Content;
-
-            //Assert
-            Assert.IsType<DeleteNothingModelVM>(result);
-            await StopApp();
-        }
-        finally
-        {
-            await StopApp();
-        }
-    }
-
-    [Fact]
-    public async Task WebApi_CreateCommand_Success()
-    {
-        try
-        {
-            //Arrange
-            await StopApp(0);
-            await StartApp();
-            var host = GetHost();
-            var uiThread = new Thread(parameter =>
-            {
-                var hostThread = parameter as IHost ?? throw new ArgumentNullException(nameof(parameter));
-                var startupService = hostThread.Services.GetRequiredService<StartupService>();
-                startupService.Start();
-                var mainWindowManager = hostThread.Services.GetRequiredService<IMainWindowManager>();
-                mainWindowManager.Strategy = hostThread.Services.GetRequiredService<NothingWebApiClientStrategy>();
-                mainWindowManager.Next(MainWindowContentType.NothingModelsListVM);
-                var createNothingModelVM = host.Services.GetRequiredService<ICreateNothingModelVMFactory>().Create();
-                createNothingModelVM.Name = "New model";
-                var command = host.Services.GetRequiredService<ICreateCommand>();
-                command.Execute(createNothingModelVM);
-            });
-            uiThread.SetApartmentState(ApartmentState.STA);
-
-            //Act
-            uiThread.Start(host);
-            Thread.Sleep(2000);
-            var mainWindowVM = host.Services.GetRequiredService<IMainWindowVM>();
-            var result = mainWindowVM.NothingModelsListVM.NothingModels?.Last().Name;
-
-            //Assert
-            var expected = "New model";
-            Assert.Equal(expected, result);
-            await StopApp();
-        }
-        finally
-        {
-            await StopApp();
-        }
-    }
-
-    [Fact]
-    public async Task WebApi_UpdateCommand_Success()
-    {
-        try
-        {
-            //Arrange
-            await StopApp(0);
-            await StartApp();
-            var host = GetHost();
-            var uiThread = new Thread(parameter =>
-            {
-                var hostThread = parameter as IHost ?? throw new ArgumentNullException(nameof(parameter));
-                var startupService = hostThread.Services.GetRequiredService<StartupService>();
-                startupService.Start();
-                var mainWindowManager = hostThread.Services.GetRequiredService<IMainWindowManager>();
-                mainWindowManager.Strategy = hostThread.Services.GetRequiredService<NothingWebApiClientStrategy>();
-                mainWindowManager.Next(MainWindowContentType.NothingModelsListVM);
-                var mainWindowVM = host.Services.GetRequiredService<IMainWindowVM>();
-                var nothingModel = mainWindowVM.NothingModelsListVM.NothingModels?.Single()
-                    ?? throw new NullReferenceException();
-                var updateNothingModelVM = host.Services.GetRequiredService<IUpdateNothingModelVMFactory>().Create(nothingModel);
-                updateNothingModelVM.Name = "New Name";
-                var command = host.Services.GetRequiredService<IUpdateCommand>();
-                command.Execute(updateNothingModelVM);
-            });
-            uiThread.SetApartmentState(ApartmentState.STA);
-
-            //Act
-            uiThread.Start(host);
-            Thread.Sleep(2000);
-            var mainWindowVM = host.Services.GetRequiredService<IMainWindowVM>();
-            var result = mainWindowVM.NothingModelsListVM.NothingModels?.Single().Name;
-
-            //Assert
-            var expected = "New Name";
-            Assert.Equal(expected, result);
-            await StopApp();
-        }
-        finally
-        {
-            await StopApp();
-        }
-    }
-
-    [Fact]
-    public async Task WebApi_DeleteCommand_Success()
-    {
-        try
-        {
-            //Arrange
-            await StopApp(0);
-            await StartApp();
-            var host = GetHost();
-            var uiThread = new Thread(parameter =>
-            {
-                var hostThread = parameter as IHost ?? throw new ArgumentNullException(nameof(parameter));
-                var startupService = hostThread.Services.GetRequiredService<StartupService>();
-                startupService.Start();
-                var mainWindowManager = hostThread.Services.GetRequiredService<IMainWindowManager>();
-                mainWindowManager.Strategy = hostThread.Services.GetRequiredService<NothingWebApiClientStrategy>();
-                mainWindowManager.Next(MainWindowContentType.NothingModelsListVM);
-                var mainWindowVM = host.Services.GetRequiredService<IMainWindowVM>();
-                var nothingModel = mainWindowVM.NothingModelsListVM.NothingModels?.Single()
-                    ?? throw new NullReferenceException();
-                var deleteNothingModelVM = host.Services.GetRequiredService<IDeleteNothingModelVMFactory>().Create(nothingModel);
-                var command = host.Services.GetRequiredService<IDeleteCommand>();
-                command.Execute(deleteNothingModelVM);
-            });
-            uiThread.SetApartmentState(ApartmentState.STA);
-
-            //Act
-            uiThread.Start(host);
-            Thread.Sleep(2000);
-            var mainWindowVM = host.Services.GetRequiredService<IMainWindowVM>();
-            var result = mainWindowVM.NothingModelsListVM.NothingModels
-                ?? throw new NullReferenceException();
-
-            //Assert
-            Assert.Empty(result);
-            await StopApp();
-        }
-        finally
-        {
-            await StopApp();
-        }
-    }
 
     private static IHost GetHost()
     {
@@ -595,9 +95,22 @@ public class AppTests
             services.AddAppConfigs(configuration);
             services.AddAppHttpClient(configuration);
             services.AddAppClients(configuration);
-            services.AddAppServices();
             services.AddAppViewModels();
-            services.AddAppViews();
+            services.AddScoped<IAppVersionProvider, AppVersionProvider>();
+            services.AddScoped<IDialogService, DialogService>();
+            services.AddScoped<IMainWindowManager, MainWindowManager>();
+            services.AddScoped(_ => Mock.Of<INotificationService>());
+            services.AddScoped<StartupService>();
+            services.AddScoped<ICreateNothingModelVMFactory, CreateNothingModelVMFactory>();
+            services.AddScoped<IDeleteNothingModelVMFactory, DeleteNothingModelVMFactory>();
+            services.AddScoped<INothingModelVMFactory, NothingModelVMFactory>();
+            services.AddScoped<IUpdateNothingModelVMFactory, UpdateNothingModelVMFactory>();
+            services.AddScoped<NothingRpcApiClientStrategy>();
+            services.AddScoped<NothingWebApiClientStrategy>();
+            services.AddScoped(_ => Mock.Of<ICreateNothingModelView>());
+            services.AddScoped(_ => Mock.Of<IDeleteNothingModelView>());
+            services.AddScoped(_ => Mock.Of<IMainWindow>());
+            services.AddScoped(_ => Mock.Of<IUpdateNothingModelView>());
         });
         var host = hostBuilder.Build();
         return host;

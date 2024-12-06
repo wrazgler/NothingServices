@@ -15,7 +15,7 @@ public class NothingModelsListVM : ObservableObject, IMainWindowContentVM
 {
     private readonly IMainWindowManager _mainWindowManager ;
     private readonly CancellationTokenSource _cancellationTokenSource;
-    private bool _visible = true;
+    private bool _active;
     private ObservableCollection<INothingModelVM>? _nothingModels;
 
     /// <summary>
@@ -48,13 +48,13 @@ public class NothingModelsListVM : ObservableObject, IMainWindowContentVM
     /// </summary>
     public bool Active
     {
-        get => _visible;
-        set
+        get => _active;
+        private set
         {
-            if (_visible == value)
+            if (_active == value)
                 return;
 
-            _visible = value;
+            _active = value;
             OnPropertyChanged();
         }
     }

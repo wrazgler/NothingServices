@@ -11,7 +11,7 @@ namespace NothingServices.WPFApp.ViewModels;
 public class ApiSelectionVM : ObservableObject, IMainWindowContentVM
 {
     private readonly IMainWindowManager _mainWindowManager;
-    private bool _visible = true;
+    private bool _active = true;
 
     /// <summary>
     /// Инициализатор данных представления окна выбора внешнего сервиса
@@ -35,13 +35,13 @@ public class ApiSelectionVM : ObservableObject, IMainWindowContentVM
     /// </summary>
     public bool Active
     {
-        get => _visible;
-        set
+        get => _active;
+        private set
         {
-            if (_visible == value)
+            if (_active == value)
                 return;
 
-            _visible = value;
+            _active = value;
             OnPropertyChanged();
         }
     }
