@@ -33,6 +33,8 @@
 
 # Environment
 **/appsettings*.json
+!NothingServices.WPFApp/appsettings*.json
+!NothingServices.WPFApp.IntegrationTests/appsettings*.json
 
 # Nuget
 **/Nuget.Config

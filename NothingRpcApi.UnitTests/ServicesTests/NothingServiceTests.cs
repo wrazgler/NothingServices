@@ -218,8 +218,11 @@ public class NothingServiceTests
         dbContextMock.Verify(db => db.SaveChangesAsync(It.IsAny<CancellationToken>()), Times.Once);
     }
 
-    [Fact]
-    public async Task Update_Trim_Db_Name_Equal()
+    [Theory]
+    [InlineData("New Name ", "New Name")]
+    [InlineData(" New Name", "New Name")]
+    [InlineData(" New Name ", "New Name")]
+    public async Task Update_Trim_Db_Name_Equal(string name, string expected)
     {
         //Arrange
         var nothingModels = GetNothingModels();
@@ -228,7 +231,7 @@ public class NothingServiceTests
         var updateNothingModelDto = new UpdateNothingModelDto()
         {
             Id = 1,
-            Name = " New Name ",
+            Name = name,
         };
 
         //Act
@@ -236,7 +239,6 @@ public class NothingServiceTests
         var result = nothingModels.Single().Name;
 
         //Assert
-        var expected = "New Name";
         Assert.Equal(expected, result);
         dbContextMock.Verify(db => db.SaveChangesAsync(It.IsAny<CancellationToken>()), Times.Once);
     }

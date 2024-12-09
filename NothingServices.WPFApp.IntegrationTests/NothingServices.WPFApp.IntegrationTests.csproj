@@ -39,6 +39,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="..\.dockerignore">
+      <Link>.dockerignore</Link>
+      <DependentUpon>Dockerfile</DependentUpon>
+    </Content>
     <Content Include="appsettings.App.Testing.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

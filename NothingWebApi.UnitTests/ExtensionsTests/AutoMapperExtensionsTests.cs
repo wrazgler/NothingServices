@@ -83,8 +83,11 @@ public class AutoMapperExtensionsTests
         Assert.Equivalent(expected, result, true);
     }
 
-    [Fact]
-    public void Map_CreateNothingModelDto_To_NothingModel_Trim_Success()
+    [Theory]
+    [InlineData(" Test Name", "Test Name")]
+    [InlineData("Test Name ", "Test Name")]
+    [InlineData(" Test Name ", "Test Name")]
+    public void Map_CreateNothingModelDto_To_NothingModel_Trim_Success(string name, string expectedName)
     {
         //Arrange
         var mapper = new ServiceCollection()
@@ -93,7 +96,7 @@ public class AutoMapperExtensionsTests
             .GetRequiredService<IMapper>();
         var createNothingModelDto = new CreateNothingModelDto()
         {
-            Name = " Test Name "
+            Name = name
         };
 
         //Act
@@ -103,7 +106,7 @@ public class AutoMapperExtensionsTests
         var expected = new NothingModel()
         {
             Id = 0,
-            Name = "Test Name",
+            Name = expectedName,
         };
         Assert.Equivalent(expected, result, true);
     }
