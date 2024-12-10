@@ -355,7 +355,7 @@ jobs:
             9.0.x
             8.0.x
       - name: Run PostgreSql
-        run: psql -U postgres
+        run: dotnet "C:\Program Files\PostgreSQL\16\bin\psql.exe" -U postgres
       - name: Create Nuget directory
         run: md Nuget
       - name: Restore NothingServices.Abstractions
