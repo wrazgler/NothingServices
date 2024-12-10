@@ -371,6 +371,8 @@ jobs:
         run: dotnet pack NothingServices.Abstractions/NothingServices.Abstractions.csproj --configuration "Release" --no-build --no-restore --output "C:\Program Files\dotnet\library-packs"
       - name: Add Nuget
         run: dotnet nuget add source "." --name "NothingServices.Abstractions"
+      - name: Add Certificate
+        run: dotnet dev-certs https -ep ${{ github.workspace }}/.certificates/localhost.crt -p localhost --trust
       - name: Restore NothingServices.WPFApp.IntegrationTests
         run: dotnet restore NothingServices.WPFApp.IntegrationTests/NothingServices.WPFApp.IntegrationTests.csproj
       - name: Build NothingServices.WPFApp.IntegrationTests
