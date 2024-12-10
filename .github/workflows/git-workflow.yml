@@ -361,8 +361,6 @@ jobs:
           password: postgres
           port: 5432
           postgres-version: 17
-      - name: Run PostgreSql
-        run: dotnet "C:\Program Files\PostgreSQL\17\bin\psql.exe" -U postgres
       - name: Create Nuget directory
         run: md Nuget
       - name: Restore NothingServices.Abstractions
