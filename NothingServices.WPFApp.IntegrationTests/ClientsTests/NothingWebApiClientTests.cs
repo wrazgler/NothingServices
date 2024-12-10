@@ -183,14 +183,16 @@ public class NothingWebApiClientTests
 
     private static async Task<Process> StartApp()
     {
-        var projectPath = Path.GetFullPath("../../../../");
-        var projectFilePath = Path.Combine(projectPath, "NothingWebApi", "NothingWebApi.csproj");
-        await Process.Start("dotnet", $"build {projectFilePath} --configuration Release --framework net8.0")
+        var path = Path.GetFullPath("../../../../");
+        var projectPath = Path.Combine(path, "NothingWebApi", "NothingWebApi.csproj");
+        await Process.Start("dotnet", $"dev-certs https -ep {path}/.certificates/localhost.crt -p localhost --trust")
+            .WaitForExitAsync();
+        await Process.Start("dotnet", $"build {projectPath} --configuration Release --framework net8.0")
             .WaitForExitAsync();
         await Task.Delay(2000);
-        var appFilePath = Path.Combine(projectPath, "NothingWebApi", "bin", "Release", "net8.0", "NothingWebApi.dll");
+        var appPath = Path.Combine(path, "NothingWebApi", "bin", "Release", "net8.0", "NothingWebApi.dll");
         var argsBuilder = new StringBuilder();
-        argsBuilder.Append($" \"{appFilePath}\"");
+        argsBuilder.Append($" \"{appPath}\"");
         argsBuilder.Append(" -e POSTGRES_HOST=localhost");
         argsBuilder.Append(" -e POSTGRES_PORT=5432");
         argsBuilder.Append(" -e POSTGRES_DB=nothing_web_api_db");
@@ -217,8 +219,7 @@ public class NothingWebApiClientTests
 
     private static NothingWebApiDbContext GetDbContext()
     {
-        var connectionString =
-            "Host=localhost;Port=5432;Database=nothing_web_api_db;Username=postgres;Password=postgres";
+        var connectionString = "Host=localhost;Port=5432;Database=nothing_web_api_db;Username=postgres;Password=postgres";
         var optionsBuilder = new DbContextOptionsBuilder<NothingWebApiDbContext>();
         optionsBuilder.UseNpgsql(connectionString);
         var context = new NothingWebApiDbContext(optionsBuilder.Options);

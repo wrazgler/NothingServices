@@ -548,14 +548,14 @@ public class AppTests
 
     private static async Task<Process> StartNothingWebApp()
     {
-        var projectPath = Path.GetFullPath("../../../../");
-        var projectFilePath = Path.Combine(projectPath, "NothingWebApi", "NothingWebApi.csproj");
-        await Process.Start("dotnet", $"build {projectFilePath} --configuration Release --framework net8.0")
+        var path = Path.GetFullPath("../../../../");
+        var projectPath = Path.Combine(path, "NothingWebApi", "NothingWebApi.csproj");
+        await Process.Start("dotnet", $"build {projectPath} --configuration Release --framework net8.0")
             .WaitForExitAsync();
         await Task.Delay(2000);
-        var appFilePath = Path.Combine(projectPath, "NothingWebApi", "bin", "Release", "net8.0", "NothingWebApi.dll");
+        var appPath = Path.Combine(path, "NothingWebApi", "bin", "Release", "net8.0", "NothingWebApi.dll");
         var argsBuilder = new StringBuilder();
-        argsBuilder.Append($" \"{appFilePath}\"");
+        argsBuilder.Append($" \"{appPath}\"");
         argsBuilder.Append(" -e POSTGRES_HOST=localhost");
         argsBuilder.Append(" -e POSTGRES_PORT=5432");
         argsBuilder.Append(" -e POSTGRES_DB=nothing_web_api_db");
