@@ -354,8 +354,12 @@ jobs:
           dotnet-version: |
             9.0.x
             8.0.x
+      - name: Install PostgreSql
+        uses: tj-actions/install-postgresql@v3
+        with:
+          postgresql-version: 17
       - name: Run PostgreSql
-        run: dotnet "C:\Program Files\PostgreSQL\16\bin\psql.exe" -U postgres
+        run: dotnet "C:\Program Files\PostgreSQL\17\bin\psql.exe" -U postgres
       - name: Create Nuget directory
         run: md Nuget
       - name: Restore NothingServices.Abstractions
