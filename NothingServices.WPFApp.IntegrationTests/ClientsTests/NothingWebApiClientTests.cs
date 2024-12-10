@@ -184,9 +184,9 @@ public class NothingWebApiClientTests
     private static async Task<Process> StartApp()
     {
         var path = Path.GetFullPath("../../../../");
-        var projectPath = Path.Combine(path, "NothingWebApi", "NothingWebApi.csproj");
         await Process.Start("dotnet", $"dev-certs https -ep {path}/.certificates/localhost.crt -p localhost --trust")
             .WaitForExitAsync();
+        var projectPath = Path.Combine(path, "NothingWebApi", "NothingWebApi.csproj");
         await Process.Start("dotnet", $"build {projectPath} --configuration Release --framework net8.0")
             .WaitForExitAsync();
         await Task.Delay(2000);

@@ -526,14 +526,16 @@ public class AppTests
 
     private static async Task<Process> StartNothingRpcApp()
     {
-        var projectPath = Path.GetFullPath("../../../../");
-        var projectFilePath = Path.Combine(projectPath, "NothingRpcApi", "NothingRpcApi.csproj");
-        await Process.Start("dotnet", $"build {projectFilePath} --configuration Release --framework net8.0")
+        var path = Path.GetFullPath("../../../../");
+        await Process.Start("dotnet", $"dev-certs https -ep {path}/.certificates/localhost.crt -p localhost --trust")
+            .WaitForExitAsync();
+        var projectPath = Path.Combine(path, "NothingRpcApi", "NothingRpcApi.csproj");
+        await Process.Start("dotnet", $"build {projectPath} --configuration Release --framework net8.0")
             .WaitForExitAsync();
         await Task.Delay(2000);
-        var appFilePath = Path.Combine(projectPath, "NothingRpcApi", "bin", "Release", "net8.0", "NothingRpcApi.dll");
+        var appPath = Path.Combine(path, "NothingRpcApi", "bin", "Release", "net8.0", "NothingRpcApi.dll");
         var argsBuilder = new StringBuilder();
-        argsBuilder.Append($" \"{appFilePath}\"");
+        argsBuilder.Append($" \"{appPath}\"");
         argsBuilder.Append(" -e POSTGRES_HOST=localhost");
         argsBuilder.Append(" -e POSTGRES_PORT=5432");
         argsBuilder.Append(" -e POSTGRES_DB=nothing_grpc_api_db");
@@ -549,6 +551,8 @@ public class AppTests
     private static async Task<Process> StartNothingWebApp()
     {
         var path = Path.GetFullPath("../../../../");
+        await Process.Start("dotnet", $"dev-certs https -ep {path}/.certificates/localhost.crt -p localhost --trust")
+            .WaitForExitAsync();
         var projectPath = Path.Combine(path, "NothingWebApi", "NothingWebApi.csproj");
         await Process.Start("dotnet", $"build {projectPath} --configuration Release --framework net8.0")
             .WaitForExitAsync();
