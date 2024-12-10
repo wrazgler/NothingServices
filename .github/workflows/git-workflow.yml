@@ -364,12 +364,6 @@ jobs:
         run: dotnet pack NothingServices.Abstractions/NothingServices.Abstractions.csproj --configuration "Release" --no-build --no-restore --output "C:\Program Files\dotnet\library-packs"
       - name: Add Nuget
         run: dotnet nuget add source "." --name "NothingServices.Abstractions"
-      - name: Docker pull postgres
-        run: docker pull postgres
-      - name: Docker pull sdk
-        run: docker pull mcr.microsoft.com/dotnet/sdk:9.0-ltsc2022
-      - name: Docker pull aspnet
-        run: docker pull mcr.microsoft.com/dotnet/aspnet:8.0-ltsc2022
       - name: Restore NothingServices.WPFApp.IntegrationTests
         run: dotnet restore NothingServices.WPFApp.IntegrationTests/NothingServices.WPFApp.IntegrationTests.csproj
       - name: Build NothingServices.WPFApp.IntegrationTests

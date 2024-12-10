@@ -35,14 +35,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\NothingRpcApi\NothingRpcApi.csproj" />
+    <ProjectReference Include="..\NothingWebApi\NothingWebApi.csproj" />
     <ProjectReference Include="..\NothingServices.WPFApp\NothingServices.WPFApp.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="..\.dockerignore">
-      <Link>.dockerignore</Link>
-      <DependentUpon>Dockerfile</DependentUpon>
-    </Content>
     <Content Include="appsettings.App.Testing.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -50,7 +48,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-  
+
   <Target Name="Create certificate" BeforeTargets="Build" Condition="$(Configuration)=='Debug'">
     <Exec Command="dotnet dev-certs https -ep .certificates/localhost.crt -p localhost --trust"
           WorkingDirectory="$(SolutionDir)" />

@@ -1,7 +1,10 @@
 using System.Diagnostics;
+using System.Text;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using NothingRpcApi.DbContexts;
 using NothingServices.WPFApp.Commands;
 using NothingServices.WPFApp.Controls;
 using NothingServices.WPFApp.Extensions;
@@ -11,19 +14,21 @@ using NothingServices.WPFApp.Services;
 using NothingServices.WPFApp.Strategies;
 using NothingServices.WPFApp.ViewModels;
 using NothingServices.WPFApp.ViewModels.Controls;
+using NothingWebApi.DbContexts;
 
 namespace NothingServices.WPFApp.IntegrationTests;
 
 public class AppTests
 {
+
     [Fact]
     public async Task CreateCommand_GRpcApi_Success()
     {
+        await StopNothingRpcApp();
+        var process = await StartNothingRpcApp();
         try
         {
             //Arrange
-            await StopApp(0);
-            await StartApp();
             var host = GetHost();
             var nothingModelsListVM = host.Services.GetRequiredService<NothingModelsListVM>();
             var mainWindowManager = host.Services.GetRequiredService<IMainWindowManager>();
@@ -34,28 +39,28 @@ public class AppTests
 
             //Act
             command.Execute(createNothingModelVM);
-            await Task.Delay(2000);
+            await Task.Delay(5000);
             var result = nothingModelsListVM.NothingModels?.Last().Name;
 
             //Assert
             var expected = "New model";
             Assert.Equal(expected, result);
-            await StopApp();
+            await StopNothingRpcApp(process);
         }
         finally
         {
-            await StopApp();
+            await StopNothingRpcApp(process);
         }
     }
 
     [Fact]
     public async Task CreateCommand_WebApi_Success()
     {
+        await StopNothingWebApp();
+        var process = await StartNothingWebApp();
         try
         {
             //Arrange
-            await StopApp(0);
-            await StartApp();
             var host = GetHost();
             var nothingModelsListVM = host.Services.GetRequiredService<NothingModelsListVM>();
             var mainWindowManager = host.Services.GetRequiredService<IMainWindowManager>();
@@ -66,28 +71,28 @@ public class AppTests
 
             //Act
             command.Execute(createNothingModelVM);
-            await Task.Delay(2000);
+            await Task.Delay(5000);
             var result = nothingModelsListVM.NothingModels?.Last().Name;
 
             //Assert
             var expected = "New model";
             Assert.Equal(expected, result);
-            await StopApp();
+            await StopNothingWebApp(process);
         }
         finally
         {
-            await StopApp();
+            await StopNothingWebApp(process);
         }
     }
 
     [Fact]
     public async Task DeleteCommand_GRpcApi_Success()
     {
+        await StopNothingRpcApp();
+        var process = await StartNothingRpcApp();
         try
         {
             //Arrange
-            await StopApp(0);
-            await StartApp();
             var host = GetHost();
             var nothingModelsListVM = host.Services.GetRequiredService<NothingModelsListVM>();
             var mainWindowManager = host.Services.GetRequiredService<IMainWindowManager>();
@@ -100,28 +105,28 @@ public class AppTests
 
             //Act
             command.Execute(deleteNothingModelVM);
-            await Task.Delay(2000);
+            await Task.Delay(5000);
             var result = nothingModelsListVM.NothingModels
                 ?? throw new NullReferenceException();
 
             //Assert
             Assert.Empty(result);
-            await StopApp();
+            await StopNothingRpcApp(process);
         }
         finally
         {
-            await StopApp();
+            await StopNothingRpcApp(process);
         }
     }
 
     [Fact]
     public async Task DeleteCommand_WebApi_Success()
     {
+        await StopNothingWebApp();
+        var process = await StartNothingWebApp();
         try
         {
             //Arrange
-            await StopApp(0);
-            await StartApp();
             var host = GetHost();
             var nothingModelsListVM = host.Services.GetRequiredService<NothingModelsListVM>();
             var mainWindowManager = host.Services.GetRequiredService<IMainWindowManager>();
@@ -135,17 +140,17 @@ public class AppTests
 
             //Act
             command.Execute(deleteNothingModelVM);
-            await Task.Delay(2000);
+            await Task.Delay(5000);
             var result = nothingModelsListVM.NothingModels
                 ?? throw new NullReferenceException();
 
             //Assert
             Assert.Empty(result);
-            await StopApp();
+            await StopNothingWebApp(process);
         }
         finally
         {
-            await StopApp();
+            await StopNothingWebApp(process);
         }
     }
 
@@ -214,11 +219,11 @@ public class AppTests
     [Fact]
     public async Task OpenDeleteNothingModelCommand_GRpcApi_DeleteNothingModelVM_Id_Equal()
     {
+        await StopNothingRpcApp();
+        var process = await StartNothingRpcApp();
         try
         {
             //Arrange
-            await StopApp(0);
-            await StartApp();
             var host = GetHost();
             var mainWindowVM = host.Services.GetRequiredService<IMainWindowVM>();
             var mainWindowManager = host.Services.GetRequiredService<IMainWindowManager>();
@@ -230,6 +235,7 @@ public class AppTests
 
             //Act
             command.Execute(nothingModelVM);
+            await Task.Delay(2000);
             var dialogVM = host.Services.GetRequiredService<IDialogVM>();
             var deleteNothingModelVM = dialogVM.Content?.DataContext as DeleteNothingModelVM;
             var result = deleteNothingModelVM?.Id;
@@ -237,22 +243,22 @@ public class AppTests
             //Assert
             var expected = nothingModelVM.Id;
             Assert.Equal(expected, result);
-            await StopApp();
+            await StopNothingRpcApp(process);
         }
         finally
         {
-            await StopApp();
+            await StopNothingRpcApp(process);
         }
     }
 
     [Fact]
     public async Task OpenDeleteNothingModelCommand_WebApi_DeleteNothingModelVM_Id_Equal()
     {
+        await StopNothingWebApp();
+        var process = await StartNothingWebApp();
         try
         {
             //Arrange
-            await StopApp(0);
-            await StartApp();
             var host = GetHost();
             var startupService = host.Services.GetRequiredService<StartupService>();
             startupService.Start();
@@ -267,6 +273,7 @@ public class AppTests
 
             //Act
             command.Execute(nothingModelVM);
+            await Task.Delay(2000);
             var dialogVM = host.Services.GetRequiredService<IDialogVM>();
             var deleteNothingModelVM = dialogVM.Content?.DataContext as DeleteNothingModelVM;
             var result = deleteNothingModelVM?.Id;
@@ -274,22 +281,22 @@ public class AppTests
             //Assert
             var expected = nothingModelVM.Id;
             Assert.Equal(expected, result);
-            await StopApp();
+            await StopNothingWebApp(process);
         }
         finally
         {
-            await StopApp();
+            await StopNothingWebApp(process);
         }
     }
 
     [Fact]
     public async Task OpenNothingModelsListCommand_GRpcApi_NothingModels_Single()
     {
+        await StopNothingRpcApp();
+        var process = await StartNothingRpcApp();
         try
         {
             //Arrange
-            await StopApp(0);
-            await StartApp();
             var host = GetHost();
             var mainWindowVM = host.Services.GetRequiredService<IMainWindowVM>();
             var strategy = host.Services.GetRequiredService<NothingRpcApiClientStrategy>();
@@ -297,27 +304,28 @@ public class AppTests
 
             //Act
             command.Execute(strategy);
+            await Task.Delay(2000);
             var result = mainWindowVM.NothingModelsListVM.NothingModels
-                         ?? throw new NullReferenceException();
+                ?? throw new NullReferenceException();
 
             //Assert
             Assert.Single(result);
-            await StopApp();
+            await StopNothingRpcApp(process);
         }
         finally
         {
-            await StopApp();
+            await StopNothingRpcApp(process);
         }
     }
 
     [Fact]
     public async Task OpenNothingModelsListCommand_WebApi_NothingModels_Single()
     {
+        await StopNothingWebApp();
+        var process = await StartNothingWebApp();
         try
         {
             //Arrange
-            await StopApp(0);
-            await StartApp();
             var host = GetHost();
             var mainWindowVM = host.Services.GetRequiredService<IMainWindowVM>();
             var strategy = host.Services.GetRequiredService<NothingWebApiClientStrategy>();
@@ -325,27 +333,28 @@ public class AppTests
 
             //Act
             command.Execute(strategy);
+            await Task.Delay(2000);
             var result = mainWindowVM.NothingModelsListVM.NothingModels
-                         ?? throw new NullReferenceException();
+                ?? throw new NullReferenceException();
 
             //Assert
             Assert.Single(result);
-            await StopApp();
+            await StopNothingWebApp(process);
         }
         finally
         {
-            await StopApp();
+            await StopNothingWebApp(process);
         }
     }
 
     [Fact]
     public async Task OpenUpdateNothingModelCommand_GRpcApi_UpdateNothingModelVM_Name_Equal()
     {
+        await StopNothingRpcApp();
+        var process = await StartNothingRpcApp();
         try
         {
             //Arrange
-            await StopApp(0);
-            await StartApp();
             var host = GetHost();
             var mainWindowVM = host.Services.GetRequiredService<IMainWindowVM>();
             var mainWindowManager = host.Services.GetRequiredService<IMainWindowManager>();
@@ -357,6 +366,7 @@ public class AppTests
 
             //Act
             command.Execute(nothingModelVM);
+            await Task.Delay(2000);
             var dialogVM = host.Services.GetRequiredService<IDialogVM>();
             var updateNothingModelVM = dialogVM.Content?.DataContext as UpdateNothingModelVM;
             var result = updateNothingModelVM?.Name;
@@ -364,22 +374,22 @@ public class AppTests
             //Assert
             var expected = nothingModelVM.Name;
             Assert.Equal(expected, result);
-            await StopApp();
+            await StopNothingRpcApp(process);
         }
         finally
         {
-            await StopApp();
+            await StopNothingRpcApp(process);
         }
     }
 
     [Fact]
     public async Task OpenUpdateNothingModelCommand_WebApi_UpdateNothingModelVM_Name_Equal()
     {
+        await StopNothingWebApp();
+        var process = await StartNothingWebApp();
         try
         {
             //Arrange
-            await StopApp(0);
-            await StartApp();
             var host = GetHost();
             var mainWindowVM = host.Services.GetRequiredService<IMainWindowVM>();
             var mainWindowManager = host.Services.GetRequiredService<IMainWindowManager>();
@@ -391,6 +401,7 @@ public class AppTests
 
             //Act
             command.Execute(nothingModelVM);
+            await Task.Delay(2000);
             var dialogVM = host.Services.GetRequiredService<IDialogVM>();
             var updateNothingModelVM = dialogVM.Content?.DataContext as UpdateNothingModelVM;
             var result = updateNothingModelVM?.Name;
@@ -398,22 +409,22 @@ public class AppTests
             //Assert
             var expected = nothingModelVM.Name;
             Assert.Equal(expected, result);
-            await StopApp();
+            await StopNothingWebApp(process);
         }
         finally
         {
-            await StopApp();
+            await StopNothingWebApp(process);
         }
     }
 
     [Fact]
     public async Task UpdateCommand_GRpcApi_Success()
     {
+        await StopNothingRpcApp();
+        var process = await StartNothingRpcApp();
         try
         {
             //Arrange
-            await StopApp(0);
-            await StartApp();
             var host = GetHost();
             var nothingModelsListVM = host.Services.GetRequiredService<NothingModelsListVM>();
             var mainWindowManager = host.Services.GetRequiredService<IMainWindowManager>();
@@ -427,28 +438,28 @@ public class AppTests
 
             //Act
             command.Execute(updateNothingModelVM);
-            await Task.Delay(2000);
+            await Task.Delay(5000);
             var result = nothingModelsListVM.NothingModels?.Single().Name;
 
             //Assert
             var expected = "New Name";
             Assert.Equal(expected, result);
-            await StopApp();
+            await StopNothingRpcApp(process);
         }
         finally
         {
-            await StopApp();
+            await StopNothingRpcApp(process);
         }
     }
 
     [Fact]
     public async Task UpdateCommand_WebApi_Success()
     {
+        await StopNothingWebApp();
+        var process = await StartNothingWebApp();
         try
         {
             //Arrange
-            await StopApp(0);
-            await StartApp();
             var host = GetHost();
             var nothingModelsListVM = host.Services.GetRequiredService<NothingModelsListVM>();
             var mainWindowManager = host.Services.GetRequiredService<IMainWindowManager>();
@@ -462,17 +473,17 @@ public class AppTests
 
             //Act
             command.Execute(updateNothingModelVM);
-            await Task.Delay(2000);
+            await Task.Delay(5000);
             var result = nothingModelsListVM.NothingModels?.Single().Name;
 
             //Assert
             var expected = "New Name";
             Assert.Equal(expected, result);
-            await StopApp();
+            await StopNothingWebApp(process);
         }
         finally
         {
-            await StopApp();
+            await StopNothingWebApp(process);
         }
     }
 
@@ -513,33 +524,87 @@ public class AppTests
         return host;
     }
 
-    private static async Task StartApp(int delay = 10000)
+    private static async Task<Process> StartNothingRpcApp()
     {
-        var projectPath = Path.GetFullPath("../../../");
-        var dockerFilePath = Path.Combine(projectPath, "docker-compose.app-test.yml");
-        await Process.Start("docker", $"compose -f {dockerFilePath} up -d").WaitForExitAsync();
-        await Task.Delay(delay);
+        var projectPath = Path.GetFullPath("../../../../");
+        var projectFilePath = Path.Combine(projectPath, "NothingRpcApi", "NothingRpcApi.csproj");
+        await Process.Start("dotnet", $"build {projectFilePath} --configuration Release --framework net8.0")
+            .WaitForExitAsync();
+        await Task.Delay(2000);
+        var appFilePath = Path.Combine(projectPath, "NothingRpcApi", "bin", "Release", "net8.0", "NothingRpcApi.dll");
+        var argsBuilder = new StringBuilder();
+        argsBuilder.Append($" \"{appFilePath}\"");
+        argsBuilder.Append(" -e POSTGRES_HOST=localhost");
+        argsBuilder.Append(" -e POSTGRES_PORT=5432");
+        argsBuilder.Append(" -e POSTGRES_DB=nothing_grpc_api_db");
+        argsBuilder.Append(" -e POSTGRES_USER=postgres");
+        argsBuilder.Append(" -e POSTGRES_PASSWORD=postgres");
+        argsBuilder.Append(" --urls https://localhost:9659");
+        var args = argsBuilder.ToString();
+        var process = Process.Start("dotnet", args);
+        await Task.Delay(2000);
+        return process;
     }
 
-    private static async Task StopApp(int beforeDelay = 10000, int afterDelay = 2000)
+    private static async Task<Process> StartNothingWebApp()
     {
-        await Task.Delay(beforeDelay);
-        await Process.Start("docker", "container remove -f -v wpf_app_test_postgres_nothing_grpc_api_db")
+        var projectPath = Path.GetFullPath("../../../../");
+        var projectFilePath = Path.Combine(projectPath, "NothingWebApi", "NothingWebApi.csproj");
+        await Process.Start("dotnet", $"build {projectFilePath} --configuration Release --framework net8.0")
             .WaitForExitAsync();
-        await Process.Start("docker", "container remove -f -v wpf_app_test_postgres_nothing_web_api_db")
-            .WaitForExitAsync();
-        await Process.Start("docker", "container remove -f wpf_app_test_nothing_grpc_api")
-            .WaitForExitAsync();
-        await Process.Start("docker", "container remove -f wpf_app_test_nothing_web_api")
-            .WaitForExitAsync();
-        await Process.Start("docker", "image remove -f wpf_app_test_nothing_grpc_api")
-            .WaitForExitAsync();
-        await Process.Start("docker", "image remove -f wpf_app_test_nothing_web_api")
-            .WaitForExitAsync();
-        await Process.Start("docker", "volume remove -f wpf_app_test_wpf_app_test_postgres_nothing_grpc_api_db")
-            .WaitForExitAsync();
-        await Process.Start("docker", "volume remove -f wpf_app_test_wpf_app_test_postgres_nothing_web_api_db")
-            .WaitForExitAsync();
-        await Task.Delay(afterDelay);
+        await Task.Delay(2000);
+        var appFilePath = Path.Combine(projectPath, "NothingWebApi", "bin", "Release", "net8.0", "NothingWebApi.dll");
+        var argsBuilder = new StringBuilder();
+        argsBuilder.Append($" \"{appFilePath}\"");
+        argsBuilder.Append(" -e POSTGRES_HOST=localhost");
+        argsBuilder.Append(" -e POSTGRES_PORT=5432");
+        argsBuilder.Append(" -e POSTGRES_DB=nothing_web_api_db");
+        argsBuilder.Append(" -e POSTGRES_USER=postgres");
+        argsBuilder.Append(" -e POSTGRES_PASSWORD=postgres");
+        argsBuilder.Append(" --urls https://localhost:9459");
+        var args = argsBuilder.ToString();
+        var process = Process.Start("dotnet", args);
+        await Task.Delay(3000);
+        return process;
+    }
+
+    private static async Task StopNothingRpcApp(Process? process = null)
+    {
+        if (process != null)
+        {
+            process.Kill();
+            await process.WaitForExitAsync();
+        }
+        var dbContext = GetNothingRpcApiDbContext();
+        await dbContext.Database.EnsureDeletedAsync();
+    }
+
+    private static NothingRpcApiDbContext GetNothingRpcApiDbContext()
+    {
+        var connectionString = "Host=localhost;Port=5432;Database=nothing_grpc_api_db;Username=postgres;Password=postgres";
+        var optionsBuilder = new DbContextOptionsBuilder<NothingRpcApiDbContext>();
+        optionsBuilder.UseNpgsql(connectionString);
+        var context = new NothingRpcApiDbContext(optionsBuilder.Options);
+        return context;
+    }
+
+    private static async Task StopNothingWebApp(Process? process = null)
+    {
+        if (process != null)
+        {
+            process.Kill();
+            await process.WaitForExitAsync();
+        }
+        var dbContext = GetNothingWebApiDbContext();
+        await dbContext.Database.EnsureDeletedAsync();
+    }
+
+    private static NothingWebApiDbContext GetNothingWebApiDbContext()
+    {
+        var connectionString = "Host=localhost;Port=5432;Database=nothing_web_api_db;Username=postgres;Password=postgres";
+        var optionsBuilder = new DbContextOptionsBuilder<NothingWebApiDbContext>();
+        optionsBuilder.UseNpgsql(connectionString);
+        var context = new NothingWebApiDbContext(optionsBuilder.Options);
+        return context;
     }
 }

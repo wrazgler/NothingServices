@@ -1,4 +1,3 @@
-using System.IO;
 using Microsoft.Extensions.Configuration;
 
 namespace NothingServices.WPFApp.Configs;
@@ -17,5 +16,5 @@ public class NothingWebApiClientConfig
     /// <summary>
     /// Url контроллера NothingWebApi
     /// </summary>
-    public string NothingWebApiUrl => Path.Combine(BaseUrl, "NothingWebApi");
+    public string NothingWebApiUrl => $"{BaseUrl}/NothingWebApi";
 }

@@ -1,9 +1,12 @@
 using System.Diagnostics;
+using System.Text;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using NothingServices.WPFApp.Clients;
 using NothingServices.WPFApp.Dtos;
 using NothingServices.WPFApp.Extensions;
+using NothingWebApi.DbContexts;
 
 namespace NothingServices.WPFApp.IntegrationTests.ClientsTests;
 
@@ -12,11 +15,11 @@ public class NothingWebApiClientTests
     [Fact]
     public async Task Get_Equivalent()
     {
+        await StopApp();
+        var process = await StartApp();
         try
         {
             //Arrange
-            await StopApp(0);
-            await StartApp();
             var nothingWebApiClient = GetNothingWebApiClient();
 
             //Act
@@ -32,22 +35,22 @@ public class NothingWebApiClientTests
                 }
             };
             Assert.Equivalent(expected, result, true);
-            await StopApp();
+            await StopApp(process);
         }
         finally
         {
-            await StopApp();
+            await StopApp(process);
         }
     }
 
     [Fact]
     public async Task Get_Id_Equivalent()
     {
+        await StopApp();
+        var process = await StartApp();
         try
         {
             //Arrange
-            await StopApp(0);
-            await StartApp();
             var nothingWebApiClient = GetNothingWebApiClient();
             var id = 1;
 
@@ -61,22 +64,22 @@ public class NothingWebApiClientTests
                 Name = "Test",
             };
             Assert.Equivalent(expected, result, true);
-            await StopApp();
+            await StopApp(process);
         }
         finally
         {
-            await StopApp();
+            await StopApp(process);
         }
     }
 
     [Fact]
     public async Task Create_Equivalent()
     {
+        await StopApp();
+        var process = await StartApp();
         try
         {
             //Arrange
-            await StopApp(0);
-            await StartApp();
             var nothingWebApiClient = GetNothingWebApiClient();
             var createNothingModelWebDto = new CreateNothingModelWebDto()
             {
@@ -93,22 +96,22 @@ public class NothingWebApiClientTests
                 Name = createNothingModelWebDto.Name,
             };
             Assert.Equivalent(expected, result, true);
-            await StopApp();
+            await StopApp(process);
         }
         finally
         {
-            await StopApp();
+            await StopApp(process);
         }
     }
 
     [Fact]
     public async Task Update_Equivalent()
     {
+        await StopApp();
+        var process = await StartApp();
         try
         {
             //Arrange
-            await StopApp(0);
-            await StartApp();
             var nothingWebApiClient = GetNothingWebApiClient();
             var updateNothingModelWebDto = new UpdateNothingModelWebDto()
             {
@@ -126,22 +129,22 @@ public class NothingWebApiClientTests
                 Name = updateNothingModelWebDto.Name,
             };
             Assert.Equivalent(expected, result, true);
-            await StopApp();
+            await StopApp(process);
         }
         finally
         {
-            await StopApp();
+            await StopApp(process);
         }
     }
 
     [Fact]
     public async Task Delete_Equivalent()
     {
+        await StopApp();
+        var process = await StartApp();
         try
         {
             //Arrange
-            await StopApp(0);
-            await StartApp();
             var nothingWebApiClient = GetNothingWebApiClient();
             var id = 1;
 
@@ -155,11 +158,11 @@ public class NothingWebApiClientTests
                 Name = "Test",
             };
             Assert.Equivalent(expected, result, true);
-            await StopApp();
+            await StopApp(process);
         }
         finally
         {
-            await StopApp();
+            await StopApp(process);
         }
     }
 
@@ -172,31 +175,53 @@ public class NothingWebApiClientTests
         services.AddAppConfigs(configuration);
         services.AddAppHttpClient(configuration);
         services.AddTransient<INothingWebApiClient, NothingWebApiClient>();
-        var nothingWebApiClient= services
+        var nothingWebApiClient = services
             .BuildServiceProvider()
             .GetRequiredService<INothingWebApiClient>();
         return nothingWebApiClient;
     }
 
-    private static async Task StartApp(int delay = 10000)
+    private static async Task<Process> StartApp()
     {
-        var projectPath = Path.GetFullPath("../../../");
-        var dockerFilePath = Path.Combine(projectPath,  "docker-compose.nothing-web-api-client.yml");
-        await Process.Start("docker", $"compose -f {dockerFilePath} up -d").WaitForExitAsync();
-        await Task.Delay(delay);
+        var projectPath = Path.GetFullPath("../../../../");
+        var projectFilePath = Path.Combine(projectPath, "NothingWebApi", "NothingWebApi.csproj");
+        await Process.Start("dotnet", $"build {projectFilePath} --configuration Release --framework net8.0")
+            .WaitForExitAsync();
+        await Task.Delay(2000);
+        var appFilePath = Path.Combine(projectPath, "NothingWebApi", "bin", "Release", "net8.0", "NothingWebApi.dll");
+        var argsBuilder = new StringBuilder();
+        argsBuilder.Append($" \"{appFilePath}\"");
+        argsBuilder.Append(" -e POSTGRES_HOST=localhost");
+        argsBuilder.Append(" -e POSTGRES_PORT=5432");
+        argsBuilder.Append(" -e POSTGRES_DB=nothing_web_api_db");
+        argsBuilder.Append(" -e POSTGRES_USER=postgres");
+        argsBuilder.Append(" -e POSTGRES_PASSWORD=postgres");
+        argsBuilder.Append(" --urls https://localhost:9069");
+        var args = argsBuilder.ToString();
+        var process = Process.Start("dotnet", args);
+        await Task.Delay(3000);
+        return process;
     }
 
-    private static async Task StopApp(int beforeDelay = 10000, int afterDelay = 2000)
+    private static async Task StopApp(Process? process = null)
     {
-        await Task.Delay(beforeDelay);
-        await Process.Start("docker", "container remove -f -v wpf_nothing_web_api_test_postgres_db")
-            .WaitForExitAsync();
-        await Process.Start("docker", "container remove -f wpf_nothing_web_api_test_nothing_web_api")
-            .WaitForExitAsync();
-        await Process.Start("docker", "image remove -f wpf_nothing_web_api_test_nothing_web_api")
-            .WaitForExitAsync();
-        await Process.Start("docker", "volume remove -f wpf_nothing_web_api_test_wpf_nothing_web_api_test_postgres_db")
-            .WaitForExitAsync();
-        await Task.Delay(afterDelay);
+        if (process != null)
+        {
+            process.Kill();
+            await process.WaitForExitAsync();
+        }
+
+        var dbContext = GetDbContext();
+        await dbContext.Database.EnsureDeletedAsync();
+    }
+
+    private static NothingWebApiDbContext GetDbContext()
+    {
+        var connectionString =
+            "Host=localhost;Port=5432;Database=nothing_web_api_db;Username=postgres;Password=postgres";
+        var optionsBuilder = new DbContextOptionsBuilder<NothingWebApiDbContext>();
+        optionsBuilder.UseNpgsql(connectionString);
+        var context = new NothingWebApiDbContext(optionsBuilder.Options);
+        return context;
     }
 }
