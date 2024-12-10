@@ -184,8 +184,6 @@ public class NothingWebApiClientTests
     private static async Task<Process> StartApp()
     {
         var path = Path.GetFullPath("../../../../");
-        await Process.Start("dotnet", $"dev-certs https -ep {path}/.certificates/localhost.crt -p localhost --trust")
-            .WaitForExitAsync();
         var projectPath = Path.Combine(path, "NothingWebApi", "NothingWebApi.csproj");
         await Process.Start("dotnet", $"build {projectPath} --configuration Release --framework net8.0")
             .WaitForExitAsync();
@@ -198,7 +196,7 @@ public class NothingWebApiClientTests
         argsBuilder.Append(" -e POSTGRES_DB=nothing_web_api_db");
         argsBuilder.Append(" -e POSTGRES_USER=postgres");
         argsBuilder.Append(" -e POSTGRES_PASSWORD=postgres");
-        argsBuilder.Append(" --urls https://localhost:9069");
+        argsBuilder.Append(" --urls http://localhost:9069");
         var args = argsBuilder.ToString();
         var process = Process.Start("dotnet", args);
         await Task.Delay(3000);

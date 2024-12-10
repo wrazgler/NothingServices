@@ -527,8 +527,6 @@ public class AppTests
     private static async Task<Process> StartNothingRpcApp()
     {
         var path = Path.GetFullPath("../../../../");
-        await Process.Start("dotnet", $"dev-certs https -ep {path}/.certificates/localhost.crt -p localhost --trust")
-            .WaitForExitAsync();
         var projectPath = Path.Combine(path, "NothingRpcApi", "NothingRpcApi.csproj");
         await Process.Start("dotnet", $"build {projectPath} --configuration Release --framework net8.0")
             .WaitForExitAsync();
@@ -541,7 +539,7 @@ public class AppTests
         argsBuilder.Append(" -e POSTGRES_DB=nothing_grpc_api_db");
         argsBuilder.Append(" -e POSTGRES_USER=postgres");
         argsBuilder.Append(" -e POSTGRES_PASSWORD=postgres");
-        argsBuilder.Append(" --urls https://localhost:9659");
+        argsBuilder.Append(" --urls http://localhost:9659");
         var args = argsBuilder.ToString();
         var process = Process.Start("dotnet", args);
         await Task.Delay(2000);
@@ -551,8 +549,6 @@ public class AppTests
     private static async Task<Process> StartNothingWebApp()
     {
         var path = Path.GetFullPath("../../../../");
-        await Process.Start("dotnet", $"dev-certs https -ep {path}/.certificates/localhost.crt -p localhost --trust")
-            .WaitForExitAsync();
         var projectPath = Path.Combine(path, "NothingWebApi", "NothingWebApi.csproj");
         await Process.Start("dotnet", $"build {projectPath} --configuration Release --framework net8.0")
             .WaitForExitAsync();
@@ -565,7 +561,7 @@ public class AppTests
         argsBuilder.Append(" -e POSTGRES_DB=nothing_web_api_db");
         argsBuilder.Append(" -e POSTGRES_USER=postgres");
         argsBuilder.Append(" -e POSTGRES_PASSWORD=postgres");
-        argsBuilder.Append(" --urls https://localhost:9459");
+        argsBuilder.Append(" --urls http://localhost:9459");
         var args = argsBuilder.ToString();
         var process = Process.Start("dotnet", args);
         await Task.Delay(3000);
