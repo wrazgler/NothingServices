@@ -354,10 +354,13 @@ jobs:
           dotnet-version: |
             9.0.x
             8.0.x
-      - name: Install PostgreSql
-        uses: tj-actions/install-postgresql@v3
+      - name: Setup PostgreSQL
+        uses: ikalnytskyi/action-setup-postgres@v7
         with:
-          postgresql-version: 17
+          username: postgres
+          password: postgres
+          port: 5432
+          postgresql-version: "17"
       - name: Run PostgreSql
         run: dotnet "C:\Program Files\PostgreSQL\17\bin\psql.exe" -U postgres
       - name: Create Nuget directory
