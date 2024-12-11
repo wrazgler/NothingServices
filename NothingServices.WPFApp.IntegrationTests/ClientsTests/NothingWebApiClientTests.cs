@@ -183,6 +183,7 @@ public class NothingWebApiClientTests
 
     private static async Task<Process> StartApp()
     {
+        ProcessLocker.Mutex.WaitOne();
         var path = Path.GetFullPath("../../../../");
         var projectPath = Path.Combine(path, "NothingWebApi", "NothingWebApi.csproj");
         await Process.Start("dotnet", $"build {projectPath} --configuration Release --framework net8.0")
@@ -199,7 +200,7 @@ public class NothingWebApiClientTests
         argsBuilder.Append(" --urls http://localhost:9069");
         var args = argsBuilder.ToString();
         var process = Process.Start("dotnet", args);
-        await Task.Delay(5000);
+        await Task.Delay(3000);
         return process;
     }
 
@@ -207,9 +208,10 @@ public class NothingWebApiClientTests
     {
         if (process != null)
         {
-            await Task.Delay(10000);
+            await Task.Delay(5000);
             process.Kill();
             await process.WaitForExitAsync();
+            ProcessLocker.Mutex.ReleaseMutex();
         }
 
         var dbContext = GetDbContext();
