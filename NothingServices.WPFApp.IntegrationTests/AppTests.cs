@@ -572,7 +572,7 @@ public class AppTests
     {
         if (process != null)
         {
-            await Task.Delay(2000);
+            await Task.Delay(10000);
             process.Kill();
             await process.WaitForExitAsync();
         }
@@ -593,7 +593,7 @@ public class AppTests
     {
         if (process != null)
         {
-            await Task.Delay(2000);
+            await Task.Delay(10000);
             process.Kill();
             await process.WaitForExitAsync();
         }
