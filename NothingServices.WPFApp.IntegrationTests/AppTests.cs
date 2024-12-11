@@ -542,7 +542,7 @@ public class AppTests
         argsBuilder.Append(" --urls http://localhost:9659");
         var args = argsBuilder.ToString();
         var process = Process.Start("dotnet", args);
-        await Task.Delay(3000);
+        await Task.Delay(5000);
         return process;
     }
 
@@ -564,7 +564,7 @@ public class AppTests
         argsBuilder.Append(" --urls http://localhost:9459");
         var args = argsBuilder.ToString();
         var process = Process.Start("dotnet", args);
-        await Task.Delay(3000);
+        await Task.Delay(5000);
         return process;
     }
 
