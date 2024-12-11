@@ -39,7 +39,7 @@ public class AppTests
 
             //Act
             command.Execute(createNothingModelVM);
-            await Task.Delay(5000);
+            await Task.Delay(3000);
             var result = nothingModelsListVM.NothingModels?.Last().Name;
 
             //Assert
@@ -71,7 +71,7 @@ public class AppTests
 
             //Act
             command.Execute(createNothingModelVM);
-            await Task.Delay(5000);
+            await Task.Delay(3000);
             var result = nothingModelsListVM.NothingModels?.Last().Name;
 
             //Assert
@@ -105,7 +105,7 @@ public class AppTests
 
             //Act
             command.Execute(deleteNothingModelVM);
-            await Task.Delay(5000);
+            await Task.Delay(3000);
             var result = nothingModelsListVM.NothingModels
                 ?? throw new NullReferenceException();
 
@@ -140,7 +140,7 @@ public class AppTests
 
             //Act
             command.Execute(deleteNothingModelVM);
-            await Task.Delay(5000);
+            await Task.Delay(3000);
             var result = nothingModelsListVM.NothingModels
                 ?? throw new NullReferenceException();
 
@@ -235,7 +235,7 @@ public class AppTests
 
             //Act
             command.Execute(nothingModelVM);
-            await Task.Delay(2000);
+            await Task.Delay(3000);
             var dialogVM = host.Services.GetRequiredService<IDialogVM>();
             var deleteNothingModelVM = dialogVM.Content?.DataContext as DeleteNothingModelVM;
             var result = deleteNothingModelVM?.Id;
@@ -273,7 +273,7 @@ public class AppTests
 
             //Act
             command.Execute(nothingModelVM);
-            await Task.Delay(2000);
+            await Task.Delay(3000);
             var dialogVM = host.Services.GetRequiredService<IDialogVM>();
             var deleteNothingModelVM = dialogVM.Content?.DataContext as DeleteNothingModelVM;
             var result = deleteNothingModelVM?.Id;
@@ -304,7 +304,7 @@ public class AppTests
 
             //Act
             command.Execute(strategy);
-            await Task.Delay(2000);
+            await Task.Delay(3000);
             var result = mainWindowVM.NothingModelsListVM.NothingModels
                 ?? throw new NullReferenceException();
 
@@ -333,7 +333,7 @@ public class AppTests
 
             //Act
             command.Execute(strategy);
-            await Task.Delay(2000);
+            await Task.Delay(3000);
             var result = mainWindowVM.NothingModelsListVM.NothingModels
                 ?? throw new NullReferenceException();
 
@@ -366,7 +366,7 @@ public class AppTests
 
             //Act
             command.Execute(nothingModelVM);
-            await Task.Delay(2000);
+            await Task.Delay(3000);
             var dialogVM = host.Services.GetRequiredService<IDialogVM>();
             var updateNothingModelVM = dialogVM.Content?.DataContext as UpdateNothingModelVM;
             var result = updateNothingModelVM?.Name;
@@ -401,7 +401,7 @@ public class AppTests
 
             //Act
             command.Execute(nothingModelVM);
-            await Task.Delay(2000);
+            await Task.Delay(3000);
             var dialogVM = host.Services.GetRequiredService<IDialogVM>();
             var updateNothingModelVM = dialogVM.Content?.DataContext as UpdateNothingModelVM;
             var result = updateNothingModelVM?.Name;
@@ -438,7 +438,7 @@ public class AppTests
 
             //Act
             command.Execute(updateNothingModelVM);
-            await Task.Delay(5000);
+            await Task.Delay(3000);
             var result = nothingModelsListVM.NothingModels?.Single().Name;
 
             //Assert
@@ -473,7 +473,7 @@ public class AppTests
 
             //Act
             command.Execute(updateNothingModelVM);
-            await Task.Delay(5000);
+            await Task.Delay(3000);
             var result = nothingModelsListVM.NothingModels?.Single().Name;
 
             //Assert
@@ -505,19 +505,19 @@ public class AppTests
             services.AddAppClients(configuration);
             services.AddAppViewModels();
             services.AddScoped<IAppVersionProvider, AppVersionProvider>();
-            services.AddScoped<IDialogService, DialogService>();
-            services.AddScoped<IMainWindowManager, MainWindowManager>();
-            services.AddScoped(_ => Mock.Of<INotificationService>());
-            services.AddScoped<StartupService>();
             services.AddScoped<ICreateNothingModelVMFactory, CreateNothingModelVMFactory>();
             services.AddScoped<IDeleteNothingModelVMFactory, DeleteNothingModelVMFactory>();
+            services.AddScoped<IDialogService, DialogService>();
+            services.AddScoped<IMainWindowManager, MainWindowManager>();
             services.AddScoped<INothingModelVMFactory, NothingModelVMFactory>();
             services.AddScoped<IUpdateNothingModelVMFactory, UpdateNothingModelVMFactory>();
             services.AddScoped<NothingRpcApiClientStrategy>();
             services.AddScoped<NothingWebApiClientStrategy>();
+            services.AddScoped<StartupService>();
             services.AddScoped(_ => Mock.Of<ICreateNothingModelView>());
             services.AddScoped(_ => Mock.Of<IDeleteNothingModelView>());
             services.AddScoped(_ => Mock.Of<IMainWindow>());
+            services.AddScoped(_ => Mock.Of<INotificationService>());
             services.AddScoped(_ => Mock.Of<IUpdateNothingModelView>());
         });
         var host = hostBuilder.Build();
@@ -542,7 +542,7 @@ public class AppTests
         argsBuilder.Append(" --urls http://localhost:9659");
         var args = argsBuilder.ToString();
         var process = Process.Start("dotnet", args);
-        await Task.Delay(2000);
+        await Task.Delay(3000);
         return process;
     }
 
@@ -572,6 +572,7 @@ public class AppTests
     {
         if (process != null)
         {
+            await Task.Delay(2000);
             process.Kill();
             await process.WaitForExitAsync();
         }
@@ -592,6 +593,7 @@ public class AppTests
     {
         if (process != null)
         {
+            await Task.Delay(2000);
             process.Kill();
             await process.WaitForExitAsync();
         }

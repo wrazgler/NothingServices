@@ -207,6 +207,7 @@ public class NothingWebApiClientTests
     {
         if (process != null)
         {
+            await Task.Delay(2000);
             process.Kill();
             await process.WaitForExitAsync();
         }
