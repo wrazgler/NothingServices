@@ -2,5 +2,5 @@ namespace NothingServices.WPFApp.IntegrationTests;
 
 public static class ProcessLocker
 {
-    public static Mutex Mutex { get; } = new();
+    public static Semaphore Semaphore { get; } = new(1, 1);
 }

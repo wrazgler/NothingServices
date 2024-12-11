@@ -20,10 +20,10 @@ namespace NothingServices.WPFApp.IntegrationTests;
 
 public class AppTests
 {
-
     [Fact]
     public async Task CreateCommand_GRpcApi_Success()
     {
+        ProcessLocker.Semaphore.WaitOne();
         await StopNothingRpcApp();
         var process = await StartNothingRpcApp();
         try
@@ -45,17 +45,18 @@ public class AppTests
             //Assert
             var expected = "New model";
             Assert.Equal(expected, result);
-            await StopNothingRpcApp(process);
         }
         finally
         {
             await StopNothingRpcApp(process);
+            ProcessLocker.Semaphore.Release();
         }
     }
 
     [Fact]
     public async Task CreateCommand_WebApi_Success()
     {
+        ProcessLocker.Semaphore.WaitOne();
         await StopNothingWebApp();
         var process = await StartNothingWebApp();
         try
@@ -77,17 +78,18 @@ public class AppTests
             //Assert
             var expected = "New model";
             Assert.Equal(expected, result);
-            await StopNothingWebApp(process);
         }
         finally
         {
             await StopNothingWebApp(process);
+            ProcessLocker.Semaphore.Release();
         }
     }
 
     [Fact]
     public async Task DeleteCommand_GRpcApi_Success()
     {
+        ProcessLocker.Semaphore.WaitOne();
         await StopNothingRpcApp();
         var process = await StartNothingRpcApp();
         try
@@ -111,17 +113,18 @@ public class AppTests
 
             //Assert
             Assert.Empty(result);
-            await StopNothingRpcApp(process);
         }
         finally
         {
             await StopNothingRpcApp(process);
+            ProcessLocker.Semaphore.Release();
         }
     }
 
     [Fact]
     public async Task DeleteCommand_WebApi_Success()
     {
+        ProcessLocker.Semaphore.WaitOne();
         await StopNothingWebApp();
         var process = await StartNothingWebApp();
         try
@@ -146,11 +149,11 @@ public class AppTests
 
             //Assert
             Assert.Empty(result);
-            await StopNothingWebApp(process);
         }
         finally
         {
             await StopNothingWebApp(process);
+            ProcessLocker.Semaphore.Release();
         }
     }
 
@@ -219,6 +222,7 @@ public class AppTests
     [Fact]
     public async Task OpenDeleteNothingModelCommand_GRpcApi_DeleteNothingModelVM_Id_Equal()
     {
+        ProcessLocker.Semaphore.WaitOne();
         await StopNothingRpcApp();
         var process = await StartNothingRpcApp();
         try
@@ -243,17 +247,18 @@ public class AppTests
             //Assert
             var expected = nothingModelVM.Id;
             Assert.Equal(expected, result);
-            await StopNothingRpcApp(process);
         }
         finally
         {
             await StopNothingRpcApp(process);
+            ProcessLocker.Semaphore.Release();
         }
     }
 
     [Fact]
     public async Task OpenDeleteNothingModelCommand_WebApi_DeleteNothingModelVM_Id_Equal()
     {
+        ProcessLocker.Semaphore.WaitOne();
         await StopNothingWebApp();
         var process = await StartNothingWebApp();
         try
@@ -281,17 +286,18 @@ public class AppTests
             //Assert
             var expected = nothingModelVM.Id;
             Assert.Equal(expected, result);
-            await StopNothingWebApp(process);
         }
         finally
         {
             await StopNothingWebApp(process);
+            ProcessLocker.Semaphore.Release();
         }
     }
 
     [Fact]
     public async Task OpenNothingModelsListCommand_GRpcApi_NothingModels_Single()
     {
+        ProcessLocker.Semaphore.WaitOne();
         await StopNothingRpcApp();
         var process = await StartNothingRpcApp();
         try
@@ -310,17 +316,18 @@ public class AppTests
 
             //Assert
             Assert.Single(result);
-            await StopNothingRpcApp(process);
         }
         finally
         {
             await StopNothingRpcApp(process);
+            ProcessLocker.Semaphore.Release();
         }
     }
 
     [Fact]
     public async Task OpenNothingModelsListCommand_WebApi_NothingModels_Single()
     {
+        ProcessLocker.Semaphore.WaitOne();
         await StopNothingWebApp();
         var process = await StartNothingWebApp();
         try
@@ -339,17 +346,18 @@ public class AppTests
 
             //Assert
             Assert.Single(result);
-            await StopNothingWebApp(process);
         }
         finally
         {
             await StopNothingWebApp(process);
+            ProcessLocker.Semaphore.Release();
         }
     }
 
     [Fact]
     public async Task OpenUpdateNothingModelCommand_GRpcApi_UpdateNothingModelVM_Name_Equal()
     {
+        ProcessLocker.Semaphore.WaitOne();
         await StopNothingRpcApp();
         var process = await StartNothingRpcApp();
         try
@@ -374,17 +382,18 @@ public class AppTests
             //Assert
             var expected = nothingModelVM.Name;
             Assert.Equal(expected, result);
-            await StopNothingRpcApp(process);
         }
         finally
         {
             await StopNothingRpcApp(process);
+            ProcessLocker.Semaphore.Release();
         }
     }
 
     [Fact]
     public async Task OpenUpdateNothingModelCommand_WebApi_UpdateNothingModelVM_Name_Equal()
     {
+        ProcessLocker.Semaphore.WaitOne();
         await StopNothingWebApp();
         var process = await StartNothingWebApp();
         try
@@ -409,17 +418,18 @@ public class AppTests
             //Assert
             var expected = nothingModelVM.Name;
             Assert.Equal(expected, result);
-            await StopNothingWebApp(process);
         }
         finally
         {
             await StopNothingWebApp(process);
+            ProcessLocker.Semaphore.Release();
         }
     }
 
     [Fact]
     public async Task UpdateCommand_GRpcApi_Success()
     {
+        ProcessLocker.Semaphore.WaitOne();
         await StopNothingRpcApp();
         var process = await StartNothingRpcApp();
         try
@@ -444,17 +454,18 @@ public class AppTests
             //Assert
             var expected = "New Name";
             Assert.Equal(expected, result);
-            await StopNothingRpcApp(process);
         }
         finally
         {
             await StopNothingRpcApp(process);
+            ProcessLocker.Semaphore.Release();
         }
     }
 
     [Fact]
     public async Task UpdateCommand_WebApi_Success()
     {
+        ProcessLocker.Semaphore.WaitOne();
         await StopNothingWebApp();
         var process = await StartNothingWebApp();
         try
@@ -479,11 +490,11 @@ public class AppTests
             //Assert
             var expected = "New Name";
             Assert.Equal(expected, result);
-            await StopNothingWebApp(process);
         }
         finally
         {
             await StopNothingWebApp(process);
+            ProcessLocker.Semaphore.Release();
         }
     }
 
@@ -526,7 +537,6 @@ public class AppTests
 
     private static async Task<Process> StartNothingRpcApp()
     {
-        ProcessLocker.Mutex.WaitOne();
         var path = Path.GetFullPath("../../../../");
         var projectPath = Path.Combine(path, "NothingRpcApi", "NothingRpcApi.csproj");
         await Process.Start("dotnet", $"build {projectPath} --configuration Release --framework net8.0")
@@ -549,7 +559,6 @@ public class AppTests
 
     private static async Task<Process> StartNothingWebApp()
     {
-        ProcessLocker.Mutex.WaitOne();
         var path = Path.GetFullPath("../../../../");
         var projectPath = Path.Combine(path, "NothingWebApi", "NothingWebApi.csproj");
         await Process.Start("dotnet", $"build {projectPath} --configuration Release --framework net8.0")
@@ -577,7 +586,6 @@ public class AppTests
             await Task.Delay(3000);
             process.Kill();
             await process.WaitForExitAsync();
-            ProcessLocker.Mutex.ReleaseMutex();
         }
         var dbContext = GetNothingRpcApiDbContext();
         await dbContext.Database.EnsureDeletedAsync();
@@ -599,7 +607,6 @@ public class AppTests
             await Task.Delay(3000);
             process.Kill();
             await process.WaitForExitAsync();
-            ProcessLocker.Mutex.ReleaseMutex();
         }
         var dbContext = GetNothingWebApiDbContext();
         await dbContext.Database.EnsureDeletedAsync();

@@ -15,6 +15,7 @@ public class NothingWebApiClientTests
     [Fact]
     public async Task Get_Equivalent()
     {
+        ProcessLocker.Semaphore.WaitOne();
         await StopApp();
         var process = await StartApp();
         try
@@ -35,17 +36,18 @@ public class NothingWebApiClientTests
                 }
             };
             Assert.Equivalent(expected, result, true);
-            await StopApp(process);
         }
         finally
         {
             await StopApp(process);
+            ProcessLocker.Semaphore.Release();
         }
     }
 
     [Fact]
     public async Task Get_Id_Equivalent()
     {
+        ProcessLocker.Semaphore.WaitOne();
         await StopApp();
         var process = await StartApp();
         try
@@ -64,17 +66,18 @@ public class NothingWebApiClientTests
                 Name = "Test",
             };
             Assert.Equivalent(expected, result, true);
-            await StopApp(process);
         }
         finally
         {
             await StopApp(process);
+            ProcessLocker.Semaphore.Release();
         }
     }
 
     [Fact]
     public async Task Create_Equivalent()
     {
+        ProcessLocker.Semaphore.WaitOne();
         await StopApp();
         var process = await StartApp();
         try
@@ -96,17 +99,18 @@ public class NothingWebApiClientTests
                 Name = createNothingModelWebDto.Name,
             };
             Assert.Equivalent(expected, result, true);
-            await StopApp(process);
         }
         finally
         {
             await StopApp(process);
+            ProcessLocker.Semaphore.Release();
         }
     }
 
     [Fact]
     public async Task Update_Equivalent()
     {
+        ProcessLocker.Semaphore.WaitOne();
         await StopApp();
         var process = await StartApp();
         try
@@ -129,17 +133,18 @@ public class NothingWebApiClientTests
                 Name = updateNothingModelWebDto.Name,
             };
             Assert.Equivalent(expected, result, true);
-            await StopApp(process);
         }
         finally
         {
             await StopApp(process);
+            ProcessLocker.Semaphore.Release();
         }
     }
 
     [Fact]
     public async Task Delete_Equivalent()
     {
+        ProcessLocker.Semaphore.WaitOne();
         await StopApp();
         var process = await StartApp();
         try
@@ -158,11 +163,11 @@ public class NothingWebApiClientTests
                 Name = "Test",
             };
             Assert.Equivalent(expected, result, true);
-            await StopApp(process);
         }
         finally
         {
             await StopApp(process);
+            ProcessLocker.Semaphore.Release();
         }
     }
 
@@ -183,7 +188,6 @@ public class NothingWebApiClientTests
 
     private static async Task<Process> StartApp()
     {
-        ProcessLocker.Mutex.WaitOne();
         var path = Path.GetFullPath("../../../../");
         var projectPath = Path.Combine(path, "NothingWebApi", "NothingWebApi.csproj");
         await Process.Start("dotnet", $"build {projectPath} --configuration Release --framework net8.0")
@@ -211,7 +215,6 @@ public class NothingWebApiClientTests
             await Task.Delay(5000);
             process.Kill();
             await process.WaitForExitAsync();
-            ProcessLocker.Mutex.ReleaseMutex();
         }
 
         var dbContext = GetDbContext();
