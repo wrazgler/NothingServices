@@ -89,7 +89,7 @@ jobs:
       - name: Build NothingServices.ConsoleApp
         run: dotnet build NothingServices.ConsoleApp/NothingServices.ConsoleApp.csproj --configuration "Release" --no-restore
   Build_NothingServices_WPFApp:
-    runs-on: windows-latest
+    runs-on: windows-2022
     needs: UnitTest_NothingServices_Abstractions
     steps:
       - uses: actions/checkout@v4
@@ -206,7 +206,7 @@ jobs:
       - name: UnitTest NothingServices.ConsoleApp
         run: dotnet test NothingServices.ConsoleApp.UnitTests/NothingServices.ConsoleApp.UnitTests.csproj --configuration "Release" --no-restore --no-build
   UnitTest_NothingServices_WPFApp:
-    runs-on: windows-latest
+    runs-on: windows-2022
     needs: Build_NothingServices_WPFApp
     steps:
       - uses: actions/checkout@v4
@@ -344,7 +344,7 @@ jobs:
       - name: IntegrationTest NothingServices.ConsoleApp
         run: dotnet test NothingServices.ConsoleApp.IntegrationTests/NothingServices.ConsoleApp.IntegrationTests.csproj --configuration "Release" --no-restore --no-build
   IntegrationTest_NothingServices_WPFApp:
-    runs-on: windows-latest
+    runs-on: windows-2022
     needs: [ UnitTest_NothingServices_WPFApp, IntegrationTest_NothingRpcApi, IntegrationTest_NothingWebApi ]
     steps:
       - uses: actions/checkout@v4
