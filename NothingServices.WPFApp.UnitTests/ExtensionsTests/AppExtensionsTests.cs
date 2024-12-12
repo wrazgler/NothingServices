@@ -73,6 +73,7 @@ public class AppExtensionsTests
         //Assert
         var expected = new[]
         {
+            "System.Threading.CancellationTokenSource",
             "NothingServices.WPFApp.Services.IAppVersionProvider",
             "NothingServices.WPFApp.Services.IDialogService",
             "NothingServices.WPFApp.Services.IMainWindowManager",
