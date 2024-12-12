@@ -10,78 +10,43 @@ namespace NothingServices.WPFApp.UnitTests.CommandsTests;
 
 public class DeleteCommandTests
 {
-    [Fact]
-    public void CanExecute_True()
+    public static IEnumerable<object?[]> CanExecuteData => new List<object?[]>
+    {
+        new object?[]
+        {
+            new DeleteNothingModelVM(
+                Mock.Of<IButtonVM>(),
+                Mock.Of<IButtonVM>(),
+                Mock.Of<INothingModelVM>(nothingModelVM => nothingModelVM.Id == 1)),
+            true,
+        },
+        new object?[]
+        {
+            new DeleteNothingModelVM(
+                Mock.Of<IButtonVM>(),
+                Mock.Of<IButtonVM>(),
+                Mock.Of<INothingModelVM>(nothingModelVM => nothingModelVM.Id == 0)),
+            false,
+        },
+        new object?[] { null, false },
+        new object?[] { new(), false },
+    };
+
+    [Theory]
+    [MemberData(nameof(CanExecuteData))]
+    public void CanExecute_Result_Equal(object? parameter, bool expected)
     {
         //Arrange
         var command = GetDeleteCommand(
             Mock.Of<IDialogService>(),
             Mock.Of<IMainWindowManager>(),
             Mock.Of<INotificationService>());
-        var nothingModelVM = Mock.Of<INothingModelVM>(nothingModelVM => nothingModelVM.Id == 1);
-        var parameter = new DeleteNothingModelVM(
-            Mock.Of<IButtonVM>(),
-            Mock.Of<IButtonVM>(),
-            nothingModelVM);
 
         //Act
         var result = command.CanExecute(parameter);
 
         //Assert
-        Assert.True(result);
-    }
-
-    [Fact]
-    public void CanExecute_Id_0_False()
-    {
-        //Arrange
-        var command = GetDeleteCommand(
-            Mock.Of<IDialogService>(),
-            Mock.Of<IMainWindowManager>(),
-            Mock.Of<INotificationService>());
-        var nothingModelVM = Mock.Of<INothingModelVM>(nothingModelVM => nothingModelVM.Id == 0);
-        var parameter = new DeleteNothingModelVM(
-            Mock.Of<IButtonVM>(),
-            Mock.Of<IButtonVM>(),
-            nothingModelVM);
-
-        //Act
-        var result = command.CanExecute(parameter);
-
-        //Assert
-        Assert.False(result);
-    }
-
-    [Fact]
-    public void CanExecute_Parameter_Null_False()
-    {
-        //Arrange
-        var command = GetDeleteCommand(
-            Mock.Of<IDialogService>(),
-            Mock.Of<IMainWindowManager>(),
-            Mock.Of<INotificationService>());
-
-        //Act
-        var result = command.CanExecute(null);
-
-        //Assert
-        Assert.False(result);
-    }
-
-    [Fact]
-    public void CanExecute_Parameter_Object_False()
-    {
-        //Arrange
-        var command = GetDeleteCommand(
-            Mock.Of<IDialogService>(),
-            Mock.Of<IMainWindowManager>(),
-            Mock.Of<INotificationService>());
-
-        //Act
-        var result = command.CanExecute(new object());
-
-        //Assert
-        Assert.False(result);
+        Assert.Equal(expected, result);
     }
 
     [Fact]
@@ -132,74 +97,6 @@ public class DeleteCommandTests
     }
 
     [Fact]
-    public void Execute_Parameter_Null_Notify_Error()
-    {
-        //Arrange
-        var notificationServiceMock = new Mock<INotificationService>();
-        var command = GetDeleteCommand(
-            Mock.Of<IDialogService>(),
-            Mock.Of<IMainWindowManager>(),
-            notificationServiceMock.Object);
-
-        //Act
-        command.Execute(null);
-
-        //Assert
-        notificationServiceMock.Verify(
-            notificationService => notificationService.Notify(
-                It.Is<string>(message => message == "Value cannot be null. (Parameter 'parameter')"),
-                It.IsAny<string>()),
-            Times.Once);
-    }
-
-    [Fact]
-    public void Execute_Parameter_Object_Notify_Error()
-    {
-        //Arrange
-        var notificationServiceMock = new Mock<INotificationService>();
-        var command = GetDeleteCommand(
-            Mock.Of<IDialogService>(),
-            Mock.Of<IMainWindowManager>(),
-            notificationServiceMock.Object);
-
-        //Act
-        command.Execute(new object());
-
-        //Assert
-        notificationServiceMock.Verify(
-            notificationService => notificationService.Notify(
-                It.Is<string>(message => message == "Некорректный тип параметра команды: Object"),
-                It.IsAny<string>()),
-            Times.Once);
-    }
-
-    [Fact]
-    public void Execute_Parameter_Id_0_Notify_Error()
-    {
-        //Arrange
-        var notificationServiceMock = new Mock<INotificationService>();
-        var command = GetDeleteCommand(
-            Mock.Of<IDialogService>(),
-            Mock.Of<IMainWindowManager>(),
-            notificationServiceMock.Object);
-        var nothingModelVM = Mock.Of<INothingModelVM>(nothingModelVM => nothingModelVM.Id == 0);
-        var parameter = new DeleteNothingModelVM(
-            Mock.Of<IButtonVM>(),
-            Mock.Of<IButtonVM>(),
-            nothingModelVM);
-
-        //Act
-        command.Execute(parameter);
-
-        //Assert
-        notificationServiceMock.Verify(
-            notificationService => notificationService.Notify(
-                It.Is<string>(message => message == "Поле Идентификатор модели не может быть пустым"),
-                It.IsAny<string>()),
-            Times.Once);
-    }
-
-    [Fact]
     public void Execute_Strategy_Null_Notify_Error()
     {
         //Arrange
@@ -221,6 +118,50 @@ public class DeleteCommandTests
         notificationServiceMock.Verify(
             notificationService => notificationService.Notify(
                 It.Is<string>(message => message == "Стратегия работы приложения не задана"),
+                It.IsAny<string>()),
+            Times.Once);
+    }
+
+    public static IEnumerable<object?[]> ExecuteErrorData => new List<object?[]>
+    {
+        new object?[]
+        {
+            null,
+            "Value cannot be null. (Parameter 'parameter')",
+        },
+        new object?[]
+        {
+            new (),
+            "Некорректный тип параметра команды: Object",
+        },
+        new object?[]
+        {
+            new DeleteNothingModelVM(
+                Mock.Of<IButtonVM>(),
+                Mock.Of<IButtonVM>(),
+                Mock.Of<INothingModelVM>(nothingModelVM => nothingModelVM.Id == 0)),
+            "Поле Идентификатор модели не может быть пустым",
+        },
+    };
+
+    [Theory]
+    [MemberData(nameof(ExecuteErrorData))]
+    public void Execute_Error_Parameter_Error_Message_Equal(object? parameter, string errorMessage)
+    {
+        //Arrange
+        var notificationServiceMock = new Mock<INotificationService>();
+        var command = GetDeleteCommand(
+            Mock.Of<IDialogService>(),
+            Mock.Of<IMainWindowManager>(),
+            notificationServiceMock.Object);
+
+        //Act
+        command.Execute(parameter);
+
+        //Assert
+        notificationServiceMock.Verify(
+            notificationService => notificationService.Notify(
+                It.Is<string>(message => message == errorMessage),
                 It.IsAny<string>()),
             Times.Once);
     }
