@@ -10,11 +10,39 @@ namespace NothingServices.WPFApp.UnitTests.CommandsTests;
 
 public class CreateCommandTests
 {
+    public static IEnumerable<object?[]> CanExecuteData => new List<object?[]>
+    {
+        new object?[]
+        {
+            new CreateNothingModelVM(Mock.Of<IButtonVM>(), Mock.Of<IButtonVM>())
+            {
+                Name = "test",
+            },
+            true,
+        },
+        new object?[]
+        {
+            new CreateNothingModelVM(Mock.Of<IButtonVM>(), Mock.Of<IButtonVM>())
+            {
+                Name = string.Empty,
+            },
+            false,
+        },
+        new object?[]
+        {
+            new CreateNothingModelVM(Mock.Of<IButtonVM>(), Mock.Of<IButtonVM>())
+            {
+                Name = "   ",
+            },
+            false,
+        },
+        new object?[] { null, false },
+        new object?[] { new(), false },
+    };
+
     [Theory]
-    [InlineData("test", true)]
-    [InlineData("", false)]
-    [InlineData("   ", false)]
-    public void CanExecute_Test(string name, bool expected)
+    [MemberData(nameof(CanExecuteData))]
+    public void CanExecute_Test_MemberData(string name, bool expected)
     {
         //Arrange
         var command = GetCreateCommand(
@@ -31,38 +59,6 @@ public class CreateCommandTests
 
         //Assert
         Assert.Equal(expected, result);
-    }
-
-    [Fact]
-    public void CanExecute_Parameter_Null_False()
-    {
-        //Arrange
-        var command = GetCreateCommand(
-            Mock.Of<IDialogService>(),
-            Mock.Of<IMainWindowManager>(),
-            Mock.Of<INotificationService>());
-
-        //Act
-        var result = command.CanExecute(null);
-
-        //Assert
-        Assert.False(result);
-    }
-
-    [Fact]
-    public void CanExecute_Parameter_Object_False()
-    {
-        //Arrange
-        var command = GetCreateCommand(
-            Mock.Of<IDialogService>(),
-            Mock.Of<IMainWindowManager>(),
-            Mock.Of<INotificationService>());
-
-        //Act
-        var result = command.CanExecute(new object());
-
-        //Assert
-        Assert.False(result);
     }
 
     [Fact]
@@ -113,100 +109,6 @@ public class CreateCommandTests
     }
 
     [Fact]
-    public void Execute_Parameter_Null_Notify_Error()
-    {
-        //Arrange
-        var notificationServiceMock = new Mock<INotificationService>();
-        var command = GetCreateCommand(
-            Mock.Of<IDialogService>(),
-            Mock.Of<IMainWindowManager>(),
-            notificationServiceMock.Object);
-
-        //Act
-        command.Execute(null);
-
-        //Assert
-        notificationServiceMock.Verify(
-            notificationService => notificationService.Notify(
-                It.Is<string>(message => message == "Value cannot be null. (Parameter 'parameter')"),
-                It.IsAny<string>()),
-            Times.Once);
-    }
-
-    [Fact]
-    public void Execute_Parameter_Object_Notify_Error()
-    {
-        //Arrange
-        var notificationServiceMock = new Mock<INotificationService>();
-        var command = GetCreateCommand(
-            Mock.Of<IDialogService>(),
-            Mock.Of<IMainWindowManager>(),
-            notificationServiceMock.Object);
-
-        //Act
-        command.Execute(new object());
-
-        //Assert
-        notificationServiceMock.Verify(
-            notificationService => notificationService.Notify(
-                It.Is<string>(message => message == "Некорректный тип параметра команды: Object"),
-                It.IsAny<string>()),
-            Times.Once);
-    }
-
-    [Fact]
-    public void Execute_Parameter_Name_Null_Notify_Error()
-    {
-        //Arrange
-        var notificationServiceMock = new Mock<INotificationService>();
-        var command = GetCreateCommand(
-            Mock.Of<IDialogService>(),
-            Mock.Of<IMainWindowManager>(),
-            notificationServiceMock.Object);
-        var parameter = new CreateNothingModelVM(Mock.Of<IButtonVM>(), Mock.Of<IButtonVM>())
-        {
-            Name = null!,
-        };
-
-        //Act
-        command.Execute(parameter);
-
-        //Assert
-        notificationServiceMock.Verify(
-            notificationService => notificationService.Notify(
-                It.Is<string>(message => message == "Поле Имя модели не может быть пустым"),
-                It.IsAny<string>()),
-            Times.Once);
-    }
-
-    [Theory]
-    [InlineData("")]
-    [InlineData("   ")]
-    public void Execute_Parameter_Name_Trim_Empty_Notify_Error(string name)
-    {
-        //Arrange
-        var notificationServiceMock = new Mock<INotificationService>();
-        var command = GetCreateCommand(
-            Mock.Of<IDialogService>(),
-            Mock.Of<IMainWindowManager>(),
-            notificationServiceMock.Object);
-        var parameter = new CreateNothingModelVM(Mock.Of<IButtonVM>(), Mock.Of<IButtonVM>())
-        {
-            Name = name,
-        };
-
-        //Act
-        command.Execute(parameter);
-
-        //Assert
-        notificationServiceMock.Verify(
-            notificationService => notificationService.Notify(
-                It.Is<string>(message => message == "Поле Имя модели не может быть пустым"),
-                It.IsAny<string>()),
-            Times.Once);
-    }
-
-    [Fact]
     public void Execute_Strategy_Null_Notify_Error()
     {
         //Arrange
@@ -227,6 +129,66 @@ public class CreateCommandTests
         notificationServiceMock.Verify(
             notificationService => notificationService.Notify(
                 It.Is<string>(message => message == "Стратегия работы приложения не задана"),
+                It.IsAny<string>()),
+            Times.Once);
+    }
+
+    public static IEnumerable<object?[]> ExecuteErorData => new List<object?[]>
+    {
+        new object?[]
+        {
+            null,
+            "Value cannot be null. (Parameter 'parameter')",
+        },
+        new object?[]
+        {
+            new (),
+            "Некорректный тип параметра команды: Object",
+        },
+        new object?[]
+        {
+            new CreateNothingModelVM(Mock.Of<IButtonVM>(), Mock.Of<IButtonVM>())
+            {
+                Name = null!,
+            },
+            "Поле Имя модели не может быть пустым",
+        },
+        new object?[]
+        {
+            new CreateNothingModelVM(Mock.Of<IButtonVM>(), Mock.Of<IButtonVM>())
+            {
+                Name = string.Empty,
+            },
+            "Поле Имя модели не может быть пустым",
+        },
+        new object?[]
+        {
+            new CreateNothingModelVM(Mock.Of<IButtonVM>(), Mock.Of<IButtonVM>())
+            {
+                Name = "   ",
+            },
+            "Поле Имя модели не может быть пустым",
+        },
+    };
+
+    [Theory]
+    [MemberData(nameof(ExecuteErorData))]
+    public void Execute_Error_Parameter_Error_Message_Equal(string parameter, string errorMessage)
+    {
+        //Arrange
+        var notificationServiceMock = new Mock<INotificationService>();
+        var command = GetCreateCommand(
+            Mock.Of<IDialogService>(),
+            Mock.Of<IMainWindowManager>(),
+            notificationServiceMock.Object);
+
+        //Act
+        command.Execute(parameter);
+
+        //Assert
+        notificationServiceMock.Verify(
+            notificationService => notificationService.Notify(
+                It.Is<string>(message => message == errorMessage),
                 It.IsAny<string>()),
             Times.Once);
     }
