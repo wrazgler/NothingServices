@@ -8,50 +8,31 @@ namespace NothingServices.WPFApp.UnitTests.CommandsTests;
 
 public class OpenNothingModelsListCommandTests
 {
-    [Fact]
-    public void CanExecute_True()
+    public static IEnumerable<object?[]> CanExecuteData => new List<object?[]>
+    {
+        new object?[]
+        {
+            Mock.Of<INothingApiClientStrategy>(),
+            true,
+        },
+        new object?[] { null, false },
+        new object?[] { new(), false },
+    };
+
+    [Theory]
+    [MemberData(nameof(CanExecuteData))]
+    public void CanExecute_Result_Equal(object? parameter, bool expected)
     {
         //Arrange
         var command = GetOpenNothingModelsListCommand(
             Mock.Of<IMainWindowManager>(),
             Mock.Of<INotificationService>());
-        var parameter = Mock.Of<INothingApiClientStrategy>();
 
         //Act
         var result = command.CanExecute(parameter);
 
         //Assert
-        Assert.True(result);
-    }
-
-    [Fact]
-    public void CanExecute_Parameter_Null_False()
-    {
-        //Arrange
-        var command = GetOpenNothingModelsListCommand(
-            Mock.Of<IMainWindowManager>(),
-            Mock.Of<INotificationService>());
-
-        //Act
-        var result = command.CanExecute(null);
-
-        //Assert
-        Assert.False(result);
-    }
-
-    [Fact]
-    public void CanExecute_Parameter_Object_False()
-    {
-        //Arrange
-        var command = GetOpenNothingModelsListCommand(
-            Mock.Of<IMainWindowManager>(),
-            Mock.Of<INotificationService>());
-
-        //Act
-        var result = command.CanExecute(new object());
-
-        //Assert
-        Assert.False(result);
+        Assert.Equal(expected, result);
     }
 
     [Fact]
@@ -75,8 +56,23 @@ public class OpenNothingModelsListCommandTests
             Times.Once);
     }
 
-    [Fact]
-    public void Execute_Parameter_Null_Notify_Error()
+    public static IEnumerable<object?[]> ExecuteErrorData => new List<object?[]>
+    {
+        new object?[]
+        {
+            null,
+            "Value cannot be null. (Parameter 'parameter')",
+        },
+        new object?[]
+        {
+            new (),
+            "Некорректный тип параметра команды: Object",
+        },
+    };
+
+    [Theory]
+    [MemberData(nameof(ExecuteErrorData))]
+    public void Execute_Error_Parameter_Error_Message_Equal(object? parameter, string errorMessage)
     {
         //Arrange
         var notificationServiceMock = new Mock<INotificationService>();
@@ -85,32 +81,12 @@ public class OpenNothingModelsListCommandTests
             notificationServiceMock.Object);
 
         //Act
-        command.Execute(null);
+        command.Execute(parameter);
 
         //Assert
         notificationServiceMock.Verify(
             notificationService => notificationService.Notify(
-                It.Is<string>(message => message == "Value cannot be null. (Parameter 'parameter')"),
-                It.IsAny<string>()),
-            Times.Once);
-    }
-
-    [Fact]
-    public void Execute_Parameter_Object_Notify_Error()
-    {
-        //Arrange
-        var notificationServiceMock = new Mock<INotificationService>();
-        var command = GetOpenNothingModelsListCommand(
-            Mock.Of<IMainWindowManager>(),
-            notificationServiceMock.Object);
-
-        //Act
-        command.Execute(new object());
-
-        //Assert
-        notificationServiceMock.Verify(
-            notificationService => notificationService.Notify(
-                It.Is<string>(message => message == "Некорректный тип параметра команды: Object"),
+                It.Is<string>(message => message == errorMessage),
                 It.IsAny<string>()),
             Times.Once);
     }
