@@ -9,7 +9,7 @@ public class IconCharHasValueConverterTests
     public static IEnumerable<object?[]> ConvertData => new List<object?[]>
     {
         new object?[] { IconChar.Egg, true },
-        new object?[] { IconChar.None, true },
+        new object?[] { IconChar.None, false },
         new object?[] { null, false },
         new object?[] { new(), false },
     };
