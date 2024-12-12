@@ -6,16 +6,10 @@ namespace NothingServices.WPFApp.UnitTests.ConvertersTests;
 
 public class IconCharHasValueConverterTests
 {
-    public static IEnumerable<object?[]> ConvertData => new List<object?[]>
-    {
-        new object?[] { IconChar.Egg, true },
-        new object?[] { IconChar.None, false },
-        new object?[] { null, false },
-        new object?[] { new(), false },
-    };
-
     [Theory]
-    [MemberData(nameof(ConvertData))]
+    [InlineData(IconChar.Egg, true)]
+    [InlineData(IconChar.None, false)]
+    [InlineData(null, false)]
     public void Convert_Result_Equal(object? value, bool expected)
     {
         //Arrange
@@ -26,6 +20,20 @@ public class IconCharHasValueConverterTests
 
         //Assert
         Assert.Equal(expected, result);
+    }
+
+    [Fact]
+    public void Convert_Object_Throws_ArgumentException()
+    {
+        //Arrange
+        var converter = new IconCharHasValueConverter();
+
+        //Act
+        var result = new Func<object>(()
+            => converter.Convert(new object(), typeof(bool), null, CultureInfo.InvariantCulture));
+
+        //Assert
+        Assert.Throws<ArgumentException>(result);
     }
 
     [Fact]
