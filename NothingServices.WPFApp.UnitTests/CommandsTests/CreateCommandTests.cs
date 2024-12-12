@@ -133,7 +133,7 @@ public class CreateCommandTests
             Times.Once);
     }
 
-    public static IEnumerable<object?[]> ExecuteErorData => new List<object?[]>
+    public static IEnumerable<object?[]> ExecuteErrorData => new List<object?[]>
     {
         new object?[]
         {
@@ -172,8 +172,8 @@ public class CreateCommandTests
     };
 
     [Theory]
-    [MemberData(nameof(ExecuteErorData))]
-    public void Execute_Error_Parameter_Error_Message_Equal(string parameter, string errorMessage)
+    [MemberData(nameof(ExecuteErrorData))]
+    public void Execute_Error_Parameter_Error_Message_Equal(object? parameter, string errorMessage)
     {
         //Arrange
         var notificationServiceMock = new Mock<INotificationService>();
