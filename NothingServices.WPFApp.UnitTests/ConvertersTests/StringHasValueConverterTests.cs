@@ -5,60 +5,26 @@ namespace NothingServices.WPFApp.UnitTests.ConvertersTests;
 
 public class StringHasValueConverterTests
 {
-    [Fact]
-    public void Convert_Return_True()
+    public static IEnumerable<object?[]> ConvertData => new List<object?[]>
+    {
+        new object?[] { "value", true },
+        new object?[] { string.Empty, false },
+        new object?[] { null, false },
+        new object?[] { new(), false },
+    };
+
+    [Theory]
+    [MemberData(nameof(ConvertData))]
+    public void Convert_Result_Equal(object? value, bool expected)
     {
         //Arrange
         var converter = new StringHasValueConverter();
 
         //Act
-        var result = converter.Convert("value", typeof(bool), null, CultureInfo.InvariantCulture);
+        var result = converter.Convert(value, typeof(bool), null, CultureInfo.InvariantCulture);
 
         //Assert
-        var expected = true;
         Assert.Equal(expected, result);
-    }
-
-    [Fact]
-    public void Convert_String_Empty_None_Return_False()
-    {
-        //Arrange
-        var converter = new StringHasValueConverter();
-
-        //Act
-        var result = converter.Convert(string.Empty, typeof(bool), null, CultureInfo.InvariantCulture);
-
-        //Assert
-        var expected = false;
-        Assert.Equal(expected, result);
-    }
-
-    [Fact]
-    public void Convert_Null_Return_False()
-    {
-        //Arrange
-        var converter = new StringHasValueConverter();
-
-        //Act
-        var result = converter.Convert(null, typeof(bool), null, CultureInfo.InvariantCulture);
-
-        //Assert
-        var expected = false;
-        Assert.Equal(expected, result);
-    }
-
-    [Fact]
-    public void Convert_Object_Throws_ArgumentException()
-    {
-        //Arrange
-        var converter = new StringHasValueConverter();
-
-        //Act
-        var result = new Func<object>(()
-            => converter.Convert(new object(), typeof(bool), null, CultureInfo.InvariantCulture));
-
-        //Assert
-        Assert.Throws<ArgumentException>(result);
     }
 
     [Fact]
