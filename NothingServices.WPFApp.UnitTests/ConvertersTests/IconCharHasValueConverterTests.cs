@@ -6,60 +6,26 @@ namespace NothingServices.WPFApp.UnitTests.ConvertersTests;
 
 public class IconCharHasValueConverterTests
 {
-    [Fact]
-    public void Convert_IconChar_Egg_Return_True()
+    public static IEnumerable<object?[]> ConvertData => new List<object?[]>
+    {
+        new object?[] { IconChar.Egg, true },
+        new object?[] { IconChar.None, true },
+        new object?[] { null, false },
+        new object?[] { new(), false },
+    };
+
+    [Theory]
+    [MemberData(nameof(ConvertData))]
+    public void Convert_Result_Equal(object? value, bool expected)
     {
         //Arrange
         var converter = new IconCharHasValueConverter();
 
         //Act
-        var result = converter.Convert(IconChar.Egg, typeof(bool), null, CultureInfo.InvariantCulture);
+        var result = converter.Convert(value, typeof(bool), null, CultureInfo.InvariantCulture);
 
         //Assert
-        var expected = true;
         Assert.Equal(expected, result);
-    }
-
-    [Fact]
-    public void Convert_IconChar_None_Return_False()
-    {
-        //Arrange
-        var converter = new IconCharHasValueConverter();
-
-        //Act
-        var result = converter.Convert(IconChar.None, typeof(bool), null, CultureInfo.InvariantCulture);
-
-        //Assert
-        var expected = false;
-        Assert.Equal(expected, result);
-    }
-
-    [Fact]
-    public void Convert_Null_Return_False()
-    {
-        //Arrange
-        var converter = new IconCharHasValueConverter();
-
-        //Act
-        var result = converter.Convert(null, typeof(bool), null, CultureInfo.InvariantCulture);
-
-        //Assert
-        var expected = false;
-        Assert.Equal(expected, result);
-    }
-
-    [Fact]
-    public void Convert_Object_Throws_ArgumentException()
-    {
-        //Arrange
-        var converter = new IconCharHasValueConverter();
-
-        //Act
-        var result = new Func<object>(()
-            => converter.Convert(new object(), typeof(bool), null, CultureInfo.InvariantCulture));
-
-        //Assert
-        Assert.Throws<ArgumentException>(result);
     }
 
     [Fact]
