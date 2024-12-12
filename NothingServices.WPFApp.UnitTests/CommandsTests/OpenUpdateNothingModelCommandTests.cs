@@ -10,8 +10,35 @@ namespace NothingServices.WPFApp.UnitTests.CommandsTests;
 
 public class OpenUpdateNothingModelCommandTests
 {
-    [Fact]
-    public void CanExecute_True()
+    public static IEnumerable<object?[]> CanExecuteData => new List<object?[]>
+    {
+        new object?[]
+        {
+            Mock.Of<INothingModelVM>(nothingModelVM => nothingModelVM.Id == 1 && nothingModelVM.Name == "test"),
+            true,
+        },
+        new object?[]
+        {
+            Mock.Of<INothingModelVM>(nothingModelVM => nothingModelVM.Id == 0 && nothingModelVM.Name == "test"),
+            false,
+        },
+        new object?[]
+        {
+            Mock.Of<INothingModelVM>(nothingModelVM => nothingModelVM.Id == 1 && nothingModelVM.Name == string.Empty),
+            false,
+        },
+        new object?[]
+        {
+            Mock.Of<INothingModelVM>(nothingModelVM => nothingModelVM.Id == 1 && nothingModelVM.Name == "    "),
+            false,
+        },
+        new object?[] { null, false },
+        new object?[] { new(), false },
+    };
+
+    [Theory]
+    [MemberData(nameof(CanExecuteData))]
+    public void CanExecute_Result_Equal(object? parameter, bool expected)
     {
         //Arrange
         var command = GetOpenUpdateNothingModelCommand(
@@ -19,105 +46,12 @@ public class OpenUpdateNothingModelCommandTests
             Mock.Of<IDialogService>(),
             Mock.Of<INotificationService>(),
             Mock.Of<IUpdateNothingModelView>());
-        var parameter = Mock.Of<INothingModelVM>(nothingModelVM
-            => nothingModelVM.Id == 1 && nothingModelVM.Name == "test");
 
         //Act
         var result = command.CanExecute(parameter);
 
         //Assert
-        Assert.True(result);
-    }
-
-    [Fact]
-    public void CanExecute_Id_0_False()
-    {
-        //Arrange
-        var command = GetOpenUpdateNothingModelCommand(
-            Mock.Of<IUpdateNothingModelVMFactory>(),
-            Mock.Of<IDialogService>(),
-            Mock.Of<INotificationService>(),
-            Mock.Of<IUpdateNothingModelView>());
-        var parameter = Mock.Of<INothingModelVM>(nothingModelVM
-            => nothingModelVM.Id == 0 && nothingModelVM.Name == "test");
-
-        //Act
-        var result = command.CanExecute(parameter);
-
-        //Assert
-        Assert.False(result);
-    }
-
-    [Fact]
-    public void CanExecute_Name_Empty_False()
-    {
-        //Arrange
-        var command = GetOpenUpdateNothingModelCommand(
-            Mock.Of<IUpdateNothingModelVMFactory>(),
-            Mock.Of<IDialogService>(),
-            Mock.Of<INotificationService>(),
-            Mock.Of<IUpdateNothingModelView>());
-        var parameter = Mock.Of<INothingModelVM>(nothingModelVM
-            => nothingModelVM.Id == 1 && nothingModelVM.Name == string.Empty);
-
-        //Act
-        var result = command.CanExecute(parameter);
-
-        //Assert
-        Assert.False(result);
-    }
-
-    [Fact]
-    public void CanExecute_Name_Trim_Empty_False()
-    {
-        //Arrange
-        var command = GetOpenUpdateNothingModelCommand(
-            Mock.Of<IUpdateNothingModelVMFactory>(),
-            Mock.Of<IDialogService>(),
-            Mock.Of<INotificationService>(),
-            Mock.Of<IUpdateNothingModelView>());
-        var parameter = Mock.Of<INothingModelVM>(nothingModelVM
-            => nothingModelVM.Id == 1 && nothingModelVM.Name == "    ");
-
-        //Act
-        var result = command.CanExecute(parameter);
-
-        //Assert
-        Assert.False(result);
-    }
-
-    [Fact]
-    public void CanExecute_Parameter_Null_False()
-    {
-        //Arrange
-        var command = GetOpenUpdateNothingModelCommand(
-            Mock.Of<IUpdateNothingModelVMFactory>(),
-            Mock.Of<IDialogService>(),
-            Mock.Of<INotificationService>(),
-            Mock.Of<IUpdateNothingModelView>());
-
-        //Act
-        var result = command.CanExecute(null);
-
-        //Assert
-        Assert.False(result);
-    }
-
-    [Fact]
-    public void CanExecute_Parameter_Object_False()
-    {
-        //Arrange
-        var command = GetOpenUpdateNothingModelCommand(
-            Mock.Of<IUpdateNothingModelVMFactory>(),
-            Mock.Of<IDialogService>(),
-            Mock.Of<INotificationService>(),
-            Mock.Of<IUpdateNothingModelView>());
-
-        //Act
-        var result = command.CanExecute(new object());
-
-        //Assert
-        Assert.False(result);
+        Assert.Equal(expected, result);
     }
 
     [Fact]
@@ -161,8 +95,43 @@ public class OpenUpdateNothingModelCommandTests
             Times.Once);
     }
 
-    [Fact]
-    public void Execute_Parameter_Null_Notify_Error()
+    public static IEnumerable<object?[]> ExecuteErrorData => new List<object?[]>
+    {
+        new object?[]
+        {
+            null,
+            "Value cannot be null. (Parameter 'parameter')",
+        },
+        new object?[]
+        {
+            new (),
+            "Некорректный тип параметра команды: Object",
+        },
+        new object?[]
+        {
+            Mock.Of<INothingModelVM>(nothingModelVM => nothingModelVM.Id == 0 && nothingModelVM.Name == "test"),
+            "Поле Идентификатор модели не может быть пустым",
+        },
+        new object?[]
+        {
+            Mock.Of<INothingModelVM>(nothingModelVM => nothingModelVM.Id == 1 && nothingModelVM.Name == null!),
+            "Поле Имя модели не может быть пустым",
+        },
+        new object?[]
+        {
+            Mock.Of<INothingModelVM>(nothingModelVM => nothingModelVM.Id == 1 && nothingModelVM.Name == string.Empty),
+            "Поле Имя модели не может быть пустым",
+        },
+        new object?[]
+        {
+            Mock.Of<INothingModelVM>(nothingModelVM => nothingModelVM.Id == 1 && nothingModelVM.Name == "   "),
+            "Поле Имя модели не может быть пустым",
+        },
+    };
+
+    [Theory]
+    [MemberData(nameof(ExecuteErrorData))]
+    public void Execute_Error_Parameter_Error_Message_Equal(object? parameter, string errorMessage)
     {
         //Arrange
         var notificationServiceMock = new Mock<INotificationService>();
@@ -171,52 +140,6 @@ public class OpenUpdateNothingModelCommandTests
             Mock.Of<IDialogService>(),
             notificationServiceMock.Object,
             Mock.Of<IUpdateNothingModelView>());
-
-        //Act
-        command.Execute(null);
-
-        //Assert
-        notificationServiceMock.Verify(
-            notificationService => notificationService.Notify(
-                It.Is<string>(message => message == "Value cannot be null. (Parameter 'parameter')"),
-                It.IsAny<string>()),
-            Times.Once);
-    }
-
-    [Fact]
-    public void Execute_Parameter_Object_Notify_Error()
-    {
-        //Arrange
-        var notificationServiceMock = new Mock<INotificationService>();
-        var command = GetOpenUpdateNothingModelCommand(
-            Mock.Of<IUpdateNothingModelVMFactory>(),
-            Mock.Of<IDialogService>(),
-            notificationServiceMock.Object,
-            Mock.Of<IUpdateNothingModelView>());
-
-        //Act
-        command.Execute(new object());
-
-        //Assert
-        notificationServiceMock.Verify(
-            notificationService => notificationService.Notify(
-                It.Is<string>(message => message == "Некорректный тип параметра команды: Object"),
-                It.IsAny<string>()),
-            Times.Once);
-    }
-
-    [Fact]
-    public void Execute_Parameter_Id_0_Notify_Error()
-    {
-        //Arrange
-        var notificationServiceMock = new Mock<INotificationService>();
-        var command = GetOpenUpdateNothingModelCommand(
-            Mock.Of<IUpdateNothingModelVMFactory>(),
-            Mock.Of<IDialogService>(),
-            notificationServiceMock.Object,
-            Mock.Of<IUpdateNothingModelView>());
-        var parameter = Mock.Of<INothingModelVM>(nothingModelVM
-            => nothingModelVM.Id == 0 && nothingModelVM.Name == "test");
 
         //Act
         command.Execute(parameter);
@@ -224,79 +147,7 @@ public class OpenUpdateNothingModelCommandTests
         //Assert
         notificationServiceMock.Verify(
             notificationService => notificationService.Notify(
-                It.Is<string>(message => message == "Поле Идентификатор модели не может быть пустым"),
-                It.IsAny<string>()),
-            Times.Once);
-    }
-
-    [Fact]
-    public void Execute_Parameter_Name_Null_Notify_Error()
-    {
-        //Arrange
-        var notificationServiceMock = new Mock<INotificationService>();
-        var command = GetOpenUpdateNothingModelCommand(
-            Mock.Of<IUpdateNothingModelVMFactory>(),
-            Mock.Of<IDialogService>(),
-            notificationServiceMock.Object,
-            Mock.Of<IUpdateNothingModelView>());
-        var parameter = Mock.Of<INothingModelVM>(nothingModelVM
-            => nothingModelVM.Id == 1 && nothingModelVM.Name == null!);
-
-        //Act
-        command.Execute(parameter);
-
-        //Assert
-        notificationServiceMock.Verify(
-            notificationService => notificationService.Notify(
-                It.Is<string>(message => message == "Поле Имя модели не может быть пустым"),
-                It.IsAny<string>()),
-            Times.Once);
-    }
-
-    [Fact]
-    public void Execute_Parameter_Name_Empty_Notify_Error()
-    {
-        //Arrange
-        var notificationServiceMock = new Mock<INotificationService>();
-        var command = GetOpenUpdateNothingModelCommand(
-            Mock.Of<IUpdateNothingModelVMFactory>(),
-            Mock.Of<IDialogService>(),
-            notificationServiceMock.Object,
-            Mock.Of<IUpdateNothingModelView>());
-        var parameter = Mock.Of<INothingModelVM>(nothingModelVM
-            => nothingModelVM.Id == 1 && nothingModelVM.Name == string.Empty);
-
-        //Act
-        command.Execute(parameter);
-
-        //Assert
-        notificationServiceMock.Verify(
-            notificationService => notificationService.Notify(
-                It.Is<string>(message => message == "Поле Имя модели не может быть пустым"),
-                It.IsAny<string>()),
-            Times.Once);
-    }
-
-    [Fact]
-    public void Execute_Parameter_Name_Trim_Empty_Notify_Error()
-    {
-        //Arrange
-        var notificationServiceMock = new Mock<INotificationService>();
-        var command = GetOpenUpdateNothingModelCommand(
-            Mock.Of<IUpdateNothingModelVMFactory>(),
-            Mock.Of<IDialogService>(),
-            notificationServiceMock.Object,
-            Mock.Of<IUpdateNothingModelView>());
-        var parameter = Mock.Of<INothingModelVM>(nothingModelVM
-            => nothingModelVM.Id == 1 && nothingModelVM.Name == "   ");
-
-        //Act
-        command.Execute(parameter);
-
-        //Assert
-        notificationServiceMock.Verify(
-            notificationService => notificationService.Notify(
-                It.Is<string>(message => message == "Поле Имя модели не может быть пустым"),
+                It.Is<string>(message => message == errorMessage),
                 It.IsAny<string>()),
             Times.Once);
     }
