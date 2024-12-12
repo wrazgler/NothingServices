@@ -6,171 +6,33 @@ namespace NothingServices.WPFApp.UnitTests.ConvertersTests;
 
 public class NotificatorHeightConverterTests
 {
-    [Fact]
-    public void Convert_Two_Values_Success()
+    public static IEnumerable<object?[]> ConvertData => new List<object?[]>
+    {
+        new object?[] { new object?[] { 2.0, 3.0 }, 6.0 },
+        new object?[] { new object?[] { "2,0", 3.0 }, 6.0 },
+        new object?[] { new object?[] { 2.0, "3,0" }, 6.0 },
+        new object?[] { new object?[] { "2.0", "3.0" }, 6.0 },
+        new object?[] { new object?[] { "2,0", "3,0" }, 6.0 },
+        new [] { null, Binding.DoNothing },
+        new [] { new object?[] { 1.0 }, Binding.DoNothing },
+        new [] { new object?[] { 1.0, 2.0, 3.0 }, Binding.DoNothing },
+        new [] { new object?[] { null, 2.0 }, Binding.DoNothing },
+        new [] { new object?[] { 1.0 , null }, Binding.DoNothing },
+        new [] { new object?[] { "test", 2.0 }, Binding.DoNothing },
+        new [] { new object?[] { 1.0 , "test" }, Binding.DoNothing },
+    };
+
+    [Theory]
+    [MemberData(nameof(ConvertData))]
+    public void Convert_Result_Equal(object?[]? value, object expected)
     {
         //Arrange
         var converter = new NotificatorHeightConverter();
 
         //Act
-        var result = converter.Convert([2.0, 3.0], typeof(bool), null, CultureInfo.InvariantCulture);
+        var result = converter.Convert(value, typeof(bool), null, CultureInfo.InvariantCulture);
 
         //Assert
-        var expected = 6.0;
-        Assert.Equal(expected, result);
-    }
-
-    [Fact]
-    public void Convert_First_String_Number_Values_Success()
-    {
-        //Arrange
-        var converter = new NotificatorHeightConverter();
-
-        //Act
-        var result = converter.Convert(["2,0", 3.0], typeof(double), null, CultureInfo.InvariantCulture);
-
-        //Assert
-        var expected = 6.0;
-        Assert.Equal(expected, result);
-    }
-
-    [Fact]
-    public void Convert_Second_String_Number_Values_Success()
-    {
-        //Arrange
-        var converter = new NotificatorHeightConverter();
-
-        //Act
-        var result = converter.Convert([2.0, "3,0"], typeof(double), null, CultureInfo.InvariantCulture);
-
-        //Assert
-        var expected = 6.0;
-        Assert.Equal(expected, result);
-    }
-
-    [Fact]
-    public void Convert_Both_String_Point_Number_Values_Success()
-    {
-        //Arrange
-        var converter = new NotificatorHeightConverter();
-
-        //Act
-        var result = converter.Convert(["2.0", "3.0"], typeof(double), null, CultureInfo.InvariantCulture);
-
-        //Assert
-        var expected = 6.0;
-        Assert.Equal(expected, result);
-    }
-
-    [Fact]
-    public void Convert_Both_String_Corner_Number_Values_Success()
-    {
-        //Arrange
-        var converter = new NotificatorHeightConverter();
-
-        //Act
-        var result = converter.Convert(["2,0", "3,0"], typeof(double), null, CultureInfo.InvariantCulture);
-
-        //Assert
-        var expected = 6.0;
-        Assert.Equal(expected, result);
-    }
-
-    [Fact]
-    public void Convert_Null_Return_Binding_DoNothing()
-    {
-        //Arrange
-        var converter = new NotificatorHeightConverter();
-
-        //Act
-        var result = converter.Convert(null, typeof(double), null, CultureInfo.InvariantCulture);
-
-        //Assert
-        var expected = Binding.DoNothing;
-        Assert.Equal(expected, result);
-    }
-
-    [Fact]
-    public void Convert_One_Value_Return_Binding_DoNothing()
-    {
-        //Arrange
-        var converter = new NotificatorHeightConverter();
-
-        //Act
-        var result = converter.Convert([1.0], typeof(double), null, CultureInfo.InvariantCulture);
-
-        //Assert
-        var expected = Binding.DoNothing;
-        Assert.Equal(expected, result);
-    }
-
-    [Fact]
-    public void Convert_Three_Values_Return_Binding_DoNothing()
-    {
-        //Arrange
-        var converter = new NotificatorHeightConverter();
-
-        //Act
-        var result = converter.Convert([1.0, 2.0, 3.0], typeof(double), null, CultureInfo.InvariantCulture);
-
-        //Assert
-        var expected = Binding.DoNothing;
-        Assert.Equal(expected, result);
-    }
-
-    [Fact]
-    public void Convert_First_Null_Return_Binding_DoNothing()
-    {
-        //Arrange
-        var converter = new NotificatorHeightConverter();
-
-        //Act
-        var result = converter.Convert([null, 2.0], typeof(double), null, CultureInfo.InvariantCulture);
-
-        //Assert
-        var expected = Binding.DoNothing;
-        Assert.Equal(expected, result);
-    }
-
-    [Fact]
-    public void Convert_Second_Null_Return_Binding_DoNothing()
-    {
-        //Arrange
-        var converter = new NotificatorHeightConverter();
-
-        //Act
-        var result = converter.Convert([1.0 , null], typeof(double), null, CultureInfo.InvariantCulture);
-
-        //Assert
-        var expected = Binding.DoNothing;
-        Assert.Equal(expected, result);
-    }
-
-    [Fact]
-    public void Convert_First_Not_Number_Return_Binding_DoNothing()
-    {
-        //Arrange
-        var converter = new NotificatorHeightConverter();
-
-        //Act
-        var result = converter.Convert(["test", 2.0], typeof(double), null, CultureInfo.InvariantCulture);
-
-        //Assert
-        var expected = Binding.DoNothing;
-        Assert.Equal(expected, result);
-    }
-
-    [Fact]
-    public void Convert_Second_Not_Number_Return_Binding_DoNothing()
-    {
-        //Arrange
-        var converter = new NotificatorHeightConverter();
-
-        //Act
-        var result = converter.Convert([1.0 , "test"], typeof(double), null, CultureInfo.InvariantCulture);
-
-        //Assert
-        var expected = Binding.DoNothing;
         Assert.Equal(expected, result);
     }
 
