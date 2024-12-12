@@ -42,17 +42,13 @@ public class CreateCommandTests
 
     [Theory]
     [MemberData(nameof(CanExecuteData))]
-    public void CanExecute_Result_Equal(string name, bool expected)
+    public void CanExecute_Result_Equal(object? parameter, bool expected)
     {
         //Arrange
         var command = GetCreateCommand(
             Mock.Of<IDialogService>(),
             Mock.Of<IMainWindowManager>(),
             Mock.Of<INotificationService>());
-        var parameter = new CreateNothingModelVM(Mock.Of<IButtonVM>(), Mock.Of<IButtonVM>())
-        {
-            Name = name,
-        };
 
         //Act
         var result = command.CanExecute(parameter);
