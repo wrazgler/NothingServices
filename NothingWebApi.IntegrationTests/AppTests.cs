@@ -33,7 +33,6 @@ public class AppTests
                 }
             };
             Assert.Equivalent(expected, result);
-            await StopApp();
         }
         finally
         {
@@ -63,7 +62,6 @@ public class AppTests
                 Name = "Test",
             };
             Assert.Equivalent(expected, result);
-            await StopApp();
         }
         finally
         {
@@ -97,7 +95,6 @@ public class AppTests
                 Name = createNothingModelDto.Name,
             };
             Assert.Equivalent(expected, result);
-            await StopApp();
         }
         finally
         {
@@ -132,7 +129,6 @@ public class AppTests
                 Name = updateNothingModelDto.Name,
             };
             Assert.Equivalent(expected, result);
-            await StopApp();
         }
         finally
         {
@@ -162,7 +158,6 @@ public class AppTests
                 Name = "Test",
             };
             Assert.Equivalent(expected, result);
-            await StopApp();
         }
         finally
         {
@@ -188,7 +183,7 @@ public class AppTests
         await Task.Delay(delay);
     }
 
-    private static async Task StopApp(int beforeDelay = 10000, int afterDelay = 2000)
+    private static async Task StopApp(int beforeDelay = 15000, int afterDelay = 2000)
     {
         await Task.Delay(beforeDelay);
         await Process.Start("docker", "container remove -f -v test_postgres_nothing_web_api_db")

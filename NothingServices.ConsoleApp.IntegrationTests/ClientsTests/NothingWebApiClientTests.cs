@@ -32,7 +32,6 @@ public class NothingWebApiClientTests
                 }
             };
             Assert.Equivalent(expected, result, true);
-            await StopApp();
         }
         finally
         {
@@ -61,7 +60,6 @@ public class NothingWebApiClientTests
                 Name = "Test",
             };
             Assert.Equivalent(expected, result, true);
-            await StopApp();
         }
         finally
         {
@@ -93,7 +91,6 @@ public class NothingWebApiClientTests
                 Name = createNothingModelWebDto.Name,
             };
             Assert.Equivalent(expected, result, true);
-            await StopApp();
         }
         finally
         {
@@ -126,7 +123,6 @@ public class NothingWebApiClientTests
                 Name = updateNothingModelWebDto.Name,
             };
             Assert.Equivalent(expected, result, true);
-            await StopApp();
         }
         finally
         {
@@ -155,7 +151,6 @@ public class NothingWebApiClientTests
                 Name = "Test",
             };
             Assert.Equivalent(expected, result, true);
-            await StopApp();
         }
         finally
         {
@@ -186,7 +181,7 @@ public class NothingWebApiClientTests
         await Task.Delay(delay);
     }
 
-    private static async Task StopApp(int beforeDelay = 10000, int afterDelay = 2000)
+    private static async Task StopApp(int beforeDelay = 15000, int afterDelay = 2000)
     {
         await Task.Delay(beforeDelay);
         await Process.Start("docker", "container remove -f -v console_nothing_web_api_test_postgres_db")
