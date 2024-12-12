@@ -65,6 +65,7 @@ public static class AppExtensions
     /// <returns>Коллекция сервисов с добавленными сервисами приложения</returns>
     public static IServiceCollection AddAppServices(this IServiceCollection services)
     {
+        services.AddScoped<CancellationTokenSource>();
         services.AddScoped<IAppVersionProvider, AppVersionProvider>();
         services.AddScoped<IDialogService, DialogService>();
         services.AddScoped<IMainWindowManager, MainWindowManager>();
