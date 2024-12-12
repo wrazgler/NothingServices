@@ -42,7 +42,7 @@ public class CreateCommandTests
 
     [Theory]
     [MemberData(nameof(CanExecuteData))]
-    public void CanExecute_Test_MemberData(string name, bool expected)
+    public void CanExecute_Result_Equal(string name, bool expected)
     {
         //Arrange
         var command = GetCreateCommand(
