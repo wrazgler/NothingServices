@@ -9,7 +9,7 @@ namespace NothingServices.WPFApp.UnitTests.ConfigsTests;
 
 public class NothingWebApiClientConfigTests
 {
-        [Fact]
+    [Fact]
     public void NothingWebApiClientConfig_Equivalent()
     {
         //Arrange
