@@ -39,6 +39,7 @@ public class AppTests
                 }
             };
             Assert.Equivalent(expected, result);
+            await StopApp();
         }
         finally
         {
@@ -70,6 +71,7 @@ public class AppTests
                 Name = "Test",
             };
             Assert.Equivalent(expected, result);
+            await StopApp();
         }
         finally
         {
@@ -101,6 +103,7 @@ public class AppTests
                 Name = createNothingModelDto.Name,
             };
             Assert.Equivalent(expected, result);
+            await StopApp();
         }
         finally
         {
@@ -133,6 +136,7 @@ public class AppTests
                 Name = updateNothingModelDto.Name,
             };
             Assert.Equivalent(expected, result);
+            await StopApp();
         }
         finally
         {
@@ -164,6 +168,7 @@ public class AppTests
                 Name = "Test",
             };
             Assert.Equivalent(expected, result);
+            await StopApp();
         }
         finally
         {

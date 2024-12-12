@@ -32,6 +32,7 @@ public class NothingWebApiClientTests
                 }
             };
             Assert.Equivalent(expected, result, true);
+            await StopApp();
         }
         finally
         {
@@ -60,6 +61,7 @@ public class NothingWebApiClientTests
                 Name = "Test",
             };
             Assert.Equivalent(expected, result, true);
+            await StopApp();
         }
         finally
         {
@@ -91,6 +93,7 @@ public class NothingWebApiClientTests
                 Name = createNothingModelWebDto.Name,
             };
             Assert.Equivalent(expected, result, true);
+            await StopApp();
         }
         finally
         {
@@ -123,6 +126,7 @@ public class NothingWebApiClientTests
                 Name = updateNothingModelWebDto.Name,
             };
             Assert.Equivalent(expected, result, true);
+            await StopApp();
         }
         finally
         {
@@ -151,6 +155,7 @@ public class NothingWebApiClientTests
                 Name = "Test",
             };
             Assert.Equivalent(expected, result, true);
+            await StopApp();
         }
         finally
         {
