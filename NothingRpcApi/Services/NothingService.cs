@@ -67,7 +67,8 @@ public class NothingService(
     {
         try
         {
-            var nothingModelDto = await  _dbContext.NothingModels.AsNoTracking()
+            var nothingModelDto = await  _dbContext.NothingModels
+                .AsNoTracking()
                 .Where(model => model.Id == nothingModelIdDto.Id)
                 .Select(model => _mapper.Map<NothingModelDto>(model))
                 .SingleOrDefaultAsync(context.CancellationToken);
