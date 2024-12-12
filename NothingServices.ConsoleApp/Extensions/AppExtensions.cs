@@ -30,8 +30,8 @@ public static class AppExtensions
         IConfiguration configuration)
     {
         var config = configuration.GetConfig<NothingRpcApiClientConfig>();
-        services.AddScoped(_ => new NothingRpcService.NothingRpcServiceClient(config.GrpcChannel));
-        services.AddScoped<INothingWebApiClient, NothingWebApiClient>();
+        services.AddTransient(_ => new NothingRpcService.NothingRpcServiceClient(config.GrpcChannel));
+        services.AddTransient<INothingWebApiClient, NothingWebApiClient>();
         return services;
     }
 
@@ -57,10 +57,10 @@ public static class AppExtensions
     /// <returns>Коллекция сервисов с добавленными сервисами приложения</returns>
     public static IServiceCollection AddAppServices(this IServiceCollection services)
     {
-        services.AddScoped<IConsoleService, ConsoleService>();
-        services.AddScoped<ILoopService, LoopService>();
-        services.AddScoped<NothingRpcApiClientStrategy>();
-        services.AddScoped<NothingWebApiClientStrategy>();
+        services.AddTransient<IConsoleService, ConsoleService>();
+        services.AddTransient<ILoopService, LoopService>();
+        services.AddTransient<NothingRpcApiClientStrategy>();
+        services.AddTransient<NothingWebApiClientStrategy>();
         return services;
     }
 

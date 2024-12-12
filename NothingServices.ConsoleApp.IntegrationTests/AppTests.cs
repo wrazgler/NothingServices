@@ -41,7 +41,6 @@ public class AppTests
             };
             var expected = GetAssert(JsonSerializer.Serialize(nothingModels, _jsonSerializerOptions));
             Assert.Equal(expected, result);
-            await StopApp();
         }
         finally
         {
@@ -76,7 +75,6 @@ public class AppTests
                 Environment.NewLine,
                 JsonSerializer.Serialize(nothingModel, _jsonSerializerOptions)));
             Assert.Equal(expected, result);
-            await StopApp();
         }
         finally
         {
@@ -112,7 +110,6 @@ public class AppTests
                 Environment.NewLine,
                 JsonSerializer.Serialize(nothingModel, _jsonSerializerOptions)));
             Assert.Equal(expected, result);
-            await StopApp();
         }
         finally
         {
@@ -151,7 +148,6 @@ public class AppTests
                 Environment.NewLine,
                 JsonSerializer.Serialize(nothingModel, _jsonSerializerOptions)));
             Assert.Equal(expected, result);
-            await StopApp();
         }
         finally
         {
@@ -186,7 +182,6 @@ public class AppTests
                 Environment.NewLine,
                 JsonSerializer.Serialize(nothingModel, _jsonSerializerOptions)));
             Assert.Equal(expected, result);
-            await StopApp();
         }
         finally
         {
@@ -221,7 +216,6 @@ public class AppTests
             };
             var expected = GetAssert(JsonSerializer.Serialize(nothingModels, _jsonSerializerOptions));
             Assert.Equal(expected, result);
-            await StopApp();
         }
         finally
         {
@@ -256,7 +250,6 @@ public class AppTests
                 Environment.NewLine,
                 JsonSerializer.Serialize(nothingModel, _jsonSerializerOptions)));
             Assert.Equal(expected, result);
-            await StopApp();
         }
         finally
         {
@@ -292,7 +285,6 @@ public class AppTests
                 Environment.NewLine,
                 JsonSerializer.Serialize(nothingModel, _jsonSerializerOptions)));
             Assert.Equal(expected, result);
-            await StopApp();
         }
         finally
         {
@@ -331,7 +323,6 @@ public class AppTests
                 Environment.NewLine,
                 JsonSerializer.Serialize(nothingModel, _jsonSerializerOptions)));
             Assert.Equal(expected, result);
-            await StopApp();
         }
         finally
         {
@@ -366,7 +357,6 @@ public class AppTests
                 Environment.NewLine,
                 JsonSerializer.Serialize(nothingModel, _jsonSerializerOptions)));
             Assert.Equal(expected, result);
-            await StopApp();
         }
         finally
         {
