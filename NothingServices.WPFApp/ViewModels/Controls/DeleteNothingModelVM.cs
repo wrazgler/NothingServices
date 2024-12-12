@@ -16,7 +16,7 @@ public class DeleteNothingModelVM(
     INothingModelVM nothingModelVM)
     : ObservableObject, IDialogContentVM
 {
-    private const string TitleFormat = "Удалить модели: {0}";
+    private const string TitleFormat = "Удалить модель: {0}";
 
     /// <summary>
     /// Идентификатор модели
