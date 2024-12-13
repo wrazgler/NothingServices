@@ -438,7 +438,7 @@ public class AppTests
         Console.SetOut(textWriterMock.Object);
     }
 
-    private static async Task StartApp(int delay = 10000)
+    private static async Task StartApp(int delay = 15000)
     {
         var projectPath = Path.GetFullPath("../../../");
         var dockerFilePath = Path.Combine(projectPath, "docker-compose.app-test.yml");
@@ -446,7 +446,7 @@ public class AppTests
         await Task.Delay(delay);
     }
 
-    private static async Task StopApp(int beforeDelay = 25000, int afterDelay = 2000)
+    private static async Task StopApp(int beforeDelay = 20000, int afterDelay = 2000)
     {
         await Task.Delay(beforeDelay);
         await Process.Start("docker", "container remove -f -v console_app_test_postgres_nothing_grpc_api_db")
