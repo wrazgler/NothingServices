@@ -189,13 +189,13 @@ public class AppTests
         return client;
     }
 
-    private static async Task StartApp(int delay = 10000)
+    private static async Task StartApp(int delay = 15000)
     {
         await Process.Start("docker", "compose up -d").WaitForExitAsync();
         await Task.Delay(delay);
     }
 
-    private static async Task StopApp(int beforeDelay = 15000, int afterDelay = 2000)
+    private static async Task StopApp(int beforeDelay = 20000, int afterDelay = 2000)
     {
         await Task.Delay(beforeDelay);
         await Process.Start("docker", "container remove -f -v test_postgres_nothing_grpc_api_db")

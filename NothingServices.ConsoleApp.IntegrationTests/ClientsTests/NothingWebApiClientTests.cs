@@ -173,7 +173,7 @@ public class NothingWebApiClientTests
         return nothingWebApiClient;
     }
 
-    private static async Task StartApp(int delay = 10000)
+    private static async Task StartApp(int delay = 15000)
     {
         var projectPath = Path.GetFullPath("../../../");
         var dockerFilePath = Path.Combine(projectPath,  "docker-compose.nothing-web-api-client.yml");
@@ -181,7 +181,7 @@ public class NothingWebApiClientTests
         await Task.Delay(delay);
     }
 
-    private static async Task StopApp(int beforeDelay = 15000, int afterDelay = 2000)
+    private static async Task StopApp(int beforeDelay = 20000, int afterDelay = 2000)
     {
         await Task.Delay(beforeDelay);
         await Process.Start("docker", "container remove -f -v console_nothing_web_api_test_postgres_db")
