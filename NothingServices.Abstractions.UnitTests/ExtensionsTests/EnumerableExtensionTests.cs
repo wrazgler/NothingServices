@@ -7,13 +7,13 @@ public class EnumerableExtensionTests
     {
         //Arrange
         var collection = new List<int>(){1,2,3,4,5,6,7,8,9};
-        
+
         //Act
         var result = 0;
         collection.ForEach(x => result += x);
-        
+
         //Assert
-        var assert = collection.Sum(x => x);
-        Assert.Equal(assert, result);
+        var expected = collection.Sum(x => x);
+        Assert.Equal(expected, result);
     }
 }

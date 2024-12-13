@@ -25,11 +25,11 @@ public class NothingWebApiClientStrategy(
     /// Вывести в консоль список моделей
     /// </summary>
     /// <param name="cancellationToken">Токен отмены</param>
-    public override async Task GetNothingModelsAsync(CancellationToken cancellationToken = default)
+    public override async Task GetNothingModels(CancellationToken cancellationToken = default)
     {
         try
         {
-            var nothingModels = await _client.GetAsync(cancellationToken);
+            var nothingModels = await _client.Get(cancellationToken);
             ConsoleService.WriteLine(JsonSerializer.Serialize(nothingModels, JsonSerializerOptions));
         }
         catch (Exception ex)
@@ -43,12 +43,12 @@ public class NothingWebApiClientStrategy(
     /// Вывести в консоль модель с указанным идентификатором
     /// </summary>
     /// <param name="cancellationToken">Токен отмены</param>
-    public override async Task GetNothingModelAsync(CancellationToken cancellationToken = default)
+    public override async Task GetNothingModel(CancellationToken cancellationToken = default)
     {
         try
         {
             var id = GetId(cancellationToken);
-            var nothingModel = await _client.GetAsync(id, cancellationToken);
+            var nothingModel = await _client.Get(id, cancellationToken);
             ConsoleService.WriteLine(JsonSerializer.Serialize(nothingModel, JsonSerializerOptions));
         }
         catch (Exception ex)
@@ -62,13 +62,13 @@ public class NothingWebApiClientStrategy(
     /// Создать новую модель
     /// </summary>
     /// <param name="cancellationToken">Токен отмены</param>
-    public override async Task CreateNothingModelAsync(CancellationToken cancellationToken = default)
+    public override async Task CreateNothingModel(CancellationToken cancellationToken = default)
     {
         try
         {
             var createNothingModel = GetCreateNothingModelDto(cancellationToken);
             var nothingModel = await _client
-                .CreateAsync(createNothingModel, cancellationToken);
+                .Create(createNothingModel, cancellationToken);
             ConsoleService.WriteLine(JsonSerializer.Serialize(nothingModel, JsonSerializerOptions));
         }
         catch (Exception ex)
@@ -82,13 +82,13 @@ public class NothingWebApiClientStrategy(
     /// Обновить существующую модель
     /// </summary>
     /// <param name="cancellationToken">Токен отмены</param>
-    public override async Task UpdateNothingModelAsync(CancellationToken cancellationToken = default)
+    public override async Task UpdateNothingModel(CancellationToken cancellationToken = default)
     {
         try
         {
             var updateNothingModel = GetUpdateNothingModelDto(cancellationToken);
             var nothingModel = await _client
-                .UpdateAsync(updateNothingModel, cancellationToken);
+                .Update(updateNothingModel, cancellationToken);
             ConsoleService.WriteLine(JsonSerializer.Serialize(nothingModel, JsonSerializerOptions));
         }
         catch (Exception ex)
@@ -102,12 +102,12 @@ public class NothingWebApiClientStrategy(
     /// Удалить модель
     /// </summary>
     /// <param name="cancellationToken">Токен отмены</param>
-    public override async Task DeleteNothingModelAsync(CancellationToken cancellationToken = default)
+    public override async Task DeleteNothingModel(CancellationToken cancellationToken = default)
     {
         try
         {
             var id = GetId(cancellationToken);
-            var nothingModel = await _client.DeleteAsync(id, cancellationToken);
+            var nothingModel = await _client.Delete(id, cancellationToken);
             ConsoleService.WriteLine(JsonSerializer.Serialize(nothingModel, JsonSerializerOptions));
         }
         catch (Exception ex)
@@ -126,7 +126,7 @@ public class NothingWebApiClientStrategy(
         };
     }
 
-    private UpdateNothingModelWebDto GetUpdateNothingModelDto(CancellationToken cancellationToken)
+    private UpdateNothingModelWebDto GetUpdateNothingModelDto(CancellationToken cancellationToken = default)
     {
         var id = GetId(cancellationToken);
         var name = GetName(cancellationToken);

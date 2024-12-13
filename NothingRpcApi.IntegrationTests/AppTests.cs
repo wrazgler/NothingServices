@@ -12,7 +12,7 @@ public class AppTests
     private const string AppUrl = "https://localhost:8459/nothing-grpc-api";
 
     [Fact]
-    public async Task GetAsync_Result_Equal()
+    public async Task Get_Result_Equal()
     {
         try
         {
@@ -30,7 +30,7 @@ public class AppTests
             }
 
             //Assert
-            var assert = new NothingModelDto[]
+            var expected = new NothingModelDto[]
             {
                 new()
                 {
@@ -38,8 +38,7 @@ public class AppTests
                     Name = "Test",
                 }
             };
-            Assert.Equivalent(assert, result);
-            await StopApp();
+            Assert.Equivalent(expected, result);
         }
         finally
         {
@@ -48,7 +47,7 @@ public class AppTests
     }
 
     [Fact]
-    public async Task GetAsync_Id_Result_Equal()
+    public async Task Get_Id_Result_Equal()
     {
         try
         {
@@ -65,13 +64,12 @@ public class AppTests
             var result = await client.GetAsync(request);
 
             //Assert
-            var assert = new NothingModelDto()
+            var expected = new NothingModelDto()
             {
                 Id = request.Id,
                 Name = "Test",
             };
-            Assert.Equivalent(assert, result);
-            await StopApp();
+            Assert.Equivalent(expected, result);
         }
         finally
         {
@@ -80,7 +78,7 @@ public class AppTests
     }
 
     [Fact]
-    public async Task CreateAsync_Result_Equal()
+    public async Task Create_Result_Equal()
     {
         try
         {
@@ -97,13 +95,12 @@ public class AppTests
             var result = await client.CreateAsync(createNothingModelDto);
 
             //Assert
-            var assert = new NothingModelDto()
+            var expected = new NothingModelDto()
             {
                 Id = 2,
                 Name = createNothingModelDto.Name,
             };
-            Assert.Equivalent(assert, result);
-            await StopApp();
+            Assert.Equivalent(expected, result);
         }
         finally
         {
@@ -112,7 +109,7 @@ public class AppTests
     }
 
     [Fact]
-    public async Task UpdateAsync_Result_Equal()
+    public async Task Update_Result_Equal()
 	{
         try
         {
@@ -130,13 +127,12 @@ public class AppTests
             var result = await client.UpdateAsync(updateNothingModelDto);
 
             //Assert
-            var assert = new NothingModelDto()
+            var expected = new NothingModelDto()
             {
                 Id = updateNothingModelDto.Id,
                 Name = updateNothingModelDto.Name,
             };
-            Assert.Equivalent(assert, result);
-            await StopApp();
+            Assert.Equivalent(expected, result);
         }
         finally
         {
@@ -145,7 +141,7 @@ public class AppTests
     }
 
     [Fact]
-    public async Task DeleteAsync_Result_Equal()
+    public async Task Delete_Result_Equal()
     {
         try
         {
@@ -162,13 +158,12 @@ public class AppTests
             var result = await client.DeleteAsync(request);
 
             //Assert
-            var assert = new NothingModelDto()
+            var expected = new NothingModelDto()
             {
                 Id = request.Id,
                 Name = "Test",
             };
-            Assert.Equivalent(assert, result);
-            await StopApp();
+            Assert.Equivalent(expected, result);
         }
         finally
         {
@@ -194,13 +189,13 @@ public class AppTests
         return client;
     }
 
-    private static async Task StartApp(int delay = 10000)
+    private static async Task StartApp(int delay = 15000)
     {
         await Process.Start("docker", "compose up -d").WaitForExitAsync();
         await Task.Delay(delay);
     }
 
-    private static async Task StopApp(int beforeDelay = 10000, int afterDelay = 2000)
+    private static async Task StopApp(int beforeDelay = 20000, int afterDelay = 2000)
     {
         await Task.Delay(beforeDelay);
         await Process.Start("docker", "container remove -f -v test_postgres_nothing_grpc_api_db")

@@ -19,11 +19,11 @@ using Microsoft.Extensions.Configuration;
          var result = configuration.GetConfig<AppConfig>();
 
          //Assert
-         var assert = new AppConfig()
+         var expected = new AppConfig()
          {
              PathBase = "/nothing-grpc-api",
          };
-         Assert.Equivalent(assert, result, true);
+         Assert.Equivalent(expected, result, true);
      }
 
      [Fact]
@@ -39,11 +39,11 @@ using Microsoft.Extensions.Configuration;
          var result = services.GetRequiredService<IOptions<AppConfig>>().Value;
 
          //Assert
-         var assert = new AppConfig()
+         var expected = new AppConfig()
          {
              PathBase = "/nothing-grpc-api",
          };
-         Assert.Equivalent(assert, result, true);
+         Assert.Equivalent(expected, result, true);
      }
 
      [Fact]

@@ -1,0 +1,78 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:assistants="clr-namespace:NothingServices.WPFApp.Assistants">
+
+  <ResourceDictionary.MergedDictionaries>
+    <ResourceDictionary Source="pack://application:,,,/NothingServices.WPFApp;v1.0.0.0;component/Styles/Colors.xaml"/>
+    <ResourceDictionary Source="pack://application:,,,/NothingServices.WPFApp;v1.0.0.0;component/Styles/ScrollViewerStyles.xaml"/>
+  </ResourceDictionary.MergedDictionaries>
+
+  <ControlTemplate x:Key="EmptyListBoxTemplate" TargetType="{x:Type ListBox}">
+    <Border x:Name="EmptyListBoxBorder"
+            Background="{TemplateBinding Background}"
+            BorderBrush="{TemplateBinding BorderBrush}"
+            BorderThickness="{TemplateBinding BorderThickness}"
+            ClipToBounds="{TemplateBinding ClipToBounds}"
+            CornerRadius="{Binding Path=(assistants:ElementAssistant.CornerRadius), RelativeSource={RelativeSource TemplatedParent}}"
+            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+      <TextBlock x:Name="EmptyListBoxTextBlock"
+                 ClipToBounds="{TemplateBinding ClipToBounds}"
+                 Foreground="{TemplateBinding Foreground}"
+                 Margin="{TemplateBinding Padding}"
+                 Text="{Binding Path=(assistants:ElementAssistant.Text), RelativeSource={RelativeSource TemplatedParent}}"
+                 TextAlignment="{Binding Path=(assistants:ElementAssistant.TextAlignment), RelativeSource={RelativeSource TemplatedParent}}"
+                 TextWrapping="{Binding Path=(assistants:ElementAssistant.TextWrapping), RelativeSource={RelativeSource TemplatedParent}}"/>
+    </Border>
+  </ControlTemplate>
+
+  <ControlTemplate x:Key="ListBoxTemplate" TargetType="{x:Type ListBox}">
+    <Grid x:Name="ListBoxGrid">
+      <Border x:Name="ListBoxBorder"
+              Background="{TemplateBinding Background}"
+              BorderBrush="{TemplateBinding BorderBrush}"
+              BorderThickness="{TemplateBinding BorderThickness}"
+              ClipToBounds="{TemplateBinding ClipToBounds}"
+              CornerRadius="{Binding Path=(assistants:ElementAssistant.CornerRadius), RelativeSource={RelativeSource TemplatedParent}}"
+              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+      <ScrollViewer x:Name="ListBoxScrollViewer"
+                    Style="{StaticResource StandardScrollViewer}">
+        <ItemsPresenter x:Name="ListBoxItemsPresenter"
+                        ClipToBounds="{TemplateBinding ClipToBounds}"
+                        HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                        Margin="{TemplateBinding Padding}"
+                        SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                        VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                        Width="{Binding ElementName=ListBoxScrollViewer, Path=ActualWidth}"/>
+      </ScrollViewer>
+    </Grid>
+  </ControlTemplate>
+
+  <Style x:Key="StandardListBox" TargetType="{x:Type ListBox}">
+    <Setter Property="assistants:ElementAssistant.CornerRadius" Value="8" />
+    <Setter Property="Background" Value="{StaticResource DefaultElementBackground}"/>
+    <Setter Property="BorderBrush" Value="{StaticResource DefaultElementBorderBrush}" />
+    <Setter Property="BorderThickness" Value="1"/>
+    <Setter Property="ClipToBounds" Value="True"/>
+    <Setter Property="HorizontalAlignment" Value="Stretch"/>
+    <Setter Property="HorizontalContentAlignment" Value="Left"/>
+    <Setter Property="Padding" Value="0,0,0,5"/>
+    <Setter Property="SnapsToDevicePixels" Value="True"/>
+    <Setter Property="Template" Value="{StaticResource ListBoxTemplate}"/>
+    <Setter Property="VerticalAlignment" Value="Stretch"/>
+    <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+    <Style.Triggers>
+      <Trigger Property="HasItems" Value="False">
+        <Setter Property="assistants:ElementAssistant.TextAlignment" Value="Center"/>
+        <Setter Property="assistants:ElementAssistant.TextWrapping" Value="Wrap"/>
+        <Setter Property="BorderBrush" Value="{StaticResource DisableBorderBrush}" />
+        <Setter Property="Foreground" Value="{StaticResource DisableForeground}" />
+        <Setter Property="Padding" Value="20,20,20,20"/>
+        <Setter Property="Template" Value="{StaticResource EmptyListBoxTemplate}" />
+      </Trigger>
+      <Trigger Property="IsEnabled" Value="False">
+        <Setter Property="BorderBrush" Value="{StaticResource DisableBorderBrush}" />
+        <Setter Property="Foreground" Value="{StaticResource DisableForeground}" />
+      </Trigger>
+    </Style.Triggers>
+  </Style>
+</ResourceDictionary>

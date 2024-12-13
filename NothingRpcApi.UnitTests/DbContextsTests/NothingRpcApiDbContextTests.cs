@@ -9,7 +9,7 @@ namespace NothingRpcApi.UnitTests.DbContextsTests;
 public class NothingRpcApiDbContextTests
 {
     [Fact]
-    public async Task CreateAsync_Db_Empty()
+    public async Task Create_Db_Empty()
     {
         //Arrange
         var dbContext = await GetDbContext();
@@ -25,7 +25,7 @@ public class NothingRpcApiDbContextTests
     }
 
     [Fact]
-    public async Task AddAsync_Db_Equivalent()
+    public async Task Add_Db_Equivalent()
     {
         //Arrange
         var dbContext = await GetDbContext();
@@ -45,12 +45,12 @@ public class NothingRpcApiDbContextTests
             .SingleAsync();
 
         //Assert
-        var assert = new NothingModel()
+        var expected = new NothingModel()
         {
             Id = 1,
             Name = "Test",
         };
-        Assert.Equivalent(assert, result, true);
+        Assert.Equivalent(expected, result, true);
     }
 
     [Fact]

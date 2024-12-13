@@ -7,7 +7,7 @@ namespace NothingServices.ConsoleApp.UnitTests.ServicesTests;
 public class HostedServiceTests
 {
     [Fact]
-    public async Task StartAsync_Success()
+    public async Task Start_Success()
     {
         //Arrange
         var loopServiceMock = new Mock<ILoopService>();
@@ -20,12 +20,12 @@ public class HostedServiceTests
 
         //Assert
         loopServiceMock.Verify(
-            consoleService => consoleService.DoWorkAsync(It.IsAny<CancellationToken>()),
+            consoleService => consoleService.DoWork(It.IsAny<CancellationToken>()),
             Times.Once);
     }
 
     [Fact]
-    public async Task StopAsync_Success()
+    public async Task Stop_Success()
     {
         //Arrange
         var hostApplicationLifetimeMock = new Mock<IHostApplicationLifetime>();

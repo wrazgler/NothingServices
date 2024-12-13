@@ -1,5 +1,5 @@
 # Base container
-FROM mcr.microsoft.com/dotnet/sdk AS sdk
+FROM mcr.microsoft.com/dotnet/sdk:9.0 AS sdk
 WORKDIR "/src"
 
 # Get arguments
@@ -20,16 +20,17 @@ COPY "./NothingServices.Abstractions/" "."
 # Restore Nuget
 RUN dotnet restore "NothingServices.Abstractions.csproj"
 
-# Publish Nuget
-RUN dotnet publish "NothingServices.Abstractions.csproj" \
+# Build Nuget
+RUN dotnet build "NothingServices.Abstractions.csproj" \
     --configuration $CONFIGURATION \
-    --output /app/publish/ \
     --no-restore
 
 # Pack Nuget
 RUN dotnet pack "NothingServices.Abstractions.csproj" \
     --configuration $CONFIGURATION \
-    --output /app/publish/
+    --output /app/publish/ \
+    --no-build \
+    --no-restore
 
 # Project container
 FROM sdk AS build
@@ -49,11 +50,12 @@ RUN dotnet restore "NothingWebApi.csproj"
 # Publish project
 RUN dotnet publish "NothingWebApi.csproj" \
     --configuration $CONFIGURATION \
+    --framework net8.0 \
     --output /app/publish/ \
     --no-restore
 
 # Application container
-FROM mcr.microsoft.com/dotnet/aspnet
+FROM mcr.microsoft.com/dotnet/aspnet:8.0
 WORKDIR "/app"
 
 # Get arguments

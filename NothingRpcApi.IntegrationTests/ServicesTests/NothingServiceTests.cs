@@ -5,8 +5,8 @@ using Microsoft.Extensions.DependencyInjection;
 using NothingRpcApi.DbContexts;
 using NothingRpcApi.Dtos;
 using NothingRpcApi.Extensions;
+using NothingRpcApi.IntegrationTests.Extensions;
 using NothingRpcApi.Services;
-using NothingWebApi.IntegrationTests.Extensions;
 
 namespace NothingRpcApi.IntegrationTests.ServicesTests;
 
@@ -17,8 +17,8 @@ public class NothingServiceTests
     {
         //Arrange
         var serviceProvider = GetServiceProvider();
-        await serviceProvider.CreateNewDataBaseAsync();
-        await serviceProvider.AddNothingModelAsync();
+        await serviceProvider.CreateNewDataBase();
+        await serviceProvider.AddNothingModel();
         var nothingService = serviceProvider.GetRequiredService<INothingService>();
         var responseStreamMock = new Mock<IServerStreamWriter<NothingModelDto>>();
         var nothingModelDtos = new List<NothingModelDto>(1);
@@ -34,15 +34,15 @@ public class NothingServiceTests
         var result = nothingModelDtos;
 
         //Assert
-        var assert = new NothingModelDto[]
+        var expected = new NothingModelDto[]
         {
             new()
             {
                 Id = 1,
-            Name = "Test",
+                Name = "Test",
             }
         };
-        Assert.Equivalent(assert, result, true);
+        Assert.Equivalent(expected, result, true);
     }
 
     [Fact]
@@ -50,8 +50,8 @@ public class NothingServiceTests
     {
         //Arrange
         var serviceProvider = GetServiceProvider();
-        await serviceProvider.CreateNewDataBaseAsync();
-        await serviceProvider.AddNothingModelAsync();
+        await serviceProvider.CreateNewDataBase();
+        await serviceProvider.AddNothingModel();
         var nothingService = serviceProvider.GetRequiredService<INothingService>();
         var nothingModelIdDto = new NothingModelIdDto()
         {
@@ -63,12 +63,33 @@ public class NothingServiceTests
             .Get(nothingModelIdDto, Mock.Of<ServerCallContext>());
 
         //Assert
-        var assert = new NothingModelDto()
+        var expected = new NothingModelDto()
         {
             Id = nothingModelIdDto.Id,
             Name = "Test",
         };
-        Assert.Equivalent(assert, result, true);
+        Assert.Equivalent(expected, result, true);
+    }
+
+    [Fact]
+    public async Task Get_Id_0_Throw_ArgumentNullException()
+    {
+        //Arrange
+        var serviceProvider = GetServiceProvider();
+        await serviceProvider.CreateNewDataBase();
+        await serviceProvider.AddNothingModel();
+        var nothingService = serviceProvider.GetRequiredService<INothingService>();
+        var nothingModelIdDto = new NothingModelIdDto()
+        {
+            Id = 0,
+        };
+
+        //Act
+        var result = new Func<Task<NothingModelDto>>(()
+            => nothingService.Get(nothingModelIdDto, Mock.Of<ServerCallContext>()));
+
+        //Assert
+        await Assert.ThrowsAsync<ArgumentException>(result);
     }
 
     [Fact]
@@ -76,8 +97,8 @@ public class NothingServiceTests
     {
         //Arrange
         var serviceProvider = GetServiceProvider();
-        await serviceProvider.CreateNewDataBaseAsync();
-        await serviceProvider.AddNothingModelAsync();
+        await serviceProvider.CreateNewDataBase();
+        await serviceProvider.AddNothingModel();
         var nothingService = serviceProvider.GetRequiredService<INothingService>();
         var createNothingModelDto = new CreateNothingModelDto()
         {
@@ -90,8 +111,8 @@ public class NothingServiceTests
         var result = nothingModel.Name;
 
         //Assert
-        var assert = "Test";
-        Assert.Equal(assert, result);
+        var expected = "Test";
+        Assert.Equal(expected, result);
     }
 
     [Fact]
@@ -99,7 +120,7 @@ public class NothingServiceTests
     {
         //Arrange
         var serviceProvider = GetServiceProvider();
-        await serviceProvider.CreateNewDataBaseAsync();
+        await serviceProvider.CreateNewDataBase();
         var nothingService = serviceProvider.GetRequiredService<INothingService>();
         var createNothingModelDto = new CreateNothingModelDto()
         {
@@ -115,8 +136,8 @@ public class NothingServiceTests
         var result = nothingModel.Name;
 
         //Assert
-        var assert = "Test";
-        Assert.Equal(assert, result);
+        var expected = "Test";
+        Assert.Equal(expected, result);
     }
 
     [Fact]
@@ -124,7 +145,7 @@ public class NothingServiceTests
     {
         //Arrange
         var serviceProvider = GetServiceProvider();
-        await serviceProvider.CreateNewDataBaseAsync();
+        await serviceProvider.CreateNewDataBase();
         var nothingService = serviceProvider.GetRequiredService<INothingService>();
         var createNothingModelDto = new CreateNothingModelDto()
         {
@@ -144,8 +165,8 @@ public class NothingServiceTests
     {
         //Arrange
         var serviceProvider = GetServiceProvider();
-        await serviceProvider.CreateNewDataBaseAsync();
-        await serviceProvider.AddNothingModelAsync();
+        await serviceProvider.CreateNewDataBase();
+        await serviceProvider.AddNothingModel();
         var nothingService = serviceProvider.GetRequiredService<INothingService>();
         var updateNothingModelDto = new UpdateNothingModelDto()
         {
@@ -159,8 +180,8 @@ public class NothingServiceTests
         var result = nothingModel.Name;
 
         //Assert
-        var assert = "New Name";
-        Assert.Equal(assert, result);
+        var expected = "New Name";
+        Assert.Equal(expected, result);
     }
 
     [Fact]
@@ -168,8 +189,8 @@ public class NothingServiceTests
     {
         //Arrange
         var serviceProvider = GetServiceProvider();
-        await serviceProvider.CreateNewDataBaseAsync();
-        await serviceProvider.AddNothingModelAsync();
+        await serviceProvider.CreateNewDataBase();
+        await serviceProvider.AddNothingModel();
         var nothingService = serviceProvider.GetRequiredService<INothingService>();
         var updateNothingModelDto = new UpdateNothingModelDto()
         {
@@ -186,8 +207,8 @@ public class NothingServiceTests
         var result = nothingModel.Name;
 
         //Assert
-        var assert = "New Name";
-        Assert.Equal(assert, result);
+        var expected = "New Name";
+        Assert.Equal(expected, result);
     }
 
     [Fact]
@@ -195,8 +216,8 @@ public class NothingServiceTests
     {
         //Arrange
         var serviceProvider = GetServiceProvider();
-        await serviceProvider.CreateNewDataBaseAsync();
-        await serviceProvider.AddNothingModelAsync();
+        await serviceProvider.CreateNewDataBase();
+        await serviceProvider.AddNothingModel();
         var nothingService = serviceProvider.GetRequiredService<INothingService>();
         var updateNothingModelDto = new UpdateNothingModelDto()
         {
@@ -213,12 +234,34 @@ public class NothingServiceTests
     }
 
     [Fact]
+    public async Task Update_Id_0_Throw_ArgumentNullException()
+    {
+        //Arrange
+        var serviceProvider = GetServiceProvider();
+        await serviceProvider.CreateNewDataBase();
+        await serviceProvider.AddNothingModel();
+        var nothingService = serviceProvider.GetRequiredService<INothingService>();
+        var updateNothingModelDto = new UpdateNothingModelDto()
+        {
+            Id = 0,
+            Name = "Test",
+        };
+
+        //Act
+        var result = new Func<Task<NothingModelDto>>(()
+            => nothingService.Update(updateNothingModelDto, Mock.Of<ServerCallContext>()));
+
+        //Assert
+        await Assert.ThrowsAsync<ArgumentException>(result);
+    }
+
+    [Fact]
     public async Task Delete_Dto_Equivalent()
     {
         //Arrange
         var serviceProvider = GetServiceProvider();
-        await serviceProvider.CreateNewDataBaseAsync();
-        await serviceProvider.AddNothingModelAsync();
+        await serviceProvider.CreateNewDataBase();
+        await serviceProvider.AddNothingModel();
         var nothingService = serviceProvider.GetRequiredService<INothingService>();
         var nothingModelIdDto = new NothingModelIdDto()
         {
@@ -230,12 +273,12 @@ public class NothingServiceTests
             .Delete(nothingModelIdDto, Mock.Of<ServerCallContext>());
 
         //Assert
-        var assert = new NothingModelDto()
+        var expected = new NothingModelDto()
         {
             Id = 1,
             Name = "Test",
         };
-        Assert.Equivalent(assert, result, true);
+        Assert.Equivalent(expected, result, true);
     }
 
     [Fact]
@@ -243,8 +286,8 @@ public class NothingServiceTests
     {
         //Arrange
         var serviceProvider = GetServiceProvider();
-        await serviceProvider.CreateNewDataBaseAsync();
-        await serviceProvider.AddNothingModelAsync();
+        await serviceProvider.CreateNewDataBase();
+        await serviceProvider.AddNothingModel();
         var nothingService = serviceProvider.GetRequiredService<INothingService>();
         var nothingModelIdDto = new NothingModelIdDto()
         {
@@ -260,6 +303,27 @@ public class NothingServiceTests
 
         //Assert
         Assert.False(result);
+    }
+
+    [Fact]
+    public async Task Delete_Id_0_Throw_ArgumentNullException()
+    {
+        //Arrange
+        var serviceProvider = GetServiceProvider();
+        await serviceProvider.CreateNewDataBase();
+        await serviceProvider.AddNothingModel();
+        var nothingService = serviceProvider.GetRequiredService<INothingService>();
+        var nothingModelIdDto = new NothingModelIdDto()
+        {
+            Id = 0,
+        };
+
+        //Act
+        var result = new Func<Task<NothingModelDto>>(()
+            => nothingService.Delete(nothingModelIdDto, Mock.Of<ServerCallContext>()));
+
+        //Assert
+        await Assert.ThrowsAsync<ArgumentException>(result);
     }
 
     private static ServiceProvider GetServiceProvider()

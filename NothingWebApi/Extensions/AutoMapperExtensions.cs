@@ -20,7 +20,8 @@ public static class AutoMapperExtensions
         {
             configuration.AllowNullCollections = true;
             configuration.CreateMap<NothingModel, NothingModelDto>();
-            configuration.CreateMap<CreateNothingModelDto, NothingModel>();
+            configuration.CreateMap<CreateNothingModelDto, NothingModel>()
+                .ForMember(model => model.Name, member => member.MapFrom(dto => dto.Name.Trim()));
         });
         return services;
     }

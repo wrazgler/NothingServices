@@ -1,0 +1,59 @@
+<UserControl x:Class="NothingServices.WPFApp.Views.CreateNothingModelView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:assistants="clr-namespace:NothingServices.WPFApp.Assistants"
+             xmlns:controls="clr-namespace:NothingServices.WPFApp.ViewModels.Controls"
+             mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance Type=controls:CreateNothingModelVM}">
+
+  <UserControl.Resources>
+    <ResourceDictionary Source="pack://application:,,,/NothingServices.WPFApp;v1.0.0.0;component/Styles/CreateNothingModelViewStyles.xaml"/>
+  </UserControl.Resources>
+
+  <Border x:Name="CreateNothingModelViewBorder"
+          Style="{StaticResource CreateNothingModelViewBorder}">
+    <Grid x:Name="CreateNothingModelViewGrid">
+      <Grid.RowDefinitions>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="Auto"/>
+      </Grid.RowDefinitions>
+
+      <Label Grid.Row="0"
+             x:Name="TitleLabel"
+             Style="{StaticResource CreateNothingModelViewTitleLabel}"
+             Content="{Binding Path=Title}"/>
+
+      <TextBox Grid.Row="1"
+               x:Name="NameTextBox"
+               Style="{StaticResource CreateNothingModelViewNameTextBox}"
+               assistants:ElementAssistant.Text="{Binding Path=Text}"
+               Text="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+      <Grid Grid.Row="2"
+            x:Name="ButtonGrid">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="*" />
+          <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Button Grid.Column="0"
+                x:Name="SaveButton"
+                Style="{StaticResource CreateNothingModelViewSaveButton}"
+                Command="{Binding Path=CreateButtonVM.Command}"
+                CommandParameter="{Binding}"
+                Content="{Binding Path=CreateButtonVM.Text}"
+                ToolTip="{Binding Path=CreateButtonVM.ToolTip}"/>
+
+        <Button Grid.Column="1"
+                x:Name="CancelButton"
+                Style="{StaticResource CreateNothingModelViewCancelButton}"
+                Command="{Binding Path=CancelButtonVM.Command}"
+                Content="{Binding Path=CancelButtonVM.Text}"
+                ToolTip="{Binding Path=CancelButtonVM.ToolTip}"/>
+      </Grid>
+    </Grid>
+  </Border>
+</UserControl>

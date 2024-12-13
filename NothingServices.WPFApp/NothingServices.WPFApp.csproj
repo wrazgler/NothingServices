@@ -1,0 +1,64 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <Authors>Golovin Nikita</Authors>
+    <Copyright>Copyright (C) Golovin Nikita 2024</Copyright>
+    <Description>WPF клиент NothingServices</Description>
+    <EnableWindowsTargeting>true</EnableWindowsTargeting>
+    <FileVersion>1.0.0.0</FileVersion>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <LangVersion>latest</LangVersion>
+    <NeutralLanguage>ru</NeutralLanguage>
+    <Nullable>enable</Nullable>
+    <OutputType>WinExe</OutputType>
+    <RepositoryUrl>https://github.com/wrazgler/NothingServices</RepositoryUrl>
+    <TargetFrameworks>net9.0-windows;net8.0-windows</TargetFrameworks>
+    <Title>NothingServices.WPFApp</Title>
+    <Version>1.0.0.0</Version>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="13.0.1" />
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.3.2" />
+    <PackageReference Include="FontAwesome.Sharp" Version="6.6.0" />
+    <PackageReference Include="Google.Protobuf" Version="3.28.3" />
+    <PackageReference Include="Grpc.Net.Client" Version="2.66.0" />
+    <PackageReference Include="Grpc.Tools" Version="2.67.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Http" Version="8.0.1" />
+    <PackageReference Include="NothingServices.Abstractions" Version="1.0.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="..\.certificates\localhost.crt">
+      <Link>localhost.crt</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="appsettings.Development.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Protobuf Include="Protos\CreateNothingModelDto.proto" GrpcServices="Client" />
+    <Protobuf Include="Protos\NothingModelDto.proto" GrpcServices="Client" />
+    <Protobuf Include="Protos\NothingModelIdDto.proto" GrpcServices="Client" />
+    <Protobuf Include="Protos\NothingRpcService.proto" GrpcServices="Client" />
+    <Protobuf Include="Protos\UpdateNothingModelDto.proto" GrpcServices="Client" />
+  </ItemGroup>
+
+  <Target Name="Create certificate" BeforeTargets="Build" Condition="$(Configuration)=='Debug'">
+    <Exec Command="dotnet dev-certs https -ep .certificates/localhost.crt -p localhost --trust"
+          WorkingDirectory="$(SolutionDir)" />
+  </Target>
+
+</Project>

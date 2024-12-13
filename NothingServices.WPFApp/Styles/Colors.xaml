@@ -1,0 +1,38 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+  <Color x:Key="DefaultMouseOverColor">#3374BA</Color>
+  <Color x:Key="DefaultColor">Transparent</Color>
+
+  <SolidColorBrush x:Key="DefaultButtonBackground" Color="White"/>
+  <SolidColorBrush x:Key="DefaultButtonBorderBrush" Color="#3374BA"/>
+
+  <SolidColorBrush x:Key="DefaultElementBackground" Color="White"/>
+  <SolidColorBrush x:Key="DefaultElementBorderBrush" Color="LightGray"/>
+  <SolidColorBrush x:Key="DefaultElementForeground" Color="LightGray"/>
+
+  <SolidColorBrush x:Key="DefaultDialogBackground" Color="Black"/>
+
+  <SolidColorBrush x:Key="DefaultMouseOverBackground" Color="#3374BA"/>
+  <SolidColorBrush x:Key="DefaultMouseOverBorderBrush" Color="#3374BA"/>
+  <SolidColorBrush x:Key="DefaultMouseOverForeground" Color="White"/>
+
+  <SolidColorBrush x:Key="DefaultNotificatorBackground" Color="#3374BA"/>
+  <SolidColorBrush x:Key="DefaultNotificatorForeground" Color="White"/>
+
+  <SolidColorBrush x:Key="DefaultTextForeground" Color="Black"/>
+  <SolidColorBrush x:Key="DefaultTextSelectionBrush" Color="#3374BA" />
+
+  <SolidColorBrush x:Key="DefaultThumbBackground" Color="#3374BA"/>
+
+  <SolidColorBrush x:Key="DisableBorderBrush" Color="LightGray"/>
+  <SolidColorBrush x:Key="DisableForeground" Color="LightGray"/>
+
+  <SolidColorBrush x:Key="GreenMouseOverBackground" Color="SeaGreen"/>
+  <SolidColorBrush x:Key="GreenMouseOverBorderBrush" Color="SeaGreen"/>
+  <SolidColorBrush x:Key="GreenMouseOverForeground" Color="White"/>
+
+  <SolidColorBrush x:Key="RedMouseOverBackground" Color="IndianRed"/>
+  <SolidColorBrush x:Key="RedMouseOverBorderBrush" Color="IndianRed"/>
+  <SolidColorBrush x:Key="RedMouseOverForeground" Color="White"/>
+</ResourceDictionary>

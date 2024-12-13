@@ -1,0 +1,72 @@
+<UserControl x:Class="NothingServices.WPFApp.Views.NothingModelView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:controls="clr-namespace:NothingServices.WPFApp.ViewModels.Controls"
+             mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance Type=controls:NothingModelVM}">
+
+  <UserControl.Resources>
+    <ResourceDictionary>
+      <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/NothingServices.WPFApp;v1.0.0.0;component/Styles/MenuStyles.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/NothingServices.WPFApp;v1.0.0.0;component/Styles/NothingModelViewStyles.xaml"/>
+      </ResourceDictionary.MergedDictionaries>
+    </ResourceDictionary>
+  </UserControl.Resources>
+
+  <Border x:Name="NothingModelViewBorder"
+          Style="{StaticResource NothingModelViewBorder}">
+    <Border.ContextMenu>
+      <ContextMenu x:Name="NothingModelViewContextMenu"
+                   Style="{StaticResource StandardContextMenu}">
+        <MenuItem x:Name="UpdateMenuItem"
+                  Style="{StaticResource EditMenuItem}"
+                  Command="{Binding Path=UpdateButtonVM.Command}"
+                  CommandParameter="{Binding}"
+                  Header="{Binding Path=UpdateButtonVM.Text}"
+                  ToolTip="{Binding Path=UpdateButtonVM.ToolTip}"/>
+        <MenuItem x:Name="DeleteMenuItem"
+                  Style="{StaticResource DeleteMenuItem}"
+                  Command="{Binding Path=DeleteButtonVM.Command}"
+                  CommandParameter="{Binding}"
+                  Header="{Binding Path=DeleteButtonVM.Text}"
+                  ToolTip="{Binding Path=DeleteButtonVM.ToolTip}"/>
+      </ContextMenu>
+    </Border.ContextMenu>
+
+    <Grid x:Name="NothingModelViewGrid">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="Auto" />
+        <ColumnDefinition Width="*" />
+        <ColumnDefinition Width="Auto" />
+        <ColumnDefinition Width="Auto" />
+      </Grid.ColumnDefinitions>
+
+      <Label Grid.Column="0"
+             x:Name="IdLabel"
+             Style="{StaticResource NothingModelViewIdLabel}"
+             Content="{Binding Path=Id}"/>
+
+      <Label Grid.Column="1"
+             x:Name="NameLabel"
+             Style="{StaticResource NothingModelViewNameLabel}"
+             Content="{Binding Path=Name}"/>
+
+      <Button Grid.Column="2"
+              x:Name="UpdateButton"
+              Style="{StaticResource NothingModelEditButton}"
+              Command="{Binding Path=UpdateButtonVM.Command}"
+              CommandParameter="{Binding}"
+              ToolTip="{Binding Path=UpdateButtonVM.ToolTip}"/>
+
+      <Button Grid.Column="3"
+              x:Name="DeleteButton"
+              Style="{StaticResource NothingModelDeleteButton}"
+              Command="{Binding Path=DeleteButtonVM.Command}"
+              CommandParameter="{Binding}"
+              ToolTip="{Binding Path=DeleteButtonVM.ToolTip}"/>
+    </Grid>
+  </Border>
+</UserControl>

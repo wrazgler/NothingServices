@@ -26,7 +26,7 @@ public class LoopService(
     /// Выполнение работы приложения
     /// </summary>
     /// <param name="cancellationToken">Токен отмены</param>
-    public async Task DoWorkAsync(CancellationToken cancellationToken = default)
+    public async Task DoWork(CancellationToken cancellationToken = default)
     {
         var work = true;
         while (work && !cancellationToken.IsCancellationRequested)
@@ -41,8 +41,8 @@ public class LoopService(
             {
                 "1" => CommunicateNothingApi(_nothingRpcApiClientStrategy, cancellationToken),
                 "2" => CommunicateNothingApi(_nothingWebApiClientStrategy, cancellationToken),
-                "e" => Task.Run(() => work = false, CancellationToken.None),
-                _ => Task.Run(() => PrintReadError(inputKey), CancellationToken.None),
+                "e" => Task.Run(() => work = false),
+                _ => Task.Run(() => PrintReadError(inputKey)),
             };
             await task;
         }
@@ -52,7 +52,7 @@ public class LoopService(
 
     private async Task CommunicateNothingApi(
         INothingApiClientStrategy nothingWebApiClientStrategy,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken = default)
     {
         var communicate = true;
         while (communicate && !cancellationToken.IsCancellationRequested)
@@ -68,13 +68,13 @@ public class LoopService(
             _consoleService.WriteLine();
             var task = inputKey switch
             {
-                "1" => nothingWebApiClientStrategy.GetNothingModelsAsync(cancellationToken),
-                "2" => nothingWebApiClientStrategy.GetNothingModelAsync(cancellationToken),
-                "3" => nothingWebApiClientStrategy.CreateNothingModelAsync(cancellationToken),
-                "4" => nothingWebApiClientStrategy.UpdateNothingModelAsync(cancellationToken),
-                "5" => nothingWebApiClientStrategy.DeleteNothingModelAsync(cancellationToken),
-                "e" => Task.Run(() => communicate = false, CancellationToken.None),
-                _ => Task.Run(() => PrintReadError(inputKey), CancellationToken.None),
+                "1" => nothingWebApiClientStrategy.GetNothingModels(cancellationToken),
+                "2" => nothingWebApiClientStrategy.GetNothingModel(cancellationToken),
+                "3" => nothingWebApiClientStrategy.CreateNothingModel(cancellationToken),
+                "4" => nothingWebApiClientStrategy.UpdateNothingModel(cancellationToken),
+                "5" => nothingWebApiClientStrategy.DeleteNothingModel(cancellationToken),
+                "e" => Task.Run(() => communicate = false),
+                _ => Task.Run(() => PrintReadError(inputKey)),
             };
             await task;
         }

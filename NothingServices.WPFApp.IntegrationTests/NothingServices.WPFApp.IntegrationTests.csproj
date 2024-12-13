@@ -1,0 +1,57 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Authors>Golovin Nikita</Authors>
+    <Copyright>Copyright (C) Golovin Nikita 2024</Copyright>
+    <Description>Интеграционные тесты WPF клиента</Description>
+    <EnableWindowsTargeting>true</EnableWindowsTargeting>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <IsPackable>false</IsPackable>
+    <IsTestProject>true</IsTestProject>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <RepositoryUrl>https://github.com/wrazgler/NothingServices</RepositoryUrl>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Title>NothingServices.WPFApp.IntegrationTests</Title>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="coverlet.collector" Version="6.0.2">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.11.1" />
+    <PackageReference Include="Moq" Version="4.20.72" />
+    <PackageReference Include="xunit" Version="2.9.2" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="3.0.0-pre.30">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Using Include="Moq" />
+    <Using Include="Xunit" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\NothingRpcApi\NothingRpcApi.csproj" />
+    <ProjectReference Include="..\NothingWebApi\NothingWebApi.csproj" />
+    <ProjectReference Include="..\NothingServices.WPFApp\NothingServices.WPFApp.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="appsettings.App.Testing.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="appsettings.NothingWebApiClient.Testing.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <Target Name="Create certificate" BeforeTargets="Build" Condition="$(Configuration)=='Debug'">
+    <Exec Command="dotnet dev-certs https -ep .certificates/localhost.crt -p localhost --trust"
+          WorkingDirectory="$(SolutionDir)" />
+  </Target>
+
+</Project>

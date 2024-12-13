@@ -179,7 +179,7 @@ paths:
       parameters:
         - name: id
           in: path
-          description: Идентификатор графа
+          description: Идентификатор модели
           required: true
           schema:
             type: integer
@@ -237,7 +237,7 @@ components:
           description: Имя модели
           nullable: true
       additionalProperties: false
-      description: Dto модели
+      description: Данные модели
     ProblemDetails:
       type: object
       properties:

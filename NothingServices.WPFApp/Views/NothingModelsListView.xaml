@@ -1,0 +1,66 @@
+<UserControl x:Class="NothingServices.WPFApp.Views.NothingModelsListView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:assistants="clr-namespace:NothingServices.WPFApp.Assistants"
+             xmlns:viewModels="clr-namespace:NothingServices.WPFApp.ViewModels"
+             mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance Type=viewModels:NothingModelsListVM}">
+
+  <UserControl.Resources>
+    <ResourceDictionary>
+      <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/NothingServices.WPFApp;v1.0.0.0;component/Styles/MenuStyles.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/NothingServices.WPFApp;v1.0.0.0;component/Styles/NothingModelsListViewStyles.xaml"/>
+      </ResourceDictionary.MergedDictionaries>
+    </ResourceDictionary>
+  </UserControl.Resources>
+
+  <Grid x:Name="NothingModelsListViewGrid">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="*"/>
+      <RowDefinition Height="Auto"/>
+    </Grid.RowDefinitions>
+
+    <ListBox Grid.Row="0"
+             x:Name="NothingModelsListBox"
+             Style="{StaticResource NothingModelsListListBox}"
+             assistants:ElementAssistant.Text="{Binding Path=EmptyText}"
+             ItemsSource="{Binding Path=NothingModels, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}">
+      <ListBox.ContextMenu>
+        <ContextMenu x:Name="NothingModelViewContextMenu"
+                     Style="{StaticResource StandardContextMenu}">
+          <MenuItem x:Name="CreatMenuItem"
+                    Style="{StaticResource CreateMenuItem}"
+                    Command="{Binding Path=CreateButtonVM.Command}"
+                    CommandParameter="{Binding}"
+                    Header="{Binding Path=CreateButtonVM.Text}"
+                    ToolTip="{Binding Path=CreateButtonVM.ToolTip}"/>
+        </ContextMenu>
+      </ListBox.ContextMenu>
+    </ListBox>
+
+    <Grid Grid.Row="1"
+          x:Name="ButtonGrid">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*" />
+        <ColumnDefinition Width="*" />
+      </Grid.ColumnDefinitions>
+
+      <Button Grid.Column="0"
+              x:Name="BackButton"
+              Style="{StaticResource NothingModelsListBackButton}"
+              Command="{Binding Path=BackButtonVM.Command}"
+              Content="{Binding Path=BackButtonVM.Text}"
+              ToolTip="{Binding Path=BackButtonVM.ToolTip}"/>
+
+      <Button Grid.Column="1"
+              x:Name="CreateButton"
+              Style="{StaticResource NothingModelsListCreateButton}"
+              Command="{Binding Path=CreateButtonVM.Command}"
+              Content="{Binding Path=CreateButtonVM.Text}"
+              ToolTip="{Binding Path=CreateButtonVM.ToolTip}"/>
+    </Grid>
+  </Grid>
+</UserControl>

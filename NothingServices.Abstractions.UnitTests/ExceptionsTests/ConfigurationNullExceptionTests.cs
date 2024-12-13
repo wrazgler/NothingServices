@@ -11,7 +11,7 @@ public class ConfigurationNullExceptionTests
         var result = new ConfigurationNullException<ConfigurationNullExceptionTests>().Message;
 
         //Assert
-        var assert = $"Value cannot be null. (Parameter 'Конфигурация {typeof(ConfigurationNullExceptionTests).Name} не обнаружена')";
-        Assert.Equal(assert, result);
+        var expected = $"Value cannot be null. (Parameter 'Конфигурация {typeof(ConfigurationNullExceptionTests).Name} не обнаружена')";
+        Assert.Equal(expected, result);
     }
 }

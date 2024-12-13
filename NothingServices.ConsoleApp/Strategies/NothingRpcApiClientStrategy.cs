@@ -26,7 +26,7 @@ public class NothingRpcApiClientStrategy(
     /// Вывести в консоль список моделей
     /// </summary>
     /// <param name="cancellationToken">Токен отмены</param>
-    public override async Task GetNothingModelsAsync(CancellationToken cancellationToken = default)
+    public override async Task GetNothingModels(CancellationToken cancellationToken = default)
     {
         try
         {
@@ -50,7 +50,7 @@ public class NothingRpcApiClientStrategy(
     /// Вывести в консоль модель с указанным идентификатором
     /// </summary>
     /// <param name="cancellationToken">Токен отмены</param>
-    public override async Task GetNothingModelAsync(CancellationToken cancellationToken = default)
+    public override async Task GetNothingModel(CancellationToken cancellationToken = default)
     {
         try
         {
@@ -69,7 +69,7 @@ public class NothingRpcApiClientStrategy(
     /// Создать новую модель
     /// </summary>
     /// <param name="cancellationToken">Токен отмены</param>
-    public override async Task CreateNothingModelAsync(CancellationToken cancellationToken = default)
+    public override async Task CreateNothingModel(CancellationToken cancellationToken = default)
     {
         try
         {
@@ -88,7 +88,7 @@ public class NothingRpcApiClientStrategy(
     /// Обновить существующую модель
     /// </summary>
     /// <param name="cancellationToken">Токен отмены</param>
-    public override async Task UpdateNothingModelAsync(CancellationToken cancellationToken = default)
+    public override async Task UpdateNothingModel(CancellationToken cancellationToken = default)
     {
         try
         {
@@ -107,7 +107,7 @@ public class NothingRpcApiClientStrategy(
     /// Удалить модель
     /// </summary>
     /// <param name="cancellationToken">Токен отмены</param>
-    public override async Task DeleteNothingModelAsync(CancellationToken cancellationToken = default)
+    public override async Task DeleteNothingModel(CancellationToken cancellationToken = default)
     {
         try
         {
@@ -122,7 +122,7 @@ public class NothingRpcApiClientStrategy(
         }
     }
 
-    private NothingModelIdDto GetNothingModelIdDto(CancellationToken cancellationToken)
+    private NothingModelIdDto GetNothingModelIdDto(CancellationToken cancellationToken = default)
     {
         var id = GetId(cancellationToken);
         return new NothingModelIdDto()
@@ -131,7 +131,7 @@ public class NothingRpcApiClientStrategy(
         };
     }
 
-    private CreateNothingModelDto GetCreateNothingModelDto(CancellationToken cancellationToken)
+    private CreateNothingModelDto GetCreateNothingModelDto(CancellationToken cancellationToken = default)
     {
         var name = GetName(cancellationToken);
         return new CreateNothingModelDto()
@@ -140,7 +140,7 @@ public class NothingRpcApiClientStrategy(
         };
     }
 
-    private UpdateNothingModelDto GetUpdateNothingModelDto(CancellationToken cancellationToken)
+    private UpdateNothingModelDto GetUpdateNothingModelDto(CancellationToken cancellationToken = default)
     {
         var id = GetId(cancellationToken);
         var name = GetName(cancellationToken);

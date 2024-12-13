@@ -9,29 +9,29 @@ public interface INothingApiClientStrategy
     /// Вывести в консоль список моделей
     /// </summary>
     /// <param name="cancellationToken">Токен отмены</param>
-    Task GetNothingModelsAsync(CancellationToken cancellationToken = default);
+    Task GetNothingModels(CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Вывести в консоль модель с указанным идентификатором
     /// </summary>
     /// <param name="cancellationToken">Токен отмены</param>
-    Task GetNothingModelAsync(CancellationToken cancellationToken = default);
+    Task GetNothingModel(CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Создать новую модель
     /// </summary>
     /// <param name="cancellationToken">Токен отмены</param>
-    Task CreateNothingModelAsync(CancellationToken cancellationToken = default);
+    Task CreateNothingModel(CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Обновить существующую модель
     /// </summary>
     /// <param name="cancellationToken">Токен отмены</param>
-    Task UpdateNothingModelAsync(CancellationToken cancellationToken = default);
+    Task UpdateNothingModel(CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Удалить модель
     /// </summary>
     /// <param name="cancellationToken">Токен отмены</param>
-    Task DeleteNothingModelAsync(CancellationToken cancellationToken = default);
+    Task DeleteNothingModel(CancellationToken cancellationToken = default);
 }

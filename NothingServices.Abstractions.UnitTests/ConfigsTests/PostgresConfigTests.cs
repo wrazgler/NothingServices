@@ -14,12 +14,12 @@ public class PostgresConfigTests
     {
         //Arrange
         var configuration = GetConfiguration();
-        
+
         //Act
         var result =  configuration.GetConfig<PostgresConfig>();
-        
+
         //Assert
-        var assert = new PostgresConfig()
+        var expected = new PostgresConfig()
         {
             Host = "localhost",
             Port = "5432",
@@ -27,9 +27,9 @@ public class PostgresConfigTests
             User = "nothing_api",
             Password = "nothing_api"
         };
-        Assert.Equivalent(assert, result, true);
+        Assert.Equivalent(expected, result, true);
     }
-    
+
     [Fact]
     public void PostgresConfig_DependencyInjection_Equivalent()
     {
@@ -38,12 +38,12 @@ public class PostgresConfigTests
         var services = new ServiceCollection()
             .Configure<PostgresConfig>(configuration)
             .BuildServiceProvider();
-        
+
         //Act
         var result = services.GetRequiredService<IOptions<PostgresConfig>>().Value;
-        
+
         //Assert
-        var assert = new PostgresConfig()
+        var expected = new PostgresConfig()
         {
             Host = "localhost",
             Port = "5432",
@@ -51,32 +51,32 @@ public class PostgresConfigTests
             User = "nothing_api",
             Password = "nothing_api"
         };
-        Assert.Equivalent(assert, result, true);
+        Assert.Equivalent(expected, result, true);
     }
-    
+
     [Fact]
     public void PostgresConfig_ConnectionString_Equal()
     {
         //Arrange
         var configuration = GetConfiguration();
-        
+
         //Act
         var result =  configuration.GetConfig<PostgresConfig>().ConnectionString;
-        
+
         //Assert
-        var assert = "Host=localhost;Port=5432;Database=nothing_api_db;Username=nothing_api;Password=nothing_api";
-        Assert.Equal(assert, result);
+        var expected = "Host=localhost;Port=5432;Database=nothing_api_db;Username=nothing_api;Password=nothing_api";
+        Assert.Equal(expected, result);
     }
-    
+
     [Fact]
     public void PostgresConfig_Empty_Throws_ConfigurationNullException()
     {
         //Arrange
         var configuration = new ConfigurationBuilder().Build();
-        
+
         //Act
         var result = new Func<PostgresConfig>(() => configuration.GetConfig<PostgresConfig>());
-        
+
         //Assert
         Assert.Throws<ConfigurationNullException<PostgresConfig>>(result);
     }
@@ -97,14 +97,14 @@ public class PostgresConfigTests
         var configuration = new ConfigurationBuilder()
             .AddInMemoryCollection(dictionary!)
             .Build();
-        
+
         //Act
         var result = new Func<PostgresConfig>(() => configuration.GetConfig<PostgresConfig>());
-        
+
         //Assert
         Assert.Throws<ConfigurationNullException<PostgresConfig>>(result);
     }
-    
+
     private IConfiguration GetConfiguration()
     {
         var dictionary = new Dictionary<string, string>(5)

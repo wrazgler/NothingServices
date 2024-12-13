@@ -15,7 +15,7 @@ public class AppTests
     private readonly JsonSerializerOptions _jsonSerializerOptions = new() { WriteIndented = true };
 
     [Fact]
-    public async Task RunAsync_1_1_e_e_Equal()
+    public async Task Run_1_1_e_e_Equal()
     {
         try
         {
@@ -39,9 +39,8 @@ public class AppTests
                     Name = "Test",
                 }
             };
-            var assert = GetAssert(JsonSerializer.Serialize(nothingModels, _jsonSerializerOptions));
-            Assert.Equal(assert, result);
-            await StopApp();
+            var expected = GetAssert(JsonSerializer.Serialize(nothingModels, _jsonSerializerOptions));
+            Assert.Equal(expected, result);
         }
         finally
         {
@@ -50,7 +49,7 @@ public class AppTests
     }
 
     [Fact]
-    public async Task RunAsync_1_2_1_e_e_Equal()
+    public async Task Run_1_2_1_e_e_Equal()
     {
         try
         {
@@ -71,12 +70,11 @@ public class AppTests
                 Id = 1,
                 Name = "Test",
             };
-            var assert = GetAssert(string.Concat(
+            var expected = GetAssert(string.Concat(
                 "Введите идентификатор",
                 Environment.NewLine,
                 JsonSerializer.Serialize(nothingModel, _jsonSerializerOptions)));
-            Assert.Equal(assert, result);
-            await StopApp();
+            Assert.Equal(expected, result);
         }
         finally
         {
@@ -85,7 +83,7 @@ public class AppTests
     }
 
     [Fact]
-    public async Task RunAsync_1_3_1_e_e_Equal()
+    public async Task Run_1_3_1_e_e_Equal()
     {
         try
         {
@@ -107,12 +105,11 @@ public class AppTests
                 Id = 2,
                 Name = newName,
             };
-            var assert = GetAssert(string.Concat(
+            var expected = GetAssert(string.Concat(
                 "Введите имя модели",
                 Environment.NewLine,
                 JsonSerializer.Serialize(nothingModel, _jsonSerializerOptions)));
-            Assert.Equal(assert, result);
-            await StopApp();
+            Assert.Equal(expected, result);
         }
         finally
         {
@@ -121,7 +118,7 @@ public class AppTests
     }
 
     [Fact]
-    public async Task RunAsync_1_4_1_e_e_Equal()
+    public async Task Run_1_4_1_e_e_Equal()
     {
         try
         {
@@ -144,14 +141,13 @@ public class AppTests
                 Id = id,
                 Name = newName,
             };
-            var assert = GetAssert(string.Concat(
+            var expected = GetAssert(string.Concat(
                 "Введите идентификатор",
                 Environment.NewLine,
                 "Введите имя модели",
                 Environment.NewLine,
                 JsonSerializer.Serialize(nothingModel, _jsonSerializerOptions)));
-            Assert.Equal(assert, result);
-            await StopApp();
+            Assert.Equal(expected, result);
         }
         finally
         {
@@ -160,7 +156,7 @@ public class AppTests
     }
 
     [Fact]
-    public async Task RunAsync_1_5_1_e_e_Equal()
+    public async Task Run_1_5_1_e_e_Equal()
     {
         try
         {
@@ -181,12 +177,11 @@ public class AppTests
                 Id = 1,
                 Name = "Test",
             };
-            var assert = GetAssert(string.Concat(
+            var expected = GetAssert(string.Concat(
                 "Введите идентификатор",
                 Environment.NewLine,
                 JsonSerializer.Serialize(nothingModel, _jsonSerializerOptions)));
-            Assert.Equal(assert, result);
-            await StopApp();
+            Assert.Equal(expected, result);
         }
         finally
         {
@@ -195,7 +190,7 @@ public class AppTests
     }
 
     [Fact]
-    public async Task RunAsync_2_1_e_e_Equal()
+    public async Task Run_2_1_e_e_Equal()
     {
         try
         {
@@ -219,9 +214,8 @@ public class AppTests
                     Name = "Test",
                 }
             };
-            var assert = GetAssert(JsonSerializer.Serialize(nothingModels, _jsonSerializerOptions));
-            Assert.Equal(assert, result);
-            await StopApp();
+            var expected = GetAssert(JsonSerializer.Serialize(nothingModels, _jsonSerializerOptions));
+            Assert.Equal(expected, result);
         }
         finally
         {
@@ -230,7 +224,7 @@ public class AppTests
     }
 
     [Fact]
-    public async Task RunAsync_2_2_1_e_e_Equal()
+    public async Task Run_2_2_1_e_e_Equal()
     {
         try
         {
@@ -251,12 +245,11 @@ public class AppTests
                 Id = 1,
                 Name = "Test",
             };
-            var assert = GetAssert(string.Concat(
+            var expected = GetAssert(string.Concat(
                 "Введите идентификатор",
                 Environment.NewLine,
                 JsonSerializer.Serialize(nothingModel, _jsonSerializerOptions)));
-            Assert.Equal(assert, result);
-            await StopApp();
+            Assert.Equal(expected, result);
         }
         finally
         {
@@ -265,7 +258,7 @@ public class AppTests
     }
 
     [Fact]
-    public async Task RunAsync_2_3_1_e_e_Equal()
+    public async Task Run_2_3_1_e_e_Equal()
     {
         try
         {
@@ -287,12 +280,11 @@ public class AppTests
                 Id = 2,
                 Name = newName,
             };
-            var assert = GetAssert(string.Concat(
+            var expected = GetAssert(string.Concat(
                 "Введите имя модели",
                 Environment.NewLine,
                 JsonSerializer.Serialize(nothingModel, _jsonSerializerOptions)));
-            Assert.Equal(assert, result);
-            await StopApp();
+            Assert.Equal(expected, result);
         }
         finally
         {
@@ -301,7 +293,7 @@ public class AppTests
     }
 
     [Fact]
-    public async Task RunAsync_2_4_1_e_e_Equal()
+    public async Task Run_2_4_1_e_e_Equal()
     {
         try
         {
@@ -324,14 +316,13 @@ public class AppTests
                 Id = id,
                 Name = newName,
             };
-            var assert = GetAssert(string.Concat(
+            var expected = GetAssert(string.Concat(
                 "Введите идентификатор",
                 Environment.NewLine,
                 "Введите имя модели",
                 Environment.NewLine,
                 JsonSerializer.Serialize(nothingModel, _jsonSerializerOptions)));
-            Assert.Equal(assert, result);
-            await StopApp();
+            Assert.Equal(expected, result);
         }
         finally
         {
@@ -340,7 +331,7 @@ public class AppTests
     }
 
     [Fact]
-    public async Task RunAsync_2_5_1_e_e_Equal()
+    public async Task Run_2_5_1_e_e_Equal()
     {
         try
         {
@@ -361,12 +352,11 @@ public class AppTests
                 Id = 1,
                 Name = "Test",
             };
-            var assert = GetAssert(string.Concat(
+            var expected = GetAssert(string.Concat(
                 "Введите идентификатор",
                 Environment.NewLine,
                 JsonSerializer.Serialize(nothingModel, _jsonSerializerOptions)));
-            Assert.Equal(assert, result);
-            await StopApp();
+            Assert.Equal(expected, result);
         }
         finally
         {
@@ -411,7 +401,7 @@ public class AppTests
     private static IHost GetHost()
     {
         var configuration = new ConfigurationBuilder()
-            .AddJsonFile("appsettings.AppTesting.json")
+            .AddJsonFile("appsettings.App.Testing.json")
             .Build();
         var hostBuilder = Host.CreateDefaultBuilder();
         hostBuilder.ConfigureServices((_, services) =>
@@ -448,7 +438,7 @@ public class AppTests
         Console.SetOut(textWriterMock.Object);
     }
 
-    private static async Task StartApp(int delay = 10000)
+    private static async Task StartApp(int delay = 15000)
     {
         var projectPath = Path.GetFullPath("../../../");
         var dockerFilePath = Path.Combine(projectPath, "docker-compose.app-test.yml");
@@ -456,7 +446,7 @@ public class AppTests
         await Task.Delay(delay);
     }
 
-    private static async Task StopApp(int beforeDelay = 10000, int afterDelay = 2000)
+    private static async Task StopApp(int beforeDelay = 20000, int afterDelay = 2000)
     {
         await Task.Delay(beforeDelay);
         await Process.Start("docker", "container remove -f -v console_app_test_postgres_nothing_grpc_api_db")
@@ -471,9 +461,9 @@ public class AppTests
             .WaitForExitAsync();
         await Process.Start("docker", "image remove -f console_app_test_nothing_web_api")
             .WaitForExitAsync();
-        await Process.Start("docker", "volume remove -f console_app_test_nothing_services_console_app_test_postgres_nothing_grpc_api_db")
+        await Process.Start("docker", "volume remove -f console_app_test_console_app_test_postgres_nothing_grpc_api_db")
             .WaitForExitAsync();
-        await Process.Start("docker", "volume remove -f console_test_nothing_services_console_app_test_postgres_nothing_web_api_db")
+        await Process.Start("docker", "volume remove -f console_app_test_console_app_test_postgres_nothing_web_api_db")
             .WaitForExitAsync();
         await Task.Delay(afterDelay);
     }

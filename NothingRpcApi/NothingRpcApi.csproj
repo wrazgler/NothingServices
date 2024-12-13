@@ -15,7 +15,7 @@
     <OpenApiName>openapi</OpenApiName>
     <OpenApiVersion>1.0</OpenApiVersion>
     <RepositoryUrl>https://github.com/wrazgler/NothingServices</RepositoryUrl>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFrameworks>net9.0;net8.0</TargetFrameworks>
     <Title>NothingRpcApi</Title>
     <Version>1.0.0.0</Version>
   </PropertyGroup>
@@ -53,6 +53,7 @@
     </Content>
     <Content Include="..\.dockerignore">
       <Link>.dockerignore</Link>
+      <DependentUpon>Dockerfile</DependentUpon>
     </Content>
   </ItemGroup>
 
@@ -66,9 +67,15 @@
     </AssemblyAttribute>
   </ItemGroup>
 
-  <Target Name="Generate OpenAPI" AfterTargets="Build" Condition="$(Configuration)=='Debug'">
+  <Target Name="Create database" BeforeTargets="Build" Condition="$(Configuration)=='Debug' And $(TargetFramework)=='net9.0'">
+    <Exec Command="docker container remove -f -v postgres_nothing_grpc_api_db" />
+    <Exec Command="docker run -d --name postgres_nothing_grpc_api_db -p 5400:5432 -e POSTGRES_DB=nothing_grpc_api_db -e POSTGRES_USER=nothing_grpc_api -e POSTGRES_PASSWORD=nothing_grpc_api -v postgres_nothing_grpc_api_db:/var/lib/postgres_nothing_grpc_api_db postgres"/>
+  </Target>
+
+  <Target Name="Generate OpenAPI" AfterTargets="Build" Condition="$(Configuration)=='Debug' And $(TargetFramework)=='net9.0'">
     <Exec Command="dotnet tool restore" />
-    <Exec Command="dotnet swagger tofile --output $(OpenApiName)_v$(OpenApiVersion).yaml --yaml $(OutputPath)$(AssemblyName).dll v$(OpenApiVersion)" WorkingDirectory="$(ProjectDir)" />
+    <Exec Command="dotnet swagger tofile --output $(OpenApiName)_v$(OpenApiVersion).yaml --yaml $(OutputPath)$(AssemblyName).dll v$(OpenApiVersion)"
+          WorkingDirectory="$(ProjectDir)" />
   </Target>
 
 </Project>

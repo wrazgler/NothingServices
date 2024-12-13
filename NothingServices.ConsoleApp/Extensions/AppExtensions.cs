@@ -1,6 +1,7 @@
 using System.Security.Cryptography.X509Certificates;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using NothingServices.Abstractions.Configs;
 using NothingServices.Abstractions.Exceptions;
 using NothingServices.Abstractions.Extensions;
 using NothingServices.ConsoleApp.Clients;
@@ -82,7 +83,11 @@ public static class AppExtensions
         var config = configuration.GetConfig<CertificateConfig>();
         if(!File.Exists(config.FileName))
             throw new FileNotFoundException($"Не удалось найти файл {config.FileName}");
+#if NET9_0_OR_GREATER
+        var certificate = X509CertificateLoader.LoadPkcs12FromFile(config.FileName, config.Password);
+#else
         var certificate = new X509Certificate2(config.FileName, config.Password);
+#endif
         var handler = new HttpClientHandler();
         handler.ClientCertificates.Add(certificate);
         services.AddHttpClient(nameof(ConsoleApp), _ => {})

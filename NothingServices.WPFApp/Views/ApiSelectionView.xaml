@@ -1,0 +1,36 @@
+<UserControl x:Class="NothingServices.WPFApp.Views.ApiSelectionView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewModels="clr-namespace:NothingServices.WPFApp.ViewModels"
+             mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance Type=viewModels:ApiSelectionVM}">
+
+  <UserControl.Resources>
+    <ResourceDictionary Source="pack://application:,,,/NothingServices.WPFApp;v1.0.0.0;component/Styles/ApiSelectionViewStyles.xaml"/>
+  </UserControl.Resources>
+
+  <Grid x:Name="ApiSelectionViewGrid">
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="*" />
+      <ColumnDefinition Width="*" />
+    </Grid.ColumnDefinitions>
+
+    <Button x:Name="GRpcApiButton"
+            Grid.Column="0"
+            Style="{StaticResource ApiSelectionButton}"
+            Command="{Binding Path=GRpcApiButtonVM.Command}"
+            CommandParameter="{Binding Path=GRpcApiButtonVM.Strategy}"
+            Content="{Binding Path=GRpcApiButtonVM.Text}"
+            ToolTip="{Binding Path=GRpcApiButtonVM.ToolTip}"/>
+
+    <Button x:Name="RestApiButton"
+            Grid.Column="1"
+            Style="{StaticResource ApiSelectionButton}"
+            Command="{Binding Path=RestApiButtonVM.Command}"
+            CommandParameter="{Binding Path=RestApiButtonVM.Strategy}"
+            Content="{Binding Path=RestApiButtonVM.Text}"
+            ToolTip="{Binding Path=RestApiButtonVM.ToolTip}"/>
+  </Grid>
+</UserControl>

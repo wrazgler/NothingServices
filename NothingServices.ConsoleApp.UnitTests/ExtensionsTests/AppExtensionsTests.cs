@@ -1,5 +1,6 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using NothingServices.Abstractions.Configs;
 using NothingServices.Abstractions.Exceptions;
 using NothingServices.ConsoleApp.Configs;
 using NothingServices.ConsoleApp.Extensions;
@@ -27,13 +28,12 @@ public class AppExtensionsTests
             .ToArray();
 
         //Assert
-        var assert = new string[]
+        var expected = new string[]
         {
             "NothingServices.ConsoleApp.Clients.NothingRpcService+NothingRpcServiceClient",
             "NothingServices.ConsoleApp.Clients.INothingWebApiClient",
-
         };
-        Assert.Equivalent(assert, result, true);
+        Assert.Equivalent(expected, result, true);
     }
 
     [Fact]
@@ -57,8 +57,8 @@ public class AppExtensionsTests
             .ToArray();
 
         //Assert
-        var assert = "Microsoft.Extensions.Options.IConfigureOptions`1[NothingServices.ConsoleApp.Configs.NothingWebApiClientConfig]";
-        Assert.Contains(assert, result);
+        var expected = "Microsoft.Extensions.Options.IConfigureOptions`1[NothingServices.ConsoleApp.Configs.NothingWebApiClientConfig]";
+        Assert.Contains(expected, result);
     }
 
     [Fact]
@@ -71,15 +71,14 @@ public class AppExtensionsTests
             .ToArray();
 
         //Assert
-        var assert = new string[]
+        var expected = new string[]
         {
             "NothingServices.ConsoleApp.Services.IConsoleService",
             "NothingServices.ConsoleApp.Services.ILoopService",
             "NothingServices.ConsoleApp.Strategies.NothingRpcApiClientStrategy",
             "NothingServices.ConsoleApp.Strategies.NothingWebApiClientStrategy",
-
         };
-        Assert.Equivalent(assert, result, true);
+        Assert.Equivalent(expected, result, true);
     }
 
     [Fact]
@@ -104,5 +103,37 @@ public class AppExtensionsTests
 
         //Assert
         Assert.IsType<HttpClient>(result);
+    }
+
+    [Fact]
+    public void AddAppHttpClient_Throws_FileNotFoundException()
+    {
+        //Arrange
+        var dictionary = new Dictionary<string, string>(1)
+        {
+            {"NOTHING_CERTIFICATE_FILE_NAME", "error.crt"},
+            {"NOTHING_CERTIFICATE_PASSWORD", "localhost"},
+        };
+        var configuration = new ConfigurationBuilder()
+            .AddInMemoryCollection(dictionary!)
+            .Build();
+
+        //Act
+        var result = new Func<IServiceCollection>(() => new ServiceCollection()
+            .AddAppHttpClient(configuration));
+
+        //Assert
+        Assert.Throws<FileNotFoundException>(result);
+    }
+
+    [Fact]
+    public void AddAppHttpClient_Throws_ConfigurationNullException()
+    {
+        //Act
+        var result = new Func<IServiceCollection>(() => new ServiceCollection()
+            .AddAppHttpClient(Mock.Of<IConfiguration>()));
+
+        //Assert
+        Assert.Throws<ConfigurationNullException<CertificateConfig>>(result);
     }
 }

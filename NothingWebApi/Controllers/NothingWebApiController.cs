@@ -22,11 +22,11 @@ public class NothingWebApiController(INothingService nothingService) : Controlle
     [HttpGet]
     [ProducesResponseType(typeof(NothingModelDto[]), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> GetAsync(CancellationToken cancellationToken)
+    public async Task<IActionResult> Get(CancellationToken cancellationToken = default)
     {
         try
         {
-            var models = await _nothingService.GetAsync(cancellationToken);
+            var models = await _nothingService.Get(cancellationToken);
             return Ok(models);
         }
         catch (Exception ex)
@@ -44,13 +44,13 @@ public class NothingWebApiController(INothingService nothingService) : Controlle
     [HttpGet("{id}")]
     [ProducesResponseType(typeof(NothingModelDto), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> GetAsync(
+    public async Task<IActionResult> Get(
         [FromRoute] int id,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken = default)
     {
         try
         {
-            var model = await _nothingService.GetAsync(id, cancellationToken);
+            var model = await _nothingService.Get(id, cancellationToken);
             return Ok(model);
         }
         catch (Exception ex)
@@ -76,13 +76,13 @@ public class NothingWebApiController(INothingService nothingService) : Controlle
     [HttpPost]
     [ProducesResponseType(typeof(NothingModelDto), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> CreateAsync(
+    public async Task<IActionResult> Create(
         [FromBody] CreateNothingModelDto createNothingModelDto,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken = default)
     {
         try
         {
-            var model = await _nothingService.CreateAsync(createNothingModelDto, cancellationToken);
+            var model = await _nothingService.Create(createNothingModelDto, cancellationToken);
             return Ok(model);
         }
         catch (Exception ex)
@@ -109,13 +109,13 @@ public class NothingWebApiController(INothingService nothingService) : Controlle
     [HttpPut]
     [ProducesResponseType(typeof(NothingModelDto), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> UpdateAsync(
+    public async Task<IActionResult> Update(
         [FromBody] UpdateNothingModelDto updateNothingModelDto,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken = default)
     {
         try
         {
-            var model = await _nothingService.UpdateAsync(updateNothingModelDto, cancellationToken);
+            var model = await _nothingService.Update(updateNothingModelDto, cancellationToken);
             return Ok(model);
         }
         catch (Exception ex)
@@ -133,13 +133,13 @@ public class NothingWebApiController(INothingService nothingService) : Controlle
     [HttpDelete("{id}")]
     [ProducesResponseType(typeof(NothingModelDto), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> DeleteAsync(
+    public async Task<IActionResult> Delete(
         [FromRoute] int id,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken = default)
     {
         try
         {
-            var model = await _nothingService.DeleteAsync(id, cancellationToken);
+            var model = await _nothingService.Delete(id, cancellationToken);
             return Ok(model);
         }
         catch (Exception ex)

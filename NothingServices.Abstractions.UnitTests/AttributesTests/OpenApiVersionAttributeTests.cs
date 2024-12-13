@@ -14,7 +14,7 @@ public class OpenApiVersionAttributeTests
         var result = new OpenApiVersionAttribute(version).Version;
 
         //Assert
-        var assert = new Version(version);
-        Assert.Equal(assert, result);
-    } 
+        var expected = new Version(version);
+        Assert.Equal(expected, result);
+    }
 }

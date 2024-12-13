@@ -1,11 +1,11 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
+using NothingServices.Abstractions.Configs;
 using NothingServices.Abstractions.Exceptions;
 using NothingServices.Abstractions.Extensions;
-using NothingServices.ConsoleApp.Configs;
 
-namespace NothingServices.ConsoleApp.UnitTests.ConfigsTests;
+namespace NothingServices.Abstractions.UnitTests.ConfigsTests;
 
 public class CertificateConfigTests
 {
@@ -20,12 +20,12 @@ public class CertificateConfigTests
         var result =  configuration.GetConfig<CertificateConfig>();
 
         //Assert
-        var assert = new CertificateConfig()
+        var expected = new CertificateConfig()
         {
             FileName = "localhost.crt",
             Password = "localhost",
         };
-        Assert.Equivalent(assert, result, true);
+        Assert.Equivalent(expected, result, true);
     }
 
     [Fact]
@@ -41,12 +41,12 @@ public class CertificateConfigTests
         var result = services.GetRequiredService<IOptions<CertificateConfig>>().Value;
 
         //Assert
-        var assert = new CertificateConfig()
+        var expected = new CertificateConfig()
         {
             FileName = "localhost.crt",
             Password = "localhost",
         };
-        Assert.Equivalent(assert, result, true);
+        Assert.Equivalent(expected, result, true);
     }
 
     [Fact]

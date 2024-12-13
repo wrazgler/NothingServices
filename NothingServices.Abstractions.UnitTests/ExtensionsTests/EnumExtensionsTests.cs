@@ -16,8 +16,8 @@ public class EnumExtensionsTests
         var result = enumValue.GetDescription();
 
         //Assert
-        var assert = "test";
-        Assert.Equal(assert, result);
+        var expected = "test";
+        Assert.Equal(expected, result);
     }
 
     [Fact]
@@ -30,8 +30,8 @@ public class EnumExtensionsTests
         var result = enumValue.GetPgName();
 
         //Assert
-        var assert = "test";
-        Assert.Equal(assert, result);
+        var expected = "test";
+        Assert.Equal(expected, result);
     }
 
     private enum TestEnum

@@ -22,11 +22,11 @@ public class ConfigurationExtensionsTests
         var result = configuration.GetConfig<TestConfig>();
 
         //Assert
-        var assert = new TestConfig()
+        var expected = new TestConfig()
         {
             Name = "Test"
         };
-        Assert.Equivalent(assert, result, true);
+        Assert.Equivalent(expected, result, true);
     }
 
     [Fact]

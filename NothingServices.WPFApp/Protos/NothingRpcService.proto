@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+package NothingRpcApi;
+
+import "google/protobuf/empty.proto";
+import "Protos/CreateNothingModelDto.proto";
+import "Protos/NothingModelDto.proto";
+import "Protos/NothingModelIdDto.proto";
+import "Protos/UpdateNothingModelDto.proto";
+
+option csharp_namespace = "NothingServices.WPFApp.Clients";
+
+// Сервис бизнес логики
+service NothingRpcService
+{
+  // Получить список моделей
+  // <returns>Список моделей</returns>
+  rpc GetStream (google.protobuf.Empty) returns (stream NothingModelDto);
+
+  // Получить модель с указанным идентификатором
+  // <param name="nothingModelIdDto">Идентификатор модели</param>
+  // <returns>Объект модели</returns>
+  rpc Get (NothingModelIdDto) returns (NothingModelDto);
+
+  // Создать новую модель
+  // <param name="createNothingModelDto">Данные для создания модели</param>
+  // <returns>Объект модели</returns>
+  // <exception cref="ArgumentNullException">Ошибка валидации входных данных</exception>
+  rpc Create (CreateNothingModelDto) returns (NothingModelDto);
+  
+  // Обновить существующую модель
+  // <param name="updateNothingModelDto">Данные для обновления модели</param>
+  // <returns>Объект модели</returns>
+  // <exception cref="ArgumentNullException">Ошибка валидации входных данных</exception>
+  rpc Update (UpdateNothingModelDto) returns (NothingModelDto);
+
+  // Удалить модель с указанным идентификатором
+  // <param name="nothingModelIdDto">Идентификатор модели</param>
+  // <returns>Объект модели</returns>
+  rpc Delete (NothingModelIdDto) returns (NothingModelDto);
+}

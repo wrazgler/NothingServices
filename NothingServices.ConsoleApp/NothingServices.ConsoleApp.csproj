@@ -13,7 +13,7 @@
     <Nullable>enable</Nullable>
     <OutputType>Exe</OutputType>
     <RepositoryUrl>https://github.com/wrazgler/NothingServices</RepositoryUrl>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFrameworks>net9.0;net8.0</TargetFrameworks>
     <Title>NothingServices.ConsoleApp</Title>
     <Version>1.0.0.0</Version>
   </PropertyGroup>
@@ -51,10 +51,9 @@
     <Protobuf Include="Protos\UpdateNothingModelDto.proto" GrpcServices="Client" />
   </ItemGroup>
 
-  <ItemGroup>
-    <None Update="Protos\UpdateNothingModelDto.proto">
-      <GrpcServices>Server</GrpcServices>
-    </None>
-  </ItemGroup>
+  <Target Name="Create certificate" BeforeTargets="Build" Condition="$(Configuration)=='Debug'">
+    <Exec Command="dotnet dev-certs https -ep .certificates/localhost.crt -p localhost --trust"
+          WorkingDirectory="$(SolutionDir)" />
+  </Target>
 
 </Project>

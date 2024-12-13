@@ -12,7 +12,7 @@ public interface INothingService
     /// </summary>
     /// <param name="cancellationToken">Токен отмены</param>
     /// <returns>Список моделей</returns>
-    public Task<NothingModelDto[]> GetAsync(CancellationToken cancellationToken = default);
+    public Task<NothingModelDto[]> Get(CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Получить модель с указанным идентификатором
@@ -20,7 +20,7 @@ public interface INothingService
     /// <param name="id">Идентификатор модели</param>
     /// <param name="cancellationToken">Токен отмены</param>
     /// <returns>Объект модели</returns>
-    public Task<NothingModelDto> GetAsync(int id, CancellationToken cancellationToken = default);
+    public Task<NothingModelDto> Get(int id, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Создать новую модель
@@ -31,7 +31,7 @@ public interface INothingService
     /// <exception cref="ArgumentNullException">
     /// Ошибка валидации входных данных
     /// </exception>
-    public Task<NothingModelDto> CreateAsync(
+    public Task<NothingModelDto> Create(
         CreateNothingModelDto createNothingModelDto,
         CancellationToken cancellationToken = default);
 
@@ -44,7 +44,7 @@ public interface INothingService
     /// <exception cref="ArgumentNullException">
     /// Ошибка валидации входных данных
     /// </exception>
-    public Task<NothingModelDto> UpdateAsync(
+    public Task<NothingModelDto> Update(
         UpdateNothingModelDto updateNothingModelDto,
         CancellationToken cancellationToken = default);
 
@@ -54,5 +54,5 @@ public interface INothingService
     /// <param name="id">Идентификатор модели</param>
     /// <param name="cancellationToken">Токен отмены</param>
     /// <returns>Объект модели</returns>
-    public Task<NothingModelDto> DeleteAsync(int id, CancellationToken cancellationToken = default);
+    public Task<NothingModelDto> Delete(int id, CancellationToken cancellationToken = default);
 }

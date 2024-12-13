@@ -1,0 +1,50 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:assistants="clr-namespace:NothingServices.WPFApp.Assistants"
+                    xmlns:views="clr-namespace:NothingServices.WPFApp.Views">
+
+  <ResourceDictionary.MergedDictionaries>
+    <ResourceDictionary Source="pack://application:,,,/NothingServices.WPFApp;v1.0.0.0;component/Styles/ButtonStyles.xaml"/>
+    <ResourceDictionary Source="pack://application:,,,/NothingServices.WPFApp;v1.0.0.0;component/Styles/ListBoxStyles.xaml"/>
+  </ResourceDictionary.MergedDictionaries>
+
+  <Style x:Key="NothingModelsListBackButton"
+         BasedOn="{StaticResource StandardButton}"
+         TargetType="{x:Type Button}">
+    <Setter Property="Height" Value="40" />
+    <Setter Property="HorizontalAlignment" Value="Left" />
+    <Setter Property="Margin" Value="10,10,10,10" />
+  </Style>
+
+  <Style x:Key="NothingModelsListCreateButton"
+         BasedOn="{StaticResource CreateButton}"
+         TargetType="{x:Type Button}">
+    <Setter Property="Height" Value="40" />
+    <Setter Property="HorizontalAlignment" Value="Right" />
+    <Setter Property="Margin" Value="10,10,10,10" />
+  </Style>
+
+  <ControlTemplate x:Key="NothingModelsListBoxItemTemplate" TargetType="{x:Type ListBoxItem}">
+    <views:NothingModelView x:Name="ListBoxContent"/>
+  </ControlTemplate>
+
+  <Style x:Key="NothingModelsListListBoxItem" TargetType="{x:Type ListBoxItem}">
+    <Setter Property="assistants:ElementAssistant.Color"
+            Value="{StaticResource DefaultColor}" />
+    <Setter Property="assistants:ElementAssistant.MouseOverColor"
+            Value="{StaticResource DefaultMouseOverColor}" />
+    <Setter Property="assistants:ElementAssistant.MouseOverForeground"
+            Value="{StaticResource DefaultMouseOverForeground}" />
+    <Setter Property="BorderThickness" Value="0"/>
+    <Setter Property="ClipToBounds" Value="True"/>
+    <Setter Property="Margin" Value="1,0,1,0"/>
+    <Setter Property="Template" Value="{StaticResource NothingModelsListBoxItemTemplate}"/>
+  </Style>
+
+  <Style x:Key="NothingModelsListListBox"
+         BasedOn="{StaticResource StandardListBox}"
+         TargetType="{x:Type ListBox}">
+    <Setter Property="ItemContainerStyle" Value="{StaticResource NothingModelsListListBoxItem}"/>
+    <Setter Property="Margin" Value="10,10,10,0" />
+  </Style>
+</ResourceDictionary>

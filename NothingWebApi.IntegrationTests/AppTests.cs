@@ -1,7 +1,6 @@
 using System.Diagnostics;
 using System.Net.Http.Json;
 using System.Security.Cryptography.X509Certificates;
-using NothingServices.Abstractions.Extensions;
 using NothingWebApi.Dtos;
 
 namespace NothingWebApi.IntegrationTests;
@@ -11,7 +10,7 @@ public class AppTests
     private const string AppUrl = "https://localhost:8259/nothing-web-api/NothingWebApi";
 
     [Fact]
-    public async Task GetAsync_Result_Equal()
+    public async Task Get_Result_Equal()
     {
         try
         {
@@ -25,7 +24,7 @@ public class AppTests
             var result = await response.Content.ReadFromJsonAsync<NothingModelDto[]>();
 
             //Assert
-            var assert = new NothingModelDto[]
+            var expected = new NothingModelDto[]
             {
                 new()
                 {
@@ -33,8 +32,7 @@ public class AppTests
                     Name = "Test",
                 }
             };
-            Assert.Equivalent(assert, result);
-            await StopApp();
+            Assert.Equivalent(expected, result);
         }
         finally
         {
@@ -43,7 +41,7 @@ public class AppTests
     }
 
     [Fact]
-    public async Task GetAsync_Id_Result_Equal()
+    public async Task Get_Id_Result_Equal()
     {
         try
         {
@@ -58,13 +56,12 @@ public class AppTests
             var result = await response.Content.ReadFromJsonAsync<NothingModelDto>();
 
             //Assert
-            var assert = new NothingModelDto()
+            var expected = new NothingModelDto()
             {
                 Id = id,
                 Name = "Test",
             };
-            Assert.Equivalent(assert, result);
-            await StopApp();
+            Assert.Equivalent(expected, result);
         }
         finally
         {
@@ -73,7 +70,7 @@ public class AppTests
     }
 
     [Fact]
-    public async Task CreateAsync_Result_Equal()
+    public async Task Create_Result_Equal()
     {
         try
         {
@@ -92,13 +89,12 @@ public class AppTests
             var result = await response.Content.ReadFromJsonAsync<NothingModelDto>();
 
             //Assert
-            var assert = new NothingModelDto()
+            var expected = new NothingModelDto()
             {
                 Id = 2,
                 Name = createNothingModelDto.Name,
             };
-            Assert.Equivalent(assert, result);
-            await StopApp();
+            Assert.Equivalent(expected, result);
         }
         finally
         {
@@ -107,7 +103,7 @@ public class AppTests
     }
 
     [Fact]
-    public async Task UpdateAsync_Result_Equal()
+    public async Task Update_Result_Equal()
     {
         try
         {
@@ -127,13 +123,12 @@ public class AppTests
             var result = await response.Content.ReadFromJsonAsync<NothingModelDto>();
 
             //Assert
-            var assert = new NothingModelDto()
+            var expected = new NothingModelDto()
             {
                 Id = updateNothingModelDto.Id,
                 Name = updateNothingModelDto.Name,
             };
-            Assert.Equivalent(assert, result);
-            await StopApp();
+            Assert.Equivalent(expected, result);
         }
         finally
         {
@@ -142,7 +137,7 @@ public class AppTests
     }
 
     [Fact]
-    public async Task DeleteAsync_Result_Equal()
+    public async Task Delete_Result_Equal()
     {
         try
         {
@@ -157,13 +152,12 @@ public class AppTests
             var result = await response.Content.ReadFromJsonAsync<NothingModelDto>();
 
             //Assert
-            var assert = new NothingModelDto()
+            var expected = new NothingModelDto()
             {
                 Id = id,
                 Name = "Test",
             };
-            Assert.Equivalent(assert, result);
-            await StopApp();
+            Assert.Equivalent(expected, result);
         }
         finally
         {
@@ -183,13 +177,13 @@ public class AppTests
         return httpClient;
     }
 
-    private static async Task StartApp(int delay = 10000)
+    private static async Task StartApp(int delay = 15000)
     {
         await Process.Start("docker", "compose up -d").WaitForExitAsync();
         await Task.Delay(delay);
     }
 
-    private static async Task StopApp(int beforeDelay = 10000, int afterDelay = 2000)
+    private static async Task StopApp(int beforeDelay = 20000, int afterDelay = 2000)
     {
         await Task.Delay(beforeDelay);
         await Process.Start("docker", "container remove -f -v test_postgres_nothing_web_api_db")

@@ -1,6 +1,6 @@
 using Microsoft.Extensions.Configuration;
 
-namespace NothingServices.ConsoleApp.Configs;
+namespace NothingServices.Abstractions.Configs;
 
 /// <summary>
 /// Конфигурация сертификата https
