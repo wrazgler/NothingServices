@@ -11,7 +11,7 @@ namespace NothingServices.WPFApp.Controls;
 [TemplatePart(Name = ContentCoverGridName, Type = typeof(Grid))]
 [TemplateVisualState(GroupName = "PopupStates", Name = OpenStateName)]
 [TemplateVisualState(GroupName = "PopupStates", Name = ClosedStateName)]
-public class Dialog : ContentControl
+public sealed class Dialog : ContentControl
 {
     private const string ContentCoverGridName = "PART_ContentCoverGrid";
     private const string DialogContentName = "PART_DialogContent";

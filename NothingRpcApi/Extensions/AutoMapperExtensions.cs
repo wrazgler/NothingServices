@@ -7,14 +7,14 @@ namespace NothingRpcApi.Extensions;
 /// <summary>
 /// Методы расширений для <see cref="Mapper"/>
 /// </summary>
-public static class AutoMapperExtensions
+internal static class AutoMapperExtensions
 {
     /// <summary>
     /// Добавить конфигурацию <see cref="Mapper"/> в коллекцию сервисов
     /// </summary>
     /// <param name="services">Коллекция сервисов</param>
     /// <returns>Коллекция сервисов с добавленной конфигурацией <see cref="Mapper"/></returns>
-    public static IServiceCollection AddAppAutoMapper(this IServiceCollection services)
+    internal static IServiceCollection AddAppAutoMapper(this IServiceCollection services)
     {
         services.AddAutoMapper(configuration =>
         {

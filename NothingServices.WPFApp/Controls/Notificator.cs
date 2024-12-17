@@ -12,7 +12,7 @@ namespace NothingServices.WPFApp.Controls;
 /// </summary>
 [TemplatePart(Name = ActivateStoryboardName, Type = typeof(Storyboard))]
 [TemplatePart(Name = DeactivateStoryboardName, Type = typeof(Storyboard))]
-public class Notificator : Control, INotificator
+public sealed class Notificator : Control, INotificator
 {
     private const string ActivateStoryboardName = "ActivateStoryboard";
     private const string DeactivateStoryboardName = "DeactivateStoryboard";

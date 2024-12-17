@@ -10,7 +10,7 @@ namespace NothingServices.ConsoleApp.Services;
 /// <param name="lifetime">Информация о жизненном цикле приложения</param>
 /// <param name="nothingRpcApiClientStrategy">Стратегия взаимодействия с клиентом NothingRpcApi</param>
 /// <param name="nothingWebApiClientStrategy">Стратегия взаимодействия с клиентом NothingWebApi</param>
-public class LoopService(
+public sealed class LoopService(
     IConsoleService consoleService,
     IHostApplicationLifetime lifetime,
     NothingRpcApiClientStrategy nothingRpcApiClientStrategy,

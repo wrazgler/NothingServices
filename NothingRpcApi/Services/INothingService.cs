@@ -16,7 +16,7 @@ public interface INothingService
     /// <param name="responseStream">Стрим, возвращающий результаты метода</param>
     /// <param name="context">Контекст запроса</param>
     /// <returns>Список моделей</returns>
-    public Task GetStream(
+    Task GetStream(
         Empty request,
         IServerStreamWriter<NothingModelDto> responseStream,
         ServerCallContext context);
@@ -27,7 +27,7 @@ public interface INothingService
     /// <param name="nothingModelIdDto">Идентификатор модели</param>
     /// <param name="context">Контекст запроса</param>
     /// <returns>Объект модели</returns>
-    public Task<NothingModelDto> Get(
+    Task<NothingModelDto> Get(
         NothingModelIdDto nothingModelIdDto,
         ServerCallContext context);
 
@@ -40,7 +40,7 @@ public interface INothingService
     /// <exception cref="ArgumentNullException">
     /// Ошибка валидации входных данных
     /// </exception>
-    public Task<NothingModelDto> Create(
+    Task<NothingModelDto> Create(
         CreateNothingModelDto createNothingModelDto,
         ServerCallContext context);
 
@@ -53,7 +53,7 @@ public interface INothingService
     /// <exception cref="ArgumentNullException">
     /// Ошибка валидации входных данных
     /// </exception>
-    public Task<NothingModelDto> Update(
+    Task<NothingModelDto> Update(
         UpdateNothingModelDto updateNothingModelDto,
         ServerCallContext context);
 
@@ -63,7 +63,7 @@ public interface INothingService
     /// <param name="nothingModelIdDto">Идентификатор модели</param>
     /// <param name="context">Контекст запроса</param>
     /// <returns>Объект модели</returns>
-    public Task<NothingModelDto> Delete(
+    Task<NothingModelDto> Delete(
         NothingModelIdDto nothingModelIdDto,
         ServerCallContext context);
 }

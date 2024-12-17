@@ -13,6 +13,7 @@
     <LangVersion>latest</LangVersion>
     <NeutralLanguage>ru</NeutralLanguage>
     <Nullable>enable</Nullable>
+    <OutputAssembly>NothingServices.Abstractions.dll</OutputAssembly>
     <PackageId>NothingServices.Abstractions</PackageId>
     <PackageProjectUrl>https://github.com/wrazgler/NothingServices/tree/develop/NothingServices.Abstractions</PackageProjectUrl>
     <PackageReadmeFile>README.md</PackageReadmeFile>

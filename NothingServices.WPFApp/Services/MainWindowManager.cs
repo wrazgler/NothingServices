@@ -6,7 +6,7 @@ namespace NothingServices.WPFApp.Services;
 /// <summary>
 /// Сервис управление отображением преставления на главном окне
 /// </summary>
-public class MainWindowManager : IMainWindowManager
+public sealed class MainWindowManager : IMainWindowManager
 {
     /// <summary>
     /// Стратегия взаимодействия с клиентом NothingApi

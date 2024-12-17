@@ -10,7 +10,7 @@ namespace NothingServices.WPFApp.ViewModels.Controls;
 /// <param name="cancelButtonVM">Кнопка отменить удаление</param>
 /// <param name="deleteButtonVM">Кнопка удалить модель</param>
 /// <param name="nothingModelVM">Данные представления модели</param>
-public class DeleteNothingModelVM(
+public sealed class DeleteNothingModelVM(
     IButtonVM cancelButtonVM,
     IButtonVM deleteButtonVM,
     INothingModelVM nothingModelVM)

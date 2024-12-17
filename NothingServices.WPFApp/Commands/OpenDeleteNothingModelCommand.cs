@@ -13,7 +13,7 @@ namespace NothingServices.WPFApp.Commands;
 /// <param name="deleteNothingModelVMFactory">Фабрика создания объекта данных представления окна удалить модель</param>
 /// <param name="dialogService">Сервис работы диалогового окна</param>
 /// <param name="notificationService">Сервис отображения уведомлений в пользовательском интерфейсе</param>
-public class OpenDeleteNothingModelCommand(
+public sealed class OpenDeleteNothingModelCommand(
     IDeleteNothingModelVMFactory deleteNothingModelVMFactory,
     IDialogService dialogService,
     INotificationService notificationService,

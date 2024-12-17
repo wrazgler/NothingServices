@@ -21,12 +21,19 @@ namespace NothingRpcApi.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Name = table.Column<string>(type: "text", nullable: false)
+                    Name = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_nothing_models", x => x.Id);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_nothing_models_Id",
+                schema: "public",
+                table: "nothing_models",
+                column: "Id",
+                unique: true);
             migrationBuilder.Sql("INSERT INTO public.nothing_models (\"Name\") VALUES ('Test');");
         }
 

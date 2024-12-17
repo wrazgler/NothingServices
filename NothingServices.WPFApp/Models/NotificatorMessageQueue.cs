@@ -3,7 +3,7 @@ namespace NothingServices.WPFApp.Models;
 /// <summary>
 /// Очередь уведомлений
 /// </summary>
-public class NotificatorMessageQueue
+public sealed class NotificatorMessageQueue
 {
     private readonly object _messagesLock = new();
     private readonly LinkedList<NotificatorItem> _nodes = [];

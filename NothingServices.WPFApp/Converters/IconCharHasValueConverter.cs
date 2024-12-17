@@ -8,7 +8,7 @@ namespace NothingServices.WPFApp.Converters;
 /// Конвертер проверки содержимого изображения для элемента
 /// </summary>
 [ValueConversion(typeof(IconChar), typeof(bool))]
-public class IconCharHasValueConverter : IValueConverter
+public sealed class IconCharHasValueConverter : IValueConverter
 {
     /// <summary>
     /// Проверяет задано ли изображение для элемента

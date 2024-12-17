@@ -13,7 +13,7 @@ internal static class DbContextExtensions
         return dbContext;
     }
 
-    internal static async Task<NothingRpcApiDbContext> CreateNewDataBase(this NothingRpcApiDbContext dbContext)
+    private static async Task<NothingRpcApiDbContext> CreateNewDataBase(this NothingRpcApiDbContext dbContext)
     {
         await dbContext.Database.EnsureDeletedAsync();
         await dbContext.Database.EnsureCreatedAsync();

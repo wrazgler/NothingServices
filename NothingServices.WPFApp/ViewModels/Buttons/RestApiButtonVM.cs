@@ -10,7 +10,7 @@ namespace NothingServices.WPFApp.ViewModels.Buttons;
 /// </summary>
 /// <param name="strategy">Стратегия взаимодействия с клиентом NothingWebApi</param>
 /// <param name="openNothingModelsListCommand">Команда открыть представление окна списка моделей</param>
-public class RestApiButtonVM(
+public sealed class RestApiButtonVM(
     NothingWebApiClientStrategy strategy,
     IOpenNothingModelsListCommand openNothingModelsListCommand)
     : ObservableObject, IRestApiButtonVM

@@ -9,7 +9,7 @@ namespace NothingWebApi.DbContexts;
 /// <summary>
 /// Фабрика создания контекста базы данных
 /// </summary>
-public class NothingWebApiDesignTimeDbContextFactory
+internal sealed class NothingWebApiDesignTimeDbContextFactory
     : IDesignTimeDbContextFactory<NothingWebApiDbContext>
 {
     /// <summary>
@@ -27,5 +27,5 @@ public class NothingWebApiDesignTimeDbContextFactory
         var optionsBuilder = new DbContextOptionsBuilder<NothingWebApiDbContext>();
         optionsBuilder.ConfigureNpgsql(config.ConnectionString);
         return new NothingWebApiDbContext(optionsBuilder.Options);
-    } 
+    }
 }

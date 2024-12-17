@@ -14,6 +14,7 @@
     <Nullable>enable</Nullable>
     <OpenApiName>openapi</OpenApiName>
     <OpenApiVersion>1.0</OpenApiVersion>
+    <OutputAssembly>NothingRpcApi.dll</OutputAssembly>
     <RepositoryUrl>https://github.com/wrazgler/NothingServices</RepositoryUrl>
     <TargetFrameworks>net9.0;net8.0</TargetFrameworks>
     <Title>NothingRpcApi</Title>
@@ -64,6 +65,12 @@
   <ItemGroup>
     <AssemblyAttribute Include="NothingServices.Abstractions.Attributes.OpenApiVersionAttribute">
       <_Parameter1>$(OpenApiVersion)</_Parameter1>
+    </AssemblyAttribute>
+    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
+      <_Parameter1>NothingRpcApi.IntegrationTests</_Parameter1>
+    </AssemblyAttribute>
+    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
+      <_Parameter1>NothingRpcApi.UnitTests</_Parameter1>
     </AssemblyAttribute>
   </ItemGroup>
 

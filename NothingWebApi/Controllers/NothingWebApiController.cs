@@ -10,7 +10,7 @@ namespace NothingWebApi.Controllers;
 /// <param name="nothingService">Сервис бизнес логики</param>
 [ApiController]
 [Route("[controller]")]
-public class NothingWebApiController(INothingService nothingService) : ControllerBase
+public sealed class NothingWebApiController(INothingService nothingService) : ControllerBase
 {
     private readonly INothingService _nothingService = nothingService;
 

@@ -5,7 +5,7 @@ namespace NothingServices.WPFApp.Dtos;
 /// <summary>
 /// Данные для обновления модели
 /// </summary>
-public class UpdateNothingModelWebDto
+public sealed class UpdateNothingModelWebDto
 {
     /// <summary>
     /// Идентификатор модели

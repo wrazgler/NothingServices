@@ -3,7 +3,7 @@ namespace NothingServices.ConsoleApp.Services;
 /// <summary>
 /// Сервис работы с консолью
 /// </summary>
-public class ConsoleService : IConsoleService
+public sealed class ConsoleService : IConsoleService
 {
     /// <summary>
     /// Запись сообщения в консоль

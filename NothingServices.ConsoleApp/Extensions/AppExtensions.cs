@@ -14,7 +14,7 @@ namespace NothingServices.ConsoleApp.Extensions;
 /// <summary>
 /// Методы расширений для приложения
 /// </summary>
-public static class AppExtensions
+internal static class AppExtensions
 {
     /// <summary>
     /// Добавить клиенты внешних сервисов приложения в коллекцию сервисов
@@ -25,7 +25,7 @@ public static class AppExtensions
     /// <exception cref="ConfigurationNullException{TConfig}">
     /// Ошибка, возникшая при получении конфигурации.
     /// </exception>
-    public static IServiceCollection AddAppClients(
+    internal static IServiceCollection AddAppClients(
         this IServiceCollection services,
         IConfiguration configuration)
     {
@@ -41,7 +41,7 @@ public static class AppExtensions
     /// <param name="services">Коллекция сервисов</param>
     /// <param name="configuration">Конфигурация приложения</param>
     /// <returns>Коллекция сервисов с добавленными конфигурациями приложения</returns>
-    public static IServiceCollection AddAppConfigs(
+    internal static IServiceCollection AddAppConfigs(
         this IServiceCollection services,
         IConfiguration configuration)
     {
@@ -55,7 +55,7 @@ public static class AppExtensions
     /// </summary>
     /// <param name="services">Коллекция сервисов</param>
     /// <returns>Коллекция сервисов с добавленными сервисами приложения</returns>
-    public static IServiceCollection AddAppServices(this IServiceCollection services)
+    internal static IServiceCollection AddAppServices(this IServiceCollection services)
     {
         services.AddTransient<IConsoleService, ConsoleService>();
         services.AddTransient<ILoopService, LoopService>();
@@ -76,7 +76,7 @@ public static class AppExtensions
     /// <exception cref="FileNotFoundException">
     /// Ошибка, возникшая при получении доступа к файлу.
     /// </exception>
-    public static IServiceCollection AddAppHttpClient(
+    internal static IServiceCollection AddAppHttpClient(
         this IServiceCollection services,
         IConfiguration configuration)
     {

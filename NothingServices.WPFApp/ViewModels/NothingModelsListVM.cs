@@ -11,7 +11,7 @@ namespace NothingServices.WPFApp.ViewModels;
 /// <summary>
 /// Данные представления окна списка моделей
 /// </summary>
-public class NothingModelsListVM : ObservableObject, IMainWindowContentVM
+public sealed class NothingModelsListVM : ObservableObject, IMainWindowContentVM
 {
     private readonly IMainWindowManager _mainWindowManager ;
     private readonly CancellationTokenSource _cancellationTokenSource;

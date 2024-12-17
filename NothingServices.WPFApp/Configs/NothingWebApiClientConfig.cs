@@ -5,7 +5,7 @@ namespace NothingServices.WPFApp.Configs;
 /// <summary>
 /// Конфигурация подключения к сервису NothingWebApi
 /// </summary>
-public class NothingWebApiClientConfig
+public sealed class NothingWebApiClientConfig
 {
     /// <summary>
     /// Адрес сервиса NothingWebApi

@@ -11,7 +11,7 @@ namespace NothingServices.WPFApp.Commands;
 /// <param name="createNothingModelVMFactory">Фабрика создания объекта данных представления окна создать модель</param>
 /// <param name="dialogService">Сервис работы диалогового окна</param>
 /// <param name="notificationService">Сервис отображения уведомлений в пользовательском интерфейсе</param>
-public class OpenCreateNothingModelCommand(
+public sealed class OpenCreateNothingModelCommand(
     ICreateNothingModelVMFactory createNothingModelVMFactory,
     IDialogService dialogService,
     INotificationService notificationService,

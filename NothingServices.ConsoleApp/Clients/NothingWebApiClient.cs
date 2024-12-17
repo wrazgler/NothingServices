@@ -11,7 +11,7 @@ namespace NothingServices.ConsoleApp.Clients;
 /// </summary>
 /// <param name="httpClientFactory">Фабрика Http клиента</param>
 /// <param name="clientOptions">Конфигурация подключения к внешнему сервису NothingWebApi</param>
-public class NothingWebApiClient(
+public sealed class NothingWebApiClient(
     IHttpClientFactory httpClientFactory,
     IOptions<NothingWebApiClientConfig> clientOptions)
     : INothingWebApiClient

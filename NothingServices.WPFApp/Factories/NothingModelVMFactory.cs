@@ -14,7 +14,7 @@ namespace NothingServices.WPFApp.Factories;
 /// <param name="openUpdateNothingModelCommand">
 /// Команда открыть представление окна обновления существующей модели
 /// </param>
-public class NothingModelVMFactory(
+public sealed class NothingModelVMFactory(
     IOpenDeleteNothingModelCommand openDeleteNothingModelCommand,
     IOpenUpdateNothingModelCommand openUpdateNothingModelCommand)
     : INothingModelVMFactory

@@ -9,14 +9,14 @@ namespace NothingRpcApi.DbContexts;
 /// Контекст базы данных
 /// </summary>
 /// <param name="options">Конфигурация контекста базы данных</param>
-public class NothingRpcApiDbContext(DbContextOptions<NothingRpcApiDbContext> options) 
+public class NothingRpcApiDbContext(DbContextOptions<NothingRpcApiDbContext> options)
     : DbContext(options)
 {
     /// <summary>
     /// Коллекция моделей
     /// </summary>
     public virtual DbSet<NothingModel> NothingModels { get; set; }
-    
+
     /// <summary>
     /// Конфигурация моделей базы данных
     /// </summary>

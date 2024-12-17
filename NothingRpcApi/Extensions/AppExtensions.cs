@@ -7,7 +7,7 @@ namespace NothingRpcApi.Extensions;
 /// <summary>
 /// Методы расширений для приложения
 /// </summary>
-public static class AppExtensions
+internal static class AppExtensions
 {
     /// <summary>
     /// Добавить конфигурации приложения в коллекцию сервисов
@@ -15,7 +15,7 @@ public static class AppExtensions
     /// <param name="services">Коллекция сервисов</param>
     /// <param name="configuration">Конфигурация приложения</param>
     /// <returns>Коллекция сервисов с добавленными конфигурациями приложения</returns>
-    public static IServiceCollection AddAppConfigs(
+    internal static IServiceCollection AddAppConfigs(
         this IServiceCollection services,
         IConfiguration configuration)
     {
@@ -32,7 +32,7 @@ public static class AppExtensions
     /// <exception cref="ConfigurationNullException{TConfig}">
     /// Ошибка, возникшая при получении конфигурации.
     /// </exception>
-    public static IApplicationBuilder UseAppPathBase(
+    internal static IApplicationBuilder UseAppPathBase(
         this IApplicationBuilder applicationBuilder,
         IConfiguration configuration)
     {

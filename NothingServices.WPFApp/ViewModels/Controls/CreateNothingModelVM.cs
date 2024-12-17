@@ -9,7 +9,7 @@ namespace NothingServices.WPFApp.ViewModels.Controls;
 /// </summary>
 /// <param name="cancelButtonVM">Кнопка отменить создание</param>
 /// <param name="createButtonVM">Кнопка создать модель</param>
-public class CreateNothingModelVM(
+public sealed class CreateNothingModelVM(
     IButtonVM cancelButtonVM,
     IButtonVM createButtonVM)
     : ObservableObject, IDialogContentVM

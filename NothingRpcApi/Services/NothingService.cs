@@ -14,7 +14,7 @@ namespace NothingRpcApi.Services;
 /// <param name="dbContext">Контекст базы данных</param>
 /// <param name="logger">Экземпляр <see cref="ILogger"/></param>
 /// <param name="mapper"><see cref="Mapper"/></param>
-public class NothingService(
+public sealed class NothingService(
     NothingRpcApiDbContext dbContext,
     ILogger<NothingService> logger,
     IMapper mapper)

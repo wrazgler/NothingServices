@@ -11,7 +11,7 @@ namespace NothingServices.WPFApp.Services;
 /// </summary>
 /// <param name="dispatcher">Рабочий поток очереди</param>
 /// <param name="duration">Длительность отображения уведомления</param>
-public class NotificationService(Dispatcher? dispatcher = null, TimeSpan? duration = null)
+public sealed class NotificationService(Dispatcher? dispatcher = null, TimeSpan? duration = null)
     : INotificationService
 {
     private readonly Dispatcher _dispatcher = GetDispatcher(dispatcher);

@@ -7,7 +7,7 @@ namespace NothingServices.WPFApp.Converters;
 /// Конвертер проверки содержимого текста для элемента
 /// </summary>
 [ValueConversion(typeof(string), typeof(bool))]
-public class StringHasValueConverter : IValueConverter
+public sealed class StringHasValueConverter : IValueConverter
 {
     /// <summary>
     /// Проверяет задан ли текст для элемента

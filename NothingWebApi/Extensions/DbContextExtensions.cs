@@ -11,7 +11,7 @@ namespace NothingWebApi.Extensions;
 /// <summary>
 /// Методы расширений для работы с EntityFramework
 /// </summary>
-public static class DbContextExtensions
+internal static class DbContextExtensions
 {
     /// <summary>
     /// Добавить базу данных PostgreSQL в коллекцию сервисов
@@ -65,7 +65,7 @@ public static class DbContextExtensions
     /// <exception cref="ConfigurationNullException{TConfig}">
     /// Ошибка, возникшая при получении конфигурации.
     /// </exception>
-    public static IServiceCollection AddInMemoryDatabase(
+    internal static IServiceCollection AddInMemoryDatabase(
         this IServiceCollection services,
         HostBuilderContext context)
     {
@@ -80,7 +80,7 @@ public static class DbContextExtensions
     /// <param name="services">Коллекция сервисов</param>
     /// <param name="dbName">Имя базы данных</param>
     /// <returns>Коллекция сервисов с добавленной базой данных  в оперативной памяти</returns>
-    public static IServiceCollection AddInMemoryDatabase(
+    internal static IServiceCollection AddInMemoryDatabase(
         this IServiceCollection services,
         string dbName)
     {

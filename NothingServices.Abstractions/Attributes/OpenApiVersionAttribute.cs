@@ -5,7 +5,8 @@ namespace NothingServices.Abstractions.Attributes;
 /// </summary>
 /// <param name="version">Версия документа OpenApi</param>
 [AttributeUsage(AttributeTargets.Assembly)]
-public class OpenApiVersionAttribute(string version) : Attribute
+
+public sealed class OpenApiVersionAttribute(string version) : Attribute
 {
     /// <summary>
     /// Версия документа OpenApi

@@ -10,7 +10,7 @@ namespace NothingServices.WPFApp.Services;
 /// <param name="mainWindow">Представление главного окна приложения</param>
 /// <param name="mainWindowManager">Сервис управление отображением преставления на главном окне</param>
 /// <param name="mainWindowVM">Данные представления главного окна</param>
-public class StartupService(
+public sealed class StartupService(
     IMainWindowManager mainWindowManager,
     IMainWindow mainWindow,
     IMainWindowVM mainWindowVM)

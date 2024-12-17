@@ -5,7 +5,7 @@ namespace NothingServices.Abstractions.Configs;
 /// <summary>
 /// Конфигурация сертификата https
 /// </summary>
-public class CertificateConfig
+public sealed class CertificateConfig
 {
     /// <summary>
     /// Путь к сертификату https

@@ -6,7 +6,7 @@ namespace NothingServices.WPFApp.ViewModels;
 /// <summary>
 /// Данные представления диалогового окна
 /// </summary>
-public class DialogVM : ObservableObject, IDialogVM
+public sealed class DialogVM : ObservableObject, IDialogVM
 {
     private bool _open = false;
     private IDialogControl? _content;

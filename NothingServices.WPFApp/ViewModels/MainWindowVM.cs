@@ -11,7 +11,7 @@ namespace NothingServices.WPFApp.ViewModels;
 /// <param name="dialogVM">Данные представления диалогового окна</param>
 /// <param name="nothingModelsListVM">Данные представления окна списка моделей</param>
 /// <param name="notificationService">Сервис отображения уведомлений в пользовательском интерфейсе</param>
-public class MainWindowVM(
+public sealed class MainWindowVM(
     IAppVersionProvider appVersionProvider,
     IDialogVM dialogVM,
     INotificationService notificationService,

@@ -12,6 +12,7 @@
     <LangVersion>latest</LangVersion>
     <NeutralLanguage>ru</NeutralLanguage>
     <Nullable>enable</Nullable>
+    <OutputAssembly>NothingServices.WPFApp.dll</OutputAssembly>
     <OutputType>WinExe</OutputType>
     <RepositoryUrl>https://github.com/wrazgler/NothingServices</RepositoryUrl>
     <TargetFrameworks>net9.0-windows;net8.0-windows</TargetFrameworks>
@@ -54,6 +55,15 @@
     <Protobuf Include="Protos\NothingModelIdDto.proto" GrpcServices="Client" />
     <Protobuf Include="Protos\NothingRpcService.proto" GrpcServices="Client" />
     <Protobuf Include="Protos\UpdateNothingModelDto.proto" GrpcServices="Client" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
+      <_Parameter1>NothingServices.WPFApp.IntegrationTests</_Parameter1>
+    </AssemblyAttribute>
+    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
+      <_Parameter1>NothingServices.WPFApp.UnitTests</_Parameter1>
+    </AssemblyAttribute>
   </ItemGroup>
 
   <Target Name="Create certificate" BeforeTargets="Build" Condition="$(Configuration)=='Debug'">

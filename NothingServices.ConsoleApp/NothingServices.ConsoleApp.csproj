@@ -11,6 +11,7 @@
     <LangVersion>latest</LangVersion>
     <NeutralLanguage>ru</NeutralLanguage>
     <Nullable>enable</Nullable>
+    <OutputAssembly>NothingServices.ConsoleApp.dll</OutputAssembly>
     <OutputType>Exe</OutputType>
     <RepositoryUrl>https://github.com/wrazgler/NothingServices</RepositoryUrl>
     <TargetFrameworks>net9.0;net8.0</TargetFrameworks>
@@ -49,6 +50,15 @@
     <Protobuf Include="Protos\NothingModelIdDto.proto" GrpcServices="Client" />
     <Protobuf Include="Protos\NothingRpcService.proto" GrpcServices="Client" />
     <Protobuf Include="Protos\UpdateNothingModelDto.proto" GrpcServices="Client" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
+      <_Parameter1>NothingServices.ConsoleApp.IntegrationTests</_Parameter1>
+    </AssemblyAttribute>
+    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
+      <_Parameter1>NothingServices.ConsoleApp.UnitTests</_Parameter1>
+    </AssemblyAttribute>
   </ItemGroup>
 
   <Target Name="Create certificate" BeforeTargets="Build" Condition="$(Configuration)=='Debug'">

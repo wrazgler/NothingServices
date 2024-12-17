@@ -7,7 +7,7 @@ namespace NothingServices.WPFApp.Commands;
 /// </summary>
 /// <param name="dialogService">Сервис работы диалогового окна</param>
 /// <param name="notificationService">Сервис отображения уведомлений в пользовательском интерфейсе</param>
-public class CloseDialogCommand(
+public sealed class CloseDialogCommand(
     IDialogService dialogService,
     INotificationService notificationService)
     : BaseCommand, ICloseDialogCommand

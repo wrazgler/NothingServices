@@ -178,7 +178,7 @@ public class NothingWebApiClientStrategyTests
         var nothingWebApiClientStrategy = GetNothingWebApiClientStrategy(
             Mock.Of<INothingModelVMFactory>(),
             clientMock.Object);
-        var nothingModelVM = Mock.Of<NothingModelVM>(nothingModelVM => nothingModelVM.Id == 1);
+        var nothingModelVM = Mock.Of<INothingModelVM>(nothingModelVM => nothingModelVM.Id == 1);
         var updateNothingModelVM = new UpdateNothingModelVM(
             Mock.Of<IButtonVM>(),
             Mock.Of<IButtonVM>(),
@@ -207,7 +207,7 @@ public class NothingWebApiClientStrategyTests
         var nothingWebApiClientStrategy = GetNothingWebApiClientStrategy(
             nothingModelVMFactoryMock.Object,
             clientMock.Object);
-        var nothingModelVM = Mock.Of<NothingModelVM>(nothingModelVM => nothingModelVM.Id == nothingModels.Single().Id);
+        var nothingModelVM = Mock.Of<INothingModelVM>(nothingModelVM => nothingModelVM.Id == nothingModels.Single().Id);
         var deleteNothingModelVM = new DeleteNothingModelVM(
             Mock.Of<IButtonVM>(),
             Mock.Of<IButtonVM>(),
@@ -233,7 +233,7 @@ public class NothingWebApiClientStrategyTests
         var nothingWebApiClientStrategy = GetNothingWebApiClientStrategy(
             Mock.Of<INothingModelVMFactory>(),
             clientMock.Object);
-        var nothingModelVM = Mock.Of<NothingModelVM>(nothingModelVM => nothingModelVM.Id == 1);
+        var nothingModelVM = Mock.Of<INothingModelVM>(nothingModelVM => nothingModelVM.Id == 1);
         var deleteNothingModelVM = new DeleteNothingModelVM(
             Mock.Of<IButtonVM>(),
             Mock.Of<IButtonVM>(),

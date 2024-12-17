@@ -7,7 +7,7 @@ namespace NothingServices.WPFApp.ViewModels.Buttons;
 /// Данные представления кнопки обновить модель
 /// </summary>
 /// <param name="command">Команда, исполняемая кнопкой</param>
-public class UpdateButtonVM(ICommand command)
+public sealed class UpdateButtonVM(ICommand command)
     : ObservableObject, IButtonVM
 {
     /// <summary>

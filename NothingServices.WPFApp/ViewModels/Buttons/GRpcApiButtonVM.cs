@@ -10,7 +10,7 @@ namespace NothingServices.WPFApp.ViewModels.Buttons;
 /// </summary>
 /// <param name="strategy">Стратегия взаимодействия с клиентом NothingRpcApi</param>
 /// <param name="openNothingModelsListCommand">Команда открыть представление окна списка моделей</param>
-public class GRpcApiButtonVM(
+public sealed class GRpcApiButtonVM(
     NothingRpcApiClientStrategy strategy,
     IOpenNothingModelsListCommand openNothingModelsListCommand)
     : ObservableObject, IGRpcApiButtonVM

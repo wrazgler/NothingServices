@@ -7,7 +7,7 @@ namespace NothingServices.WPFApp.Converters;
 /// Конвертер высоты окна уведомлений
 /// </summary>
 [ValueConversion(typeof(double[]), typeof(double))]
-public class NotificatorHeightConverter : IMultiValueConverter
+public sealed class NotificatorHeightConverter : IMultiValueConverter
 {
     /// <summary>
     /// Перемножает входящие значения для получения высоты элемента

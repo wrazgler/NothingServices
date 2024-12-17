@@ -7,7 +7,7 @@ namespace NothingRpcApi.EntityTypeConfigurations;
 /// <summary>
 /// Конфигурация таблицы модели
 /// </summary>
-public class NothingModelConfiguration: IEntityTypeConfiguration<NothingModel>
+internal sealed class NothingModelConfiguration: IEntityTypeConfiguration<NothingModel>
 {
     /// <summary>
     /// Настройка таблицы модели
@@ -15,6 +15,8 @@ public class NothingModelConfiguration: IEntityTypeConfiguration<NothingModel>
     public void Configure(EntityTypeBuilder<NothingModel> entity)
     {
         entity.HasKey(nothingModel => nothingModel.Id);
+        entity.HasIndex(nothingModel => nothingModel.Id)
+            .IsUnique();
         entity.Property(nothingModel => nothingModel.Id)
             .UseIdentityByDefaultColumn();
         entity.Property(nothingModel => nothingModel.Name)

@@ -5,7 +5,7 @@ namespace NothingServices.WPFApp.Services;
 /// <summary>
 /// Провайдер версии приложения
 /// </summary>
-public class AppVersionProvider : IAppVersionProvider
+public sealed class AppVersionProvider : IAppVersionProvider
 {
     /// <summary>
     /// Получить текущую версию приложения

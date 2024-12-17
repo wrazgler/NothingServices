@@ -5,7 +5,7 @@ namespace NothingWebApi.Dtos;
 /// <summary>
 /// Данные для обновления модели
 /// </summary>
-public class UpdateNothingModelDto
+public sealed class UpdateNothingModelDto
 {
     /// <summary>
     /// Идентификатор модели

@@ -5,7 +5,7 @@ namespace NothingWebApi.Dtos;
 /// <summary>
 /// Данные для создания модели
 /// </summary>
-public class CreateNothingModelDto
+public sealed class CreateNothingModelDto
 {
     /// <summary>
     /// Имя модели

@@ -5,7 +5,7 @@ namespace NothingServices.ConsoleApp.Dtos;
 /// <summary>
 /// Данные модели
 /// </summary>
-public class NothingModelWebDto
+public sealed class NothingModelWebDto
 {
     /// <summary>
     /// Идентификатор модели

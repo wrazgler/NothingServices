@@ -13,6 +13,7 @@
     <NeutralLanguage>ru</NeutralLanguage>
     <Nullable>enable</Nullable>
     <OpenApiName>openapi</OpenApiName>
+    <OutputAssembly>NothingWebApi.dll</OutputAssembly>
     <OpenApiVersion>1.0</OpenApiVersion>
     <RepositoryUrl>https://github.com/wrazgler/NothingServices</RepositoryUrl>
     <TargetFrameworks>net9.0;net8.0</TargetFrameworks>
@@ -52,6 +53,12 @@
   <ItemGroup>
     <AssemblyAttribute Include="NothingServices.Abstractions.Attributes.OpenApiVersionAttribute">
       <_Parameter1>$(OpenApiVersion)</_Parameter1>
+    </AssemblyAttribute>
+    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
+      <_Parameter1>NothingWebApi.IntegrationTests</_Parameter1>
+    </AssemblyAttribute>
+    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
+      <_Parameter1>NothingWebApi.UnitTests</_Parameter1>
     </AssemblyAttribute>
   </ItemGroup>
 

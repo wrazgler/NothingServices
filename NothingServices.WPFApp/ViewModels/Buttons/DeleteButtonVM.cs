@@ -7,7 +7,7 @@ namespace NothingServices.WPFApp.ViewModels.Buttons;
 /// Данные представления кнопки удалить модель
 /// </summary>
 /// <param name="command">Команда, исполняемая кнопкой</param>
-public class DeleteButtonVM(ICommand command)
+public sealed class DeleteButtonVM(ICommand command)
     : ObservableObject, IButtonVM
 {
     /// <summary>

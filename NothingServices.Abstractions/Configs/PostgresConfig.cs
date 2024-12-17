@@ -5,7 +5,7 @@ namespace NothingServices.Abstractions.Configs;
 /// <summary>
 /// Конфигурация подключения к базе данных Postgres
 /// </summary>
-public class PostgresConfig
+public sealed class PostgresConfig
 {
     private const string ConnectingStringFormat = "Host={0};Port={1};Database={2};Username={3};Password={4}";
 
@@ -14,7 +14,7 @@ public class PostgresConfig
     /// </summary>
     [ConfigurationKeyName("POSTGRES_HOST")]
     public required string Host { get; init; }
-	
+
     /// <summary>
     /// Номер порта
     /// </summary>

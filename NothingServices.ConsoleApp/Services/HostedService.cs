@@ -7,7 +7,7 @@ namespace NothingServices.ConsoleApp.Services;
 /// </summary>
 /// <param name="lifetime">Информация о жизненном цикле приложения</param>
 /// <param name="loopService">Сервис бизнес логики приложения</param>
-public class HostedService(
+public sealed class HostedService(
     IHostApplicationLifetime lifetime,
     ILoopService loopService)
     : IHostedService

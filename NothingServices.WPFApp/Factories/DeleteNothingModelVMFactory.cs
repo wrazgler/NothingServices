@@ -13,7 +13,7 @@ namespace NothingServices.WPFApp.Factories;
 /// <param name="closeDialogCommand">
 /// Команда закрыть представление диалогового окна
 /// </param>
-public class DeleteNothingModelVMFactory(
+public sealed class DeleteNothingModelVMFactory(
     ICloseDialogCommand closeDialogCommand,
     IDeleteCommand deleteCommand)
     : IDeleteNothingModelVMFactory

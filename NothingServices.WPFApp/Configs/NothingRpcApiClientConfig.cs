@@ -6,7 +6,7 @@ namespace NothingServices.WPFApp.Configs;
 /// <summary>
 /// Конфигурация подключения к сервису NothingRpcApi
 /// </summary>
-public class NothingRpcApiClientConfig
+public sealed class NothingRpcApiClientConfig
 {
     /// <summary>
     /// Адрес сервиса NothingRpcApi

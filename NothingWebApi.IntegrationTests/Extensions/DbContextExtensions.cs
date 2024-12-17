@@ -12,15 +12,15 @@ internal static class DbContextExtensions
         await dbContext.CreateNewDataBase();
         return dbContext;
     }
-    
-    internal static async Task<NothingWebApiDbContext> CreateNewDataBase(this NothingWebApiDbContext dbContext)
+
+    private static async Task<NothingWebApiDbContext> CreateNewDataBase(this NothingWebApiDbContext dbContext)
     {
         await dbContext.Database.EnsureDeletedAsync();
         await dbContext.Database.EnsureCreatedAsync();
         dbContext.ChangeTracker.Clear();
         return dbContext;
     }
-    
+
     internal static async Task<NothingWebApiDbContext> AddNothingModel(
         this IServiceProvider serviceProvider,
         string name = "Test")

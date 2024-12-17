@@ -5,7 +5,7 @@ namespace NothingServices.WPFApp.Dtos;
 /// <summary>
 /// Данные для создания модели
 /// </summary>
-public class CreateNothingModelWebDto
+public sealed class CreateNothingModelWebDto
 {
     /// <summary>
     /// Имя модели

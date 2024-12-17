@@ -6,7 +6,7 @@ namespace NothingServices.Abstractions.Exceptions;
 /// <summary>
 /// Ошибка отсутствия значения у требуемого поля
 /// </summary>
-public class PropertyRequiredException : ValidationException
+public sealed class PropertyRequiredException : ValidationException
 {
     private const string MessageFormat = "Поле {0} не может быть пустым";
 

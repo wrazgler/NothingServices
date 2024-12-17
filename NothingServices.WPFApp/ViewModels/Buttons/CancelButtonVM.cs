@@ -7,7 +7,7 @@ namespace NothingServices.WPFApp.ViewModels.Buttons;
 /// Данные представления кнопки отменить
 /// </summary>
 /// <param name="command">Команда, исполняемая кнопкой</param>
-public class CancelButtonVM(ICommand command)
+public sealed class CancelButtonVM(ICommand command)
     : ObservableObject, IButtonVM
 {
     /// <summary>

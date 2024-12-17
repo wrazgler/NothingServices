@@ -3,7 +3,7 @@ namespace NothingWebApi.Configs;
 /// <summary>
 /// Конфигурация приложения
 /// </summary>
-public class AppConfig
+public sealed class AppConfig
 {
     /// <summary>
     /// Базовый адрес Url приложения

@@ -9,7 +9,7 @@ namespace NothingServices.WPFApp.Commands;
 /// </summary>
 /// <param name="mainWindowManager">Сервис управление отображением преставления на главном окне</param>
 /// <param name="notificationService">Сервис отображения уведомлений в пользовательском интерфейсе</param>
-public class OpenNothingModelsListCommand(
+public sealed class OpenNothingModelsListCommand(
     IMainWindowManager mainWindowManager,
     INotificationService notificationService)
     : BaseCommand, IOpenNothingModelsListCommand

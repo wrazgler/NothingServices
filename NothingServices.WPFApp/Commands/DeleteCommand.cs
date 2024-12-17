@@ -12,7 +12,7 @@ namespace NothingServices.WPFApp.Commands;
 /// <param name="mainWindowManager">Сервис управление отображением преставления на главном окне</param>
 /// <param name="notificationService">Сервис отображения уведомлений в пользовательском интерфейсе</param>
 /// <param name="cancellationTokenSource">Объект управления токена отмены</param>
-public class DeleteCommand(
+public sealed class DeleteCommand(
     IDialogService dialogService,
     IMainWindowManager mainWindowManager,
     INotificationService notificationService,

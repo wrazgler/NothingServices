@@ -3,7 +3,7 @@ namespace NothingServices.WPFApp.Models;
 /// <summary>
 /// Данные уведомления
 /// </summary>
-public class NotificatorItem
+public sealed class NotificatorItem
 {
     /// <summary>
     /// Текст уведомления

@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace NothingRpcApi.Models;
@@ -6,7 +7,7 @@ namespace NothingRpcApi.Models;
 /// Модель
 /// </summary>
 [Table("nothing_models")]
-public class NothingModel
+public sealed class NothingModel
 {
     /// <summary>
     /// Идентификатор модели
@@ -16,5 +17,6 @@ public class NothingModel
     /// <summary>
     /// Имя модели
     /// </summary>
+    [MaxLength(100)]
     public required string Name { get; set; }
 }

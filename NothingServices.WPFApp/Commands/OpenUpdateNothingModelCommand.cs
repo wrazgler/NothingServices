@@ -13,7 +13,7 @@ namespace NothingServices.WPFApp.Commands;
 /// <param name="updateNothingModelVMFactory">Фабрика создания объекта данных представления окна обновить модель</param>
 /// <param name="dialogService">Сервис работы диалогового окна</param>
 /// <param name="notificationService">Сервис отображения уведомлений в пользовательском интерфейсе</param>
-public class OpenUpdateNothingModelCommand(
+public sealed class OpenUpdateNothingModelCommand(
     IUpdateNothingModelVMFactory updateNothingModelVMFactory,
     IDialogService dialogService,
     INotificationService notificationService,

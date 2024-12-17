@@ -8,7 +8,7 @@ namespace NothingServices.WPFApp.Services;
 /// Сервис работы диалогового окна
 /// </summary>
 /// <param name="dialogVM">Данные представления диалогового окна</param>
-public class DialogService(IDialogVM dialogVM) : IDialogService
+public sealed class DialogService(IDialogVM dialogVM) : IDialogService
 {
     private readonly IDialogVM _dialogVM = dialogVM;
 

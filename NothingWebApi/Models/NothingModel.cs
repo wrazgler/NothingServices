@@ -7,7 +7,7 @@ namespace NothingWebApi.Models;
 /// Модель
 /// </summary>
 [Table("nothing_models")]
-public class NothingModel
+public sealed class NothingModel
 {
     /// <summary>
     /// Идентификатор модели

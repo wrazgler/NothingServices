@@ -8,7 +8,7 @@ namespace NothingServices.WPFApp.ViewModels;
 /// <summary>
 /// Данные представления окна выбора внешнего сервиса
 /// </summary>
-public class ApiSelectionVM : ObservableObject, IMainWindowContentVM
+public sealed class ApiSelectionVM : ObservableObject, IMainWindowContentVM
 {
     private readonly IMainWindowManager _mainWindowManager;
     private bool _active = true;
