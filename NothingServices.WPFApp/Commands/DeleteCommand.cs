@@ -56,7 +56,7 @@ public sealed class DeleteCommand(
     /// <exception cref="NullReferenceException">
     /// Ошибка, возникшая при получении стратегии работы приложения
     /// </exception>
-    /// <exception cref="PropertyRequiredException">
+    /// <exception cref="PropertyRequiredException{T}">
     /// Требуемое поле не задано
     /// </exception>
     public override async void Execute(object? parameter)
@@ -68,7 +68,7 @@ public sealed class DeleteCommand(
             var deleteNothingModelVM = parameter as DeleteNothingModelVM
                 ?? throw new ArgumentException($"Некорректный тип параметра команды: {parameter.GetType().Name}");
             if (deleteNothingModelVM.Id == 0)
-                throw new PropertyRequiredException(typeof(DeleteNothingModelVM), nameof(deleteNothingModelVM.Id));
+                throw new PropertyRequiredException<DeleteNothingModelVM>(nameof(deleteNothingModelVM.Id));
             var strategy = _mainWindowManager.Strategy
                 ?? throw new NullReferenceException("Стратегия работы приложения не задана");
             var nothingModelVM = await strategy.DeleteNothingModel(

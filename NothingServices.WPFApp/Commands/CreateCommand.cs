@@ -56,7 +56,7 @@ public sealed class CreateCommand(
     /// <exception cref="NullReferenceException">
     /// Ошибка, возникшая при получении стратегии работы приложения
     /// </exception>
-    /// <exception cref="PropertyRequiredException">
+    /// <exception cref="PropertyRequiredException{T}">
     /// Требуемое поле не задано
     /// </exception>
     public override async void Execute(object? parameter)
@@ -68,7 +68,7 @@ public sealed class CreateCommand(
             var createNothingModelVM = parameter as CreateNothingModelVM
                 ?? throw new ArgumentException($"Некорректный тип параметра команды: {parameter.GetType().Name}");
             if (createNothingModelVM.Name == null || string.IsNullOrEmpty(createNothingModelVM.Name.Trim()))
-                throw new PropertyRequiredException(typeof(CreateNothingModelVM), nameof(createNothingModelVM.Name));
+                throw new PropertyRequiredException<CreateNothingModelVM>(nameof(createNothingModelVM.Name));
             var strategy = _mainWindowManager.Strategy
                 ?? throw new NullReferenceException("Стратегия работы приложения не задана");
             var nothingModelVM = await strategy.CreateNothingModel(

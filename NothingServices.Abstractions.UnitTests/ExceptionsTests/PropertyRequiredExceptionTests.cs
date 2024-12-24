@@ -9,7 +9,7 @@ public class PropertyRequiredExceptionTests
     public void Message_Equal()
     {
         //Act
-        var result = new PropertyRequiredException(typeof(TestClass), nameof(TestClass.TestProperty)).Message;
+        var result = new PropertyRequiredException<TestClass>(nameof(TestClass.TestProperty)).Message;
 
         //Assert
         var expected = "Поле description не может быть пустым";

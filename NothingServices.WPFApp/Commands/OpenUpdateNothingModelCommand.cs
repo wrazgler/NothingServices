@@ -56,7 +56,7 @@ public sealed class OpenUpdateNothingModelCommand(
     /// <exception cref="ArgumentNullException">
     /// Параметр ссылается на <see langword="null"/>
     /// </exception>
-    /// <exception cref="PropertyRequiredException">
+    /// <exception cref="PropertyRequiredException{T}">
     /// Требуемое поле не задано
     /// </exception>
     public override void Execute(object? parameter)
@@ -68,9 +68,9 @@ public sealed class OpenUpdateNothingModelCommand(
             var nothingModelVM = parameter as INothingModelVM
                 ?? throw new ArgumentException($"Некорректный тип параметра команды: {parameter.GetType().Name}");
             if (nothingModelVM.Id == 0)
-                throw new PropertyRequiredException(typeof(INothingModelVM), nameof(nothingModelVM.Id));
+                throw new PropertyRequiredException<INothingModelVM>(nameof(nothingModelVM.Id));
             if (nothingModelVM.Name == null || string.IsNullOrEmpty(nothingModelVM.Name.Trim()))
-                throw new PropertyRequiredException(typeof(INothingModelVM), nameof(nothingModelVM.Name));
+                throw new PropertyRequiredException<INothingModelVM>(nameof(nothingModelVM.Name));
             var updateNothingModelVM = _updateNothingModelVMFactory.Create(nothingModelVM);
             _dialogService.OpenDialog(updateNothingModelVM, _updateNothingModelView);
         }

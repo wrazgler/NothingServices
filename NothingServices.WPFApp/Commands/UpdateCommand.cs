@@ -59,7 +59,7 @@ public sealed class UpdateCommand(
     /// <exception cref="NullReferenceException">
     /// Ошибка, возникшая при получении стратегии работы приложения
     /// </exception>
-    /// <exception cref="PropertyRequiredException">
+    /// <exception cref="PropertyRequiredException{T}">
     /// Требуемое поле не задано
     /// </exception>
     public override async void Execute(object? parameter)
@@ -71,9 +71,9 @@ public sealed class UpdateCommand(
             var updateNothingModelVM = parameter as UpdateNothingModelVM
                 ?? throw new ArgumentException($"Некорректный тип параметра команды: {parameter.GetType().Name}");
             if (updateNothingModelVM.Id == 0)
-                throw new PropertyRequiredException(typeof(UpdateNothingModelVM), nameof(updateNothingModelVM.Id));
+                throw new PropertyRequiredException<UpdateNothingModelVM>(nameof(updateNothingModelVM.Id));
             if (updateNothingModelVM.Name == null || string.IsNullOrEmpty(updateNothingModelVM.Name.Trim()))
-                throw new PropertyRequiredException(typeof(UpdateNothingModelVM), nameof(updateNothingModelVM.Name));
+                throw new PropertyRequiredException<UpdateNothingModelVM>(nameof(updateNothingModelVM.Name));
             var strategy = _mainWindowManager.Strategy
                 ?? throw new NullReferenceException("Стратегия работы приложения не задана");
             var nothingModelVM = await strategy.UpdateNothingModel(

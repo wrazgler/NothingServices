@@ -1,4 +1,3 @@
-using System.ComponentModel.DataAnnotations;
 using NothingServices.Abstractions.Extensions;
 
 namespace NothingServices.Abstractions.Exceptions;
@@ -6,17 +5,14 @@ namespace NothingServices.Abstractions.Exceptions;
 /// <summary>
 /// Ошибка отсутствия значения у требуемого поля
 /// </summary>
-public sealed class PropertyRequiredException : ValidationException
+/// <param name="propertyName">Имя поля</param>
+public sealed class PropertyRequiredException<T>(string propertyName)
+    : Exception where T : class
 {
     private const string MessageFormat = "Поле {0} не может быть пустым";
 
     /// <summary>
-    /// Создать исключение отсутствия значения у требуемого поля
+    /// Сообщение об ошибке
     /// </summary>
-    /// <param name="type">Тип объекта</param>
-    /// <param name="propertyName">Имя поля</param>
-    public PropertyRequiredException(Type type, string propertyName)
-        : base(string.Format(MessageFormat, type.GetDescription(propertyName)))
-    {
-    }
+    public override string Message => string.Format(MessageFormat, typeof(T).GetDescription(propertyName));
 }

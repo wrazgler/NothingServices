@@ -3,16 +3,13 @@ namespace NothingServices.Abstractions.Exceptions;
 /// <summary>
 /// Ошибка получения конфигурации
 /// </summary>
-public sealed class ConfigurationNullException<TConfig> : ArgumentNullException
+public sealed class ConfigurationNullException<TConfig> : Exception
     where TConfig : class
 {
     private const string MessageFormat = "Конфигурация {0} не обнаружена";
 
     /// <summary>
-    /// Создать исключение отсутствия конфигурации
+    /// Сообщение об ошибке
     /// </summary>
-    public ConfigurationNullException()
-        : base(string.Format(MessageFormat, typeof(TConfig).Name))
-    {
-    }
+    public override string Message { get; } = string.Format(MessageFormat, typeof(TConfig).Name);
 }

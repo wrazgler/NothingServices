@@ -53,7 +53,7 @@ public sealed class OpenDeleteNothingModelCommand(
     /// <exception cref="ArgumentNullException">
     /// Параметр ссылается на <see langword="null"/>
     /// </exception>
-    /// <exception cref="PropertyRequiredException">
+    /// <exception cref="PropertyRequiredException{T}">
     /// Требуемое поле не задано
     /// </exception>
     public override void Execute(object? parameter)
@@ -65,7 +65,7 @@ public sealed class OpenDeleteNothingModelCommand(
             var nothingModelVM = parameter as INothingModelVM
                 ?? throw new ArgumentException($"Некорректный тип параметра команды: {parameter.GetType().Name}");
             if (nothingModelVM.Id == 0)
-                throw new PropertyRequiredException(typeof(INothingModelVM), nameof(nothingModelVM.Id));
+                throw new PropertyRequiredException<INothingModelVM>(nameof(nothingModelVM.Id));
             var deleteNothingModelVM = _deleteNothingModelVMFactory.Create(nothingModelVM);
             _dialogService.OpenDialog(deleteNothingModelVM, _deleteNothingModelView);
 
