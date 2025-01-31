@@ -1,4 +1,5 @@
 using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
 using Microsoft.EntityFrameworkCore;
@@ -41,7 +42,7 @@ public sealed class NothingService(
             var nothingModels = await _dbContext.NothingModels
                 .AsNoTracking()
                 .OrderBy(model => model.Id)
-                .Select(model => _mapper.Map<NothingModelDto>(model))
+                .ProjectTo<NothingModelDto>(_mapper.ConfigurationProvider)
                 .ToArrayAsync(context.CancellationToken);
             foreach (var nothingModel in nothingModels)
             {
@@ -70,7 +71,7 @@ public sealed class NothingService(
             var nothingModelDto = await  _dbContext.NothingModels
                 .AsNoTracking()
                 .Where(model => model.Id == nothingModelIdDto.Id)
-                .Select(model => _mapper.Map<NothingModelDto>(model))
+                .ProjectTo<NothingModelDto>(_mapper.ConfigurationProvider)
                 .SingleOrDefaultAsync(context.CancellationToken);
             if(nothingModelDto == null)
                 throw new ArgumentException($"Не удалось найти модель с идентификатором {nothingModelIdDto.Id}.");

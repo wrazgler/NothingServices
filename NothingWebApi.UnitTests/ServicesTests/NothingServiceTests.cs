@@ -1,12 +1,12 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Moq.EntityFrameworkCore;
 using NothingWebApi.DbContexts;
 using NothingWebApi.Dtos;
 using NothingWebApi.Extensions;
 using NothingWebApi.Models;
 using NothingWebApi.Services;
+using NothingWebApi.UnitTests.DbContextMock;
 
 namespace NothingWebApi.UnitTests.ServicesTests;
 
@@ -309,7 +309,7 @@ public class NothingServiceTests
         await Assert.ThrowsAsync<ArgumentException>(result);
     }
 
-    private static IList<NothingModel> GetNothingModels()
+    private static List<NothingModel> GetNothingModels()
     {
         var nothingModels = new List<NothingModel>()
         {
@@ -334,19 +334,10 @@ public class NothingServiceTests
         return nothingService;
     }
 
-    private static Mock<NothingWebApiDbContext> GetDbContextMock(IList<NothingModel> nothingModels)
+    private static Mock<NothingWebApiDbContext> GetDbContextMock(List<NothingModel> nothingModels)
     {
-        var dbContextOptions = new DbContextOptions<NothingWebApiDbContext>();
-        var nothingWebApiDbContextMock = new Mock<NothingWebApiDbContext>(dbContextOptions);
-        nothingWebApiDbContextMock
-            .SetupGet(dbContext => dbContext.NothingModels)
-            .ReturnsDbSet(nothingModels);
-        nothingWebApiDbContextMock
-            .Setup(dbContext => dbContext.NothingModels.AddAsync(It.IsAny<NothingModel>(),  It.IsAny<CancellationToken>()))
-            .Callback<NothingModel, CancellationToken>((nothingModel, _) => nothingModels.Add(nothingModel));
-        nothingWebApiDbContextMock
-            .Setup(dbContext => dbContext.NothingModels.Remove(It.IsAny<NothingModel>()))
-            .Callback<NothingModel>(nothingModel => nothingModels.Remove(nothingModel));
-        return nothingWebApiDbContextMock;
+        var dbContextBuilder = new MockDbContextBuilder<NothingWebApiDbContext>();
+        dbContextBuilder.AddDbSet(x => x.NothingModels, nothingModels);
+        return  dbContextBuilder.Build();
     }
 }
