@@ -1,4 +1,5 @@
 using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
 using NothingWebApi.DbContexts;
 using NothingWebApi.Dtos;
@@ -34,7 +35,7 @@ public sealed class NothingService(
             return _dbContext.NothingModels
                 .AsNoTracking()
                 .OrderBy(model => model.Id)
-                .Select(model => _mapper.Map<NothingModelDto>(model))
+                .ProjectTo<NothingModelDto>(_mapper.ConfigurationProvider)
                 .ToArrayAsync(cancellationToken);
         }
         catch (Exception ex)
@@ -57,7 +58,7 @@ public sealed class NothingService(
             var nothingModelDto = await _dbContext.NothingModels
                 .AsNoTracking()
                 .Where(model => model.Id == id)
-                .Select(model => _mapper.Map<NothingModelDto>(model))
+                .ProjectTo<NothingModelDto>(_mapper.ConfigurationProvider)
                 .SingleOrDefaultAsync(cancellationToken);
             if(nothingModelDto == null)
                 throw new ArgumentException($"Не удалось найти модель с идентификатором {id}.");

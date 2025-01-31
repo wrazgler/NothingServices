@@ -3,12 +3,13 @@ using Grpc.Core;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Moq.EntityFrameworkCore;
 using NothingRpcApi.DbContexts;
 using NothingRpcApi.Dtos;
 using NothingRpcApi.Extensions;
 using NothingRpcApi.Models;
 using NothingRpcApi.Services;
+using NothingRpcApi.UnitTests.DbContextMock;
+using NothingRpcApi.UnitTests.ExtensionsTests;
 
 namespace NothingRpcApi.UnitTests.ServicesTests;
 
@@ -378,17 +379,8 @@ public class NothingServiceTests
 
     private static Mock<NothingRpcApiDbContext> GetDbContextMock(List<NothingModel> nothingModels)
     {
-        var dbContextOptions = new DbContextOptions<NothingRpcApiDbContext>();
-        var nothingWebApiDbContextMock = new Mock<NothingRpcApiDbContext>(dbContextOptions);
-        nothingWebApiDbContextMock
-            .SetupGet(dbContext => dbContext.NothingModels)
-            .ReturnsDbSet(nothingModels);
-        nothingWebApiDbContextMock
-            .Setup(dbContext => dbContext.NothingModels.AddAsync(It.IsAny<NothingModel>(), It.IsAny<CancellationToken>()))
-            .Callback<NothingModel, CancellationToken>((nothingModel, _) => nothingModels.Add(nothingModel));
-        nothingWebApiDbContextMock
-            .Setup(dbContext => dbContext.NothingModels.Remove(It.IsAny<NothingModel>()))
-            .Callback<NothingModel>(nothingModel => nothingModels.Remove(nothingModel));
-        return nothingWebApiDbContextMock;
+        var dbContextBuilder = new MockDbContextBuilder<NothingRpcApiDbContext>();
+        dbContextBuilder.AddDbSet(x => x.NothingModels, nothingModels);
+        return  dbContextBuilder.Build();
     }
 }
