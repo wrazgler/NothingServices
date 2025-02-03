@@ -9,7 +9,6 @@ using NothingRpcApi.Extensions;
 using NothingRpcApi.Models;
 using NothingRpcApi.Services;
 using NothingRpcApi.UnitTests.DbContextMock;
-using NothingRpcApi.UnitTests.ExtensionsTests;
 
 namespace NothingRpcApi.UnitTests.ServicesTests;
 
