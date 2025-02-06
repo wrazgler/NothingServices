@@ -7,7 +7,7 @@ namespace NothingWebApi.EntityTypeConfigurations;
 /// <summary>
 /// Конфигурация таблицы модели
 /// </summary>
-internal sealed class NothingModelConfiguration: IEntityTypeConfiguration<NothingModel>
+internal sealed class NothingModelConfiguration : IEntityTypeConfiguration<NothingModel>
 {
     /// <summary>
     /// Настройка таблицы модели

@@ -1,8 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using NothingRpcApi.Models;
+using NothingKafka.Models;
 
-namespace NothingRpcApi.EntityTypeConfigurations;
+namespace NothingKafka.EntityTypeConfigurations;
 
 /// <summary>
 /// Конфигурация таблицы модели
