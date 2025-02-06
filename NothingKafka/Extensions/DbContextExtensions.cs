@@ -1,6 +1,8 @@
 using System.Reflection;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using NothingKafka.DbContexts;
 using NothingServices.Abstractions.Configs;
 using NothingServices.Abstractions.Exceptions;

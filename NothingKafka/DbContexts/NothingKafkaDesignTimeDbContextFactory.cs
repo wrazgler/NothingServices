@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
+using Microsoft.Extensions.Configuration;
 using NothingKafka.Extensions;
 using NothingServices.Abstractions.Configs;
 using NothingServices.Abstractions.Extensions;

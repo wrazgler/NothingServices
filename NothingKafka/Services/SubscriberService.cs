@@ -1,3 +1,5 @@
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using NothingKafka.Configs;
 using NothingKafka.Dtos;
@@ -8,9 +10,11 @@ namespace NothingKafka.Services;
 /// Сервис подписчик на Kafka
 /// </summary>
 /// <param name="consumerService">Сервис получения сообщений из Kafka</param>
+/// <param name="hostEnvironment">Окружение хоста приложения</param>
 /// <param name="logger">Экземпляр <see cref="ILogger"/></param>
 /// <param name="kafkaConfig">Конфигурация Kafka</param>
 /// <param name="kafkaService">Сервис администрирования Kafka</param>
+/// <param name="nothingService">Сервис бизнес логики</param>
 /// <param name="nothingServiceConfig">Заголовки Kafka сервиса NothingService</param>
 public sealed class SubscriberService(
     IConsumerService consumerService,

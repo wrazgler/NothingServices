@@ -1,5 +1,5 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Web">
-
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  
   <PropertyGroup>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
     <Authors>Golovin Nikita</Authors>
@@ -13,6 +13,7 @@
     <NeutralLanguage>ru</NeutralLanguage>
     <Nullable>enable</Nullable>
     <OutputAssembly>NothingKafka.dll</OutputAssembly>
+    <OutputType>Exe</OutputType>
     <RepositoryUrl>https://github.com/wrazgler/NothingServices</RepositoryUrl>
     <TargetFrameworks>net9.0;net8.0</TargetFrameworks>
     <Title>NothingKafka</Title>
@@ -42,6 +43,7 @@
 
   <ItemGroup>
     <None Include="Dockerfile" />
+    <None Remove="Properties\launchSettings.json" />
   </ItemGroup>
 
   <ItemGroup>
