@@ -1,3 +1,6 @@
+using NothingKafka.Configs;
+using NothingKafka.Services;
+
 namespace NothingKafka.Extensions;
 
 /// <summary>
@@ -16,6 +19,21 @@ internal static class AppExtensions
         IConfiguration configuration)
     {
         services.AddOptions();
+        services.Configure<KafkaConfig>(configuration);
+        services.Configure<NothingServiceConfig>(configuration);
+        return services;
+    }
+
+    /// <summary>
+    /// Добавить сервисы приложения в коллекцию сервисов
+    /// </summary>
+    /// <param name="services">Коллекция сервисов</param>
+    /// <returns>Коллекция сервисов с добавленными сервисами приложения</returns>
+    internal static IServiceCollection AddAppServices(this IServiceCollection services)
+    {
+        services.AddTransient<IConsumerService, ConsumerService>();
+        services.AddTransient<INothingService, NothingService>();
+        services.AddTransient<IProducerService, ProducerService>();
         return services;
     }
 }

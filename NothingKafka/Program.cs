@@ -11,6 +11,7 @@ hostBuilder.ConfigureServices((context, services) =>
 {
     services.AddAppAutoMapper();
     services.AddAppConfigs(context.Configuration);
+    services.AddAppServices();
     services.AddPostgreSQL(context);
 });
 var host = hostBuilder.Build();
