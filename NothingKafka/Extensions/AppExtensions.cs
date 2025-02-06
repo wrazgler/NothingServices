@@ -32,6 +32,7 @@ internal static class AppExtensions
     internal static IServiceCollection AddAppServices(this IServiceCollection services)
     {
         services.AddTransient<IConsumerService, ConsumerService>();
+        services.AddTransient<IKafkaService, KafkaService>();
         services.AddTransient<INothingService, NothingService>();
         services.AddTransient<IProducerService, ProducerService>();
         return services;

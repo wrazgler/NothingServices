@@ -34,9 +34,12 @@ public sealed class NothingService(
     /// <summary>
     /// Получить список моделей
     /// </summary>
+    /// <param name="getNothingsModelsDto">Данные для получения моделей</param>
     /// <param name="cancellationToken">Токен отмены</param>
     /// <returns>Список моделей</returns>
-    public async Task Get(CancellationToken cancellationToken = default)
+    public async Task Get(
+        GetNothingModelsDto getNothingsModelsDto,
+        CancellationToken cancellationToken = default)
     {
         try
         {
@@ -57,20 +60,22 @@ public sealed class NothingService(
     /// <summary>
     /// Получить модель с указанным идентификатором
     /// </summary>
-    /// <param name="id">Идентификатор модели</param>
+    /// <param name="getNothingModelDto">Данные для получения модели</param>
     /// <param name="cancellationToken">Токен отмены</param>
     /// <returns>Объект модели</returns>
-    public async Task Get(int id, CancellationToken cancellationToken = default)
+    public async Task Get(
+        GetNothingModelDto getNothingModelDto,
+        CancellationToken cancellationToken = default)
     {
         try
         {
             var nothingModelDto = await _dbContext.NothingModels
                 .AsNoTracking()
-                .Where(model => model.Id == id)
+                .Where(model => model.Id == getNothingModelDto.Id)
                 .ProjectTo<NothingModelDto>(_mapper.ConfigurationProvider)
                 .SingleOrDefaultAsync(cancellationToken);
             if(nothingModelDto == null)
-                throw new ArgumentException($"Не удалось найти модель с идентификатором {id}.");
+                throw new ArgumentException($"Не удалось найти модель с идентификатором {getNothingModelDto.Id}.");
             var result =  nothingModelDto;
             await _producerService.SendMessage(result, _nothingServiceConfig.GetModelTopic, cancellationToken);
         }
@@ -147,17 +152,19 @@ public sealed class NothingService(
     /// <summary>
     /// Удалить модель с указанным идентификатором
     /// </summary>
-    /// <param name="id">Идентификатор модели</param>
+    /// <param name="deleteNothingModelDto">Данные для удаления модели</param>
     /// <param name="cancellationToken">Токен отмены</param>
     /// <returns>Объект модели</returns>
-    public async Task Delete(int id, CancellationToken cancellationToken = default)
+    public async Task Delete(
+        DeleteNothingModelDto deleteNothingModelDto,
+        CancellationToken cancellationToken = default)
     {
         try
         {
             var model = await _dbContext.NothingModels
-                .SingleOrDefaultAsync(model => model.Id == id, cancellationToken);
+                .SingleOrDefaultAsync(model => model.Id == deleteNothingModelDto.Id, cancellationToken);
             if(model == null)
-                throw new ArgumentException($"Не удалось найти модель с идентификатором {id}.");
+                throw new ArgumentException($"Не удалось найти модель с идентификатором {deleteNothingModelDto.Id}.");
             _dbContext.NothingModels.Remove(model);
             await _dbContext.SaveChangesAsync(cancellationToken);
             var result = _mapper.Map<NothingModelDto>(model);

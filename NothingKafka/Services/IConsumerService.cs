@@ -9,8 +9,10 @@ public interface IConsumerService
     /// Получить сообщение из Kafka
     /// </summary>
     /// <param name="topicName">Заголовок сообщения</param>
+    /// <param name="callbackAction">Действие обратного вызова для заголовка</param>
     /// <param name="cancellationToken">Токен отмены</param>
-    IAsyncEnumerable<TMessage> SubscribeTopic<TMessage>(
+    Task SubscribeTopic<TMessage>(
         string topicName,
+        Action<TMessage, CancellationToken> callbackAction,
         CancellationToken cancellationToken = default);
 }

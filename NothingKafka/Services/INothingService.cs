@@ -10,15 +10,16 @@ public interface INothingService
     /// <summary>
     /// Получить список моделей
     /// </summary>
+    /// <param name="getNothingsModelsDto">Данные для получения моделей</param>
     /// <param name="cancellationToken">Токен отмены</param>
-    Task Get(CancellationToken cancellationToken = default);
+    Task Get(GetNothingModelsDto getNothingsModelsDto, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Получить модель с указанным идентификатором
     /// </summary>
-    /// <param name="id">Идентификатор модели</param>
+    /// <param name="getNothingModelDto">Данные для получения модели</param>
     /// <param name="cancellationToken">Токен отмены</param>
-    Task Get(int id, CancellationToken cancellationToken = default);
+    Task Get(GetNothingModelDto getNothingModelDto, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Создать новую модель
@@ -43,7 +44,7 @@ public interface INothingService
     /// <summary>
     /// Удалить модель с указанным идентификатором
     /// </summary>
-    /// <param name="id">Идентификатор модели</param>
+    /// <param name="deleteNothingModelDto">Данные для удаления модели</param>
     /// <param name="cancellationToken">Токен отмены</param>
-    Task Delete(int id, CancellationToken cancellationToken = default);
+    Task Delete(DeleteNothingModelDto deleteNothingModelDto, CancellationToken cancellationToken = default);
 }
