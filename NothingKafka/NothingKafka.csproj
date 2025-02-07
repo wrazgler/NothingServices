@@ -56,10 +56,7 @@
       <_Parameter1>$(OpenApiVersion)</_Parameter1>
     </AssemblyAttribute>
     <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
-      <_Parameter1>NothingRpcApi.IntegrationTests</_Parameter1>
-    </AssemblyAttribute>
-    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
-      <_Parameter1>NothingRpcApi.UnitTests</_Parameter1>
+      <_Parameter1>NothingKafka.UnitTests</_Parameter1>
     </AssemblyAttribute>
   </ItemGroup>
 

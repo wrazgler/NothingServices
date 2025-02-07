@@ -65,7 +65,7 @@ using Microsoft.Extensions.Configuration;
          //Arrange
          var dictionary = new Dictionary<string, string>(5)
          {
-             {"AppConfig", default!},
+             {"AppConfig", null!},
              {"AppConfig:PathBase", "/nothing-grpc-api"},
          };
          var configuration = new ConfigurationBuilder()

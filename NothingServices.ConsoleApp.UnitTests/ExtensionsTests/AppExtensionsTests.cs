@@ -28,7 +28,7 @@ public class AppExtensionsTests
             .ToArray();
 
         //Assert
-        var expected = new string[]
+        var expected = new[]
         {
             "NothingServices.ConsoleApp.Clients.NothingRpcService+NothingRpcServiceClient",
             "NothingServices.ConsoleApp.Clients.INothingWebApiClient",
@@ -71,7 +71,7 @@ public class AppExtensionsTests
             .ToArray();
 
         //Assert
-        var expected = new string[]
+        var expected = new[]
         {
             "NothingServices.ConsoleApp.Services.IConsoleService",
             "NothingServices.ConsoleApp.Services.ILoopService",
