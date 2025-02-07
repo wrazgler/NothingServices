@@ -2,6 +2,7 @@ using Confluent.Kafka;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using NothingKafka.Configs;
+using NothingKafka.Serializers;
 
 namespace NothingKafka.Services;
 
@@ -31,6 +32,7 @@ public sealed class ConsumerService(
         string topicName,
         Action<TMessage, CancellationToken> callbackAction,
         CancellationToken cancellationToken = default)
+        where TMessage : class
     {
         var consumerConfig = new ConsumerConfig
         {
@@ -38,6 +40,7 @@ public sealed class ConsumerService(
             GroupId = _kafkaConfig.ConsumerGroup,
         };
         var consumerBuilder = new ConsumerBuilder<Null, TMessage>(consumerConfig);
+        consumerBuilder.SetValueDeserializer(new KafkaSerializer<TMessage>()!);
         using var consumer = consumerBuilder.Build();
         consumer.Subscribe(topicName);
         while (!cancellationToken.IsCancellationRequested)
@@ -51,7 +54,6 @@ public sealed class ConsumerService(
             {
                 var message = $"Consumption of kafka topic {topicName} was cancelled";
                 _logger.LogDebug(message);
-                consumer.Close();
             }
             catch (ConsumeException consumeException)
                 when (consumeException.Message.Contains("topic not available"))
@@ -63,11 +65,8 @@ public sealed class ConsumerService(
             {
                 var message = $"Error consuming from kafka topic {topicName}: {ex}";
                 _logger.LogError(ex, message);
-                consumer.Close();
             }
             _logger.LogDebug("New message was consumed from {TopicName}", topicName);
         }
-
-        consumer.Close();
     }
 }

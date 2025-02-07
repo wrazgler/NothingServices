@@ -2,20 +2,17 @@ using Confluent.Kafka;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using NothingKafka.Configs;
+using NothingKafka.Serializers;
 
 namespace NothingKafka.Services;
 
 /// <summary>
 /// Сервис отправки сообщений в Kafka
 /// </summary>
-/// <param name="logger">Экземпляр <see cref="ILogger"/></param>
 /// <param name="config">Конфигурация Kafka</param>
-public sealed class ProducerService(
-    ILogger<ProducerService> logger,
-    IOptions<KafkaConfig> config)
+public sealed class ProducerService(IOptions<KafkaConfig> config)
     : IProducerService
 {
-    private readonly ILogger<ProducerService> _logger = logger;
     private readonly KafkaConfig _kafkaConfig = config.Value;
 
     /// <summary>
@@ -28,16 +25,19 @@ public sealed class ProducerService(
         TMessage message,
         string topicName,
         CancellationToken cancellationToken = default)
+        where TMessage : class
     {
         var producerConfig = new ProducerConfig
         {
             BootstrapServers = _kafkaConfig.BootstrapServers,
         };
         var producerBuilder = new ProducerBuilder<Null, TMessage>(producerConfig);
+        producerBuilder.SetValueSerializer(new KafkaSerializer<TMessage>());
         using var producer = producerBuilder.Build();
-        await producer.ProduceAsync(
-            topicName,
-            new Message<Null, TMessage>() {Value = message},
-            cancellationToken);
+        var producerMessage = new Message<Null, TMessage>()
+        {
+            Value = message
+        };
+        await producer.ProduceAsync(topicName, producerMessage, cancellationToken);
     }
 }

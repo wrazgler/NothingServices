@@ -14,5 +14,6 @@ public interface IConsumerService
     Task SubscribeTopic<TMessage>(
         string topicName,
         Action<TMessage, CancellationToken> callbackAction,
-        CancellationToken cancellationToken = default);
+        CancellationToken cancellationToken = default)
+        where TMessage : class;
 }

@@ -14,5 +14,6 @@ public interface IProducerService
     Task SendMessage<TMessage>(
         TMessage message,
         string topicName,
-        CancellationToken cancellationToken = default);
+        CancellationToken cancellationToken = default)
+        where TMessage : class;
 }
