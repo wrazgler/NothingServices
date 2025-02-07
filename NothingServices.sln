@@ -52,6 +52,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NothingServices.WPFApp.Inte
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NothingKafka", "NothingKafka\NothingKafka.csproj", "{41F9F9BA-C674-4E54-BEC2-B560E9FCEB07}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NothingKafka.UnitTests", "NothingKafka.UnitTests\NothingKafka.UnitTests.csproj", "{225DD207-2F1E-4058-98A7-88806F6EB7D8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -118,6 +120,10 @@ Global
 		{41F9F9BA-C674-4E54-BEC2-B560E9FCEB07}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{41F9F9BA-C674-4E54-BEC2-B560E9FCEB07}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{41F9F9BA-C674-4E54-BEC2-B560E9FCEB07}.Release|Any CPU.Build.0 = Release|Any CPU
+		{225DD207-2F1E-4058-98A7-88806F6EB7D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{225DD207-2F1E-4058-98A7-88806F6EB7D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{225DD207-2F1E-4058-98A7-88806F6EB7D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{225DD207-2F1E-4058-98A7-88806F6EB7D8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -138,6 +144,7 @@ Global
 		{7C221D93-6BFA-499C-AF2C-535D43AEE747} = {6C9C67D1-F810-406E-920D-5391E4FF7D9D}
 		{33CD6BAA-BB54-4693-AF56-0004DB4892C5} = {4B5B43A6-D4A4-4282-A306-D06C828A2C50}
 		{41F9F9BA-C674-4E54-BEC2-B560E9FCEB07} = {397A7181-1D7D-4B96-956D-A9E2008BB54C}
+		{225DD207-2F1E-4058-98A7-88806F6EB7D8} = {6C9C67D1-F810-406E-920D-5391E4FF7D9D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A6EA7D68-C0AF-4132-BDE4-8539C4849090}

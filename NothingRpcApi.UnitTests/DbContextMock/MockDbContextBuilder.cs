@@ -1,7 +1,7 @@
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using NothingRpcApi.UnitTests.ExtensionsTests;
+using NothingRpcApi.UnitTests.Extensions;
 using NothingServices.Abstractions.Extensions;
 
 namespace NothingRpcApi.UnitTests.DbContextMock;

@@ -1,17 +1,14 @@
 using System.Linq.Expressions;
-using System.Reflection;
-using AutoMapper.Internal;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using NothingKafka.UnitTests.Extensions;
 using NothingServices.Abstractions.Extensions;
-using NothingWebApi.UnitTests.Extensions;
 
-namespace NothingWebApi.UnitTests.DbContextMock;
+namespace NothingKafka.UnitTests.DbContextMock;
 
 internal class MockDbContextBuilder<TDbContext> where TDbContext : DbContext
 {
     private readonly Mock<TDbContext> _dbContextMock;
-    private readonly Dictionary<string, PropertyInfo> _dbContextProperties;
 
     internal MockDbContextBuilder()
     {
@@ -19,11 +16,6 @@ internal class MockDbContextBuilder<TDbContext> where TDbContext : DbContext
         var databaseMock = new Mock<DatabaseFacade>(_dbContextMock.Object);
         databaseMock.SetupGet(x => x.ProviderName).Returns(string.Empty);
         _dbContextMock.SetupGet(x => x.Database).Returns(databaseMock.Object);
-        _dbContextProperties = typeof(TDbContext)
-            .GetProperties()
-            .Where(x => x.PropertyType.IsGenericType && x.IsPublic())
-            .Select(x => (x.PropertyType.GenericTypeArguments.Single().Name, x))
-            .ToDictionary();
     }
 
     internal Mock<TDbContext> Build() => _dbContextMock;

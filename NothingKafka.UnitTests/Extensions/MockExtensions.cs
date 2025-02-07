@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
-using NothingWebApi.UnitTests.DbContextMock;
+using NothingKafka.UnitTests.DbContextMock;
 
-namespace NothingWebApi.UnitTests.ExtensionsTests;
+namespace NothingKafka.UnitTests.Extensions;
 
 internal static class MockExtensions
 {
