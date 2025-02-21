@@ -234,6 +234,7 @@ public class NothingServiceTests
 
         //Assert
         await Assert.ThrowsAsync<ArgumentException>(result);
+        dbContextMock.Verify(db => db.SaveChangesAsync(It.IsAny<CancellationToken>()), Times.Never);
     }
 
     [Fact]
@@ -307,6 +308,8 @@ public class NothingServiceTests
 
         //Assert
         await Assert.ThrowsAsync<ArgumentException>(result);
+        dbContextMock.Verify(db => db.NothingModels.Remove(It.IsAny<NothingModel>()), Times.Never);
+        dbContextMock.Verify(db => db.SaveChangesAsync(It.IsAny<CancellationToken>()), Times.Never);
     }
 
     private static List<NothingModel> GetNothingModels()

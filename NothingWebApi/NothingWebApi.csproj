@@ -69,7 +69,6 @@
   </Target>
 
   <Target Name="Generate OpenAPI" AfterTargets="Build" Condition="$(Configuration)=='Debug' And $(TargetFramework)=='net9.0'">
-    <Exec Command="dotnet tool restore" />
     <Exec Command="dotnet swagger tofile --output $(OpenApiName)_v$(OpenApiVersion).yaml --yaml $(OutputPath)$(AssemblyName).dll v$(OpenApiVersion)"
           WorkingDirectory="$(ProjectDir)" />
   </Target>

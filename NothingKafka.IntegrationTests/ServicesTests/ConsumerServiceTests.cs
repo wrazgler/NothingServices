@@ -8,7 +8,7 @@ using NothingKafka.Dtos;
 using NothingKafka.Serializers;
 using NothingKafka.Services;
 
-namespace NothingKafka.UnitTests.ServicesTests;
+namespace NothingKafka.IntegrationTests.ServicesTests;
 
 public class ConsumerServiceTests
 {
