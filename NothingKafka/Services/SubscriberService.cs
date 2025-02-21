@@ -10,7 +10,6 @@ namespace NothingKafka.Services;
 /// Сервис подписчик на Kafka
 /// </summary>
 /// <param name="consumerService">Сервис получения сообщений из Kafka</param>
-/// <param name="hostEnvironment">Окружение хоста приложения</param>
 /// <param name="logger">Экземпляр <see cref="ILogger"/></param>
 /// <param name="kafkaConfig">Конфигурация Kafka</param>
 /// <param name="kafkaService">Сервис администрирования Kafka</param>
@@ -18,18 +17,18 @@ namespace NothingKafka.Services;
 /// <param name="nothingServiceConfig">Заголовки Kafka сервиса NothingService</param>
 public sealed class SubscriberService(
     IConsumerService consumerService,
-    IHostEnvironment hostEnvironment,
     ILogger<SubscriberService> logger,
     IKafkaService kafkaService,
     INothingService nothingService,
     IOptions<KafkaConfig> kafkaConfig,
-    IOptions<NothingServiceConfig> nothingServiceConfig)
+    IOptions<NothingServiceConfig> nothingServiceConfig,
+    IOptions<SubscriberServiceConfig> subscriberServiceConfig)
     : BackgroundService
 {
     private readonly KafkaConfig _kafkaConfig = kafkaConfig.Value;
     private readonly NothingServiceConfig _nothingServiceConfig = nothingServiceConfig.Value;
+    private readonly SubscriberServiceConfig _subscriberServiceConfig = subscriberServiceConfig.Value;
     private readonly IConsumerService _consumerService = consumerService;
-    private readonly IHostEnvironment _hostEnvironment = hostEnvironment;
     private readonly ILogger<SubscriberService> _logger = logger;
     private readonly IKafkaService _kafkaService = kafkaService;
     private readonly INothingService _nothingService = nothingService;
@@ -40,9 +39,6 @@ public sealed class SubscriberService(
     /// <param name="cancellationToken">Токен отмены</param>
     protected override Task ExecuteAsync(CancellationToken cancellationToken)
     {
-        if (_hostEnvironment.IsEnvironment("Local"))
-            return Task.CompletedTask;
-
         _ = Task.Run(() => Subscribe(cancellationToken), cancellationToken);
         return Task.CompletedTask;
     }
@@ -76,9 +72,9 @@ public sealed class SubscriberService(
                         (message, token) => _nothingService.Update(message, token),
                         cancellationToken), cancellationToken);
                 }
-                catch (Exception e)
+                catch (Exception ex)
                 {
-                    _logger.LogError("Error occurred in ServiceWorker: {Error}", e.Message);
+                    _logger.LogError("Error occurred in ServiceWorker: {Error}", ex.Message);
                 }
             }
             else
@@ -87,7 +83,7 @@ public sealed class SubscriberService(
                 _logger.LogWarning(message);
             }
 
-            await Task.Delay(TimeSpan.FromSeconds(30), cancellationToken);
+            await Task.Delay(TimeSpan.FromSeconds(_subscriberServiceConfig.IterationDelay), cancellationToken);
         }
     }
 }

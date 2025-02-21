@@ -24,6 +24,7 @@ internal static class AppExtensions
         services.AddOptions();
         services.Configure<KafkaConfig>(configuration);
         services.Configure<NothingServiceConfig>(configuration);
+        services.Configure<SubscriberServiceConfig>(configuration);
         return services;
     }
 

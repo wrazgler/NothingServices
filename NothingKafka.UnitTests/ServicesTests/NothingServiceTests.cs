@@ -14,7 +14,7 @@ namespace NothingKafka.UnitTests.ServicesTests;
 
 public class NothingServiceTests
 {
-    private readonly NothingServiceConfig _nothingServiceConfig = new()
+    private static readonly NothingServiceConfig NothingServiceConfig = new()
     {
         CreateTopic = "CreateTopic",
         DeleteTopic = "DeleteTopic",
@@ -40,7 +40,7 @@ public class NothingServiceTests
         producerServiceMock.Verify(
             producerService => producerService.SendMessage(
                 It.IsAny<NothingModelDto[]>(),
-                It.Is<string>(x => x == _nothingServiceConfig.GetModelsTopic),
+                It.Is<string>(x => x == NothingServiceConfig.GetModelsTopic),
                 It.IsAny<CancellationToken>()),
             Times.Once);
     }
@@ -66,7 +66,7 @@ public class NothingServiceTests
         producerServiceMock.Verify(
             producerService => producerService.SendMessage(
                 It.IsAny<NothingModelDto[]>(),
-                It.Is<string>(x => x == _nothingServiceConfig.GetModelsTopic),
+                It.Is<string>(x => x == NothingServiceConfig.GetModelsTopic),
                 It.IsAny<CancellationToken>()),
             Times.Never());
     }
@@ -91,7 +91,7 @@ public class NothingServiceTests
         producerServiceMock.Verify(
             producerService => producerService.SendMessage(
                 It.Is<NothingModelDto>(x => x.Id == getNothingModelDto.Id),
-                It.Is<string>(x => x == _nothingServiceConfig.GetModelTopic),
+                It.Is<string>(x => x == NothingServiceConfig.GetModelTopic),
                 It.IsAny<CancellationToken>()),
             Times.Once);
     }
@@ -116,7 +116,7 @@ public class NothingServiceTests
         producerServiceMock.Verify(
             producerService => producerService.SendMessage(
                 It.Is<NothingModelDto>(x => x.Id == getNothingModelDto.Id),
-                It.Is<string>(x => x == _nothingServiceConfig.CreateTopic),
+                It.Is<string>(x => x == NothingServiceConfig.CreateTopic),
                 It.IsAny<CancellationToken>()),
             Times.Never);
     }
@@ -140,7 +140,7 @@ public class NothingServiceTests
         producerServiceMock.Verify(
             producerService => producerService.SendMessage(
                 It.Is<NothingModelDto>(x => x.Name == createNothingModelDto.Name),
-                It.Is<string>(x => x == _nothingServiceConfig.CreateTopic),
+                It.Is<string>(x => x == NothingServiceConfig.CreateTopic),
                 It.IsAny<CancellationToken>()),
             Times.Once);
         dbContextMock.Verify(db => db.NothingModels.AddAsync(It.IsAny<NothingModel>(),It.IsAny<CancellationToken>()), Times.Once);
@@ -170,7 +170,7 @@ public class NothingServiceTests
         producerServiceMock.Verify(
             producerService => producerService.SendMessage(
                 It.Is<NothingModelDto>(x => x.Name == createNothingModelDto.Name),
-                It.Is<string>(x => x == _nothingServiceConfig.CreateTopic),
+                It.Is<string>(x => x == NothingServiceConfig.CreateTopic),
                 It.IsAny<CancellationToken>()),
             Times.Once);
         dbContextMock.Verify(db => db.NothingModels.AddAsync(It.IsAny<NothingModel>(),It.IsAny<CancellationToken>()), Times.Once);
@@ -197,7 +197,7 @@ public class NothingServiceTests
         producerServiceMock.Verify(
             producerService => producerService.SendMessage(
                 It.Is<NothingModelDto>(x => x.Name == createNothingModelDto.Name),
-                It.Is<string>(x => x == _nothingServiceConfig.CreateTopic),
+                It.Is<string>(x => x == NothingServiceConfig.CreateTopic),
                 It.IsAny<CancellationToken>()),
             Times.Never);
         dbContextMock.Verify(db => db.NothingModels.AddAsync(It.IsAny<NothingModel>(),It.IsAny<CancellationToken>()), Times.Never);
@@ -226,7 +226,7 @@ public class NothingServiceTests
             producerService => producerService.SendMessage(
                 It.Is<NothingModelDto>(x
                     => x.Id == updateNothingModelDto.Id && x.Name == updateNothingModelDto.Name),
-                It.Is<string>(x => x == _nothingServiceConfig.UpdateTopic),
+                It.Is<string>(x => x == NothingServiceConfig.UpdateTopic),
                 It.IsAny<CancellationToken>()),
             Times.Once);
         dbContextMock.Verify(db => db.SaveChangesAsync(It.IsAny<CancellationToken>()), Times.Once);
@@ -257,7 +257,7 @@ public class NothingServiceTests
             producerService => producerService.SendMessage(
                 It.Is<NothingModelDto>(x
                     => x.Id == updateNothingModelDto.Id && x.Name == updateNothingModelDto.Name),
-                It.Is<string>(x => x == _nothingServiceConfig.UpdateTopic),
+                It.Is<string>(x => x == NothingServiceConfig.UpdateTopic),
                 It.IsAny<CancellationToken>()),
             Times.Once);
         dbContextMock.Verify(db => db.SaveChangesAsync(It.IsAny<CancellationToken>()), Times.Once);
@@ -290,7 +290,7 @@ public class NothingServiceTests
             producerService => producerService.SendMessage(
                 It.Is<NothingModelDto>(x
                     => x.Id == updateNothingModelDto.Id && x.Name == expected),
-                It.Is<string>(x => x == _nothingServiceConfig.UpdateTopic),
+                It.Is<string>(x => x == NothingServiceConfig.UpdateTopic),
                 It.IsAny<CancellationToken>()),
             Times.Once);
         dbContextMock.Verify(db => db.SaveChangesAsync(It.IsAny<CancellationToken>()), Times.Once);
@@ -318,7 +318,7 @@ public class NothingServiceTests
             producerService => producerService.SendMessage(
                 It.Is<NothingModelDto>(x
                     => x.Id == updateNothingModelDto.Id && x.Name == updateNothingModelDto.Name),
-                It.Is<string>(x => x == _nothingServiceConfig.UpdateTopic),
+                It.Is<string>(x => x == NothingServiceConfig.UpdateTopic),
                 It.IsAny<CancellationToken>()),
             Times.Never);
         dbContextMock.Verify(db => db.SaveChangesAsync(It.IsAny<CancellationToken>()), Times.Never);
@@ -346,7 +346,7 @@ public class NothingServiceTests
             producerService => producerService.SendMessage(
                 It.Is<NothingModelDto>(x
                     => x.Id == updateNothingModelDto.Id && x.Name == updateNothingModelDto.Name),
-                It.Is<string>(x => x == _nothingServiceConfig.UpdateTopic),
+                It.Is<string>(x => x == NothingServiceConfig.UpdateTopic),
                 It.IsAny<CancellationToken>()),
             Times.Never);
         dbContextMock.Verify(db => db.SaveChangesAsync(It.IsAny<CancellationToken>()), Times.Never);
@@ -372,7 +372,7 @@ public class NothingServiceTests
         producerServiceMock.Verify(
             producerService => producerService.SendMessage(
                 It.Is<NothingModelDto>(x=> x.Id == deleteNothingModelDto.Id),
-                It.Is<string>(x => x == _nothingServiceConfig.DeleteTopic),
+                It.Is<string>(x => x == NothingServiceConfig.DeleteTopic),
                 It.IsAny<CancellationToken>()),
             Times.Once);
         dbContextMock.Verify(db => db.NothingModels.Remove(It.IsAny<NothingModel>()), Times.Once);
@@ -400,7 +400,7 @@ public class NothingServiceTests
         producerServiceMock.Verify(
             producerService => producerService.SendMessage(
                 It.Is<NothingModelDto>(x=> x.Id == deleteNothingModelDto.Id),
-                It.Is<string>(x => x == _nothingServiceConfig.DeleteTopic),
+                It.Is<string>(x => x == NothingServiceConfig.DeleteTopic),
                 It.IsAny<CancellationToken>()),
             Times.Once);
         dbContextMock.Verify(db => db.NothingModels.Remove(It.IsAny<NothingModel>()), Times.Once);
@@ -427,7 +427,7 @@ public class NothingServiceTests
         producerServiceMock.Verify(
             producerService => producerService.SendMessage(
                 It.Is<NothingModelDto>(x=> x.Id == deleteNothingModelDto.Id),
-                It.Is<string>(x => x == _nothingServiceConfig.DeleteTopic),
+                It.Is<string>(x => x == NothingServiceConfig.DeleteTopic),
                 It.IsAny<CancellationToken>()),
             Times.Never);
         dbContextMock.Verify(db => db.NothingModels.Remove(It.IsAny<NothingModel>()), Times.Never);
@@ -456,14 +456,7 @@ public class NothingServiceTests
             .AddTransient<INothingService, NothingService>()
             .AddTransient(_ => Mock.Of<ILogger<NothingService>>())
             .AddTransient(_ => Mock.Of<IOptions<NothingServiceConfig>>(nothingServiceConfig
-                => nothingServiceConfig.Value == new NothingServiceConfig
-                {
-                    CreateTopic = "CreateTopic",
-                    DeleteTopic = "DeleteTopic",
-                    GetModelTopic = "GetModelTopic",
-                    GetModelsTopic = "GetModelsTopic",
-                    UpdateTopic = "UpdateTopic",
-                }))
+                => nothingServiceConfig.Value == NothingServiceConfig))
             .AddTransient(_ => producerService)
             .AddAppAutoMapper()
             .BuildServiceProvider()

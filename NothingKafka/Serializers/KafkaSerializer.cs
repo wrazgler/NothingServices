@@ -9,7 +9,7 @@ namespace NothingKafka.Serializers;
 /// <summary>
 /// Сериализатор сообщений в Kafka
 /// </summary>
-public class KafkaSerializer<TData> : ISerializer<TData>, IDeserializer<TData?>
+public sealed class KafkaSerializer<TData> : ISerializer<TData>, IDeserializer<TData?>
     where TData : class
 {
     private readonly JsonSerializerOptions _options = new()

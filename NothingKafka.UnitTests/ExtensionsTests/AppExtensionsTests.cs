@@ -20,7 +20,8 @@ public class AppExtensionsTests
         var expected = new[]
         {
             "Microsoft.Extensions.Options.IConfigureOptions`1[NothingKafka.Configs.KafkaConfig]",
-            "Microsoft.Extensions.Options.IConfigureOptions`1[NothingKafka.Configs.NothingServiceConfig]"
+            "Microsoft.Extensions.Options.IConfigureOptions`1[NothingKafka.Configs.NothingServiceConfig]",
+            "Microsoft.Extensions.Options.IConfigureOptions`1[NothingKafka.Configs.SubscriberServiceConfig]"
         };
         Assert.Equivalent(expected, result, true);
     }
