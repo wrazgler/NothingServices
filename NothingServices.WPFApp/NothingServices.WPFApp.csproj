@@ -3,7 +3,7 @@
   <PropertyGroup>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
     <Authors>Golovin Nikita</Authors>
-    <Copyright>Copyright (C) Golovin Nikita 2024</Copyright>
+    <Copyright>Copyright (C) Golovin Nikita 2025</Copyright>
     <Description>WPF клиент NothingServices</Description>
     <EnableWindowsTargeting>true</EnableWindowsTargeting>
     <FileVersion>1.0.0.0</FileVersion>
@@ -22,7 +22,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AutoMapper" Version="13.0.1" />
+    <PackageReference Include="AutoMapper" Version="14.0.0" />
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
     <PackageReference Include="FontAwesome.Sharp" Version="6.6.0" />
     <PackageReference Include="Google.Protobuf" Version="3.29.3" />
@@ -31,8 +31,8 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.1" />
-    <PackageReference Include="Microsoft.Extensions.Http" Version="9.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.2" />
+    <PackageReference Include="Microsoft.Extensions.Http" Version="9.0.2" />
     <PackageReference Include="NothingServices.Abstractions" Version="1.0.0.0" />
   </ItemGroup>
 

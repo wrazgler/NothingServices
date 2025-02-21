@@ -9,6 +9,9 @@ public interface IKafkaService
     /// Проверить доступность работы Kafka
     /// </summary>
     /// <param name="timeoutInSeconds">Время ожидание ответа</param>
+    /// <returns>
+    /// Возвращает <see langword="true"/>, если сервис Kafka доступен, и <see langword="false"/>, если нет
+    /// </returns>
     bool IsKafkaAvailable(int timeoutInSeconds = 10);
 
     /// <summary>

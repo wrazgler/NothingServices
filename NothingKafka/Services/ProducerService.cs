@@ -1,5 +1,4 @@
 using Confluent.Kafka;
-using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using NothingKafka.Configs;
 using NothingKafka.Serializers;

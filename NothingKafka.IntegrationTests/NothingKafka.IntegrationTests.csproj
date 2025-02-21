@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Authors>Golovin Nikita</Authors>
     <Copyright>Copyright (C) Golovin Nikita 2025</Copyright>
-    <Description>Unit тесты приложения Rest Api</Description>
+    <Description>Интеграционные тесты приложения Kafka</Description>
     <ImplicitUsings>enable</ImplicitUsings>
     <IsPackable>false</IsPackable>
     <IsTestProject>true</IsTestProject>
@@ -11,7 +11,7 @@
     <Nullable>enable</Nullable>
     <RepositoryUrl>https://github.com/wrazgler/NothingServices</RepositoryUrl>
     <TargetFrameworks>net9.0;net8.0</TargetFrameworks>
-    <Title>NothingWebApi.UnitTests</Title>
+    <Title>NothingKafka.IntegrationTests</Title>
   </PropertyGroup>
 
   <ItemGroup>
@@ -30,11 +30,11 @@
 
   <ItemGroup>
     <Using Include="Moq" />
-    <Using Include="Xunit" />
+    <Using Include="Xunit"/>
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\NothingWebApi\NothingWebApi.csproj" />
+    <ProjectReference Include="..\NothingKafka\NothingKafka.csproj" />
   </ItemGroup>
 
 </Project>

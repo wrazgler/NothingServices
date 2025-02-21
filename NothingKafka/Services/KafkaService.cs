@@ -23,6 +23,9 @@ public sealed class KafkaService(
     /// Проверить доступность работы Kafka
     /// </summary>
     /// <param name="timeoutInSeconds">Время ожидание ответа</param>
+    /// <returns>
+    /// Возвращает <see langword="true"/>, если сервис Kafka доступен, и <see langword="false"/>, если нет
+    /// </returns>
     public bool IsKafkaAvailable(int timeoutInSeconds = 10)
     {
         try

@@ -3,7 +3,7 @@
   <PropertyGroup>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
     <Authors>Golovin Nikita</Authors>
-    <Copyright>Copyright (C) Golovin Nikita 2024</Copyright>
+    <Copyright>Copyright (C) Golovin Nikita 2025</Copyright>
     <Description>Приложение Kafka</Description>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <FileVersion>1.0.0.0</FileVersion>
@@ -21,15 +21,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AutoMapper" Version="13.0.1" />
+    <PackageReference Include="AutoMapper" Version="14.0.0" />
     <PackageReference Include="Confluent.Kafka" Version="2.8.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="9.0.1" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="9.0.1" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.1">
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="9.0.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="9.0.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.2">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.2" />
     <PackageReference Include="NothingServices.Abstractions" Version="1.0.0.0" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="9.0.3" />
   </ItemGroup>
