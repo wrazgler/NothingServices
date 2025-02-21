@@ -68,7 +68,7 @@ public class NothingServiceConfigTests
     }
 
     [Fact]
-    public void KafkaConfig_Not_Attribute_Format_Throws_ConfigurationNullException()
+    public void NothingServiceConfig_Not_Attribute_Format_Throws_ConfigurationNullException()
     {
         //Arrange
         var dictionary = new Dictionary<string, string>(5)
