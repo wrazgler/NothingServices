@@ -9,8 +9,8 @@ namespace NothingKafka.Serializers;
 /// <summary>
 /// Сериализатор сообщений в Kafka
 /// </summary>
-public class KafkaSerializer<TMessage> : ISerializer<TMessage>, IDeserializer<TMessage?>
-    where TMessage : class
+public class KafkaSerializer<TData> : ISerializer<TData>, IDeserializer<TData?>
+    where TData : class
 {
     private readonly JsonSerializerOptions _options = new()
     {
@@ -30,31 +30,31 @@ public class KafkaSerializer<TMessage> : ISerializer<TMessage>, IDeserializer<TM
     /// <summary>
     /// Сериализовать сообщений в Kafka
     /// </summary>
-    /// <param name="message">Сообщение в Kafka</param>
+    /// <param name="data">Сообщение в Kafka</param>
     /// <param name="context">Контекст сериализации Kafka</param>
     /// <returns>Массив байт в Kafka</returns>
-    public byte[] Serialize(TMessage? message, SerializationContext context)
+    public byte[] Serialize(TData? data, SerializationContext context)
     {
-        if (message is null)
+        if (data is null)
             return [];
 
-        var stringData = JsonSerializer.Serialize(message, _options);
+        var stringData = JsonSerializer.Serialize(data, _options);
         return Encoding.UTF8.GetBytes(stringData);
     }
 
     /// <summary>
     /// Десериализовать сообщений из Kafka
     /// </summary>
-    /// <param name="message">Массив байт из Kafka</param>
+    /// <param name="data">Массив байт из Kafka</param>
     /// <param name="isNull">Флаг отсутствия сообщения</param>
     /// <param name="context">Контекст сериализации Kafka</param>
     /// <returns>Сообщение из Kafka</returns>
-    public TMessage? Deserialize(ReadOnlySpan<byte> message, bool isNull, SerializationContext context)
+    public TData? Deserialize(ReadOnlySpan<byte> data, bool isNull, SerializationContext context)
     {
         if (isNull)
             return null;
 
-        var stringData = Encoding.UTF8.GetString(message);
-        return JsonSerializer.Deserialize<TMessage>(stringData, _options);
+        var stringData = Encoding.UTF8.GetString(data);
+        return JsonSerializer.Deserialize<TData>(stringData, _options);
     }
 }
