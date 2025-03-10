@@ -64,5 +64,31 @@ internal class MockDbContextBuilder<TDbContext> where TDbContext : DbContext
        _dbContextMock
             .SetupGet(expression)
             .Returns(dbSetMock.Object);
+       _dbContextMock.Setup(x=> x.Add(It.IsAny<TEntity>()))
+           .Callback<object>(item => entities.Add((TEntity)item));
+       _dbContextMock.Setup(x=> x.AddAsync(It.IsAny<TEntity>(), It.IsAny<CancellationToken>()))
+           .Callback<object, CancellationToken>((item, _) => entities.Add((TEntity)item));
+       _dbContextMock.Setup(x=> x.AddRange(It.IsAny<IEnumerable<TEntity>>()))
+           .Callback<IEnumerable<object>>(items => entities.AddRange((IEnumerable<TEntity>)items));
+       _dbContextMock.Setup(x=> x.AddRangeAsync(It.IsAny<IEnumerable<TEntity>>(), It.IsAny<CancellationToken>()))
+           .Callback<IEnumerable<object>, CancellationToken>((items, _) => entities.AddRange((IEnumerable<TEntity>)items));
+       _dbContextMock.Setup(x=> x.Remove(It.IsAny<TEntity>()))
+           .Callback<object>(item => entities.Remove((TEntity)item));
+       _dbContextMock.Setup(x=> x.RemoveRange(It.IsAny<IEnumerable<TEntity>>()))
+           .Callback<IEnumerable<object>>(items => items.ForEach(item => entities.Remove((TEntity)item)));
+       _dbContextMock.Setup(x=> x.Update(It.IsAny<TEntity>()))
+           .Callback<object>(item =>
+           {
+               var existItem = entities.Single(entity => comparer?.Equals((TEntity)item, entity) ?? item.Equals(entity));
+               entities.Remove(existItem);
+               entities.Add((TEntity)item);
+           });
+       _dbContextMock.Setup(x=> x.UpdateRange(It.IsAny<IEnumerable<TEntity>>()))
+           .Callback<IEnumerable<object>>(items =>
+           {
+               var enumerable = items.ToList();
+               enumerable.ForEach(item => entities.Remove((TEntity)item));
+               entities.AddRange((IEnumerable<TEntity>)enumerable);
+           });
     }
 }

@@ -48,7 +48,7 @@ public class MockQueryProvider<TEntity> : IOrderedQueryable<TEntity>, IQueryProv
 
     public IQueryable<T> CreateQuery<T>(Expression expression)
     {
-        return (IQueryable<T>) CreateInstance(typeof(TEntity), expression)!;
+        return (IQueryable<T>) CreateInstance(typeof(T), expression)!;
     }
 
     public object Execute(Expression expression)
