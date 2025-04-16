@@ -125,7 +125,8 @@ components:
       properties:
         '@type':
           type: string
-      additionalProperties: { }
+      additionalProperties:
+        $ref: '#/components/schemas/Value'
     CreateNothingModelDto:
       type: object
       properties:
@@ -134,6 +135,27 @@ components:
           description: Имя модели
       additionalProperties: false
       description: Данные для создания модели
+    KindOneofCase:
+      enum:
+        - 0
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 6
+      type: integer
+      format: int32
+    ListValue:
+      type: object
+      properties:
+        values:
+          type: array
+          items:
+            $ref: '#/components/schemas/Value'
+          nullable: true
+          readOnly: true
+      additionalProperties: false
     NothingModelDto:
       type: object
       properties:
@@ -146,6 +168,11 @@ components:
           description: Имя модели
       additionalProperties: false
       description: Данные модели
+    NullValue:
+      enum:
+        - 0
+      type: integer
+      format: int32
     Status:
       type: object
       properties:
@@ -159,6 +186,16 @@ components:
           items:
             $ref: '#/components/schemas/Any'
       additionalProperties: false
+    Struct:
+      type: object
+      properties:
+        fields:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/Value'
+          nullable: true
+          readOnly: true
+      additionalProperties: false
     UpdateNothingModelDto:
       type: object
       properties:
@@ -171,6 +208,38 @@ components:
           description: Имя модели
       additionalProperties: false
       description: Данные для обновления модели
+    Value:
+      type: object
+      properties:
+        nullValue:
+          $ref: '#/components/schemas/NullValue'
+        hasNullValue:
+          type: boolean
+          readOnly: true
+        numberValue:
+          type: number
+          format: double
+        hasNumberValue:
+          type: boolean
+          readOnly: true
+        stringValue:
+          type: string
+          nullable: true
+        hasStringValue:
+          type: boolean
+          readOnly: true
+        boolValue:
+          type: boolean
+        hasBoolValue:
+          type: boolean
+          readOnly: true
+        structValue:
+          $ref: '#/components/schemas/Struct'
+        listValue:
+          $ref: '#/components/schemas/ListValue'
+        kindCase:
+          $ref: '#/components/schemas/KindOneofCase'
+      additionalProperties: false
 tags:
   - name: NothingRpcService
     description: Сервис бизнес логики

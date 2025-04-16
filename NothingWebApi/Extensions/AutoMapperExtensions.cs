@@ -1,6 +1,5 @@
+using System.Reflection;
 using AutoMapper;
-using NothingWebApi.Dtos;
-using NothingWebApi.Models;
 
 namespace NothingWebApi.Extensions;
 
@@ -16,13 +15,13 @@ internal static class AutoMapperExtensions
     /// <returns>Коллекция сервисов с добавленной конфигурацией <see cref="Mapper"/></returns>
     internal static IServiceCollection AddAppAutoMapper(this IServiceCollection services)
     {
-        services.AddAutoMapper(configuration =>
+        var configuration = new MapperConfiguration(configurationExpression =>
         {
-            configuration.AllowNullCollections = true;
-            configuration.CreateMap<NothingModel, NothingModelDto>();
-            configuration.CreateMap<CreateNothingModelDto, NothingModel>()
-                .ForMember(model => model.Name, member => member.MapFrom(dto => dto.Name.Trim()));
+            configurationExpression.AddMaps(Assembly.GetExecutingAssembly());
         });
+        configuration.AssertConfigurationIsValid();
+        var mapper = new Mapper(configuration);
+        services.AddSingleton<IMapper, Mapper>(_ => mapper);
         return services;
     }
 }

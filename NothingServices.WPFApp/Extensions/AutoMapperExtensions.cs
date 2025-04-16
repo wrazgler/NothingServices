@@ -1,7 +1,6 @@
+using System.Reflection;
 using AutoMapper;
 using Microsoft.Extensions.DependencyInjection;
-using NothingServices.WPFApp.Dtos;
-using NothingServices.WPFApp.ViewModels.Controls;
 
 namespace NothingServices.WPFApp.Extensions;
 
@@ -17,15 +16,13 @@ internal static class AutoMapperExtensions
     /// <returns>Коллекция сервисов с добавленной конфигурацией <see cref="Mapper"/></returns>
     internal static IServiceCollection AddAppAutoMapper(this IServiceCollection services)
     {
-        services.AddAutoMapper(configuration =>
+        var configuration = new MapperConfiguration(configurationExpression =>
         {
-            configuration.AllowNullCollections = true;
-            configuration.CreateMap<CreateNothingModelVM, CreateNothingModelDto>();
-            configuration.CreateMap<CreateNothingModelVM, CreateNothingModelWebDto>();
-            configuration.CreateMap<DeleteNothingModelVM, NothingModelIdDto>();
-            configuration.CreateMap<UpdateNothingModelVM, UpdateNothingModelDto>();
-            configuration.CreateMap<UpdateNothingModelVM, UpdateNothingModelWebDto>();
+            configurationExpression.AddMaps(Assembly.GetExecutingAssembly());
         });
+        configuration.AssertConfigurationIsValid();
+        var mapper = new Mapper(configuration);
+        services.AddSingleton<IMapper, Mapper>(_ => mapper);
         return services;
     }
 }

@@ -15,6 +15,7 @@ namespace NothingKafka.Services;
 /// <param name="kafkaService">Сервис администрирования Kafka</param>
 /// <param name="nothingService">Сервис бизнес логики</param>
 /// <param name="nothingServiceConfig">Заголовки Kafka сервиса NothingService</param>
+/// <param name="subscriberServiceConfig">Конфигурация сервиса подписок</param>
 public sealed class SubscriberService(
     IConsumerService consumerService,
     ILogger<SubscriberService> logger,
